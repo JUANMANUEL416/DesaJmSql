@@ -312,9 +312,10 @@ BEGIN
       END
       IF @PROCESO='Editar'
       BEGIN
-         IF NOT EXISTS(SELECT * FROM TGEN WHERE TABLA=@TABLA AND CAMPO=@CAMPO AND CODIGO=@CODIGO)
+         IF EXISTS(SELECT * FROM TGEN WHERE TABLA=@TABLA AND CAMPO=@CAMPO AND CODIGO=@CODIGO)
          BEGIN
-            UPDATE TGEN SET DATO1=@DATO1,@VALOR1=@VALOR1,DATO2=@DATO2 WHERE TABLA=@TABLA AND CAMPO=@CAMPO AND CODIGO=@CODIGO
+            PRINT 'VOY A ACTUALIZAR'
+            UPDATE TGEN SET DATO1=@DATO1,VALOR1=@VALOR1,DATO2=@DATO2,DESCRIPCION=@DESCRIPCION WHERE TABLA=@TABLA AND CAMPO=@CAMPO AND CODIGO=@CODIGO
          END
          ELSE
          BEGIN
@@ -322,5 +323,79 @@ BEGIN
             SELECT 'No se encontro código del Distribuidor ya existe. Verifique e intente de nuevo'            
          END
       END
+      IF(SELECT COUNT(*) FROM @TBLERRORES)>0
+      BEGIN
+         SELECT 'KO' OK, ERROR FROM @TBLERRORES
+         RETURN
+      END
+      SELECT 'OK' OK
+      RETURN 
+   END  
+   IF @METODO='CRUD_TGENDIST'     
+   BEGIN         
+      SELECT @DATOS=DATOS        
+      FROM   OPENJSON (@PARAMETROS)
+      WITH (           
+      DATOS NVARCHAR(MAX) AS JSON 
+      )
+                 
+      SELECT @PROCESO=PROCESO, @TABLA=TABLA,@CAMPO=CAMPO,@CODIGO=CODIGO,@DESCRIPCION=DESCRIPCION       
+      FROM   OPENJSON (@DATOS)
+      WITH   (      
+      PROCESO  VARCHAR(20)   '$.PROCESO',
+      TABLA  VARCHAR(20)   '$.TABLA',
+      CAMPO  VARCHAR(20)   '$.CAMPO',
+      CODIGO  VARCHAR(20)   '$.CODIGO',
+      DESCRIPCION  VARCHAR(20)   '$.DESCRIPCION'
+      )  
+      IF @PROCESO='Nuevo'
+      BEGIN
+         IF NOT EXISTS(SELECT * FROM TGEN WHERE TABLA=@TABLA AND CAMPO=@CAMPO AND CODIGO=@CODIGO)
+         BEGIN
+            BEGIN TRY           
+                INSERT INTO TGEN(TABLA,CAMPO,CODIGO,DESCRIPCION)
+                SELECT @TABLA,@CAMPO,@CODIGO,@DESCRIPCION
+            END TRY
+            BEGIN CATCH
+                    INSERT INTO @TBLERRORES(ERROR) SELECT ERROR_MESSAGE()
+            END CATCH
+         END
+         ELSE
+         BEGIN
+            INSERT INTO @TBLERRORES(ERROR)
+            SELECT 'Ya existe este distrito asoicado al este Distribuidor'
+         END
+      END
+      IF @PROCESO='Editar'
+      BEGIN
+         IF EXISTS(SELECT * FROM TGEN WHERE TABLA=@TABLA AND CAMPO=@CAMPO AND CODIGO=@CODIGO)
+         BEGIN
+            UPDATE TGEN SET CODIGO=@CODIGO, DESCRIPCION=@DESCRIPCION WHERE TABLA=@TABLA AND CAMPO=@CAMPO AND CODIGO=@CODIGO
+         END
+         ELSE
+         BEGIN
+            INSERT INTO @TBLERRORES(ERROR)
+            SELECT 'No se Encontro el Distrito en este distribuidor'
+         END
+      END
+      IF @PROCESO='Borrar'
+      BEGIN
+         IF EXISTS(SELECT * FROM TGEN WHERE TABLA=@TABLA AND CAMPO=@CAMPO AND CODIGO=@CODIGO)
+         BEGIN
+            DELETE TGEN WHERE TABLA=@TABLA AND CAMPO=@CAMPO AND CODIGO=@CODIGO
+         END
+         ELSE
+         BEGIN
+            INSERT INTO @TBLERRORES(ERROR)
+            SELECT 'No se Encontro el Distrito en este distribuidor'
+         END
+      END
+      IF(SELECT COUNT(*) FROM @TBLERRORES)>0
+      BEGIN
+         SELECT 'KO' OK, ERROR FROM @TBLERRORES
+         RETURN
+      END
+      SELECT 'OK' OK
+      RETURN 
    END  
 END
