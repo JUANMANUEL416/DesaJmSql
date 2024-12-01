@@ -65,22 +65,22 @@ FROM #JSON
      IF EXISTS(SELECT * FROM IMOV WHERE OBSERVACION=@ID_TRX AND SYS_ComputerName='INTERFAXINV')
      BEGIN
         INSERT INTO @TBLERRORES(ERROR)
-        SELECT 'ID de la transacción de SAP ya fue procesada... @ID_TRX='+@ID_TRX
+        SELECT 'ID de la transacción de SAP ya fue procesada... @ID_TRX='+COALESCE(@ID_TRX,'')
      END
      IF EXISTS(SELECT * FROM IMOV WHERE NODOCUMENTO=@ID_OPE_CAB AND SYS_ComputerName='INTERFAXINV')
      BEGIN
         INSERT INTO @TBLERRORES(ERROR)
-        SELECT 'ID que viene de SAP cabecera ya fue procesada... @ID_OPE_CAB='+@ID_OPE_CAB+' @ID_TRX='+@ID_TRX
+        SELECT 'ID que viene de SAP cabecera ya fue procesada... @ID_OPE_CAB='+COALESCE(@ID_OPE_CAB,'')+' @ID_TRX='+COALESCE(@ID_TRX,'')
      END
      IF NOT EXISTS(SELECT * FROM IART WHERE IDARTICULO=@COD_ART)
      BEGIN
         INSERT INTO @TBLERRORES(ERROR)
-        SELECT 'ID Articulo no existe en el Maestro de Articulos, @COD_ART='+@COD_ART+' @ID_TRX='+@ID_TRX
+        SELECT 'ID Articulo no existe en el Maestro de Articulos, @COD_ART='+COALESCE(@COD_ART,'')+' @ID_TRX='+COALESCE(@ID_TRX,'')
      END
      IF COALESCE(@CANT_ART,0)<=0
      BEGIN
         INSERT INTO @TBLERRORES(ERROR)
-        SELECT 'La Cantidad del Articulo no puede ser Menor o Igual a cero @ID_TRX='+@ID_TRX
+        SELECT 'La Cantidad del Articulo no puede ser Menor o Igual a cero @ID_TRX='+COALESCE(@ID_TRX,'')
      END
      IF COALESCE(@FEC_LOTE,'')='' OR @FEC_LOTE< DBO.FNK_GETDATE()+30
      BEGIN
@@ -90,9 +90,10 @@ FROM #JSON
      IF(SELECT COUNT(*) FROM @TBLERRORES)>0
      BEGIN
         INSERT INTO INTERFAXINV(FECHA,ID_TRX,PROCESO,SOLICITUD,FORMATEADO,RESPUESTA,ESTADO,CNSMOV,IDARTICULO)
-        SELECT TOP 1 DBO.FNK_GETDATE(), @ID_TRX,CASE WHEN @TIP_MOV='501' THEN 'COMPRA' ELSE 'DEVOL' END,@DATOS1,@DATOS,ERROR,'ERRORES',@NVOCONSEC,@COD_ART FROM @TBLERRORES
+        SELECT TOP 1 DBO.FNK_GETDATE(), @ID_TRX,CASE WHEN @TIP_MOV='501' THEN 'COMPRA' ELSE 'DEVOL' END,@DATOS1,@DATOS,
+        ERROR,'ERRORES',@NVOCONSEC,@COD_ART FROM @TBLERRORES
 
-        SELECT 'KO' OK, ERROR FROM @TBLERRORES
+        SELECT 'KO' KO, ERROR FROM @TBLERRORES
         RETURN
      END
      BEGIN TRY           
