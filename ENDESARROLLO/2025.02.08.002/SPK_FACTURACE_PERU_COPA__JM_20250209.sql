@@ -496,6 +496,13 @@ BEGIN
 		END
       
 		SELECT @OKFTRD = COUNT(*) FROM #FTRD1
+      IF @OKFTRD > 0 
+      BEGIN
+         IF (SELECT SUM(COALESCE(VLR_SERVICI,0)-COALESCE(VLR_COPAGOS,0)) FROM #FTRD1) <=0
+         BEGIN
+            SELECT @OKFTRD=0
+         END
+      END
 
 		IF ISNULL(@DV,0) <= 0
 			SET @DV = 30
