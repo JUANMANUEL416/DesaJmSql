@@ -1,0 +1,88 @@
+CREATE OR ALTER PROCEDURE DBO.SPQ_PRI_COL @JSON NVARCHAR(MAX)
+	WITH ENCRYPTION
+AS
+SET DATEFORMAT dmy
+DECLARE @TBLERRORES TABLE (ERROR VARCHAR(MAX))
+DECLARE  @PARAMETROS NVARCHAR(MAX)			,@MODELO VARCHAR(100)			   ,@METODO VARCHAR(100)
+		,@USUARIO VARCHAR(12)				   ,@COMPANIA VARCHAR(2)		      ,@IDSEDE      VARCHAR(5)		
+      ,@SYS_COMPUTERNAME VARCHAR(200)     ,@DATOS    VARCHAR(MAX)
+      ,@ANIO VARCHAR(20)                  ,@MES SMALLINT                   ,@CERRADO BIT
+      ,@PROCEDENCIA VARCHAR(20)
+
+BEGIN
+	SELECT *
+	INTO #JSON
+	FROM OPENJSON(@json) WITH (
+			MODELO VARCHAR(100) '$.MODELO'
+			,METODO VARCHAR(100) '$.METODO'
+			,USUARIO VARCHAR(12) '$.USUARIO'
+			,PARAMETROS NVARCHAR(MAX) AS JSON
+	)
+
+	SELECT   @MODELO = MODELO			,@METODO = METODO
+			,@PARAMETROS = PARAMETROS	,@USUARIO = USUARIO
+	FROM #JSON
+   IF @METODO='CERRAR_FACTURA'     
+   BEGIN         
+      SELECT @DATOS=DATOS        
+      FROM   OPENJSON (@PARAMETROS)
+      WITH (           
+      DATOS NVARCHAR(MAX) AS JSON 
+      )
+                 
+      SELECT @ANIO=ANIO,@MES=MES,@CERRADO=CERRADO,@PROCEDENCIA=PROCEDENCIA      
+      FROM   OPENJSON (@DATOS)
+      WITH   ( 
+      ANIO  VARCHAR(4)   '$.ANIO',
+      MES  SMALLINT   '$.MES',
+      CERRADO  BIT   '$.CERRADO',
+      PROCEDENCIA  VARCHAR(20)   '$.PROCEDENCIA'
+      )   
+      IF COALESCE(@CERRADO,0)<>0
+      BEGIN
+         INSERT INTO @TBLERRORES(ERROR)
+         SELECT 'Periodo Cerrado...'
+      END
+      IF @PROCEDENCIA='FACTURA'
+      BEGIN
+         IF NOT EXISTS(SELECT * FROM PRI WHERE ANO=@ANIO AND MES=@MES AND CERRADO_FAC=0)
+         BEGIN
+            INSERT INTO @TBLERRORES(ERROR)
+            SELECT 'No se Encontro el Periodo de Facturación o ya esta Cerrado. Verifique e intente de nuevo'
+         END
+      END
+      IF @PROCEDENCIA='CARTERA'
+      BEGIN
+         IF NOT EXISTS(SELECT * FROM PRI WHERE ANO=@ANIO AND MES=@MES AND CERRADO_CARTERA=0)
+         BEGIN
+            INSERT INTO @TBLERRORES(ERROR)
+            SELECT 'No se Encontro el Periodo de Cartera o ya esta Cerrado. Verifique e intente de nuevo'
+         END
+      END      
+      IF EXISTS( SELECT * FROM MCPE WHERE PROCEDENCIA IN('CXC','RAD CXC','NOTDBCR','FACTURA','RGLO','CONCI')AND MES=@MES   AND ANO=@ANIO AND COALESCE(CLASECONTB,'')<>'NIIF')
+      BEGIN
+         INSERT INTO @TBLERRORES(ERROR)
+         SELECT 'Existen comprobantes con Error que Afectan la Cartera, no se puede cerrar con comprobantes  con error'
+      END
+      IF(SELECT COUNT(*) FROM @TBLERRORES)>0
+      BEGIN
+             SELECT 'KO' OK, ERROR FROM @TBLERRORES
+             RETURN
+      END
+      BEGIN TRY   
+          EXEC SPK_CIERRA_CARTERA @ANIO,@MES,@USUARIO,@PROCEDENCIA                
+      END TRY
+      BEGIN CATCH
+              INSERT INTO @TBLERRORES(ERROR) SELECT ERROR_MESSAGE()
+      END CATCH
+      IF(SELECT COUNT(*) FROM @TBLERRORES)>0
+      BEGIN
+         SELECT 'KO' OK, ERROR FROM @TBLERRORES
+         RETURN
+      END
+      SELECT 'OK' OK
+      RETURN 
+   END  
+END
+
+
