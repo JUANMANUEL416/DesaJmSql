@@ -1,0 +1,2110 @@
+[MODULE]
+[COMMON]
+FROM ABC GENERATED
+MODIFIED '2020/02/28' ' 9:23:42'
+[PROCEDURE]
+NAME NC_MCP:Ficha
+[COMMON]
+DESCRIPTION 'Actualizar la Tabla MCP'
+FROM ABC Window
+CATEGORY 'Form'
+MODIFIED '2024/07/22' '11:49:23'
+[DATA]
+[SCREENCONTROLS]
+! ENTRY(@s80),USE(CurrentTab)
+[REPORTCONTROLS]
+! STRING(@s80),USE(CurrentTab)
+CurrentTab               STRING(80)
+!!> GUID('b681e976-9749-41e1-a58b-e1be818872c8'),PICTURE(@s80)
+[SCREENCONTROLS]
+! PROMPT('&Nombre Ubicación:'),USE(?loc:NomUbica:Prompt)
+! ENTRY(@s40),USE(loc:NomUbica),MSG('Nombre de la Ubicación')
+[REPORTCONTROLS]
+! STRING(@s40),USE(loc:NomUbica)
+loc:NomUbica             CSTRING(41) !Nombre de la Ubicación
+!!> GUID('e83783f1-fa43-4bea-b963-b9af7f4f5193'),PROMPT('&Nombre Ubicación:'),HEADER('Nombre Ubicación'),MESSAGE('Nombre de la Ubicación'),PICTURE(@s40),DERIVEDFROM('ubg:NOMUBICACION')
+[SCREENCONTROLS]
+! PROMPT('&Nombre Comprobante:'),USE(?loc:nomcomp:Prompt)
+! ENTRY(@s40),USE(loc:nomcomp),MSG('Nombre del Comprobante'),REQ
+[REPORTCONTROLS]
+! STRING(@s40),USE(loc:nomcomp)
+loc:nomcomp              CSTRING(41) !Nombre del Comprobante
+!!> GUID('c76967cd-7eb3-4c97-86b1-ca20f3f6c7d3'),VALID(NONZERO),PROMPT('&Nombre Comprobante:'),HEADER('Nombre Comprobante'),MESSAGE('Nombre del Comprobante'),PICTURE(@s40),DERIVEDFROM('COM:NOMCOMPROBANTE')
+[SCREENCONTROLS]
+! PROMPT('Nombre:'),USE(?loc:NomDoc:Prompt)
+! ENTRY(@s40),USE(loc:NomDoc),MSG('Nombre'),TIP('Nombre')
+[REPORTCONTROLS]
+! STRING(@s40),USE(loc:NomDoc)
+loc:NomDoc               CSTRING(41) !Nombre
+!!> GUID('b7bf69a9-9dd5-4e50-9f0f-789d20169415'),PROMPT('Nombre:'),HEADER('Nombre'),MESSAGE('Nombre'),TOOLTIP('Nombre'),PICTURE(@s40),DERIVEDFROM('DOC:NOMDOCUMENTO')
+ActionMessage            CSTRING(40)
+!!> GUID('ce6dee86-cf9c-4d7f-b615-0e0536bd5e43')
+[SCREENCONTROLS]
+! PROMPT('&Comprobante:'),USE(?LOC:COMPROBANTE_ANT:Prompt)
+! ENTRY(@s2),USE(LOC:COMPROBANTE_ANT),MSG('Clase de Comprobantes'),TIP('Documento'),REQ
+[REPORTCONTROLS]
+! STRING(@s2),USE(LOC:COMPROBANTE_ANT)
+LOC:COMPROBANTE_ANT      CSTRING(3) !Clase de Comprobantes
+!!> GUID('47bd3ec8-66e3-47cc-89bb-4de1322a96a4'),VALID(NONZERO),PROMPT('&Comprobante:'),HEADER('Comprobante'),MESSAGE('Clase de Comprobantes'),TOOLTIP('Documento'),PICTURE(@s2),DERIVEDFROM('MCP:COMPROBANTE')
+[FILES]
+[PRIMARY]
+MCP
+[INSTANCE]
+2
+[OTHERS]
+WDF
+COM
+TER
+PRI
+WDUM
+[PROMPTS]
+%ButtonAction DEPEND %Control DEFAULT TIMES 31
+WHEN  ('') ('No Special Action')
+WHEN  ('?BFechaContable') ('No Special Action')
+WHEN  ('?COM:NOMCOMPROBANTE') ('No Special Action')
+WHEN  ('?CallLookup:COM') ('No Special Action')
+WHEN  ('?CallLookup:TER') ('No Special Action')
+WHEN  ('?Cancel') ('No Special Action')
+WHEN  ('?CurrentTab') ('No Special Action')
+WHEN  ('?Group:Cheque') ('No Special Action')
+WHEN  ('?MCP:ANO') ('No Special Action')
+WHEN  ('?MCP:ANULADO') ('No Special Action')
+WHEN  ('?MCP:COMPROBANTE') ('No Special Action')
+WHEN  ('?MCP:DETALLE:Prompt') ('No Special Action')
+WHEN  ('?MCP:DOCUMENTO:Prompt') ('No Special Action')
+WHEN  ('?MCP:FECHACONTABLE_DATE') ('No Special Action')
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') ('No Special Action')
+WHEN  ('?MCP:IDTERCERO') ('No Special Action')
+WHEN  ('?MCP:MES') ('No Special Action')
+WHEN  ('?MCP:NOCHEQUE') ('No Special Action')
+WHEN  ('?MCP:NOREFERENCIA') ('No Special Action')
+WHEN  ('?MCP:NROCOMPROBANTE') ('No Special Action')
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') ('No Special Action')
+WHEN  ('?MCP:OBSERVACION') ('No Special Action')
+WHEN  ('?MCP:PROCEDENCIA') ('No Special Action')
+WHEN  ('?MCP:REFERENCIA1:Prompt') ('No Special Action')
+WHEN  ('?MCP:TOTALCREDITO') ('No Special Action')
+WHEN  ('?MCP:TOTALCREDITO:Prompt') ('No Special Action')
+WHEN  ('?MCP:TOTALDEBITO') ('No Special Action')
+WHEN  ('?MCP:TOTALDEBITO:Prompt') ('No Special Action')
+WHEN  ('?MCP:VALOR_CHEQUE') ('No Special Action')
+WHEN  ('?OK') ('No Special Action')
+WHEN  ('?TER:RAZONSOCIAL') ('No Special Action')
+
+%ButtonRunName DEPEND %Control DEFAULT TIMES 3
+WHEN  ('?BFechaContable') ('')
+WHEN  ('?CallLookup:COM') ('')
+WHEN  ('?CallLookup:TER') ('')
+
+%ButtonRunParameters DEPEND %Control DEFAULT TIMES 3
+WHEN  ('?BFechaContable') ('')
+WHEN  ('?CallLookup:COM') ('')
+WHEN  ('?CallLookup:TER') ('')
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 3
+WHEN  ('?BFechaContable') ()
+WHEN  ('?CallLookup:COM') ()
+WHEN  ('?CallLookup:TER') ()
+
+%ButtonThread DEPEND %Control LONG TIMES 3
+WHEN  ('?BFechaContable') (0)
+WHEN  ('?CallLookup:COM') (0)
+WHEN  ('?CallLookup:TER') (0)
+
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 31
+WHEN  ('') ('25000')
+WHEN  ('?BFechaContable') ('25000')
+WHEN  ('?COM:NOMCOMPROBANTE') ('25000')
+WHEN  ('?CallLookup:COM') ('25000')
+WHEN  ('?CallLookup:TER') ('25000')
+WHEN  ('?Cancel') ('25000')
+WHEN  ('?CurrentTab') ('25000')
+WHEN  ('?Group:Cheque') ('25000')
+WHEN  ('?MCP:ANO') ('25000')
+WHEN  ('?MCP:ANULADO') ('25000')
+WHEN  ('?MCP:COMPROBANTE') ('25000')
+WHEN  ('?MCP:DETALLE:Prompt') ('25000')
+WHEN  ('?MCP:DOCUMENTO:Prompt') ('25000')
+WHEN  ('?MCP:FECHACONTABLE_DATE') ('25000')
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') ('25000')
+WHEN  ('?MCP:IDTERCERO') ('25000')
+WHEN  ('?MCP:MES') ('25000')
+WHEN  ('?MCP:NOCHEQUE') ('25000')
+WHEN  ('?MCP:NOREFERENCIA') ('25000')
+WHEN  ('?MCP:NROCOMPROBANTE') ('25000')
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') ('25000')
+WHEN  ('?MCP:OBSERVACION') ('25000')
+WHEN  ('?MCP:PROCEDENCIA') ('25000')
+WHEN  ('?MCP:REFERENCIA1:Prompt') ('25000')
+WHEN  ('?MCP:TOTALCREDITO') ('25000')
+WHEN  ('?MCP:TOTALCREDITO:Prompt') ('25000')
+WHEN  ('?MCP:TOTALDEBITO') ('25000')
+WHEN  ('?MCP:TOTALDEBITO:Prompt') ('25000')
+WHEN  ('?MCP:VALOR_CHEQUE') ('25000')
+WHEN  ('?OK') ('25000')
+WHEN  ('?TER:RAZONSOCIAL') ('25000')
+
+%ButtonParameters DEPEND %Control DEFAULT TIMES 3
+WHEN  ('?BFechaContable') ('')
+WHEN  ('?CallLookup:COM') ('')
+WHEN  ('?CallLookup:TER') ('')
+
+%ButtonRequest DEPEND %Control DEFAULT TIMES 31
+WHEN  ('') ('None')
+WHEN  ('?BFechaContable') ('None')
+WHEN  ('?COM:NOMCOMPROBANTE') ('None')
+WHEN  ('?CallLookup:COM') ('None')
+WHEN  ('?CallLookup:TER') ('None')
+WHEN  ('?Cancel') ('None')
+WHEN  ('?CurrentTab') ('None')
+WHEN  ('?Group:Cheque') ('None')
+WHEN  ('?MCP:ANO') ('None')
+WHEN  ('?MCP:ANULADO') ('None')
+WHEN  ('?MCP:COMPROBANTE') ('None')
+WHEN  ('?MCP:DETALLE:Prompt') ('None')
+WHEN  ('?MCP:DOCUMENTO:Prompt') ('None')
+WHEN  ('?MCP:FECHACONTABLE_DATE') ('None')
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') ('None')
+WHEN  ('?MCP:IDTERCERO') ('None')
+WHEN  ('?MCP:MES') ('None')
+WHEN  ('?MCP:NOCHEQUE') ('None')
+WHEN  ('?MCP:NOREFERENCIA') ('None')
+WHEN  ('?MCP:NROCOMPROBANTE') ('None')
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') ('None')
+WHEN  ('?MCP:OBSERVACION') ('None')
+WHEN  ('?MCP:PROCEDENCIA') ('None')
+WHEN  ('?MCP:REFERENCIA1:Prompt') ('None')
+WHEN  ('?MCP:TOTALCREDITO') ('None')
+WHEN  ('?MCP:TOTALCREDITO:Prompt') ('None')
+WHEN  ('?MCP:TOTALDEBITO') ('None')
+WHEN  ('?MCP:TOTALDEBITO:Prompt') ('None')
+WHEN  ('?MCP:VALOR_CHEQUE') ('None')
+WHEN  ('?OK') ('None')
+WHEN  ('?TER:RAZONSOCIAL') ('None')
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 11
+WHEN  ('?MCP:ANO') ()
+WHEN  ('?MCP:COMPROBANTE') ()
+WHEN  ('?MCP:IDTERCERO') ()
+WHEN  ('?MCP:MES') ()
+WHEN  ('?MCP:NOCHEQUE') ()
+WHEN  ('?MCP:NOREFERENCIA') ()
+WHEN  ('?MCP:NROCOMPROBANTE') ()
+WHEN  ('?MCP:PROCEDENCIA') ()
+WHEN  ('?MCP:TOTALCREDITO') ()
+WHEN  ('?MCP:TOTALDEBITO') ()
+WHEN  ('?MCP:VALOR_CHEQUE') ()
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 11
+WHEN  ('?MCP:ANO') ()
+WHEN  ('?MCP:COMPROBANTE') ()
+WHEN  ('?MCP:IDTERCERO') ()
+WHEN  ('?MCP:MES') ()
+WHEN  ('?MCP:NOCHEQUE') ()
+WHEN  ('?MCP:NOREFERENCIA') ()
+WHEN  ('?MCP:NROCOMPROBANTE') ()
+WHEN  ('?MCP:PROCEDENCIA') ()
+WHEN  ('?MCP:TOTALCREDITO') ()
+WHEN  ('?MCP:TOTALDEBITO') ()
+WHEN  ('?MCP:VALOR_CHEQUE') ()
+
+%PostLookupKey DEPEND %Control KEY TIMES 3
+WHEN  ('?MCP:COMPROBANTE') (COM:COMCOMPROBANTE)
+WHEN  ('?MCP:IDTERCERO') (TER:TERIDTERCERO)
+WHEN  ('?MCP:NOREFERENCIA') ()
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 11
+WHEN  ('?MCP:ANO') ()
+WHEN  ('?MCP:COMPROBANTE') (COM:COMPROBANTE)
+WHEN  ('?MCP:IDTERCERO') (TER:IDTERCERO)
+WHEN  ('?MCP:MES') ()
+WHEN  ('?MCP:NOCHEQUE') ()
+WHEN  ('?MCP:NOREFERENCIA') ()
+WHEN  ('?MCP:NROCOMPROBANTE') ()
+WHEN  ('?MCP:PROCEDENCIA') ()
+WHEN  ('?MCP:TOTALCREDITO') ()
+WHEN  ('?MCP:TOTALDEBITO') ()
+WHEN  ('?MCP:VALOR_CHEQUE') ()
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 11
+WHEN  ('?MCP:ANO') ()
+WHEN  ('?MCP:COMPROBANTE') (Brw:Sel_COM)
+WHEN  ('?MCP:IDTERCERO') (TER:Elegir_todos)
+WHEN  ('?MCP:MES') ()
+WHEN  ('?MCP:NOCHEQUE') ()
+WHEN  ('?MCP:NOREFERENCIA') ()
+WHEN  ('?MCP:NROCOMPROBANTE') ()
+WHEN  ('?MCP:PROCEDENCIA') ()
+WHEN  ('?MCP:TOTALCREDITO') ()
+WHEN  ('?MCP:TOTALDEBITO') ()
+WHEN  ('?MCP:VALOR_CHEQUE') ()
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+
+%ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('WindowManager')
+WHEN  ('WindowToolbar') ('ToolbarClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('')
+WHEN  ('WindowToolbar') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Ask {20}PROCEDURE(),DERIVED', 'Init {19}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', 'PrimeFields {12}PROCEDURE(),PROC,DERIVED', |
+  'Run {20}PROCEDURE(),BYTE,PROC,DERIVED', 'Run {20}PROCEDURE(USHORT Number,BYTE Request),BYTE,PROC,DERIVED', |
+  'SetAlerts {14}PROCEDURE(),DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeCompleted {10}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
+
+%ReturnValue FIELD  ()
+%WindowOperationMode DEFAULT  ('Use WINDOW setting')
+%INISaveWindow LONG  (1)
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('NO')
+WHEN  ('WindowToolbar') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('ThisWindow')
+WHEN  ('WindowToolbar') ('Toolbar')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('APIPrinterClass')
+WHEN  ('WindowToolbar') ('APIPrinterClass')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (0)
+WHEN  ('WindowToolbar') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 3
+WHEN  ('?BFechaContable') ()
+WHEN  ('?CallLookup:COM') ()
+WHEN  ('?CallLookup:TER') ()
+
+%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 3
+WHEN  ('?BFechaContable') (0)
+WHEN  ('?CallLookup:COM') (0)
+WHEN  ('?CallLookup:TER') (0)
+
+%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 3
+WHEN  ('?BFechaContable') ('')
+WHEN  ('?CallLookup:COM') ('')
+WHEN  ('?CallLookup:TER') ('')
+
+%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 3
+WHEN  ('?BFechaContable') ()
+WHEN  ('?CallLookup:COM') ()
+WHEN  ('?CallLookup:TER') ()
+
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 33
+WHEN  ('') (1)
+WHEN  ('?BFechaContable') (1)
+WHEN  ('?COM:NOMCOMPROBANTE') (1)
+WHEN  ('?CallLookup:COM') (1)
+WHEN  ('?CallLookup:TER') (1)
+WHEN  ('?Cancel') (1)
+WHEN  ('?CurrentTab') (1)
+WHEN  ('?Group:Cheque') (1)
+WHEN  ('?MCP:ANO') (1)
+WHEN  ('?MCP:ANULADO') (1)
+WHEN  ('?MCP:COMPROBANTE') (1)
+WHEN  ('?MCP:DETALLE:Prompt') (1)
+WHEN  ('?MCP:DOCUMENTO:Prompt') (1)
+WHEN  ('?MCP:FECHACONTABLE_DATE') (1)
+WHEN  ('?MCP:FECHARADICACION_DATE') (1)
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') (1)
+WHEN  ('?MCP:IDTERCERO') (1)
+WHEN  ('?MCP:MES') (1)
+WHEN  ('?MCP:NOCHEQUE') (1)
+WHEN  ('?MCP:NOREFERENCIA') (1)
+WHEN  ('?MCP:NROCOMPROBANTE') (1)
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') (1)
+WHEN  ('?MCP:OBSERVACION') (1)
+WHEN  ('?MCP:PROCEDENCIA') (1)
+WHEN  ('?MCP:REFERENCIA1') (1)
+WHEN  ('?MCP:REFERENCIA1:Prompt') (1)
+WHEN  ('?MCP:REFERENCIA2') (1)
+WHEN  ('?MCP:TOTALCREDITO') (1)
+WHEN  ('?MCP:TOTALCREDITO:Prompt') (1)
+WHEN  ('?MCP:TOTALDEBITO') (1)
+WHEN  ('?MCP:TOTALDEBITO:Prompt') (1)
+WHEN  ('?MCP:VALOR_CHEQUE') (1)
+WHEN  ('?TER:RAZONSOCIAL') (1)
+
+%LookupAssign DEPEND %Control MULTI LONG TIMES 0
+
+%MoreField DEPEND %LookupAssign DEFAULT TIMES 0
+
+%MoreTarget DEPEND %LookupAssign FIELD TIMES 0
+
+%CheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedAssignVariable DEPEND %CheckedAssigns FIELD TIMES 0
+
+%CheckedAssignValue DEPEND %CheckedAssigns DEFAULT TIMES 0
+
+%CheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
+
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 30
+WHEN  ('')TIMES 0
+WHEN  ('?BFechaContable')TIMES 0
+WHEN  ('?COM:NOMCOMPROBANTE')TIMES 0
+WHEN  ('?CallLookup:COM')TIMES 0
+WHEN  ('?CallLookup:TER')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?CurrentTab')TIMES 0
+WHEN  ('?Group:Cheque')TIMES 0
+WHEN  ('?MCP:ANO')TIMES 0
+WHEN  ('?MCP:ANULADO')TIMES 0
+WHEN  ('?MCP:COMPROBANTE')TIMES 0
+WHEN  ('?MCP:DETALLE:Prompt')TIMES 0
+WHEN  ('?MCP:DOCUMENTO:Prompt')TIMES 0
+WHEN  ('?MCP:FECHACONTABLE_DATE')TIMES 0
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt')TIMES 0
+WHEN  ('?MCP:IDTERCERO')TIMES 0
+WHEN  ('?MCP:MES')TIMES 0
+WHEN  ('?MCP:NOCHEQUE')TIMES 0
+WHEN  ('?MCP:NOREFERENCIA')TIMES 0
+WHEN  ('?MCP:NROCOMPROBANTE')TIMES 0
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt')TIMES 0
+WHEN  ('?MCP:OBSERVACION')TIMES 0
+WHEN  ('?MCP:PROCEDENCIA')TIMES 0
+WHEN  ('?MCP:REFERENCIA1:Prompt')TIMES 0
+WHEN  ('?MCP:TOTALCREDITO')TIMES 0
+WHEN  ('?MCP:TOTALCREDITO:Prompt')TIMES 0
+WHEN  ('?MCP:TOTALDEBITO')TIMES 0
+WHEN  ('?MCP:TOTALDEBITO:Prompt')TIMES 0
+WHEN  ('?MCP:VALOR_CHEQUE')TIMES 0
+WHEN  ('?TER:RAZONSOCIAL')TIMES 0
+
+%CheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
+
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 30
+WHEN  ('')TIMES 0
+WHEN  ('?BFechaContable')TIMES 0
+WHEN  ('?COM:NOMCOMPROBANTE')TIMES 0
+WHEN  ('?CallLookup:COM')TIMES 0
+WHEN  ('?CallLookup:TER')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?CurrentTab')TIMES 0
+WHEN  ('?Group:Cheque')TIMES 0
+WHEN  ('?MCP:ANO')TIMES 0
+WHEN  ('?MCP:ANULADO')TIMES 0
+WHEN  ('?MCP:COMPROBANTE')TIMES 0
+WHEN  ('?MCP:DETALLE:Prompt')TIMES 0
+WHEN  ('?MCP:DOCUMENTO:Prompt')TIMES 0
+WHEN  ('?MCP:FECHACONTABLE_DATE')TIMES 0
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt')TIMES 0
+WHEN  ('?MCP:IDTERCERO')TIMES 0
+WHEN  ('?MCP:MES')TIMES 0
+WHEN  ('?MCP:NOCHEQUE')TIMES 0
+WHEN  ('?MCP:NOREFERENCIA')TIMES 0
+WHEN  ('?MCP:NROCOMPROBANTE')TIMES 0
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt')TIMES 0
+WHEN  ('?MCP:OBSERVACION')TIMES 0
+WHEN  ('?MCP:PROCEDENCIA')TIMES 0
+WHEN  ('?MCP:REFERENCIA1:Prompt')TIMES 0
+WHEN  ('?MCP:TOTALCREDITO')TIMES 0
+WHEN  ('?MCP:TOTALCREDITO:Prompt')TIMES 0
+WHEN  ('?MCP:TOTALDEBITO')TIMES 0
+WHEN  ('?MCP:TOTALDEBITO:Prompt')TIMES 0
+WHEN  ('?MCP:VALOR_CHEQUE')TIMES 0
+WHEN  ('?TER:RAZONSOCIAL')TIMES 0
+
+%UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%UncheckedAssignVariable DEPEND %UncheckedAssigns FIELD TIMES 0
+
+%UncheckedAssignValue DEPEND %UncheckedAssigns DEFAULT TIMES 0
+
+%UnCheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
+
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 30
+WHEN  ('')TIMES 0
+WHEN  ('?BFechaContable')TIMES 0
+WHEN  ('?COM:NOMCOMPROBANTE')TIMES 0
+WHEN  ('?CallLookup:COM')TIMES 0
+WHEN  ('?CallLookup:TER')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?CurrentTab')TIMES 0
+WHEN  ('?Group:Cheque')TIMES 0
+WHEN  ('?MCP:ANO')TIMES 0
+WHEN  ('?MCP:ANULADO')TIMES 0
+WHEN  ('?MCP:COMPROBANTE')TIMES 0
+WHEN  ('?MCP:DETALLE:Prompt')TIMES 0
+WHEN  ('?MCP:DOCUMENTO:Prompt')TIMES 0
+WHEN  ('?MCP:FECHACONTABLE_DATE')TIMES 0
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt')TIMES 0
+WHEN  ('?MCP:IDTERCERO')TIMES 0
+WHEN  ('?MCP:MES')TIMES 0
+WHEN  ('?MCP:NOCHEQUE')TIMES 0
+WHEN  ('?MCP:NOREFERENCIA')TIMES 0
+WHEN  ('?MCP:NROCOMPROBANTE')TIMES 0
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt')TIMES 0
+WHEN  ('?MCP:OBSERVACION')TIMES 0
+WHEN  ('?MCP:PROCEDENCIA')TIMES 0
+WHEN  ('?MCP:REFERENCIA1:Prompt')TIMES 0
+WHEN  ('?MCP:TOTALCREDITO')TIMES 0
+WHEN  ('?MCP:TOTALCREDITO:Prompt')TIMES 0
+WHEN  ('?MCP:TOTALDEBITO')TIMES 0
+WHEN  ('?MCP:TOTALDEBITO:Prompt')TIMES 0
+WHEN  ('?MCP:VALOR_CHEQUE')TIMES 0
+WHEN  ('?TER:RAZONSOCIAL')TIMES 0
+
+%UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
+
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 30
+WHEN  ('')TIMES 0
+WHEN  ('?BFechaContable')TIMES 0
+WHEN  ('?COM:NOMCOMPROBANTE')TIMES 0
+WHEN  ('?CallLookup:COM')TIMES 0
+WHEN  ('?CallLookup:TER')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?CurrentTab')TIMES 0
+WHEN  ('?Group:Cheque')TIMES 0
+WHEN  ('?MCP:ANO')TIMES 0
+WHEN  ('?MCP:ANULADO')TIMES 0
+WHEN  ('?MCP:COMPROBANTE')TIMES 0
+WHEN  ('?MCP:DETALLE:Prompt')TIMES 0
+WHEN  ('?MCP:DOCUMENTO:Prompt')TIMES 0
+WHEN  ('?MCP:FECHACONTABLE_DATE')TIMES 0
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt')TIMES 0
+WHEN  ('?MCP:IDTERCERO')TIMES 0
+WHEN  ('?MCP:MES')TIMES 0
+WHEN  ('?MCP:NOCHEQUE')TIMES 0
+WHEN  ('?MCP:NOREFERENCIA')TIMES 0
+WHEN  ('?MCP:NROCOMPROBANTE')TIMES 0
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt')TIMES 0
+WHEN  ('?MCP:OBSERVACION')TIMES 0
+WHEN  ('?MCP:PROCEDENCIA')TIMES 0
+WHEN  ('?MCP:REFERENCIA1:Prompt')TIMES 0
+WHEN  ('?MCP:TOTALCREDITO')TIMES 0
+WHEN  ('?MCP:TOTALCREDITO:Prompt')TIMES 0
+WHEN  ('?MCP:TOTALDEBITO')TIMES 0
+WHEN  ('?MCP:TOTALDEBITO:Prompt')TIMES 0
+WHEN  ('?MCP:VALOR_CHEQUE')TIMES 0
+WHEN  ('?TER:RAZONSOCIAL')TIMES 0
+
+%ProcedureDisableEnhanceFocus LONG  (0)
+%ProcedureUseEnterInsteadTabOverride LONG  (0)
+%WindowUseEnterInsteadTab LONG  (1)
+%ProcedureUseEnterInsteadTabExcludeListCombo LONG  (0)
+%ProcedureUseEnterInsteadTabEnableNextTabStop LONG  (0)
+%ProcedureUseEnterInsteadTabExcludeG LONG  (1)
+%WindowUseEnterInsteadTabExclude MULTI DEFAULT  ()
+%WindowStyles MULTI LONG  ()
+%WindowStyleFontName DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontSize DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontStyle DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontColor DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontCharSet DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStylePicture DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleOtherListboxes MULTI DEFAULT  ()
+%ProcedureAutoBindFields MULTI LONG  ()
+%ProcedureAutoBindField DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldTPL DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedures MULTI LONG  ()
+%ProcedureAutoBindProcedure DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedureTPL DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldsIgnored MULTI LONG  ()
+%ProcedureAutoBindFieldIgnored DEPEND %ProcedureAutoBindFieldsIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindProceduresIgnored MULTI LONG  ()
+%ProcedureAutoBindProcedureIgnored DEPEND %ProcedureAutoBindProceduresIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindValidToAddField LONG  (0)
+%ProcedureUserBindFields MULTI LONG  ()
+%ProcedureUserBindField DEPEND %ProcedureUserBindFields FIELD TIMES 0
+
+%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 0
+
+%ProcedureUserBindProcedures MULTI LONG  ()
+%ProcedureUserBindProcedure DEPEND %ProcedureUserBindProcedures PROCEDURE TIMES 0
+
+%ProcedureAutoBindProcedureIgnore DEPEND %ProcedureAutoBindProcedures LONG TIMES 0
+
+%ProcedureUserBindExpressions MULTI LONG  ()
+%ProcedureUserBindExpressionName DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%ProcedureUserBindExpression DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%PreLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
+
+%PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
+
+%ExtUITabIcon DEPEND %Control DEFAULT TIMES 0
+
+%ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
+
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 8
+WHEN  ('') ('Default')
+WHEN  ('?BFechaContable') ('Default')
+WHEN  ('?CallLookup:COM') ('Default')
+WHEN  ('?CallLookup:TER') ('Default')
+WHEN  ('?Cancel') ('Default')
+WHEN  ('?CurrentTab') ('Default')
+WHEN  ('?MCP:FECHACONTABLE_DATE') ('Default')
+WHEN  ('?MCP:REFERENCIA1:Prompt') ('Default')
+
+%CheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
+
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 8
+WHEN  ('')TIMES 0
+WHEN  ('?BFechaContable')TIMES 0
+WHEN  ('?CallLookup:COM')TIMES 0
+WHEN  ('?CallLookup:TER')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?CurrentTab')TIMES 0
+WHEN  ('?MCP:FECHACONTABLE_DATE')TIMES 0
+WHEN  ('?MCP:REFERENCIA1:Prompt')TIMES 0
+
+%UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
+
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 8
+WHEN  ('')TIMES 0
+WHEN  ('?BFechaContable')TIMES 0
+WHEN  ('?CallLookup:COM')TIMES 0
+WHEN  ('?CallLookup:TER')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?CurrentTab')TIMES 0
+WHEN  ('?MCP:FECHACONTABLE_DATE')TIMES 0
+WHEN  ('?MCP:REFERENCIA1:Prompt')TIMES 0
+
+%ProcedureOneInstance LONG  (0)
+%PreserveVarsLoc MULTI LONG  ()
+%PreserveVarLoc DEPEND %PreserveVarsLoc DEFAULT TIMES 0
+
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
+WHEN  ('') ('Off')
+
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 1
+WHEN  ('') ('')
+
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 1
+WHEN  ('') (-1)
+
+%FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+%FieldGradientColorTo DEPEND %Control LONG TIMES 1
+WHEN  ('') (-1)
+
+%FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+%ActiveImageEnable DEPEND %Control LONG TIMES 0
+
+%AIObjectName DEPEND %Control DEFAULT TIMES 1
+WHEN  ('') ('AIBtn0')
+
+%AIEnableMimicControl DEPEND %Control LONG TIMES 1
+WHEN  ('') (1)
+
+%AIMimicControl DEPEND %Control DEFAULT TIMES 1
+WHEN  ('') ('?CurrentTab')
+
+%AIImgRound DEPEND %Control LONG TIMES 0
+
+%AIOverrideImg DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+%AIDisableImg DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+%AIHotImg DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+%AIPressedImg DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+[EMBED]
+EMBED %WindowManagerMethodCodeSection
+[INSTANCES]
+WHEN 'TakeCompleted'
+[INSTANCES]
+WHEN '(),BYTE'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4500
+PROPERTY:END
+IF MCP:FechaContable_date < GLO:FECHAINICIAL or MCP:FechaContable_date > GLO:FECHAFINAL
+   case message('La Fecha Contable No Corresponde al Período seleccionado.'&chr(13)&chr(10)&|
+                '    Quiere Continuar con el nuevo periodo: '&year(MCP:FechaContable_date)&'-'&month(MCP:FechaContable_date)&' ?','Fecha Contable',icon:question,Button:yes+Button:No,Button:No,1)
+   of Button:yes
+      clear(wdum:record)
+      wdum{prop:sql} = 'SELECT CERRADO, ANO FROM PRI WHERE ANO='&FnSqlFmt(year(MCP:FechaContable_date))&' AND MES='&FnSqlFmt(Month(MCP:FechaContable_date))
+      access:wdum.next()
+      if wdu:c2 = ''
+         Message('El Periodo Contable '&year(MCP:FechaContable_date)&'-'&month(MCP:FechaContable_date)&' No Existe','Fecha Contable',icon:hand)
+         Cycle
+      end
+      if wdu:c1 = 1
+         Message('El Periodo Contable '&year(MCP:FechaContable_date)&'-'&month(MCP:FechaContable_date)&' está Cerrado','Fecha Contable',icon:hand)
+         Cycle
+      end
+      mcp:ano = year(MCP:FechaContable_date)
+      mcp:mes = Month(MCP:FechaContable_date)
+   of Button:NO
+      select(?MCP:FECHACONTABLE_DATE)
+      Cycle
+   END
+END
+
+IF FnValorVariable('IDCON_TCOM_ECAJ')=MCP:COMPROBANTE
+   MCP:RPT_COMPROBANTE='EGRESO'
+END
+
+CASE THISWINDOW.REQUEST
+OF INSERTRECORD
+   BIND('SALIDA', MCP:NROCOMPROBANTE)
+   clear(wdum:record)
+   wdum{prop:sql}='CALL SPQ_GENSEQUENCE ('&FnSqlFmt(GLO:IDSEDE)&',''@MCP'', '&FnSqlFmt(GLO:IDSEDE)&', 14, ''NVO'', &SALIDA[OUT])'
+   IF ERRORCODE() THEN
+      SETCLIPBOARD(wdum{prop:sql})
+      MESSAGE('Error: ' & fileerror(), 'Error Krystalos', ICON:HAND)
+   END
+   IF MCP:COMPROBANTE<>FnValorVariable('IDCON_TCOM_FTR')
+      MCP:NOREFERENCIA=Format(FnGeneraConsecutivo(GLO:IDSEDE,'@COM'&Clip(MCP:COMPROBANTE)),@n08)
+   END
+   
+OF CHANGERECORD
+   CLEAR(WDF:RECORD)
+   WDF{PROP:SQL}='SELECT DBO.FNK_FECHA_SIN_MLS(GETDATE())'
+   ACCESS:WDF.NEXT()
+   MCP:Usuario = glo:usuario
+   MCP:FECHA_DATE = WDF:C1_DATE
+   MCP:FECHA_TIME = WDF:C1_TIME
+   IF LOC:COMPROBANTE_ANT<>MCP:COMPROBANTE
+      IF MCP:COMPROBANTE<>FnValorVariable('IDCON_TCOM_FTR')
+         MCP:NOREFERENCIA=Format(FnGeneraConsecutivo(GLO:IDSEDE,'@COM'&Clip(MCP:COMPROBANTE)),@n08)
+         Message('*** Atencion: El No. de Comprobante ha Cambiado por '&MCP:COMPROBANTE&' '&MCP:NOREFERENCIA,'Comprobante',icon:asterisk)
+      END
+   END
+END
+
+[END]
+[END]
+WHEN 'Init'
+[INSTANCES]
+WHEN '(),BYTE'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 8125
+PROPERTY:END
+case ThisWindow.Request
+of ChangeRecord orof DeleteRecord
+   glo:ano = mcp:ano
+   glo:mes = mcp:mes
+end
+
+CLEAR(PRI:RECORD)
+PRI:COMPANIA=GLO:COMPANIA
+PRI:ANO=GLO:ANO
+PRI:MES=GLO:MES
+IF ACCESS:PRI.TRYFETCH(PRI:PRICIAANOMES)
+   Disable(?CurrentTab)
+   Disable(?OK)
+   Message('Periodo Contable No Existe, No se pueden hacer Actualizaciones.','Periodo',icon:hand)
+ELSE
+ glo:fechainicial = pri:fecha_ini_date
+ glo:fechafinal   = pri:fecha_fin_date
+ IF PRI:CERRADO=0
+    CASE THISWINDOW.REQUEST
+    OF INSERTRECORD
+       CLEAR(WDF:RECORD)
+       WDF{PROP:SQL}='SELECT DBO.FNK_FECHA_SIN_MLS(GETDATE())'
+       ACCESS:WDF.NEXT()
+       MCP:COMPANIA=GLO:COMPANIA
+       MCP:Usuario = glo:usuario
+       MCP:FECHACONTABLE_DATE = WDF:C1_DATE
+       MCP:FECHACONTABLE_TIME = WDF:C1_TIME
+       MCP:FECHA_DATE = WDF:C1_DATE
+       MCP:FECHA_TIME = WDF:C1_TIME
+       MCP:ANO=GLO:ANO
+       MCP:MES=GLO:MES
+       MCP:TOTALDEBITO=0
+       MCP:TOTALCREDITO=0
+       MCP:PROCEDENCIA='MANUAL'
+       MCP:IDSEDE=GLO:IDSEDE
+       MCP:ESTADO=0
+    OF CHANGERECORD
+       IF MCP:PROCEDENCIA <> 'MANUAL'
+          Disable(?CurrentTab)
+          Disable(?OK)
+          dISABLE(?MCP:ANULADO)
+          DISABLE(?OK)
+       ELSE
+          LOC:COMPROBANTE_ANT=MCP:COMPROBANTE
+          !Disable(?CallLookup:COM)
+          !?MCP:COMPROBANTE{PROP:READONLY}=True
+          CASE MCP:ESTADO
+          OF 0
+             IF MCP:PROCEDENCIA<>'MANUAL'
+                Disable(?MCP:NOREFERENCIA)
+             END
+          OF 1
+             IF MCP:PROCEDENCIA<>'MANUAL'
+                Disable(?MCP:NOREFERENCIA)
+             END
+          OF 2
+             Disable(?CurrentTab)
+             Disable(?OK)
+          END
+       END
+    OF DELETERECORD
+       IF MCP:PROCEDENCIA <> 'MANUAL'
+          Disable(?CurrentTab)
+          Disable(?OK)
+          dISABLE(?MCP:ANULADO)
+          DISABLE(?OK)
+       ELSE
+          Disable(?CurrentTab)
+          IF MCP:PROCEDENCIA='MANUAL' OR MCP:PROCEDENCIA='MCA'
+             CASE MCP:ESTADO
+             OF 2
+                Disable(?OK)
+             END
+          ELSE
+             Disable(?OK)
+          END
+       END
+    END
+
+  IF MCP:COMPROBANTE=FnValorVariable('IDCON_TCOM_FTR')
+   ?MCP:NOREFERENCIA{PROP:REQ}=True
+   IF MCP:PROCEDENCIA='MANUAL' OR MCP:PROCEDENCIA='MCA'
+    Enable(?MCP:NOREFERENCIA)
+   END
+  ELSE
+   ?MCP:NOREFERENCIA{PROP:REQ}=False
+   Disable(?MCP:NOREFERENCIA)
+  END
+ ELSE
+  Disable(?CurrentTab)
+  Disable(?OK)
+  Message('Periodo Contable Cerrado, No se pueden hacer Actualizaciones.','Periodo',icon:hand)
+
+ END
+END
+
+CLEAR(COM:RECORD)
+COM:COMPANIA=GLO:COMPANIA
+COM:COMPROBANTE=MCP:COMPROBANTE
+IF ACCESS:COM.TRYFETCH(COM:COMCOMPROBANTE) THEN CLEAR(COM:RECORD).
+
+CLEAR(TER:RECORD)
+TER:IDTERCERO=MCP:IDTERCERO
+IF ACCESS:TER.TRYFETCH(TER:TERIDTERCERO) THEN CLEAR(TER:RECORD).
+
+IF FnValorVariable('IDCON_TCOM_ECAJ')= MCP:COMPROBANTE
+ UnHide(?Group:Cheque)
+ELSE
+ Hide(?Group:Cheque)
+END
+
+DISPLAY
+
+[END]
+[END]
+[END]
+EMBED %ControlEventHandling
+[INSTANCES]
+WHEN '?BFechaContable'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+case thiswindow.request
+ of insertrecord
+  MCP:FECHACONTABLE_DATE=fnCalendario(Today())
+ Of ChangeRecord
+  MCP:FECHACONTABLE_DATE=fnCalendario(MCP:FECHACONTABLE_DATE)
+end
+Display
+[END]
+[END]
+WHEN '?MCP:COMPROBANTE'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7501
+PROPERTY:END
+do ValidaComprobante
+
+
+[END]
+[END]
+WHEN '?CallLookup:COM'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7501
+PROPERTY:END
+do ValidaComprobante
+
+[END]
+[END]
+[END]
+EMBED %WindowEventHandling
+[INSTANCES]
+WHEN 'OpenWindow'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+SELECT(?MCP:COMPROBANTE)
+[END]
+[END]
+EMBED %ProcedureRoutines
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+ValidaComprobante Routine
+ IF FnValorVariable('IDCON_TCOM_ECAJ')=MCP:COMPROBANTE
+  UnHide(?Group:Cheque)
+ ELSE
+  Hide(?Group:Cheque)
+ END
+
+ IF UPPER(FnValorVariable('PERMITIR_TODO'))='SI'
+  if upper(FnValorVariable('IDTIPOCXP_DEFAULT'))='ARS'
+   !?MCP:NOREFERENCIA{PROP:REQ}=True
+   !Enable(?MCP:NOREFERENCIA)
+   Enable(?MCP:NOCHEQUE)
+   Enable(?MCP:VALOR_CHEQUE)
+  else
+   IF MCP:COMPROBANTE=FnValorVariable('IDCON_TCOM_FTR')
+    ?MCP:NOREFERENCIA{PROP:REQ}=True
+    Enable(?MCP:NOREFERENCIA)
+   ELSE
+    ?MCP:NOREFERENCIA{PROP:REQ}=False
+    Disable(?MCP:NOREFERENCIA)
+   END
+  end
+ ELSE
+  IF MCP:COMPROBANTE=FnValorVariable('IDCON_TCOM_FTR')
+   ?MCP:NOREFERENCIA{PROP:REQ}=True
+   Enable(?MCP:NOREFERENCIA)
+  ELSE
+   ?MCP:NOREFERENCIA{PROP:REQ}=False
+   Disable(?MCP:NOREFERENCIA)
+  END
+  Disable(?MCP:NOCHEQUE)
+  Disable(?MCP:VALOR_CHEQUE)
+ END
+[END]
+[END]
+[ADDITION]
+NAME AnyScreen AnyScreenProcedure
+[FIELDPROMPT]
+%HideOnClient DEPEND %Control LONG TIMES 42
+WHEN  ('') (0)
+WHEN  ('?BFechaContable') (0)
+WHEN  ('?COM:NOMCOMPROBANTE') (0)
+WHEN  ('?CallLookup:COM') (0)
+WHEN  ('?CallLookup:TER') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?CurrentTab') (0)
+WHEN  ('?Group:Cheque') (0)
+WHEN  ('?MCP:ANO') (0)
+WHEN  ('?MCP:ANO:Prompt') (0)
+WHEN  ('?MCP:ANULADO') (0)
+WHEN  ('?MCP:COMPROBANTE') (0)
+WHEN  ('?MCP:COMPROBANTE:Prompt') (0)
+WHEN  ('?MCP:DETALLE:Prompt') (0)
+WHEN  ('?MCP:DOCUMENTO:Prompt') (0)
+WHEN  ('?MCP:FECHACONTABLE_DATE') (0)
+WHEN  ('?MCP:FECHARADICACION_DATE') (0)
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') (0)
+WHEN  ('?MCP:IDTERCERO') (0)
+WHEN  ('?MCP:IDTERCERO:Prompt') (0)
+WHEN  ('?MCP:MES') (0)
+WHEN  ('?MCP:NOCHEQUE') (0)
+WHEN  ('?MCP:NOCHEQUE:Prompt') (0)
+WHEN  ('?MCP:NOREFERENCIA') (0)
+WHEN  ('?MCP:NROCOMPROBANTE') (0)
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') (0)
+WHEN  ('?MCP:OBSERVACION') (0)
+WHEN  ('?MCP:PROCEDENCIA') (0)
+WHEN  ('?MCP:PROCEDENCIA:Prompt') (0)
+WHEN  ('?MCP:REFERENCIA1') (0)
+WHEN  ('?MCP:REFERENCIA1:Prompt') (0)
+WHEN  ('?MCP:REFERENCIA2') (0)
+WHEN  ('?MCP:TOTALCREDITO') (0)
+WHEN  ('?MCP:TOTALCREDITO:Prompt') (0)
+WHEN  ('?MCP:TOTALDEBITO') (0)
+WHEN  ('?MCP:TOTALDEBITO:Prompt') (0)
+WHEN  ('?MCP:VALOR_CHEQUE') (0)
+WHEN  ('?MCP:VALOR_CHEQUE:Prompt') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?StringFechaContable') (0)
+WHEN  ('?TER:RAZONSOCIAL') (0)
+WHEN  ('?Tab:1') (0)
+
+%SynOnAccept DEPEND %Control LONG TIMES 42
+WHEN  ('') (1)
+WHEN  ('?BFechaContable') (1)
+WHEN  ('?COM:NOMCOMPROBANTE') (1)
+WHEN  ('?CallLookup:COM') (1)
+WHEN  ('?CallLookup:TER') (1)
+WHEN  ('?Cancel') (1)
+WHEN  ('?CurrentTab') (1)
+WHEN  ('?Group:Cheque') (1)
+WHEN  ('?MCP:ANO') (1)
+WHEN  ('?MCP:ANO:Prompt') (1)
+WHEN  ('?MCP:ANULADO') (1)
+WHEN  ('?MCP:COMPROBANTE') (1)
+WHEN  ('?MCP:COMPROBANTE:Prompt') (1)
+WHEN  ('?MCP:DETALLE:Prompt') (1)
+WHEN  ('?MCP:DOCUMENTO:Prompt') (1)
+WHEN  ('?MCP:FECHACONTABLE_DATE') (1)
+WHEN  ('?MCP:FECHARADICACION_DATE') (1)
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') (1)
+WHEN  ('?MCP:IDTERCERO') (1)
+WHEN  ('?MCP:IDTERCERO:Prompt') (1)
+WHEN  ('?MCP:MES') (1)
+WHEN  ('?MCP:NOCHEQUE') (1)
+WHEN  ('?MCP:NOCHEQUE:Prompt') (1)
+WHEN  ('?MCP:NOREFERENCIA') (1)
+WHEN  ('?MCP:NROCOMPROBANTE') (1)
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') (1)
+WHEN  ('?MCP:OBSERVACION') (1)
+WHEN  ('?MCP:PROCEDENCIA') (1)
+WHEN  ('?MCP:PROCEDENCIA:Prompt') (1)
+WHEN  ('?MCP:REFERENCIA1') (1)
+WHEN  ('?MCP:REFERENCIA1:Prompt') (1)
+WHEN  ('?MCP:REFERENCIA2') (1)
+WHEN  ('?MCP:TOTALCREDITO') (1)
+WHEN  ('?MCP:TOTALCREDITO:Prompt') (1)
+WHEN  ('?MCP:TOTALDEBITO') (1)
+WHEN  ('?MCP:TOTALDEBITO:Prompt') (1)
+WHEN  ('?MCP:VALOR_CHEQUE') (1)
+WHEN  ('?MCP:VALOR_CHEQUE:Prompt') (1)
+WHEN  ('?OK') (1)
+WHEN  ('?StringFechaContable') (1)
+WHEN  ('?TER:RAZONSOCIAL') (1)
+WHEN  ('?Tab:1') (1)
+
+%SynOnSelect DEPEND %Control LONG TIMES 42
+WHEN  ('') (1)
+WHEN  ('?BFechaContable') (1)
+WHEN  ('?COM:NOMCOMPROBANTE') (1)
+WHEN  ('?CallLookup:COM') (1)
+WHEN  ('?CallLookup:TER') (1)
+WHEN  ('?Cancel') (1)
+WHEN  ('?CurrentTab') (1)
+WHEN  ('?Group:Cheque') (1)
+WHEN  ('?MCP:ANO') (1)
+WHEN  ('?MCP:ANO:Prompt') (1)
+WHEN  ('?MCP:ANULADO') (1)
+WHEN  ('?MCP:COMPROBANTE') (1)
+WHEN  ('?MCP:COMPROBANTE:Prompt') (1)
+WHEN  ('?MCP:DETALLE:Prompt') (1)
+WHEN  ('?MCP:DOCUMENTO:Prompt') (1)
+WHEN  ('?MCP:FECHACONTABLE_DATE') (1)
+WHEN  ('?MCP:FECHARADICACION_DATE') (1)
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') (1)
+WHEN  ('?MCP:IDTERCERO') (1)
+WHEN  ('?MCP:IDTERCERO:Prompt') (1)
+WHEN  ('?MCP:MES') (1)
+WHEN  ('?MCP:NOCHEQUE') (1)
+WHEN  ('?MCP:NOCHEQUE:Prompt') (1)
+WHEN  ('?MCP:NOREFERENCIA') (1)
+WHEN  ('?MCP:NROCOMPROBANTE') (1)
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') (1)
+WHEN  ('?MCP:OBSERVACION') (1)
+WHEN  ('?MCP:PROCEDENCIA') (1)
+WHEN  ('?MCP:PROCEDENCIA:Prompt') (1)
+WHEN  ('?MCP:REFERENCIA1') (1)
+WHEN  ('?MCP:REFERENCIA1:Prompt') (1)
+WHEN  ('?MCP:REFERENCIA2') (1)
+WHEN  ('?MCP:TOTALCREDITO') (1)
+WHEN  ('?MCP:TOTALCREDITO:Prompt') (1)
+WHEN  ('?MCP:TOTALDEBITO') (1)
+WHEN  ('?MCP:TOTALDEBITO:Prompt') (1)
+WHEN  ('?MCP:VALOR_CHEQUE') (1)
+WHEN  ('?MCP:VALOR_CHEQUE:Prompt') (1)
+WHEN  ('?OK') (1)
+WHEN  ('?StringFechaContable') (1)
+WHEN  ('?TER:RAZONSOCIAL') (1)
+WHEN  ('?Tab:1') (1)
+
+%ThinControlMaxSize DEPEND %Control DEFAULT TIMES 42
+WHEN  ('') ('250000')
+WHEN  ('?BFechaContable') ('250000')
+WHEN  ('?COM:NOMCOMPROBANTE') ('250000')
+WHEN  ('?CallLookup:COM') ('250000')
+WHEN  ('?CallLookup:TER') ('250000')
+WHEN  ('?Cancel') ('250000')
+WHEN  ('?CurrentTab') ('250000')
+WHEN  ('?Group:Cheque') ('250000')
+WHEN  ('?MCP:ANO') ('250000')
+WHEN  ('?MCP:ANO:Prompt') ('250000')
+WHEN  ('?MCP:ANULADO') ('250000')
+WHEN  ('?MCP:COMPROBANTE') ('250000')
+WHEN  ('?MCP:COMPROBANTE:Prompt') ('250000')
+WHEN  ('?MCP:DETALLE:Prompt') ('250000')
+WHEN  ('?MCP:DOCUMENTO:Prompt') ('250000')
+WHEN  ('?MCP:FECHACONTABLE_DATE') ('250000')
+WHEN  ('?MCP:FECHARADICACION_DATE') ('250000')
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') ('250000')
+WHEN  ('?MCP:IDTERCERO') ('250000')
+WHEN  ('?MCP:IDTERCERO:Prompt') ('250000')
+WHEN  ('?MCP:MES') ('250000')
+WHEN  ('?MCP:NOCHEQUE') ('250000')
+WHEN  ('?MCP:NOCHEQUE:Prompt') ('250000')
+WHEN  ('?MCP:NOREFERENCIA') ('250000')
+WHEN  ('?MCP:NROCOMPROBANTE') ('250000')
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') ('250000')
+WHEN  ('?MCP:OBSERVACION') ('250000')
+WHEN  ('?MCP:PROCEDENCIA') ('250000')
+WHEN  ('?MCP:PROCEDENCIA:Prompt') ('250000')
+WHEN  ('?MCP:REFERENCIA1') ('250000')
+WHEN  ('?MCP:REFERENCIA1:Prompt') ('250000')
+WHEN  ('?MCP:REFERENCIA2') ('250000')
+WHEN  ('?MCP:TOTALCREDITO') ('250000')
+WHEN  ('?MCP:TOTALCREDITO:Prompt') ('250000')
+WHEN  ('?MCP:TOTALDEBITO') ('250000')
+WHEN  ('?MCP:TOTALDEBITO:Prompt') ('250000')
+WHEN  ('?MCP:VALOR_CHEQUE') ('250000')
+WHEN  ('?MCP:VALOR_CHEQUE:Prompt') ('250000')
+WHEN  ('?OK') ('250000')
+WHEN  ('?StringFechaContable') ('250000')
+WHEN  ('?TER:RAZONSOCIAL') ('250000')
+WHEN  ('?Tab:1') ('250000')
+
+%ThinControlListboxPipes DEPEND %Control LONG TIMES 42
+WHEN  ('') (0)
+WHEN  ('?BFechaContable') (0)
+WHEN  ('?COM:NOMCOMPROBANTE') (0)
+WHEN  ('?CallLookup:COM') (0)
+WHEN  ('?CallLookup:TER') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?CurrentTab') (0)
+WHEN  ('?Group:Cheque') (0)
+WHEN  ('?MCP:ANO') (0)
+WHEN  ('?MCP:ANO:Prompt') (0)
+WHEN  ('?MCP:ANULADO') (0)
+WHEN  ('?MCP:COMPROBANTE') (0)
+WHEN  ('?MCP:COMPROBANTE:Prompt') (0)
+WHEN  ('?MCP:DETALLE:Prompt') (0)
+WHEN  ('?MCP:DOCUMENTO:Prompt') (0)
+WHEN  ('?MCP:FECHACONTABLE_DATE') (0)
+WHEN  ('?MCP:FECHARADICACION_DATE') (0)
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') (0)
+WHEN  ('?MCP:IDTERCERO') (0)
+WHEN  ('?MCP:IDTERCERO:Prompt') (0)
+WHEN  ('?MCP:MES') (0)
+WHEN  ('?MCP:NOCHEQUE') (0)
+WHEN  ('?MCP:NOCHEQUE:Prompt') (0)
+WHEN  ('?MCP:NOREFERENCIA') (0)
+WHEN  ('?MCP:NROCOMPROBANTE') (0)
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') (0)
+WHEN  ('?MCP:OBSERVACION') (0)
+WHEN  ('?MCP:PROCEDENCIA') (0)
+WHEN  ('?MCP:PROCEDENCIA:Prompt') (0)
+WHEN  ('?MCP:REFERENCIA1') (0)
+WHEN  ('?MCP:REFERENCIA1:Prompt') (0)
+WHEN  ('?MCP:REFERENCIA2') (0)
+WHEN  ('?MCP:TOTALCREDITO') (0)
+WHEN  ('?MCP:TOTALCREDITO:Prompt') (0)
+WHEN  ('?MCP:TOTALDEBITO') (0)
+WHEN  ('?MCP:TOTALDEBITO:Prompt') (0)
+WHEN  ('?MCP:VALOR_CHEQUE') (0)
+WHEN  ('?MCP:VALOR_CHEQUE:Prompt') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?StringFechaContable') (0)
+WHEN  ('?TER:RAZONSOCIAL') (0)
+WHEN  ('?Tab:1') (0)
+
+%AnyScreenCSSclass DEPEND %Control DEFAULT TIMES 42
+WHEN  ('') ('')
+WHEN  ('?BFechaContable') ('')
+WHEN  ('?COM:NOMCOMPROBANTE') ('')
+WHEN  ('?CallLookup:COM') ('')
+WHEN  ('?CallLookup:TER') ('')
+WHEN  ('?Cancel') ('')
+WHEN  ('?CurrentTab') ('')
+WHEN  ('?Group:Cheque') ('')
+WHEN  ('?MCP:ANO') ('')
+WHEN  ('?MCP:ANO:Prompt') ('')
+WHEN  ('?MCP:ANULADO') ('')
+WHEN  ('?MCP:COMPROBANTE') ('')
+WHEN  ('?MCP:COMPROBANTE:Prompt') ('')
+WHEN  ('?MCP:DETALLE:Prompt') ('')
+WHEN  ('?MCP:DOCUMENTO:Prompt') ('')
+WHEN  ('?MCP:FECHACONTABLE_DATE') ('')
+WHEN  ('?MCP:FECHARADICACION_DATE') ('')
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') ('')
+WHEN  ('?MCP:IDTERCERO') ('')
+WHEN  ('?MCP:IDTERCERO:Prompt') ('')
+WHEN  ('?MCP:MES') ('')
+WHEN  ('?MCP:NOCHEQUE') ('')
+WHEN  ('?MCP:NOCHEQUE:Prompt') ('')
+WHEN  ('?MCP:NOREFERENCIA') ('')
+WHEN  ('?MCP:NROCOMPROBANTE') ('')
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') ('')
+WHEN  ('?MCP:OBSERVACION') ('')
+WHEN  ('?MCP:PROCEDENCIA') ('')
+WHEN  ('?MCP:PROCEDENCIA:Prompt') ('')
+WHEN  ('?MCP:REFERENCIA1') ('')
+WHEN  ('?MCP:REFERENCIA1:Prompt') ('')
+WHEN  ('?MCP:REFERENCIA2') ('')
+WHEN  ('?MCP:TOTALCREDITO') ('')
+WHEN  ('?MCP:TOTALCREDITO:Prompt') ('')
+WHEN  ('?MCP:TOTALDEBITO') ('')
+WHEN  ('?MCP:TOTALDEBITO:Prompt') ('')
+WHEN  ('?MCP:VALOR_CHEQUE') ('')
+WHEN  ('?MCP:VALOR_CHEQUE:Prompt') ('')
+WHEN  ('?OK') ('')
+WHEN  ('?StringFechaContable') ('')
+WHEN  ('?TER:RAZONSOCIAL') ('')
+WHEN  ('?Tab:1') ('')
+
+%EnableWithoutThinet DEPEND %Control LONG TIMES 42
+WHEN  ('') (0)
+WHEN  ('?BFechaContable') (0)
+WHEN  ('?COM:NOMCOMPROBANTE') (0)
+WHEN  ('?CallLookup:COM') (0)
+WHEN  ('?CallLookup:TER') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?CurrentTab') (0)
+WHEN  ('?Group:Cheque') (0)
+WHEN  ('?MCP:ANO') (0)
+WHEN  ('?MCP:ANO:Prompt') (0)
+WHEN  ('?MCP:ANULADO') (0)
+WHEN  ('?MCP:COMPROBANTE') (0)
+WHEN  ('?MCP:COMPROBANTE:Prompt') (0)
+WHEN  ('?MCP:DETALLE:Prompt') (0)
+WHEN  ('?MCP:DOCUMENTO:Prompt') (0)
+WHEN  ('?MCP:FECHACONTABLE_DATE') (0)
+WHEN  ('?MCP:FECHARADICACION_DATE') (0)
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') (0)
+WHEN  ('?MCP:IDTERCERO') (0)
+WHEN  ('?MCP:IDTERCERO:Prompt') (0)
+WHEN  ('?MCP:MES') (0)
+WHEN  ('?MCP:NOCHEQUE') (0)
+WHEN  ('?MCP:NOCHEQUE:Prompt') (0)
+WHEN  ('?MCP:NOREFERENCIA') (0)
+WHEN  ('?MCP:NROCOMPROBANTE') (0)
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') (0)
+WHEN  ('?MCP:OBSERVACION') (0)
+WHEN  ('?MCP:PROCEDENCIA') (0)
+WHEN  ('?MCP:PROCEDENCIA:Prompt') (0)
+WHEN  ('?MCP:REFERENCIA1') (0)
+WHEN  ('?MCP:REFERENCIA1:Prompt') (0)
+WHEN  ('?MCP:REFERENCIA2') (0)
+WHEN  ('?MCP:TOTALCREDITO') (0)
+WHEN  ('?MCP:TOTALCREDITO:Prompt') (0)
+WHEN  ('?MCP:TOTALDEBITO') (0)
+WHEN  ('?MCP:TOTALDEBITO:Prompt') (0)
+WHEN  ('?MCP:VALOR_CHEQUE') (0)
+WHEN  ('?MCP:VALOR_CHEQUE:Prompt') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?StringFechaContable') (0)
+WHEN  ('?TER:RAZONSOCIAL') (0)
+WHEN  ('?Tab:1') (0)
+
+%OverrideGlobalListboxHeaderColors DEPEND %Control LONG TIMES 42
+WHEN  ('') (0)
+WHEN  ('?BFechaContable') (0)
+WHEN  ('?COM:NOMCOMPROBANTE') (0)
+WHEN  ('?CallLookup:COM') (0)
+WHEN  ('?CallLookup:TER') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?CurrentTab') (0)
+WHEN  ('?Group:Cheque') (0)
+WHEN  ('?MCP:ANO') (0)
+WHEN  ('?MCP:ANO:Prompt') (0)
+WHEN  ('?MCP:ANULADO') (0)
+WHEN  ('?MCP:COMPROBANTE') (0)
+WHEN  ('?MCP:COMPROBANTE:Prompt') (0)
+WHEN  ('?MCP:DETALLE:Prompt') (0)
+WHEN  ('?MCP:DOCUMENTO:Prompt') (0)
+WHEN  ('?MCP:FECHACONTABLE_DATE') (0)
+WHEN  ('?MCP:FECHARADICACION_DATE') (0)
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') (0)
+WHEN  ('?MCP:IDTERCERO') (0)
+WHEN  ('?MCP:IDTERCERO:Prompt') (0)
+WHEN  ('?MCP:MES') (0)
+WHEN  ('?MCP:NOCHEQUE') (0)
+WHEN  ('?MCP:NOCHEQUE:Prompt') (0)
+WHEN  ('?MCP:NOREFERENCIA') (0)
+WHEN  ('?MCP:NROCOMPROBANTE') (0)
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') (0)
+WHEN  ('?MCP:OBSERVACION') (0)
+WHEN  ('?MCP:PROCEDENCIA') (0)
+WHEN  ('?MCP:PROCEDENCIA:Prompt') (0)
+WHEN  ('?MCP:REFERENCIA1') (0)
+WHEN  ('?MCP:REFERENCIA1:Prompt') (0)
+WHEN  ('?MCP:REFERENCIA2') (0)
+WHEN  ('?MCP:TOTALCREDITO') (0)
+WHEN  ('?MCP:TOTALCREDITO:Prompt') (0)
+WHEN  ('?MCP:TOTALDEBITO') (0)
+WHEN  ('?MCP:TOTALDEBITO:Prompt') (0)
+WHEN  ('?MCP:VALOR_CHEQUE') (0)
+WHEN  ('?MCP:VALOR_CHEQUE:Prompt') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?StringFechaContable') (0)
+WHEN  ('?TER:RAZONSOCIAL') (0)
+WHEN  ('?Tab:1') (0)
+
+%cNormal DEPEND %Control LONG TIMES 42
+WHEN  ('') (-1)
+WHEN  ('?BFechaContable') (-1)
+WHEN  ('?COM:NOMCOMPROBANTE') (-1)
+WHEN  ('?CallLookup:COM') (-1)
+WHEN  ('?CallLookup:TER') (-1)
+WHEN  ('?Cancel') (-1)
+WHEN  ('?CurrentTab') (-1)
+WHEN  ('?Group:Cheque') (-1)
+WHEN  ('?MCP:ANO') (-1)
+WHEN  ('?MCP:ANO:Prompt') (-1)
+WHEN  ('?MCP:ANULADO') (-1)
+WHEN  ('?MCP:COMPROBANTE') (-1)
+WHEN  ('?MCP:COMPROBANTE:Prompt') (-1)
+WHEN  ('?MCP:DETALLE:Prompt') (-1)
+WHEN  ('?MCP:DOCUMENTO:Prompt') (-1)
+WHEN  ('?MCP:FECHACONTABLE_DATE') (-1)
+WHEN  ('?MCP:FECHARADICACION_DATE') (-1)
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') (-1)
+WHEN  ('?MCP:IDTERCERO') (-1)
+WHEN  ('?MCP:IDTERCERO:Prompt') (-1)
+WHEN  ('?MCP:MES') (-1)
+WHEN  ('?MCP:NOCHEQUE') (-1)
+WHEN  ('?MCP:NOCHEQUE:Prompt') (-1)
+WHEN  ('?MCP:NOREFERENCIA') (-1)
+WHEN  ('?MCP:NROCOMPROBANTE') (-1)
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') (-1)
+WHEN  ('?MCP:OBSERVACION') (-1)
+WHEN  ('?MCP:PROCEDENCIA') (-1)
+WHEN  ('?MCP:PROCEDENCIA:Prompt') (-1)
+WHEN  ('?MCP:REFERENCIA1') (-1)
+WHEN  ('?MCP:REFERENCIA1:Prompt') (-1)
+WHEN  ('?MCP:REFERENCIA2') (-1)
+WHEN  ('?MCP:TOTALCREDITO') (-1)
+WHEN  ('?MCP:TOTALCREDITO:Prompt') (-1)
+WHEN  ('?MCP:TOTALDEBITO') (-1)
+WHEN  ('?MCP:TOTALDEBITO:Prompt') (-1)
+WHEN  ('?MCP:VALOR_CHEQUE') (-1)
+WHEN  ('?MCP:VALOR_CHEQUE:Prompt') (-1)
+WHEN  ('?OK') (-1)
+WHEN  ('?StringFechaContable') (-1)
+WHEN  ('?TER:RAZONSOCIAL') (-1)
+WHEN  ('?Tab:1') (-1)
+
+%cAccentTxt DEPEND %Control LONG TIMES 42
+WHEN  ('') (14342874)
+WHEN  ('?BFechaContable') (14342874)
+WHEN  ('?COM:NOMCOMPROBANTE') (14342874)
+WHEN  ('?CallLookup:COM') (14342874)
+WHEN  ('?CallLookup:TER') (14342874)
+WHEN  ('?Cancel') (14342874)
+WHEN  ('?CurrentTab') (14342874)
+WHEN  ('?Group:Cheque') (14342874)
+WHEN  ('?MCP:ANO') (14342874)
+WHEN  ('?MCP:ANO:Prompt') (14342874)
+WHEN  ('?MCP:ANULADO') (14342874)
+WHEN  ('?MCP:COMPROBANTE') (14342874)
+WHEN  ('?MCP:COMPROBANTE:Prompt') (14342874)
+WHEN  ('?MCP:DETALLE:Prompt') (14342874)
+WHEN  ('?MCP:DOCUMENTO:Prompt') (14342874)
+WHEN  ('?MCP:FECHACONTABLE_DATE') (14342874)
+WHEN  ('?MCP:FECHARADICACION_DATE') (14342874)
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') (14342874)
+WHEN  ('?MCP:IDTERCERO') (14342874)
+WHEN  ('?MCP:IDTERCERO:Prompt') (14342874)
+WHEN  ('?MCP:MES') (14342874)
+WHEN  ('?MCP:NOCHEQUE') (14342874)
+WHEN  ('?MCP:NOCHEQUE:Prompt') (14342874)
+WHEN  ('?MCP:NOREFERENCIA') (14342874)
+WHEN  ('?MCP:NROCOMPROBANTE') (14342874)
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') (14342874)
+WHEN  ('?MCP:OBSERVACION') (14342874)
+WHEN  ('?MCP:PROCEDENCIA') (14342874)
+WHEN  ('?MCP:PROCEDENCIA:Prompt') (14342874)
+WHEN  ('?MCP:REFERENCIA1') (14342874)
+WHEN  ('?MCP:REFERENCIA1:Prompt') (14342874)
+WHEN  ('?MCP:REFERENCIA2') (14342874)
+WHEN  ('?MCP:TOTALCREDITO') (14342874)
+WHEN  ('?MCP:TOTALCREDITO:Prompt') (14342874)
+WHEN  ('?MCP:TOTALDEBITO') (14342874)
+WHEN  ('?MCP:TOTALDEBITO:Prompt') (14342874)
+WHEN  ('?MCP:VALOR_CHEQUE') (14342874)
+WHEN  ('?MCP:VALOR_CHEQUE:Prompt') (14342874)
+WHEN  ('?OK') (14342874)
+WHEN  ('?StringFechaContable') (14342874)
+WHEN  ('?TER:RAZONSOCIAL') (14342874)
+WHEN  ('?Tab:1') (14342874)
+
+%cListHeaderBack DEPEND %Control LONG TIMES 42
+WHEN  ('') (14342874)
+WHEN  ('?BFechaContable') (14342874)
+WHEN  ('?COM:NOMCOMPROBANTE') (14342874)
+WHEN  ('?CallLookup:COM') (14342874)
+WHEN  ('?CallLookup:TER') (14342874)
+WHEN  ('?Cancel') (14342874)
+WHEN  ('?CurrentTab') (14342874)
+WHEN  ('?Group:Cheque') (14342874)
+WHEN  ('?MCP:ANO') (14342874)
+WHEN  ('?MCP:ANO:Prompt') (14342874)
+WHEN  ('?MCP:ANULADO') (14342874)
+WHEN  ('?MCP:COMPROBANTE') (14342874)
+WHEN  ('?MCP:COMPROBANTE:Prompt') (14342874)
+WHEN  ('?MCP:DETALLE:Prompt') (14342874)
+WHEN  ('?MCP:DOCUMENTO:Prompt') (14342874)
+WHEN  ('?MCP:FECHACONTABLE_DATE') (14342874)
+WHEN  ('?MCP:FECHARADICACION_DATE') (14342874)
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') (14342874)
+WHEN  ('?MCP:IDTERCERO') (14342874)
+WHEN  ('?MCP:IDTERCERO:Prompt') (14342874)
+WHEN  ('?MCP:MES') (14342874)
+WHEN  ('?MCP:NOCHEQUE') (14342874)
+WHEN  ('?MCP:NOCHEQUE:Prompt') (14342874)
+WHEN  ('?MCP:NOREFERENCIA') (14342874)
+WHEN  ('?MCP:NROCOMPROBANTE') (14342874)
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') (14342874)
+WHEN  ('?MCP:OBSERVACION') (14342874)
+WHEN  ('?MCP:PROCEDENCIA') (14342874)
+WHEN  ('?MCP:PROCEDENCIA:Prompt') (14342874)
+WHEN  ('?MCP:REFERENCIA1') (14342874)
+WHEN  ('?MCP:REFERENCIA1:Prompt') (14342874)
+WHEN  ('?MCP:REFERENCIA2') (14342874)
+WHEN  ('?MCP:TOTALCREDITO') (14342874)
+WHEN  ('?MCP:TOTALCREDITO:Prompt') (14342874)
+WHEN  ('?MCP:TOTALDEBITO') (14342874)
+WHEN  ('?MCP:TOTALDEBITO:Prompt') (14342874)
+WHEN  ('?MCP:VALOR_CHEQUE') (14342874)
+WHEN  ('?MCP:VALOR_CHEQUE:Prompt') (14342874)
+WHEN  ('?OK') (14342874)
+WHEN  ('?StringFechaContable') (14342874)
+WHEN  ('?TER:RAZONSOCIAL') (14342874)
+WHEN  ('?Tab:1') (14342874)
+
+%cListHeaderFore DEPEND %Control LONG TIMES 42
+WHEN  ('') (0)
+WHEN  ('?BFechaContable') (0)
+WHEN  ('?COM:NOMCOMPROBANTE') (0)
+WHEN  ('?CallLookup:COM') (0)
+WHEN  ('?CallLookup:TER') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?CurrentTab') (0)
+WHEN  ('?Group:Cheque') (0)
+WHEN  ('?MCP:ANO') (0)
+WHEN  ('?MCP:ANO:Prompt') (0)
+WHEN  ('?MCP:ANULADO') (0)
+WHEN  ('?MCP:COMPROBANTE') (0)
+WHEN  ('?MCP:COMPROBANTE:Prompt') (0)
+WHEN  ('?MCP:DETALLE:Prompt') (0)
+WHEN  ('?MCP:DOCUMENTO:Prompt') (0)
+WHEN  ('?MCP:FECHACONTABLE_DATE') (0)
+WHEN  ('?MCP:FECHARADICACION_DATE') (0)
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') (0)
+WHEN  ('?MCP:IDTERCERO') (0)
+WHEN  ('?MCP:IDTERCERO:Prompt') (0)
+WHEN  ('?MCP:MES') (0)
+WHEN  ('?MCP:NOCHEQUE') (0)
+WHEN  ('?MCP:NOCHEQUE:Prompt') (0)
+WHEN  ('?MCP:NOREFERENCIA') (0)
+WHEN  ('?MCP:NROCOMPROBANTE') (0)
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') (0)
+WHEN  ('?MCP:OBSERVACION') (0)
+WHEN  ('?MCP:PROCEDENCIA') (0)
+WHEN  ('?MCP:PROCEDENCIA:Prompt') (0)
+WHEN  ('?MCP:REFERENCIA1') (0)
+WHEN  ('?MCP:REFERENCIA1:Prompt') (0)
+WHEN  ('?MCP:REFERENCIA2') (0)
+WHEN  ('?MCP:TOTALCREDITO') (0)
+WHEN  ('?MCP:TOTALCREDITO:Prompt') (0)
+WHEN  ('?MCP:TOTALDEBITO') (0)
+WHEN  ('?MCP:TOTALDEBITO:Prompt') (0)
+WHEN  ('?MCP:VALOR_CHEQUE') (0)
+WHEN  ('?MCP:VALOR_CHEQUE:Prompt') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?StringFechaContable') (0)
+WHEN  ('?TER:RAZONSOCIAL') (0)
+WHEN  ('?Tab:1') (0)
+
+%cListHeaderGRBack DEPEND %Control LONG TIMES 42
+WHEN  ('') (14342874)
+WHEN  ('?BFechaContable') (14342874)
+WHEN  ('?COM:NOMCOMPROBANTE') (14342874)
+WHEN  ('?CallLookup:COM') (14342874)
+WHEN  ('?CallLookup:TER') (14342874)
+WHEN  ('?Cancel') (14342874)
+WHEN  ('?CurrentTab') (14342874)
+WHEN  ('?Group:Cheque') (14342874)
+WHEN  ('?MCP:ANO') (14342874)
+WHEN  ('?MCP:ANO:Prompt') (14342874)
+WHEN  ('?MCP:ANULADO') (14342874)
+WHEN  ('?MCP:COMPROBANTE') (14342874)
+WHEN  ('?MCP:COMPROBANTE:Prompt') (14342874)
+WHEN  ('?MCP:DETALLE:Prompt') (14342874)
+WHEN  ('?MCP:DOCUMENTO:Prompt') (14342874)
+WHEN  ('?MCP:FECHACONTABLE_DATE') (14342874)
+WHEN  ('?MCP:FECHARADICACION_DATE') (14342874)
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') (14342874)
+WHEN  ('?MCP:IDTERCERO') (14342874)
+WHEN  ('?MCP:IDTERCERO:Prompt') (14342874)
+WHEN  ('?MCP:MES') (14342874)
+WHEN  ('?MCP:NOCHEQUE') (14342874)
+WHEN  ('?MCP:NOCHEQUE:Prompt') (14342874)
+WHEN  ('?MCP:NOREFERENCIA') (14342874)
+WHEN  ('?MCP:NROCOMPROBANTE') (14342874)
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') (14342874)
+WHEN  ('?MCP:OBSERVACION') (14342874)
+WHEN  ('?MCP:PROCEDENCIA') (14342874)
+WHEN  ('?MCP:PROCEDENCIA:Prompt') (14342874)
+WHEN  ('?MCP:REFERENCIA1') (14342874)
+WHEN  ('?MCP:REFERENCIA1:Prompt') (14342874)
+WHEN  ('?MCP:REFERENCIA2') (14342874)
+WHEN  ('?MCP:TOTALCREDITO') (14342874)
+WHEN  ('?MCP:TOTALCREDITO:Prompt') (14342874)
+WHEN  ('?MCP:TOTALDEBITO') (14342874)
+WHEN  ('?MCP:TOTALDEBITO:Prompt') (14342874)
+WHEN  ('?MCP:VALOR_CHEQUE') (14342874)
+WHEN  ('?MCP:VALOR_CHEQUE:Prompt') (14342874)
+WHEN  ('?OK') (14342874)
+WHEN  ('?StringFechaContable') (14342874)
+WHEN  ('?TER:RAZONSOCIAL') (14342874)
+WHEN  ('?Tab:1') (14342874)
+
+%cListHeaderGrFore DEPEND %Control LONG TIMES 42
+WHEN  ('') (0)
+WHEN  ('?BFechaContable') (0)
+WHEN  ('?COM:NOMCOMPROBANTE') (0)
+WHEN  ('?CallLookup:COM') (0)
+WHEN  ('?CallLookup:TER') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?CurrentTab') (0)
+WHEN  ('?Group:Cheque') (0)
+WHEN  ('?MCP:ANO') (0)
+WHEN  ('?MCP:ANO:Prompt') (0)
+WHEN  ('?MCP:ANULADO') (0)
+WHEN  ('?MCP:COMPROBANTE') (0)
+WHEN  ('?MCP:COMPROBANTE:Prompt') (0)
+WHEN  ('?MCP:DETALLE:Prompt') (0)
+WHEN  ('?MCP:DOCUMENTO:Prompt') (0)
+WHEN  ('?MCP:FECHACONTABLE_DATE') (0)
+WHEN  ('?MCP:FECHARADICACION_DATE') (0)
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') (0)
+WHEN  ('?MCP:IDTERCERO') (0)
+WHEN  ('?MCP:IDTERCERO:Prompt') (0)
+WHEN  ('?MCP:MES') (0)
+WHEN  ('?MCP:NOCHEQUE') (0)
+WHEN  ('?MCP:NOCHEQUE:Prompt') (0)
+WHEN  ('?MCP:NOREFERENCIA') (0)
+WHEN  ('?MCP:NROCOMPROBANTE') (0)
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') (0)
+WHEN  ('?MCP:OBSERVACION') (0)
+WHEN  ('?MCP:PROCEDENCIA') (0)
+WHEN  ('?MCP:PROCEDENCIA:Prompt') (0)
+WHEN  ('?MCP:REFERENCIA1') (0)
+WHEN  ('?MCP:REFERENCIA1:Prompt') (0)
+WHEN  ('?MCP:REFERENCIA2') (0)
+WHEN  ('?MCP:TOTALCREDITO') (0)
+WHEN  ('?MCP:TOTALCREDITO:Prompt') (0)
+WHEN  ('?MCP:TOTALDEBITO') (0)
+WHEN  ('?MCP:TOTALDEBITO:Prompt') (0)
+WHEN  ('?MCP:VALOR_CHEQUE') (0)
+WHEN  ('?MCP:VALOR_CHEQUE:Prompt') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?StringFechaContable') (0)
+WHEN  ('?TER:RAZONSOCIAL') (0)
+WHEN  ('?Tab:1') (0)
+
+%cListHeaderArrow DEPEND %Control LONG TIMES 42
+WHEN  ('') (8421504)
+WHEN  ('?BFechaContable') (8421504)
+WHEN  ('?COM:NOMCOMPROBANTE') (8421504)
+WHEN  ('?CallLookup:COM') (8421504)
+WHEN  ('?CallLookup:TER') (8421504)
+WHEN  ('?Cancel') (8421504)
+WHEN  ('?CurrentTab') (8421504)
+WHEN  ('?Group:Cheque') (8421504)
+WHEN  ('?MCP:ANO') (8421504)
+WHEN  ('?MCP:ANO:Prompt') (8421504)
+WHEN  ('?MCP:ANULADO') (8421504)
+WHEN  ('?MCP:COMPROBANTE') (8421504)
+WHEN  ('?MCP:COMPROBANTE:Prompt') (8421504)
+WHEN  ('?MCP:DETALLE:Prompt') (8421504)
+WHEN  ('?MCP:DOCUMENTO:Prompt') (8421504)
+WHEN  ('?MCP:FECHACONTABLE_DATE') (8421504)
+WHEN  ('?MCP:FECHARADICACION_DATE') (8421504)
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') (8421504)
+WHEN  ('?MCP:IDTERCERO') (8421504)
+WHEN  ('?MCP:IDTERCERO:Prompt') (8421504)
+WHEN  ('?MCP:MES') (8421504)
+WHEN  ('?MCP:NOCHEQUE') (8421504)
+WHEN  ('?MCP:NOCHEQUE:Prompt') (8421504)
+WHEN  ('?MCP:NOREFERENCIA') (8421504)
+WHEN  ('?MCP:NROCOMPROBANTE') (8421504)
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') (8421504)
+WHEN  ('?MCP:OBSERVACION') (8421504)
+WHEN  ('?MCP:PROCEDENCIA') (8421504)
+WHEN  ('?MCP:PROCEDENCIA:Prompt') (8421504)
+WHEN  ('?MCP:REFERENCIA1') (8421504)
+WHEN  ('?MCP:REFERENCIA1:Prompt') (8421504)
+WHEN  ('?MCP:REFERENCIA2') (8421504)
+WHEN  ('?MCP:TOTALCREDITO') (8421504)
+WHEN  ('?MCP:TOTALCREDITO:Prompt') (8421504)
+WHEN  ('?MCP:TOTALDEBITO') (8421504)
+WHEN  ('?MCP:TOTALDEBITO:Prompt') (8421504)
+WHEN  ('?MCP:VALOR_CHEQUE') (8421504)
+WHEN  ('?MCP:VALOR_CHEQUE:Prompt') (8421504)
+WHEN  ('?OK') (8421504)
+WHEN  ('?StringFechaContable') (8421504)
+WHEN  ('?TER:RAZONSOCIAL') (8421504)
+WHEN  ('?Tab:1') (8421504)
+
+%cListHeaderArrow3D DEPEND %Control LONG TIMES 42
+WHEN  ('') (16777215)
+WHEN  ('?BFechaContable') (16777215)
+WHEN  ('?COM:NOMCOMPROBANTE') (16777215)
+WHEN  ('?CallLookup:COM') (16777215)
+WHEN  ('?CallLookup:TER') (16777215)
+WHEN  ('?Cancel') (16777215)
+WHEN  ('?CurrentTab') (16777215)
+WHEN  ('?Group:Cheque') (16777215)
+WHEN  ('?MCP:ANO') (16777215)
+WHEN  ('?MCP:ANO:Prompt') (16777215)
+WHEN  ('?MCP:ANULADO') (16777215)
+WHEN  ('?MCP:COMPROBANTE') (16777215)
+WHEN  ('?MCP:COMPROBANTE:Prompt') (16777215)
+WHEN  ('?MCP:DETALLE:Prompt') (16777215)
+WHEN  ('?MCP:DOCUMENTO:Prompt') (16777215)
+WHEN  ('?MCP:FECHACONTABLE_DATE') (16777215)
+WHEN  ('?MCP:FECHARADICACION_DATE') (16777215)
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') (16777215)
+WHEN  ('?MCP:IDTERCERO') (16777215)
+WHEN  ('?MCP:IDTERCERO:Prompt') (16777215)
+WHEN  ('?MCP:MES') (16777215)
+WHEN  ('?MCP:NOCHEQUE') (16777215)
+WHEN  ('?MCP:NOCHEQUE:Prompt') (16777215)
+WHEN  ('?MCP:NOREFERENCIA') (16777215)
+WHEN  ('?MCP:NROCOMPROBANTE') (16777215)
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') (16777215)
+WHEN  ('?MCP:OBSERVACION') (16777215)
+WHEN  ('?MCP:PROCEDENCIA') (16777215)
+WHEN  ('?MCP:PROCEDENCIA:Prompt') (16777215)
+WHEN  ('?MCP:REFERENCIA1') (16777215)
+WHEN  ('?MCP:REFERENCIA1:Prompt') (16777215)
+WHEN  ('?MCP:REFERENCIA2') (16777215)
+WHEN  ('?MCP:TOTALCREDITO') (16777215)
+WHEN  ('?MCP:TOTALCREDITO:Prompt') (16777215)
+WHEN  ('?MCP:TOTALDEBITO') (16777215)
+WHEN  ('?MCP:TOTALDEBITO:Prompt') (16777215)
+WHEN  ('?MCP:VALOR_CHEQUE') (16777215)
+WHEN  ('?MCP:VALOR_CHEQUE:Prompt') (16777215)
+WHEN  ('?OK') (16777215)
+WHEN  ('?StringFechaContable') (16777215)
+WHEN  ('?TER:RAZONSOCIAL') (16777215)
+WHEN  ('?Tab:1') (16777215)
+
+%ThinControlMaxSizeRTF DEPEND %Control DEFAULT TIMES 42
+WHEN  ('') ('250000')
+WHEN  ('?BFechaContable') ('250000')
+WHEN  ('?COM:NOMCOMPROBANTE') ('250000')
+WHEN  ('?CallLookup:COM') ('250000')
+WHEN  ('?CallLookup:TER') ('250000')
+WHEN  ('?Cancel') ('250000')
+WHEN  ('?CurrentTab') ('250000')
+WHEN  ('?Group:Cheque') ('250000')
+WHEN  ('?MCP:ANO') ('250000')
+WHEN  ('?MCP:ANO:Prompt') ('250000')
+WHEN  ('?MCP:ANULADO') ('250000')
+WHEN  ('?MCP:COMPROBANTE') ('250000')
+WHEN  ('?MCP:COMPROBANTE:Prompt') ('250000')
+WHEN  ('?MCP:DETALLE:Prompt') ('250000')
+WHEN  ('?MCP:DOCUMENTO:Prompt') ('250000')
+WHEN  ('?MCP:FECHACONTABLE_DATE') ('250000')
+WHEN  ('?MCP:FECHARADICACION_DATE') ('250000')
+WHEN  ('?MCP:FECHARADICACION_DATE:Prompt') ('250000')
+WHEN  ('?MCP:IDTERCERO') ('250000')
+WHEN  ('?MCP:IDTERCERO:Prompt') ('250000')
+WHEN  ('?MCP:MES') ('250000')
+WHEN  ('?MCP:NOCHEQUE') ('250000')
+WHEN  ('?MCP:NOCHEQUE:Prompt') ('250000')
+WHEN  ('?MCP:NOREFERENCIA') ('250000')
+WHEN  ('?MCP:NROCOMPROBANTE') ('250000')
+WHEN  ('?MCP:NROCOMPROBANTE:Prompt') ('250000')
+WHEN  ('?MCP:OBSERVACION') ('250000')
+WHEN  ('?MCP:PROCEDENCIA') ('250000')
+WHEN  ('?MCP:PROCEDENCIA:Prompt') ('250000')
+WHEN  ('?MCP:REFERENCIA1') ('250000')
+WHEN  ('?MCP:REFERENCIA1:Prompt') ('250000')
+WHEN  ('?MCP:REFERENCIA2') ('250000')
+WHEN  ('?MCP:TOTALCREDITO') ('250000')
+WHEN  ('?MCP:TOTALCREDITO:Prompt') ('250000')
+WHEN  ('?MCP:TOTALDEBITO') ('250000')
+WHEN  ('?MCP:TOTALDEBITO:Prompt') ('250000')
+WHEN  ('?MCP:VALOR_CHEQUE') ('250000')
+WHEN  ('?MCP:VALOR_CHEQUE:Prompt') ('250000')
+WHEN  ('?OK') ('250000')
+WHEN  ('?StringFechaContable') ('250000')
+WHEN  ('?TER:RAZONSOCIAL') ('250000')
+WHEN  ('?Tab:1') ('250000')
+
+[INSTANCE]
+INSTANCE 7
+OWNER 7
+[PROMPTS]
+%AnyScreenTimerRefresh LONG  (0)
+[ADDITION]
+NAME ABC RecordValidation
+[INSTANCE]
+INSTANCE 1
+PROCPROP
+[PROMPTS]
+%ValidateOnAccept LONG  (1)
+%ValidateOnNonStopSelect LONG  (1)
+%ControlsExcluded MULTI LONG  ()
+%ControlToExclude DEPEND %ControlsExcluded DEFAULT TIMES 0
+
+%ValidateUsingColoration LONG  (0)
+%InvalidFieldColor LONG  (255)
+%InvalidPromptColor LONG  (255)
+%UseValidateMessage LONG  (0)
+%ValidationMessage DEFAULT  ('The values of Colored Fields are invalid, Please correct this information.')
+%MessageControl FIELD  ()
+[ADDITION]
+NAME ABC SaveButton
+[INSTANCE]
+INSTANCE 2
+PROCPROP
+[PROMPTS]
+%InsertAllowed LONG  (1)
+%InsertMessage DEFAULT  ('Agregando un Movimiento Contable')
+%ChangeAllowed LONG  (1)
+%ChangeMessage DEFAULT  ('Cambiando un Movimiento Contable')
+%DeleteAllowed LONG  (1)
+%DeleteMessage DEFAULT  ('Borrando un Movimiento Contable')
+%MessageHeader LONG  (0)
+%ActionOnDelete DEFAULT  ('Display Form')
+%PrimingFields MULTI LONG  (1, 2)
+%PrimedField DEPEND %PrimingFields FIELD TIMES 2
+WHEN  (1) (MCP:ANO)
+WHEN  (2) (MCP:MES)
+
+%PrimedValue DEPEND %PrimingFields DEFAULT TIMES 2
+WHEN  (1) ('glo:ano')
+WHEN  (2) ('glo:mes')
+
+%ActionOnCancel DEFAULT  ('Cancel without confirming')
+%MessageLocation DEFAULT  ('Title Bar')
+%MessageStatusSection DEFAULT  ('0')
+%HistoryKey DEFAULT  ('734')
+%AppendToTitle LONG  (0)
+%AppendToTitleID DEFAULT  ('')
+%ViewMessage DEFAULT  ('View Record')
+%AfterGoodInsert DEFAULT  ('Return to caller')
+%AskAfterAdd LONG  (0)
+[ADDITION]
+NAME ABC CancelButton
+[INSTANCE]
+INSTANCE 3
+[ADDITION]
+NAME ABC WindowResize
+[FIELDPROMPT]
+%ResizeAnchorTop DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorLeft DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorRight DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorBottom DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowTop DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowLeft DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowRight DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowBottom DEPEND %Control LONG TIMES 0
+
+[INSTANCE]
+INSTANCE 5
+[PROMPTS]
+%UseAppStrategy DEFAULT  ('1')
+%AppStrategy DEFAULT  ('Surface')
+%RestrictMinSize LONG  (1)
+%WindowMinWidth DEFAULT  ('0')
+%WindowMaxWidth DEFAULT  ('0')
+%ClassItem UNIQUE DEFAULT  ('Default')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('WindowResizeClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Init {19}PROCEDURE(BYTE AppStrategy=AppStrategy:Resize,BYTE SetWindowMinSize=False,BYTE SetWindowMaxSize=False)')
+
+%WindowMinHeight DEFAULT  ('')
+%RestrictMaxSize LONG  (0)
+%WindowMaxHeight DEFAULT  ('')
+%OverrideControls MULTI LONG  ()
+%OverrideControl DEPEND %OverrideControls DEFAULT TIMES 0
+
+%DisableResize DEPEND %OverrideControls LONG TIMES 0
+
+%HorizResize DEPEND %OverrideControls DEFAULT TIMES 0
+
+%VertResize DEPEND %OverrideControls DEFAULT TIMES 0
+
+%HorizPositional DEPEND %OverrideControls DEFAULT TIMES 0
+
+%VertPositional DEPEND %OverrideControls DEFAULT TIMES 0
+
+%AutoFindParents DEFAULT  ('Default')
+%DeferMoves DEFAULT  ('Default')
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('Resizer')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('APIPrinterClass')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+[ADDITION]
+NAME ABC FieldLookupButton
+[INSTANCE]
+INSTANCE 4
+[PROMPTS]
+%ControlToLookup DEFAULT  ('?MCP:COMPROBANTE')
+[INSTANCE]
+INSTANCE 6
+[PROMPTS]
+%ControlToLookup DEFAULT  ('?MCP:IDTERCERO')
+[WINDOW]
+QuickWindow WINDOW('Actualizar la Tabla MCP'),AT(,,408,200),FONT('Arial',8),DOUBLE,CENTER, |
+          GRAY,IMM,MDI,HLP('MCP:Ficha'),SYSTEM,WALLPAPER('.\ICONOS\cuadrado.jpg')
+          SHEET,AT(3,2,401,178),USE(?CurrentTab),JOIN,#ORIG(CurrentTab),#ORDINAL(1)
+            TAB('General'),USE(?Tab:1),#ORDINAL(2)
+              PROMPT('Tipo. de Comp.:'),AT(18,22),USE(?MCP:COMPROBANTE:Prompt),FONT('Verdana', |
+                8,,,CHARSET:ANSI),TRN,#LINK(?MCP:COMPROBANTE),#ORIG(?MCP:COMPROBANTE:Prompt), |
+                #ORDINAL(3)
+              ENTRY(@s2),AT(83,22,21,10),USE(MCP:COMPROBANTE),MSG('Clase de Comprobantes'), |
+                REQ,#LINK(?MCP:COMPROBANTE:Prompt),#ORIG(MCP:COMPROBANTE),#ORDINAL(4)
+              BUTTON,AT(107,21,18,13),USE(?CallLookup:COM),ICON('wizfind.ico'),FLAT,#ORIG(?CallLookup), |
+                #SEQ(4),#ORDINAL(5)
+              STRING(@s40),AT(127,24,116,9),USE(COM:NOMCOMPROBANTE),FONT('Arial Unicode MS', |
+                7,COLOR:Black,FONT:bold,CHARSET:ANSI),TRN,#ORIG(?String2),#ORDINAL(6)
+              GROUP('Group 1'),AT(245,21,157,42),USE(?Group:Cheque),#ORIG(?Group1),#ORDINAL(7)
+                PROMPT('No. Cheque:'),AT(275,22),USE(?MCP:NOCHEQUE:Prompt),TRN,#LINK(?MCP:NOCHEQUE), |
+                  #ORIG(?MCP:NOCHEQUE:Prompt),#ORDINAL(8)
+                ENTRY(@s20),AT(315,22,81,10),USE(MCP:NOCHEQUE),MSG('No. Cheque'),TIP('No. Cheque'), |
+                  #LINK(?MCP:NOCHEQUE:Prompt),#ORIG(MCP:NOCHEQUE),#ORDINAL(9)
+                PROMPT('Valor Cheque:'),AT(267,36),USE(?MCP:VALOR_CHEQUE:Prompt),TRN,#LINK(?MCP:VALOR_CHEQUE), |
+                  #ORIG(?MCP:VALOR_CHEQUE:Prompt),#ORDINAL(10)
+                ENTRY(@n-19.2),AT(315,36,81,10),USE(MCP:VALOR_CHEQUE),DECIMAL(12),MSG('Valor del Cheque'), |
+                  TIP('Valor del Cheque'),#LINK(?MCP:VALOR_CHEQUE:Prompt),#ORIG(MCP:VALOR_CHEQUE), |
+                  #ORDINAL(11)
+                PROMPT('Fecha Radicación:'),AT(255,50),USE(?MCP:FECHARADICACION_DATE:Prompt), |
+                  TRN,#LINK(?MCP:FECHARADICACION_DATE),#ORIG(?MCP:FECHARADICACION_DATE:Prompt), |
+                  #ORDINAL(12)
+                ENTRY(@d6),AT(315,50,81,10),USE(MCP:FECHARADICACION_DATE),#LINK(?MCP:FECHARADICACION_DATE:Prompt), |
+                  #ORIG(MCP:FECHARADICACION_DATE),#ORDINAL(13)
+              END
+              PROMPT('Consecutivo Interno:'),AT(239,164,,10),USE(?MCP:NROCOMPROBANTE:Prompt), |
+                FONT('Verdana',8,,,CHARSET:ANSI),TRN,#LINK(?MCP:NROCOMPROBANTE),#ORIG(?MCP:NROCOMPROBANTE:Prompt), |
+                #ORDINAL(14)
+              ENTRY(@s20),AT(322,164,76,10),USE(MCP:NROCOMPROBANTE),FONT(,,,FONT:bold),MSG('Número del' & |
+                ' Comprobante'),READONLY,SKIP,#LINK(?MCP:NROCOMPROBANTE:Prompt),#ORIG(MCP:NROCOMPROBANTE), |
+                #ORDINAL(15)
+              PROMPT('No Comprobante:'),AT(12,36),USE(?MCP:DOCUMENTO:Prompt),FONT('Verdana', |
+                8,,,CHARSET:ANSI),TRN,#LINK(?MCP:NOREFERENCIA),#ORIG(?MCP:DOCUMENTO:Prompt), |
+                #ORDINAL(16)
+              ENTRY(@s20),AT(83,36,77,10),USE(MCP:NOREFERENCIA),MSG('Documento'),REQ,TIP('Documento'), |
+                #LINK(?MCP:DOCUMENTO:Prompt),#ORIG(MCP:DOCUMENTO),#ORDINAL(17)
+              STRING('Fecha Contable:'),AT(18,50),USE(?StringFechaContable),FONT('Verdana', |
+                8,,,CHARSET:ANSI),TRN,#ORIG(?String1),#ORDINAL(18)
+              SPIN(@d6),AT(83,50,60,10),USE(MCP:FECHACONTABLE_DATE),REQ,#ORIG(?Spin1),#ORDINAL(19)
+              BUTTON,AT(146,49,15,12),USE(?BFechaContable),ICON('.\iconos\Evoc\calendar.ico'), |
+                FLAT,#ORIG(?Button3),#ORDINAL(20)
+              PROMPT('Id. Tercero :'),AT(41,65),USE(?MCP:IDTERCERO:Prompt),TRN,#LINK(?MCP:IDTERCERO), |
+                #ORIG(?MCP:IDTERCERO:Prompt),#ORDINAL(21)
+              ENTRY(@s20),AT(83,65,76,10),USE(MCP:IDTERCERO),UPR,MSG('Id. Tercero'),REQ,TIP('Id. Tercero'), |
+                #LINK(?MCP:IDTERCERO:Prompt),#ORIG(MCP:IDTERCERO),#ORDINAL(22)
+              BUTTON,AT(161,64,18,13),USE(?CallLookup:TER),ICON('wizfind.ico'),FLAT,#ORIG(?CallLookup), |
+                #SEQ(6),#ORDINAL(23)
+              STRING(@s120),AT(182,66,217,9),USE(TER:RAZONSOCIAL),FONT('Verdana',8,,FONT:bold), |
+                TRN,#ORIG(?String3),#ORDINAL(24)
+              PROMPT('Período Contable:'),AT(272,2),USE(?MCP:ANO:Prompt),FONT('Verdana',8, |
+                ,FONT:bold,CHARSET:ANSI),TRN,#LINK(?MCP:ANO),#ORIG(?MCP:ANO:Prompt),#ORDINAL(25)
+              ENTRY(@s4),AT(352,2,28,10),USE(MCP:ANO),FONT(,,,FONT:bold),DISABLE,MSG('Año Contable'), |
+                SKIP,#LINK(?MCP:ANO:Prompt),#ORIG(MCP:ANO),#ORDINAL(26)
+              ENTRY(@s2),AT(383,2,,10),USE(MCP:MES),FONT(,,,FONT:bold),DISABLE,MSG('Mes Contable'), |
+                SKIP,#ORIG(MCP:MES),#ORDINAL(27)
+              PROMPT('Total Debito:'),AT(29,80),USE(?MCP:TOTALDEBITO:Prompt),FONT('Verdana', |
+                8,,,CHARSET:ANSI),TRN,#LINK(?MCP:TOTALDEBITO),#ORIG(?MCP:TOTALDEBITO:Prompt), |
+                #ORDINAL(28)
+              ENTRY(@n(21.2)),AT(83,80,76,10),USE(MCP:TOTALDEBITO),FONT(,,,FONT:bold),RIGHT, |
+                DISABLE,MSG('Total Movimientos Debito'),SKIP,#LINK(?MCP:TOTALDEBITO:Prompt), |
+                #ORIG(MCP:TOTALDEBITO),#ORDINAL(29)
+              PROMPT('Total Credito:'),AT(258,80),USE(?MCP:TOTALCREDITO:Prompt),FONT('Verdana', |
+                8,,,CHARSET:ANSI),TRN,#LINK(?MCP:TOTALCREDITO),#ORIG(?MCP:TOTALCREDITO:Prompt), |
+                #ORDINAL(30)
+              ENTRY(@n(21.2)),AT(317,80,,10),USE(MCP:TOTALCREDITO),FONT(,,,FONT:bold),RIGHT, |
+                DISABLE,MSG('Total Movimiento Credito'),SKIP,#LINK(?MCP:TOTALCREDITO:Prompt), |
+                #ORIG(MCP:TOTALCREDITO),#ORDINAL(31)
+              ENTRY(@s20),AT(243,95,155,10),USE(MCP:REFERENCIA2),MSG('Referencia Dos pa' & |
+                'ra los Asientos'),#ORIG(MCP:REFERENCIA2),#ORDINAL(32)
+              PROMPT('Otras Referencias:'),AT(19,94,63,10),USE(?MCP:REFERENCIA1:Prompt),TRN, |
+                #LINK(?MCP:REFERENCIA1),#ORIG(?MCP:REFERENCIA1:Prompt),#ORDINAL(33)
+              ENTRY(@s40),AT(83,94,157,10),USE(MCP:REFERENCIA1),MSG('Referencia Uno par' & |
+                'a los Asientos'),#LINK(?MCP:REFERENCIA1:Prompt),#ORIG(MCP:REFERENCIA1),#ORDINAL(34)
+              PROMPT('Detalle:'),AT(50,110),USE(?MCP:DETALLE:Prompt),FONT('Verdana',8,,,CHARSET:ANSI), |
+                TRN,#FREEZE,#LINK(?MCP:OBSERVACION),#ORIG(?MCP:DETALLE:Prompt),#ORDINAL(35)
+              TEXT,AT(83,110,315,50),USE(MCP:OBSERVACION),VSCROLL,BOXED,MSG('Detalle'),TIP('Detalle'), |
+                #LINK(?MCP:DETALLE:Prompt),#ORIG(MCP:DETALLE),#ORDINAL(36)
+              PROMPT('Procedencia:'),AT(32,164),USE(?MCP:PROCEDENCIA:Prompt),FONT('Verdana', |
+                8,,,CHARSET:ANSI),TRN,#LINK(?MCP:PROCEDENCIA),#ORIG(?MCP:PROCEDENCIA:Prompt), |
+                #ORDINAL(37)
+              ENTRY(@s20),AT(83,164,60,10),USE(MCP:PROCEDENCIA),FONT(,,,FONT:bold),RIGHT,MSG('Procedencia'), |
+                READONLY,SKIP,TIP('Procedencia'),#LINK(?MCP:PROCEDENCIA:Prompt),#ORIG(MCP:PROCEDENCIA), |
+                #ORDINAL(38)
+            END
+          END
+          CHECK('Anulado:'),AT(48,184,43,10),USE(MCP:ANULADO),FONT('Arial Narrow',10,,FONT:bold, |
+            CHARSET:ANSI),LEFT,TRN,#ORIG(MCP:ANULADO),#ORDINAL(39)
+          BUTTON('Aceptar'),AT(294,183,54,14),USE(?OK),LEFT,ICON('aceptar.ico'),DEFAULT,#ORIG(?OK), |
+            #SEQ(2),#ORDINAL(40)
+          BUTTON('Cancelar'),AT(350,183,54,14),USE(?Cancel),LEFT,ICON('cancelar.ico'),#ORIG(?Cancel), |
+            #SEQ(3),#ORDINAL(41)
+        END
+
+[END]

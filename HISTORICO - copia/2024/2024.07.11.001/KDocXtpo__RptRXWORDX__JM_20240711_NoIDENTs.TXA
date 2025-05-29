@@ -1,0 +1,3281 @@
+[MODULE]
+[COMMON]
+FROM ABC GENERATED
+MODIFIED '2020/02/28' ' 8:16:50'
+[PROCEDURE]
+NAME RptRXWORDX
+PROTOTYPE '(string,string)'
+PARAMETERS '(in:metodo,in:servicio)'
+GLOBAL
+[COMMON]
+DESCRIPTION 'Reporte de tabla LORD'
+FROM ABC Report
+MODIFIED '2024/07/11' '20:33:11'
+[DATA]
+Progress:Thermometer     BYTE
+!!> GUID('77933a18-9da3-47d3-98c3-a085b5e5ee7f')
+[SCREENCONTROLS]
+! PROMPT('LOC : COMENTARIOS:'),USE(?LOC:COMENTARIOS:Prompt)
+! ENTRY(@s255),USE(LOC:COMENTARIOS)
+[REPORTCONTROLS]
+! STRING(@s255),USE(LOC:COMENTARIOS)
+LOC:COMENTARIOS          CSTRING(2048)
+!!> GUID('19667d84-63b3-4656-a88e-f6be98f1b9cb'),PROMPT('LOC : COMENTARIOS:'),HEADER('LOC : COMENTARIOS'),PICTURE(@s255),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('LOC : ESPMEDDIL:'),USE(?LOC:ESPMEDDIL:Prompt)
+! ENTRY(@s29),USE(LOC:ESPMEDDIL)
+[REPORTCONTROLS]
+! STRING(@s29),USE(LOC:ESPMEDDIL)
+LOC:ESPMEDDIL            CSTRING(30)
+!!> GUID('5bcc1464-95c7-42a1-82ba-2f24e10eba59'),PROMPT('LOC : ESPMEDDIL:'),HEADER('LOC : ESPMEDDIL'),PICTURE(@s29)
+[SCREENCONTROLS]
+! PROMPT('LOC : NOMEDICORED:'),USE(?LOC:NOMEDICORED:Prompt)
+! ENTRY(@s29),USE(LOC:NOMEDICORED)
+[REPORTCONTROLS]
+! STRING(@s29),USE(LOC:NOMEDICORED)
+LOC:NOMEDICORED          CSTRING(30)
+!!> GUID('e44d684e-31ed-4422-b4e9-8b2ca04721e4'),PROMPT('LOC : NOMEDICORED:'),HEADER('LOC : NOMEDICORED'),PICTURE(@s29)
+[SCREENCONTROLS]
+! PROMPT('loc : max:'),USE(?loc:max:Prompt)
+! ENTRY(@n-14),USE(loc:max),RIGHT
+[REPORTCONTROLS]
+! STRING(@n-14),USE(loc:max),RIGHT
+loc:max                  LONG
+!!> GUID('67e4eaea-eee0-4e0f-a79e-eff9f18a96e5'),PROMPT('loc : max:'),HEADER('loc : max'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
+[SCREENCONTROLS]
+! PROMPT('loc : min:'),USE(?loc:min:Prompt)
+! ENTRY(@n-14),USE(loc:min),RIGHT
+[REPORTCONTROLS]
+! STRING(@n-14),USE(loc:min),RIGHT
+loc:min                  LONG
+!!> GUID('4aa857b1-836b-42eb-a2e2-a3f59739fba1'),PROMPT('loc : min:'),HEADER('loc : min'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
+[SCREENCONTROLS]
+! PROMPT('LOC : DESCRIPCION:'),USE(?LOC:DESCRIPCION:Prompt)
+! ENTRY(@s80),USE(LOC:DESCRIPCION)
+[REPORTCONTROLS]
+! STRING(@s80),USE(LOC:DESCRIPCION)
+LOC:DESCRIPCION          STRING(80)
+!!> GUID('220e32c2-df15-4b33-aaa6-f5b68123f524'),PROMPT('LOC : DESCRIPCION:'),HEADER('LOC : DESCRIPCION'),PICTURE(@s80)
+[SCREENCONTROLS]
+! PROMPT('loc : noregistros:'),USE(?loc:noregistros:Prompt)
+! ENTRY(@n-7),USE(loc:noregistros),RIGHT
+[REPORTCONTROLS]
+! STRING(@n-7),USE(loc:noregistros),RIGHT
+loc:noregistros          SHORT
+!!> GUID('cbbcef1a-72f8-4ab5-962d-e7642b95a21a'),PROMPT('loc : noregistros:'),HEADER('loc : noregistros'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
+[SCREENCONTROLS]
+! PROMPT('loc : nom prefijo:'),USE(?loc:nom_prefijo:Prompt)
+! ENTRY(@s60),USE(loc:nom_prefijo)
+[REPORTCONTROLS]
+! STRING(@s60),USE(loc:nom_prefijo)
+loc:nom_prefijo          STRING(60)
+!!> GUID('2de2688e-c22a-4d93-a7f2-2c56d1e6c664'),PROMPT('loc : nom prefijo:'),HEADER('loc : nom prefijo'),PICTURE(@s60)
+[SCREENCONTROLS]
+! PROMPT('LOC : VRITEM:'),USE(?LOC:VRITEM:Prompt)
+! ENTRY(@n-19.2),USE(LOC:VRITEM),DECIMAL(12)
+[REPORTCONTROLS]
+! STRING(@n-19.2),USE(LOC:VRITEM),DECIMAL(12)
+LOC:VRITEM               PDECIMAL(14,2)
+!!> GUID('4bcb4489-9fa5-44b6-8092-0d1862f8aaea'),PROMPT('LOC : VRITEM:'),HEADER('LOC : VRITEM'),PICTURE(@n-19.2),JUSTIFY(DECIMAL,12)
+[SCREENCONTROLS]
+! PROMPT('Loc : Ciudad AFI:'),USE(?Loc:CiudadAFI:Prompt)
+! ENTRY(@s40),USE(Loc:CiudadAFI)
+[REPORTCONTROLS]
+! STRING(@s40),USE(Loc:CiudadAFI)
+Loc:CiudadAFI            CSTRING(41)
+!!> GUID('7f119fe3-6a7c-4cde-b305-db8a1ab954ba'),PROMPT('Loc : Ciudad AFI:'),HEADER('Loc : Ciudad AFI'),PICTURE(@s40)
+[SCREENCONTROLS]
+! PROMPT('Loc : Edad:'),USE(?Loc:Edad:Prompt)
+! ENTRY(@n7),USE(Loc:Edad),RIGHT
+[REPORTCONTROLS]
+! STRING(@n7),USE(Loc:Edad),RIGHT
+Loc:Edad                 SHORT
+!!> GUID('22a31caa-f950-4141-b24c-2b911c6b803c'),PROMPT('Loc : Edad:'),HEADER('Loc : Edad'),PICTURE(@n7),JUSTIFY(RIGHT,1)
+[SCREENCONTROLS]
+! PROMPT('Loc : idaut:'),USE(?Loc:idaut:Prompt)
+! ENTRY(@s20),USE(Loc:idaut)
+[REPORTCONTROLS]
+! STRING(@s20),USE(Loc:idaut)
+Loc:idaut                CSTRING(21)
+!!> GUID('93c63d0f-b2e2-45af-b6cc-07d0532c14ad'),PROMPT('Loc : idaut:'),HEADER('Loc : idaut'),PICTURE(@s20)
+[SCREENCONTROLS]
+! PROMPT('Loc : Nom Afiliado:'),USE(?Loc:NomAfiliado:Prompt)
+! ENTRY(@s59),USE(Loc:NomAfiliado)
+[REPORTCONTROLS]
+! STRING(@s59),USE(Loc:NomAfiliado)
+Loc:NomAfiliado          CSTRING(60)
+!!> GUID('880fc31c-e1c0-412c-8add-3ed6292c90ab'),PROMPT('Loc : Nom Afiliado:'),HEADER('Loc : Nom Afiliado'),PICTURE(@s59)
+[SCREENCONTROLS]
+! PROMPT('Loc : msg Alto Costo:'),USE(?Loc:msgAltoCosto:Prompt)
+! ENTRY(@s20),USE(Loc:msgAltoCosto)
+[REPORTCONTROLS]
+! STRING(@s20),USE(Loc:msgAltoCosto)
+Loc:msgAltoCosto         CSTRING(21)
+!!> GUID('1c1edbfd-ba7f-4373-92f6-31458f8b50ee'),PROMPT('Loc : msg Alto Costo:'),HEADER('Loc : msg Alto Costo'),PICTURE(@s20)
+[SCREENCONTROLS]
+! PROMPT('Files Opened:'),USE(?FilesOpened:Prompt)
+! ENTRY(@n3),USE(FilesOpened)
+[REPORTCONTROLS]
+! STRING(@n3),USE(FilesOpened)
+FilesOpened              BYTE
+!!> GUID('2f09192e-1755-459f-a48d-2563f431e938'),PROMPT('Files Opened:'),HEADER('Files Opened'),PICTURE(@n3)
+[SCREENCONTROLS]
+! PROMPT('Loc : Titulo:'),USE(?Loc:Titulo:Prompt)
+! ENTRY(@s40),USE(Loc:Titulo)
+[REPORTCONTROLS]
+! STRING(@s40),USE(Loc:Titulo)
+Loc:Titulo               STRING(40)
+!!> GUID('f2140094-5e51-4da5-a935-85915ec6d34a'),PROMPT('Loc : Titulo:'),HEADER('Loc : Titulo'),PICTURE(@s40)
+[SCREENCONTROLS]
+! PROMPT('loc : idproveedor:'),USE(?loc:idproveedor:Prompt)
+! ENTRY(@s20),USE(loc:idproveedor)
+[REPORTCONTROLS]
+! STRING(@s20),USE(loc:idproveedor)
+loc:idproveedor          STRING(20)
+!!> GUID('10482bd5-15a6-4590-a447-4e68922fcb31'),PROMPT('loc : idproveedor:'),HEADER('loc : idproveedor'),PICTURE(@s20)
+[SCREENCONTROLS]
+! PROMPT('loc : nomprovedor:'),USE(?loc:nomprovedor:Prompt)
+! ENTRY(@s45),USE(loc:nomprovedor)
+[REPORTCONTROLS]
+! STRING(@s45),USE(loc:nomprovedor)
+loc:nomprovedor          STRING(45)
+!!> GUID('a666dc1d-1764-4a7d-860a-fdc58d3c414c'),PROMPT('loc : nomprovedor:'),HEADER('loc : nomprovedor'),PICTURE(@s45)
+[SCREENCONTROLS]
+! PROMPT('LOC : CONVENIO:'),USE(?LOC:CONVENIO:Prompt)
+! ENTRY(@s80),USE(LOC:CONVENIO)
+[REPORTCONTROLS]
+! STRING(@s80),USE(LOC:CONVENIO)
+LOC:CONVENIO             CSTRING(81)
+!!> GUID('9867d4b5-9045-4d5e-8377-e5c185acacc6'),PROMPT('LOC : CONVENIO:'),HEADER('LOC : CONVENIO'),PICTURE(@s80)
+[SCREENCONTROLS]
+! PROMPT('LOC : MSGCOPIA:'),USE(?LOC:MSGCOPIA:Prompt)
+! ENTRY(@s40),USE(LOC:MSGCOPIA),MSG('Mensaje de Original/Copia'),TIP('Mensaje de Original/Copia')
+[REPORTCONTROLS]
+! STRING(@s40),USE(LOC:MSGCOPIA)
+LOC:MSGCOPIA             CSTRING(41) !Mensaje de Original/Copia
+!!> GUID('db1854f4-d27c-4b69-ac83-3401dc1a5607'),PROMPT('LOC : MSGCOPIA:'),HEADER('LOC : MSGCOPIA'),MESSAGE('Mensaje de Original/Copia'),TOOLTIP('Mensaje de Original/Copia'),PICTURE(@s40)
+[SCREENCONTROLS]
+! PROMPT('LOC : FECHA:'),USE(?LOC:FECHA:Prompt)
+! ENTRY(@d8.),USE(LOC:FECHA)
+[REPORTCONTROLS]
+! STRING(@d8.),USE(LOC:FECHA)
+LOC:FECHA                DATE
+!!> GUID('9f576615-8951-49a4-ad06-01c778a102d8'),PROMPT('LOC : FECHA:'),HEADER('LOC : FECHA'),PICTURE(@d8.)
+[SCREENCONTROLS]
+! PROMPT('LOC : HORA:'),USE(?LOC:HORA:Prompt)
+! ENTRY(@t6),USE(LOC:HORA)
+[REPORTCONTROLS]
+! STRING(@t6),USE(LOC:HORA)
+LOC:HORA                 TIME
+!!> GUID('92c5150a-eb72-40dc-99a0-05c6b0871cc3'),PROMPT('LOC : HORA:'),HEADER('LOC : HORA'),PICTURE(@t6)
+[SCREENCONTROLS]
+! PROMPT('Nombre:'),USE(?LOC:USUARIO:Prompt)
+! ENTRY(@s40),USE(LOC:USUARIO),MSG('Nombre'),TIP('Nombre'),REQ
+[REPORTCONTROLS]
+! STRING(@s40),USE(LOC:USUARIO)
+LOC:USUARIO              CSTRING(41) !Nombre
+!!> GUID('8b0a0c7d-1450-4ab7-a6f6-7cbf723dcfa8'),VALID(NONZERO),PROMPT('Nombre:'),HEADER('Nombre'),MESSAGE('Nombre'),TOOLTIP('Nombre'),PICTURE(@s40),DERIVEDFROM('USUSU:NOMBRE')
+[SCREENCONTROLS]
+! PROMPT('loc : devol:'),USE(?loc:devol:Prompt)
+! ENTRY(@s35),USE(loc:devol)
+[REPORTCONTROLS]
+! STRING(@s35),USE(loc:devol)
+loc:devol                STRING(35)
+!!> GUID('695ccff4-3b42-4c62-921e-235bf15e7728'),PROMPT('loc : devol:'),HEADER('loc : devol'),PICTURE(@s35)
+[SCREENCONTROLS]
+! PROMPT('Loc : Nom Solicitado:'),USE(?Loc:NomSolicitado:Prompt)
+! ENTRY(@s80),USE(Loc:NomSolicitado)
+[REPORTCONTROLS]
+! STRING(@s80),USE(Loc:NomSolicitado)
+Loc:NomSolicitado        STRING(80)
+!!> GUID('c3741986-41c5-40eb-8877-5b533c0b27da'),PROMPT('Loc : Nom Solicitado:'),HEADER('Loc : Nom Solicitado'),PICTURE(@s80)
+[SCREENCONTROLS]
+! PROMPT('loc : nomexa:'),USE(?loc:nomexa:Prompt)
+! ENTRY(@s80),USE(loc:nomexa)
+[REPORTCONTROLS]
+! STRING(@s80),USE(loc:nomexa)
+loc:nomexa               STRING(80)
+!!> GUID('99601221-91c4-4980-9763-e38839c954bc'),PROMPT('loc : nomexa:'),HEADER('loc : nomexa'),PICTURE(@s80)
+[SCREENCONTROLS]
+! PROMPT('loc : valor:'),USE(?loc:valor:Prompt)
+! TEXT,USE(loc:valor),BOXED
+[REPORTCONTROLS]
+! TEXT,USE(loc:valor),BOXED
+loc:valor                CSTRING(4096)
+!!> GUID('f66dd658-f790-470f-ba6b-4df1db697102'),PROMPT('loc : valor:'),HEADER('loc : valor'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('LOC : SQL:'),USE(?LOC:SQL:Prompt)
+! TEXT,USE(LOC:SQL),BOXED
+[REPORTCONTROLS]
+! TEXT,USE(LOC:SQL),BOXED
+LOC:SQL                  CSTRING(2049)
+!!> GUID('abb1d5d6-ad6c-4b3a-a5f5-9fc9875ee450'),PROMPT('LOC : SQL:'),HEADER('LOC : SQL'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('LOC : VLRNORMAL:'),USE(?LOC:VLRNORMAL:Prompt)
+! TEXT,USE(LOC:VLRNORMAL),BOXED
+[REPORTCONTROLS]
+! TEXT,USE(LOC:VLRNORMAL),BOXED
+LOC:VLRNORMAL            CSTRING(513)
+!!> GUID('ccda9d64-36dd-4ff6-b6aa-4877a982551c'),PROMPT('LOC : VLRNORMAL:'),HEADER('LOC : VLRNORMAL'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('LOC : VLRNORMALM:'),USE(?LOC:VLRNORMALM:Prompt)
+! TEXT,USE(LOC:VLRNORMALM),BOXED
+[REPORTCONTROLS]
+! TEXT,USE(LOC:VLRNORMALM),BOXED
+LOC:VLRNORMALM           CSTRING(513)
+!!> GUID('52929aad-dc25-4991-8025-155eed9a0e7f'),PROMPT('LOC : VLRNORMALM:'),HEADER('LOC : VLRNORMALM'),PICTURE(@s255)
+[QUICKCODE]
+!TAB('I. Datos básicos')
+[SCREENCONTROLS]
+! PROMPT('Sexo:'),USE(?LOC:SEXO:Prompt)
+! LIST,USE(LOC:SEXO),MSG('Sexo del paciente'),TIP('Sexo del paciente'),DROP(5),FROM('Masculino|#Masculino|Femenino|#Femenino')
+[REPORTCONTROLS]
+! STRING(@s9),USE(LOC:SEXO)
+LOC:SEXO                 CSTRING(10) !SEXO DEL PACIENTE
+!!> GUID('3506bea6-64e7-4115-a407-c1347a00180c'),VALID(INLIST('Masculino|Femenino')),PROMPT('Sexo:'),HEADER('Sexo'),MESSAGE('Sexo del paciente'),TOOLTIP('Sexo del paciente'),PICTURE(@s9),VALUES('Masculino|Femenino'),DERIVEDFROM('AFI:SEXO')
+[SCREENCONTROLS]
+! PROMPT('LOC : SQL 2:'),USE(?LOC:SQL2:Prompt)
+! TEXT,USE(LOC:SQL2),BOXED
+[REPORTCONTROLS]
+! TEXT,USE(LOC:SQL2),BOXED
+LOC:SQL2                 CSTRING(2049)
+!!> GUID('6478cbbf-10d7-444b-ad9e-87bcea3a395f'),PROMPT('LOC : SQL 2:'),HEADER('LOC : SQL 2'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('loc : nombacteriologo:'),USE(?loc:nombacteriologo:Prompt)
+! ENTRY(@s100),USE(loc:nombacteriologo)
+[REPORTCONTROLS]
+! STRING(@s100),USE(loc:nombacteriologo)
+loc:nombacteriologo      CSTRING(101)
+!!> GUID('84396be8-d00f-47aa-8802-39ec9e25df5b'),PROMPT('loc : nombacteriologo:'),HEADER('loc : nombacteriologo'),PICTURE(@s100)
+[SCREENCONTROLS]
+! PROMPT('LOC : FILIGRANA:'),USE(?LOC:FILIGRANA:Prompt)
+! ENTRY(@s30),USE(LOC:FILIGRANA)
+[REPORTCONTROLS]
+! STRING(@s30),USE(LOC:FILIGRANA)
+LOC:FILIGRANA            CSTRING(31)
+!!> GUID('8b9bfe29-f1ea-413d-b436-056797c35f4f'),PROMPT('LOC : FILIGRANA:'),HEADER('LOC : FILIGRANA'),PICTURE(@s30)
+[SCREENCONTROLS]
+! PROMPT('LOC : FILTRO:'),USE(?LOC:FILTRO:Prompt)
+! TEXT,USE(LOC:FILTRO)
+[REPORTCONTROLS]
+! TEXT,USE(LOC:FILTRO)
+LOC:FILTRO               CSTRING(2049)
+!!> GUID('2588cd72-73a3-46b5-a8fd-6e9a2a4482df'),PROMPT('LOC : FILTRO:'),HEADER('LOC : FILTRO'),PICTURE(@s255)
+[QUICKCODE]
+!TAB('Información básica')
+[SCREENCONTROLS]
+! PROMPT('Descripción:'),USE(?LOC:DESCSERVICIO:Prompt)
+! TEXT,USE(LOC:DESCSERVICIO),BOXED,MSG('Descripción del servicio'),TIP('Descripción del servicio'),REQ
+[REPORTCONTROLS]
+! TEXT,USE(LOC:DESCSERVICIO),BOXED
+LOC:DESCSERVICIO         CSTRING(256) !DESCRIPCIóN DEL SERVICIO
+!!> GUID('93ad5ba8-7884-47ec-b50e-3aeb32ddbb56'),VALID(NONZERO),PROMPT('Descripción:'),HEADER('Descripción'),MESSAGE('Descripción del servicio'),TOOLTIP('Descripción del servicio'),PICTURE(@s255),DERIVEDFROM('SER:DESCSERVICIO')
+[SCREENCONTROLS]
+! PROMPT('loc : fecha enca:'),USE(?loc:fecha_enca:Prompt)
+! ENTRY(@d06.),USE(loc:fecha_enca)
+[REPORTCONTROLS]
+! STRING(@d06.),USE(loc:fecha_enca)
+loc:fecha_enca           DATE
+!!> GUID('b092e93e-8f65-4013-9b79-d78233b4c4f6'),PROMPT('loc : fecha enca:'),HEADER('loc : fecha enca'),PICTURE(@d06.)
+[SCREENCONTROLS]
+! PROMPT('loc : hora enca:'),USE(?loc:hora_enca:Prompt)
+! ENTRY(@t1),USE(loc:hora_enca)
+[REPORTCONTROLS]
+! STRING(@t1),USE(loc:hora_enca)
+loc:hora_enca            TIME
+!!> GUID('1003b118-0f9d-4580-8760-e1a25869b2e5'),PROMPT('loc : hora enca:'),HEADER('loc : hora enca'),PICTURE(@t1)
+[SCREENCONTROLS]
+! PROMPT('LOC : FECHAA:'),USE(?LOC:FECHAA:Prompt)
+! ENTRY(@s30),USE(LOC:FECHAA)
+[REPORTCONTROLS]
+! STRING(@s30),USE(LOC:FECHAA)
+LOC:FECHAA               STRING(30)
+!!> GUID('cee450d9-c987-4edb-aa1f-10d264308c6d'),PROMPT('LOC : FECHAA:'),HEADER('LOC : FECHAA'),PICTURE(@s30)
+[SCREENCONTROLS]
+! PROMPT('LOC : PATHPDF:'),USE(?LOC:PATHPDF:Prompt)
+! ENTRY(@s255),USE(LOC:PATHPDF)
+[REPORTCONTROLS]
+! STRING(@s255),USE(LOC:PATHPDF)
+LOC:PATHPDF              CSTRING(265)
+!!> GUID('391ab424-cb41-46c6-849d-668f0e30cd13'),PROMPT('LOC : PATHPDF:'),HEADER('LOC : PATHPDF'),PICTURE(@s255),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('Resultado:'),USE(?LOC:RESULTADOHTML:Prompt)
+! TEXT,USE(LOC:RESULTADOHTML),MSG('Resultado'),TIP('Resultado')
+[REPORTCONTROLS]
+! TEXT,USE(LOC:RESULTADOHTML)
+LOC:RESULTADOHTML        CSTRING(420001) !Resultado
+!!> GUID('520b5589-cfa9-4080-9dfd-21cec5a816be'),PROMPT('Resultado:'),HEADER('Resultado'),MESSAGE('Resultado'),TOOLTIP('Resultado'),PICTURE(@s255),TYPEMODE(INS),FREEZE,DERIVEDFROM('LORD:RESULTADO')
+[SCREENCONTROLS]
+! PROMPT('LOC : CNSRPDX:'),USE(?LOC:CNSRPDX:Prompt)
+! ENTRY(@s20),USE(LOC:CNSRPDX)
+[REPORTCONTROLS]
+! STRING(@s20),USE(LOC:CNSRPDX)
+LOC:CNSRPDX              CSTRING(21)
+!!> GUID('ba0139d9-ee08-413c-8abd-e7e0b5486523'),PROMPT('LOC : CNSRPDX:'),HEADER('LOC : CNSRPDX'),PICTURE(@s20),TYPEMODE(INS)
+[FILES]
+[PRIMARY]
+LORD
+[INSTANCE]
+0
+[KEY]
+LORD:LORDNOINGRESO
+[SECONDARY]
+SER LORD INNER CUSTOM('LORD:IDSERVICIO = SER:IDSERVICIO')
+[OTHERS]
+RPDX_TEXT
+Archivos
+MES
+TER
+AFI
+WDF
+USUSU
+DPR
+TGEN
+MED
+LING
+LORDDM
+LDAT
+LSER
+WDUM
+LDATD
+LORD
+LORDD
+SER
+WDU2
+[PROMPTS]
+%ButtonAction DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?Progress:Cancel') ('No Special Action')
+
+%ButtonRunName DEPEND %Control DEFAULT TIMES 0
+
+%ButtonRunParameters DEPEND %Control DEFAULT TIMES 0
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ButtonThread DEPEND %Control LONG TIMES 0
+
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?Progress:Cancel') ('25000')
+
+%ButtonParameters DEPEND %Control DEFAULT TIMES 0
+
+%ButtonRequest DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?Progress:Cancel') ('None')
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+
+%ClassItem UNIQUE DEFAULT  ('BreakMgr', 'Default', 'Previewer', 'Process', 'ProgressMgr', |
+  'TargetSelector', 'WindowToolbar')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 6
+WHEN  ('BreakMgr') ('BreakManagerClass')
+WHEN  ('Default') ('ReportManager')
+WHEN  ('Previewer') ('PrintPreviewClass')
+WHEN  ('Process') ('ProcessClass')
+WHEN  ('ProgressMgr') ('StepClass')
+WHEN  ('TargetSelector') ('ReportTargetSelectorClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 6
+WHEN  ('BreakMgr') ('')
+WHEN  ('Default') ('')
+WHEN  ('Previewer') ('')
+WHEN  ('Process') ('')
+WHEN  ('ProgressMgr') ('StepStringClass')
+WHEN  ('TargetSelector') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+
+%ReturnValue FIELD  ()
+%WindowOperationMode DEFAULT  ('Use WINDOW setting')
+%INISaveWindow LONG  (1)
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 6
+WHEN  ('BreakMgr') ('BreakMgr')
+WHEN  ('Default') ('ThisWindow')
+WHEN  ('Previewer') ('Previewer')
+WHEN  ('Process') ('ThisReport')
+WHEN  ('ProgressMgr') ('ProgressMgr')
+WHEN  ('TargetSelector') ('TargetSelector')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 7
+WHEN  ('BreakMgr') (1)
+WHEN  ('Default') (1)
+WHEN  ('Previewer') (1)
+WHEN  ('Process') (1)
+WHEN  ('ProgressMgr') (1)
+WHEN  ('TargetSelector') (1)
+WHEN  ('WindowToolbar') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 7
+WHEN  ('BreakMgr') (1)
+WHEN  ('Default') (1)
+WHEN  ('Previewer') (1)
+WHEN  ('Process') (1)
+WHEN  ('ProgressMgr') (1)
+WHEN  ('TargetSelector') (1)
+WHEN  ('WindowToolbar') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 7
+WHEN  ('BreakMgr') ('ADOBlob')
+WHEN  ('Default') ('AsciiFileClass')
+WHEN  ('Previewer') ('AsciiFileClass')
+WHEN  ('Process') ('AsciiFileClass')
+WHEN  ('ProgressMgr') ('AsciiFileClass')
+WHEN  ('TargetSelector') ('ADOBlob')
+WHEN  ('WindowToolbar') ('AsciiFileClass')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 7
+WHEN  ('BreakMgr') (0)
+WHEN  ('Default') (0)
+WHEN  ('Previewer') (0)
+WHEN  ('Process') (0)
+WHEN  ('ProgressMgr') (0)
+WHEN  ('TargetSelector') (0)
+WHEN  ('WindowToolbar') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 4
+WHEN  ('BreakMgr')TIMES 0
+WHEN  ('Previewer')TIMES 0
+WHEN  ('ProgressMgr')TIMES 0
+WHEN  ('TargetSelector')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 4
+WHEN  ('BreakMgr')TIMES 0
+WHEN  ('Previewer')TIMES 0
+WHEN  ('ProgressMgr')TIMES 0
+WHEN  ('TargetSelector')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%WindowMessage DEFAULT  ('')
+%EnablePrintPreview LONG  (1)
+%EnableQuickScan LONG  (1)
+%RecordFilter DEFAULT  ('')
+%AddSortFields DEFAULT  ('')
+%ApproxRecordCount DEFAULT  ('')
+%ManuallySetProgressLimits LONG  (0)
+%LowLimit DEFAULT  ('')
+%HighLimit DEFAULT  ('')
+%RangeField COMPONENT  ()
+%RangeLimitType DEFAULT  ('Current Value')
+%RangeLimit FIELD  ()
+%RangeLow FIELD  ()
+%RangeHigh FIELD  ()
+%RangeFile FILE  (LING)
+%InitialZoom DEFAULT  ('100%')
+%AllowUserZooms LONG  (1)
+%InitWindowPosition LONG  (0)
+%WinXPos DEFAULT  ('')
+%WinYPos DEFAULT  ('')
+%WinWidth DEFAULT  ('315')
+%WinHeight DEFAULT  ('200')
+%MaximizePreviewWindow LONG  (1)
+%HotFields MULTI LONG  (1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, |
+  18, 19)
+%HotField DEPEND %HotFields FIELD TIMES 18
+WHEN  (1) (LING:IDAFILIADO)
+WHEN  (2) (LING:IDTERCERO)
+WHEN  (4) (LORDD:NOITEM)
+WHEN  (5) (LORDD:IDDATO)
+WHEN  (6) (LORDD:MEMO)
+WHEN  (7) (LORDD:ALFANUMERICO)
+WHEN  (8) (LORDD:FECHA_DATE)
+WHEN  (9) (LORDD:IDSERVICIO)
+WHEN  (10) (LORDD:TIPOCAMPO)
+WHEN  (11) (SER:IMPRIMELAB)
+WHEN  (12) (LORD:REALIZADO)
+WHEN  (13) (LING:AMBITOTR)
+WHEN  (14) (LORD:FECHARES_DATE)
+WHEN  (15) (LORD:FECHARES_TIME)
+WHEN  (16) (LORD:NORDEN)
+WHEN  (17) (LORD:NORDEN)
+WHEN  (18) (LORD:NOINGRESO)
+WHEN  (19) (LORD:RESULTADO)
+
+%HotFieldBound DEPEND %HotFields LONG TIMES 18
+WHEN  (1) (1)
+WHEN  (2) (1)
+WHEN  (4) (1)
+WHEN  (5) (1)
+WHEN  (6) (1)
+WHEN  (7) (1)
+WHEN  (8) (1)
+WHEN  (9) (1)
+WHEN  (10) (1)
+WHEN  (11) (1)
+WHEN  (12) (1)
+WHEN  (13) (1)
+WHEN  (14) (1)
+WHEN  (15) (1)
+WHEN  (16) (1)
+WHEN  (17) (1)
+WHEN  (18) (1)
+WHEN  (19) (1)
+
+%DetailFilter DEPEND %ReportControl DEFAULT TIMES 4
+WHEN  ('?Conclusion') ('false')
+WHEN  ('?Resulhtml') ('false')
+WHEN  ('?Resultado') ('false')
+WHEN  ('?linea') ('false')
+
+%DetailFilterExclusive DEPEND %ReportControl LONG TIMES 0
+
+%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 0
+
+%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 0
+
+%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 0
+
+%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 0
+
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 1
+WHEN  ('?Progress:Cancel') (1)
+
+%LookupAssign DEPEND %Control MULTI LONG TIMES 0
+
+%MoreField DEPEND %LookupAssign DEFAULT TIMES 0
+
+%MoreTarget DEPEND %LookupAssign FIELD TIMES 0
+
+%CheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedAssignVariable DEPEND %CheckedAssigns FIELD TIMES 0
+
+%CheckedAssignValue DEPEND %CheckedAssigns DEFAULT TIMES 0
+
+%CheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
+
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 1
+WHEN  ('?Progress:Cancel')TIMES 0
+
+%CheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
+
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 1
+WHEN  ('?Progress:Cancel')TIMES 0
+
+%UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%UncheckedAssignVariable DEPEND %UncheckedAssigns FIELD TIMES 0
+
+%UncheckedAssignValue DEPEND %UncheckedAssigns DEFAULT TIMES 0
+
+%UnCheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
+
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 1
+WHEN  ('?Progress:Cancel')TIMES 0
+
+%UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
+
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 1
+WHEN  ('?Progress:Cancel')TIMES 0
+
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 7
+WHEN  ('BreakMgr') ('NO')
+WHEN  ('Default') ('NO')
+WHEN  ('Previewer') ('NO')
+WHEN  ('Process') ('NO')
+WHEN  ('ProgressMgr') ('NO')
+WHEN  ('TargetSelector') ('NO')
+WHEN  ('WindowToolbar') ('NO')
+
+%ProcedureDisableEnhanceFocus LONG  (0)
+%ProcedureUseEnterInsteadTabOverride LONG  (0)
+%WindowUseEnterInsteadTab LONG  (1)
+%ProcedureUseEnterInsteadTabExcludeListCombo LONG  (0)
+%ProcedureUseEnterInsteadTabEnableNextTabStop LONG  (0)
+%ProcedureUseEnterInsteadTabExcludeG LONG  (1)
+%WindowUseEnterInsteadTabExclude MULTI DEFAULT  ()
+%WindowStyles MULTI LONG  ()
+%WindowStyleFontName DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontSize DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontStyle DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontColor DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontCharSet DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStylePicture DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleOtherListboxes MULTI DEFAULT  ()
+%ProcedureAutoBindFields MULTI LONG  (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, |
+  14, 15, 16, 17)
+%ProcedureAutoBindField DEPEND %ProcedureAutoBindFields DEFAULT TIMES 17
+WHEN  (1) ('LING:IDAFILIADO')
+WHEN  (2) ('LING:IDTERCERO')
+WHEN  (3) ('LORDD:NOITEM')
+WHEN  (4) ('LORDD:IDDATO')
+WHEN  (5) ('LORDD:MEMO')
+WHEN  (6) ('LORDD:ALFANUMERICO')
+WHEN  (7) ('LORDD:FECHA_DATE')
+WHEN  (8) ('LORDD:IDSERVICIO')
+WHEN  (9) ('LORDD:TIPOCAMPO')
+WHEN  (10) ('SER:IMPRIMELAB')
+WHEN  (11) ('LORD:REALIZADO')
+WHEN  (12) ('LING:AMBITOTR')
+WHEN  (13) ('LORD:FECHARES_DATE')
+WHEN  (14) ('LORD:FECHARES_TIME')
+WHEN  (15) ('LORD:NORDEN')
+WHEN  (16) ('LORD:NOINGRESO')
+WHEN  (17) ('LORD:RESULTADO')
+
+%ProcedureAutoBindFieldTPL DEPEND %ProcedureAutoBindFields DEFAULT TIMES 17
+WHEN  (1) ('Report')
+WHEN  (2) ('Report')
+WHEN  (3) ('Report')
+WHEN  (4) ('Report')
+WHEN  (5) ('Report')
+WHEN  (6) ('Report')
+WHEN  (7) ('Report')
+WHEN  (8) ('Report')
+WHEN  (9) ('Report')
+WHEN  (10) ('Report')
+WHEN  (11) ('Report')
+WHEN  (12) ('Report')
+WHEN  (13) ('Report')
+WHEN  (14) ('Report')
+WHEN  (15) ('Report')
+WHEN  (16) ('Report')
+WHEN  (17) ('Report')
+
+%ProcedureAutoBindProcedures MULTI LONG  ()
+%ProcedureAutoBindProcedure DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedureTPL DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldsIgnored MULTI LONG  ()
+%ProcedureAutoBindFieldIgnored DEPEND %ProcedureAutoBindFieldsIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindProceduresIgnored MULTI LONG  ()
+%ProcedureAutoBindProcedureIgnored DEPEND %ProcedureAutoBindProceduresIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindValidToAddField LONG  (0)
+%ProcedureUserBindFields MULTI LONG  ()
+%ProcedureUserBindField DEPEND %ProcedureUserBindFields FIELD TIMES 0
+
+%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 0
+
+%ProcedureUserBindProcedures MULTI LONG  ()
+%ProcedureUserBindProcedure DEPEND %ProcedureUserBindProcedures PROCEDURE TIMES 0
+
+%ProcedureAutoBindProcedureIgnore DEPEND %ProcedureAutoBindProcedures LONG TIMES 0
+
+%ProcedureUserBindExpressions MULTI LONG  ()
+%ProcedureUserBindExpressionName DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%ProcedureUserBindExpression DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%ReportTargetList MULTI LONG  (1)
+%ReportTargetListName DEPEND %ReportTargetList DEFAULT TIMES 1
+WHEN  (1) ('PDF')
+
+%ReportTargetListClass DEPEND %ReportTargetList DEFAULT TIMES 1
+WHEN  (1) ('PDFReportGenerator')
+
+%ReportTargetListObject DEPEND %ReportTargetList DEFAULT TIMES 1
+WHEN  (1) ('PDFReporter')
+
+%ReportTargetListCondition DEPEND %ReportTargetList DEFAULT TIMES 1
+WHEN  (1) ('GLO:EXPORTARPDF=TRUE')
+
+%ReportTargetHiddenControls MULTI LONG  ()
+%ReportTargetHiddenControl DEPEND %ReportTargetHiddenControls DEFAULT TIMES 0
+
+%ReportTargetHiddenControlTemplate DEPEND %ReportTargetHiddenControls DEFAULT TIMES 0
+
+%ReportDataSource DEFAULT  ('File')
+%MDIProgressWindow LONG  (0)
+%ProgressInterval DEFAULT  ('10')
+%AdditionalSortType DEFAULT  ('Manual')
+%AddSortFieldsAssisted MULTI LONG  ()
+%AddSortFieldAssisted DEPEND %AddSortFieldsAssisted FIELD TIMES 0
+
+%AddSortFieldAssistedOrder DEPEND %AddSortFieldsAssisted DEFAULT TIMES 0
+
+%AddConditionalSort MULTI LONG  ()
+%AddConditionalSortCondition DEPEND %AddConditionalSort DEFAULT TIMES 0
+
+%AddConditionalSortFieldsAssisted DEPEND %AddConditionalSort MULTI LONG TIMES 0
+
+%AddConditionalSortFieldAssisted DEPEND %AddConditionalSortFieldsAssisted FIELD TIMES 0
+
+%AddConditionalSortFieldAssistedOrder DEPEND %AddConditionalSortFieldsAssisted DEFAULT TIMES 0
+
+%AddSortDynamicNamed MULTI LONG  ()
+%AddSortFieldDinNameDescription DEPEND %AddSortDynamicNamed DEFAULT TIMES 0
+
+%AddSortFieldsDinName DEPEND %AddSortDynamicNamed MULTI LONG TIMES 0
+
+%AddSortFieldDinName DEPEND %AddSortFieldsDinName FIELD TIMES 0
+
+%AddSortFieldDinNameOrder DEPEND %AddSortFieldsDinName DEFAULT TIMES 0
+
+%AddSortFieldsDinSort MULTI LONG  ()
+%AddSortFieldDinSortDescription DEPEND %AddSortFieldsDinSort DEFAULT TIMES 0
+
+%AddSortFieldDinSort DEPEND %AddSortFieldsDinSort FIELD TIMES 0
+
+%AddSortFieldDinSortOrder DEPEND %AddSortFieldsDinSort DEFAULT TIMES 0
+
+%AdditionalSortWindowTitle DEFAULT  ('Select the Order')
+%AdditionalSortWindowMessage DEFAULT  ('Select the order to process the data.')
+%AdditionalSortWindowOkButtonText DEFAULT  ('&OK')
+%AdditionalSortWindowOkButtonIcon DEFAULT  ('SOK.ICO')
+%AdditionalSortWindowOkButtonCursor DEFAULT  ('')
+%AdditionalSortWindowOkButtonKeyCode DEFAULT  ('')
+%AdditionalSortWindowOkButtonMsg DEFAULT  ('Accept data and close the window')
+%AdditionalSortWindowOkButtonTip DEFAULT  ('Accept data and close the window')
+%AdditionalSortWindowOkButtonFlat LONG  (1)
+%AdditionalSortWindowOkButtonSkip LONG  (0)
+%AdditionalSortWindowOkButtonJustification DEFAULT  ('Left')
+%AdditionalSortWindowCancelButtonText DEFAULT  ('&Cancel')
+%AdditionalSortWindowCancelButtonIcon DEFAULT  ('SCANCEL.ICO')
+%AdditionalSortWindowCancelButtonCursor DEFAULT  ('')
+%AdditionalSortWindowCancelButtonKeyCode DEFAULT  ('')
+%AdditionalSortWindowCancelButtonMsg DEFAULT  ('Cancel operation')
+%AdditionalSortWindowCancelButtonTip DEFAULT  ('Cancel operation')
+%AdditionalSortWindowCancelButtonFlat LONG  (1)
+%AdditionalSortWindowCancelButtonSkip LONG  (0)
+%AdditionalSortWindowCancelButtonJustification DEFAULT  ('Left')
+%AdditionalSortWindowUpButtonText DEFAULT  ('')
+%AdditionalSortWindowUpButtonIcon DEFAULT  ('SUP.ICO')
+%AdditionalSortWindowUpButtonCursor DEFAULT  ('')
+%AdditionalSortWindowUpButtonKeyCode DEFAULT  ('')
+%AdditionalSortWindowUpButtonMsg DEFAULT  ('Move field up')
+%AdditionalSortWindowUpButtonTip DEFAULT  ('Move field up')
+%AdditionalSortWindowUpButtonFlat LONG  (1)
+%AdditionalSortWindowUpButtonSkip LONG  (0)
+%AdditionalSortWindowUpButtonJustification DEFAULT  ('Left')
+%AdditionalSortWindowDownButtonText DEFAULT  ('')
+%AdditionalSortWindowDownButtonIcon DEFAULT  ('SDOWN.ICO')
+%AdditionalSortWindowDownButtonCursor DEFAULT  ('')
+%AdditionalSortWindowDownButtonKeyCode DEFAULT  ('')
+%AdditionalSortWindowDownButtonMsg DEFAULT  ('Move field down')
+%AdditionalSortWindowDownButtonTip DEFAULT  ('Move field down')
+%AdditionalSortWindowDownButtonFlat LONG  (1)
+%AdditionalSortWindowDownButtonSkip LONG  (0)
+%AdditionalSortWindowDownButtonJustification DEFAULT  ('Left')
+%AdditionalSortWindowChOrdButtonText DEFAULT  ('')
+%AdditionalSortWindowChOrdButtonIcon DEFAULT  ('SCH-ORD.ICO')
+%AdditionalSortWindowChOrdButtonCursor DEFAULT  ('')
+%AdditionalSortWindowChOrdButtonKeyCode DEFAULT  ('')
+%AdditionalSortWindowChOrdButtonMsg DEFAULT  ('Change Order')
+%AdditionalSortWindowChOrdButtonTip DEFAULT  ('Change Order')
+%AdditionalSortWindowChOrdButtonFlat LONG  (1)
+%AdditionalSortWindowChOrdButtonSkip LONG  (0)
+%AdditionalSortWindowChOrdButtonJustification DEFAULT  ('Left')
+%ReportDataSourceQueueName DEFAULT  ('')
+%ReportTargetOutput DEFAULT  ('Printer')
+%ReportTargetAskWithPrint LONG  (1)
+%ReportTargetOtherOutput DEFAULT  ('')
+%HigherKeys MULTI LONG  (1)
+%HigherKey DEPEND %HigherKeys COMPONENT TIMES 1
+WHEN  (1) (LORD:NOINGRESO)
+
+%HigherKeyField DEPEND %HigherKeys FIELD TIMES 1
+WHEN  (1) (LORD:NOINGRESO)
+
+%HigherKeyValueType DEPEND %HigherKeys DEFAULT TIMES 1
+WHEN  (1) ('1')
+
+%HigherKeyValueVariable DEPEND %HigherKeys FIELD TIMES 1
+WHEN  (1) ()
+
+%HigherKeyValueFixed DEPEND %HigherKeys DEFAULT TIMES 1
+WHEN  (1) ('')
+
+%RuntimeSkipPreview DEFAULT  ('False')
+%MDIPreviewer LONG  (0)
+%ProcessBreaks MULTI LONG  ()
+%BreakName DEPEND %ProcessBreaks DEFAULT TIMES 0
+
+%BreakLevelCero DEPEND %ProcessBreaks LONG TIMES 0
+
+%BreakLevelBreakNumber DEPEND %ProcessBreaks LONG TIMES 0
+
+%BreakLevel DEPEND %ProcessBreaks LONG TIMES 0
+
+%BreakFields DEPEND %ProcessBreaks MULTI LONG TIMES 0
+
+%BreakField DEPEND %BreakFields FIELD TIMES 0
+
+%BreakTotals DEPEND %ProcessBreaks MULTI LONG TIMES 0
+
+%BreakTotalTarget DEPEND %BreakTotals FIELD TIMES 0
+
+%BreakTotalType DEPEND %BreakTotals DEFAULT TIMES 0
+
+%BreakTotalField DEPEND %BreakTotals FIELD TIMES 0
+
+%BreakTotalFieldWeight DEPEND %BreakTotals FIELD TIMES 0
+
+%BreakTotalBasedOn DEPEND %BreakTotals DEFAULT TIMES 0
+
+%BreakTotalCondition DEPEND %BreakTotals DEFAULT TIMES 0
+
+%BreakTotalReset DEPEND %BreakTotals LONG TIMES 0
+
+%BreakReportHeaderYes DEPEND %ProcessBreaks LONG TIMES 0
+
+%BreakReportHeader DEPEND %ProcessBreaks DEFAULT TIMES 0
+
+%BreakReportFooterYes DEPEND %ProcessBreaks LONG TIMES 0
+
+%BreakReportFooter DEPEND %ProcessBreaks DEFAULT TIMES 0
+
+%HotFieldRestoreOnBreak DEPEND %HotFields LONG TIMES 7
+WHEN  (13) (0)
+WHEN  (14) (0)
+WHEN  (15) (0)
+WHEN  (16) (0)
+WHEN  (17) (0)
+WHEN  (18) (0)
+WHEN  (19) (0)
+
+%DetailFilterExternal DEPEND %ReportControl DEFAULT TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') ('')
+WHEN  ('?AFI:SEXO') ('')
+WHEN  ('?AFI:TIPO_DOC') ('')
+WHEN  ('?Conclusion') ('')
+WHEN  ('?DPR:Ciudad') ('')
+WHEN  ('?DPR:Direccion') ('')
+WHEN  ('?DPR:Nit') ('')
+WHEN  ('?DPR:RazonSocial') ('')
+WHEN  ('?DPR:Telefonos') ('')
+WHEN  ('?GLO:USUARIO') ('')
+WHEN  ('?Group2') ('')
+WHEN  ('?Group3') ('')
+WHEN  ('?Image2') ('')
+WHEN  ('?LOC:COMENTARIOS') ('')
+WHEN  ('?LOC:CONVENIO') ('')
+WHEN  ('?LOC:FECHA') ('')
+WHEN  ('?LOC:FECHAA') ('')
+WHEN  ('?LOC:FECHAA:2') ('')
+WHEN  ('?LOC:FILIGRANA') ('')
+WHEN  ('?LOC:HORA') ('')
+WHEN  ('?LOC:RESULTADOHTML') ('')
+WHEN  ('?LORD:CONCLUSION') ('')
+WHEN  ('?LORD:IDMEDICO') ('')
+WHEN  ('?LORD:IDSERVICIO') ('')
+WHEN  ('?LORD:NOINGRESO') ('')
+WHEN  ('?LORD:NORDEN') ('')
+WHEN  ('?LORD:OBSERVACION') ('')
+WHEN  ('?LORD:RESULTADO') ('')
+WHEN  ('?Line2:2') ('')
+WHEN  ('?Line3') ('')
+WHEN  ('?Line4') ('')
+WHEN  ('?Loc:Edad') ('')
+WHEN  ('?Loc:NomAfiliado') ('')
+WHEN  ('?Loc:NomSolicitado') ('')
+WHEN  ('?Loc:Titulo') ('')
+WHEN  ('?MED:NOMBRE') ('')
+WHEN  ('?MED:NO_REGISTRO') ('')
+WHEN  ('?MES:DESCRIPCION') ('')
+WHEN  ('?ReportPageNumber') ('')
+WHEN  ('?Resulhtml') ('')
+WHEN  ('?Resultado') ('')
+WHEN  ('?SER:DESCSERVICIO') ('')
+WHEN  ('?String10') ('')
+WHEN  ('?String11') ('')
+WHEN  ('?String13') ('')
+WHEN  ('?String14') ('')
+WHEN  ('?String34') ('')
+WHEN  ('?String34:2') ('')
+WHEN  ('?String37') ('')
+WHEN  ('?String37:2') ('')
+WHEN  ('?String37:3') ('')
+WHEN  ('?String40') ('')
+WHEN  ('?String41') ('')
+WHEN  ('?String45') ('')
+WHEN  ('?String45:2') ('')
+WHEN  ('?String49') ('')
+WHEN  ('?String56') ('')
+WHEN  ('?String57') ('')
+WHEN  ('?linea') ('')
+WHEN  ('?loc:fecha_enca') ('')
+WHEN  ('?loc:hora_enca') ('')
+WHEN  ('?loc:idproveedor') ('')
+WHEN  ('?loc:nomprovedor') ('')
+WHEN  ('?logocliente') ('')
+WHEN  ('?unnamed') ('')
+WHEN  ('?unnamed:2') ('')
+WHEN  ('?unnamed:3') ('')
+WHEN  ('?unnamed:4') ('')
+
+%PreLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
+
+%PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
+
+%UseMRP LONG  (1)
+%ExtUITabIcon DEPEND %Control DEFAULT TIMES 0
+
+%ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
+
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?Progress:Cancel') ('Default')
+
+%CheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
+
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 1
+WHEN  ('?Progress:Cancel')TIMES 0
+
+%UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
+
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 1
+WHEN  ('?Progress:Cancel')TIMES 0
+
+%ProcedureOneInstance LONG  (0)
+%PreserveVarsLoc MULTI LONG  ()
+%PreserveVarLoc DEPEND %PreserveVarsLoc DEFAULT TIMES 0
+
+%FirstPage DEFAULT  ('')
+%ReportTargetOpen LONG  (0)
+%HideOutputProgress LONG  (0)
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?Progress:Cancel') ('Off')
+
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?Progress:Cancel') ('')
+
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?Progress:Cancel') (0)
+
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 1
+WHEN  ('?Progress:Cancel') (-1)
+
+%FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?Progress:Cancel') (0)
+
+%FieldGradientColorTo DEPEND %Control LONG TIMES 1
+WHEN  ('?Progress:Cancel') (-1)
+
+%FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?Progress:Cancel') (0)
+
+%ActiveImageEnable DEPEND %Control LONG TIMES 0
+
+%AIObjectName DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?Progress:Cancel') ('AIBtn4')
+
+%AIEnableMimicControl DEPEND %Control LONG TIMES 1
+WHEN  ('?Progress:Cancel') (1)
+
+%AIMimicControl DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?Progress:Cancel') ('?Progress:Thermometer')
+
+%AIImgRound DEPEND %Control LONG TIMES 0
+
+%AIOverrideImg DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?Progress:Cancel') (0)
+
+%AIDisableImg DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?Progress:Cancel') (0)
+
+%AIHotImg DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?Progress:Cancel') (0)
+
+%AIPressedImg DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?Progress:Cancel') (0)
+
+%AddSortFieldAssistedNoCase DEPEND %AddSortFieldsAssisted LONG TIMES 0
+
+%AddConditionalSortFieldAssistedNoCase DEPEND %AddConditionalSortFieldsAssisted LONG TIMES 0
+
+[EMBED]
+EMBED %ProcessManagerMethodCodeSection
+[INSTANCES]
+WHEN 'Open'
+[INSTANCES]
+WHEN '()'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5001
+PROPERTY:END
+!Process Manager - Open - Despues del PC Inicializa Reporte para traer logo
+loc:noregistros =0
+[END]
+[END]
+WHEN 'TakeRecord'
+[INSTANCES]
+WHEN '(),BYTE'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 500
+PROPERTY:END
+CLEAR(WDUM:RECORD)
+WDUM{PROP:SQL}='SELECT CASE WHEN  SUBSTRING(RESULTADO,2,6)=''\rtf1\'' THEN ''RTF'' ELSE ''HTML'' END FROM LORD WHERE NORDEN='&FnSQLFmt(LORD:NORDEN)
+Access:WDUM.Next()
+IF CLIP(WDUM:C1)='RTF'
+   PRINT(RPT:Resultado)
+ELSE
+   LOC:CNSRPDX=CLIP(GLO:IDSEDE)&FORMAT(FNGENERACONSECUTIVO(GLO:IDSEDE,'@RPDX'),@N08)
+   CLEAR(WDUM:RECORD)
+   WDUM{PROP:SQL}='INSERT INTO RPDX_TEXT(CNS,TEXT01) SELECT '&FnSQLFmt(LOC:CNSRPDX)&', DBO.FNK_RETIRA_HTML('&FNSQLFMT(LORD:RESULTADO)&')'
+   CLEAR(RPDX_TEXT:RECORD)
+   RPDX_TEXT:CNS=LOC:CNSRPDX
+   IF Access:RPDX_TEXT.TryFetch(RPDX_TEXT:RPDX_TEXTCNS)THEN CLEAR(RPDX_TEXT:RECORD).
+   LOC:RESULTADOHTML=CLIP(RPDX_TEXT:TEXT01)
+   PRINT(RPT:Resulhtml)
+ END
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4500
+PROPERTY:END
+
+!stop('loc:edad='&loc:edad)
+!Firma Digital REQ:1883
+
+clear(med:record)
+MED:IDMEDICO = LORD:IDMEDICO
+if Access:med.tryfetch(MED:MEDIDMEDICO) THEN CLEAR(MED:RECORD).
+LOC:NOMEDICORED = MED:NOMBRE
+
+CLEAR(MES:RECORD)
+MES:IDEMEDICA = MED:IDEMEDICA
+IF ACCESS:MES.TRYFETCH(MES:MESIDEMEDICA) THEN CLEAR(MES:RECORD).
+LOC:ESPMEDDIL = MES:DESCRIPCION
+
+ IF IN:METODO='A'
+    CLEAR(WDUM:RECORD)
+    WDUM{PROP:SQL}='SELECT DBO.FNK_FECHA_SIN_MLS(LING.FECHA) FROM LING INNER JOIN LORD ON LING.NOINGRESO=LORD.NOINGRESO WHERE LORD.NORDEN='&FNSQLFMT(LORD:NORDEN)
+    ACCESS:WDUM.NEXT()
+    LOC:FECHAA='Fecha :'&CLIP(WDUM:C1)
+ ELSE
+    LOC:FECHAA=''
+ END
+
+if FnValorVariable('ASI_UTILIZAFIRMA_HC') = 'SI'
+    W# = FnValorVariable('ASI_FIRMA_HC_ANCHO')
+    H# = FnValorVariable('ASI_FIRMA_HC_ALTO')
+    Arc:id = MED:IDFIRMA
+    access:archivos.fetch(Arc:PK_Archivos)
+    Report$?Image2{PROP:ImageBlob} = Arc:dicom{PROP:Handle}
+    !Report$?Image2{PROP:Width}   = 4000
+    !Report$?Image2{PROP:Height}  = 2000
+    Report$?Image2{PROP:Width}   = W# * 400
+    Report$?Image2{PROP:Height}  = H# * 400
+END
+
+
+[END]
+[END]
+WHEN 'ApplyFilter'
+[INSTANCES]
+WHEN '()'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5001
+PROPERTY:END
+loc:filtro = 'A.NOINGRESO = '&FNSQLFMT(IN:SERVICIO )
+!IF in:metodo = 'I' THEN
+!   LOC:FILTRO = CLIP(LOC:FILTRO) & ' AND  A.IDSERVICIO = ' & FNSQLFMT(in:servicio)
+!
+!ELSE
+!   If in:metodo = 'S' then
+!      LOC:FILTRO = CLIP(LOC:FILTRO) & ' AND  A.MARCA = 1 '
+!   End
+!END
+!IF IN:METODO='A'
+!   loc:filtro = ' EXISTS (SELECT * FROM LING WHERE NOINGRESO=A.NOINGRESO AND AMBITOTR='&FNSQLFMT(GLO:AMBITO)&' AND NOADMISION='&FNSQLFMT(LING:NOADMISION)&')' &' AND COALESCE(A.REALIZADO,0) = 1 '
+!END
+Process:View{Prop:SqlFilter}=LOC:FILTRO
+IF FNVALORVARIABLE('IDDEPURAR')= 'SI'
+   SETCLIPBOARD(loc:filtro)
+   STOP('Metodo='& in:metodo & '     id servicio' & in:servicio)
+END
+[END]
+[END]
+[END]
+EMBED %WindowManagerMethodCodeSection
+[INSTANCES]
+WHEN 'Init'
+[INSTANCES]
+WHEN '(),BYTE'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7501
+PROPERTY:END
+clear(ling:record)
+LING:NOINGRESO = IN:SERVICIO
+if access:ling.tryfetch(LING:LINGNOINGRESO) then clear(ling:record).
+loc:fecha_enca = LING:FECHA_DATE
+loc:hora_enca =LING:FECHA_TIME
+
+if  LING:AMBITOTR = fnvalorvariable('APOYODG_RX')
+    if in:metodo = 'I'
+       if LORD:FECHARES_DATE <> ''
+          loc:fecha_enca = LORD:FECHARES_DATE
+       end
+       if LORD:FECHARES_TIME <> ''
+          loc:hora_enca = LORD:FECHARES_TIME
+       end
+    end
+end
+IF FnValorVariable('FECHA_RESIMP_APDX')='RESPUESTA'
+   loc:fecha_enca = LING:FECHA_G_DATE
+   loc:hora_enca = LING:FECHA_G_TIME
+END
+CLEAR(AFI:RECORD)
+AFI:IDAFILIADO = LING:IDAFILIADO
+IF ACCESS:AFI.TRYFETCH(AFI:AFIIDAFILIADO) THEN CLEAR(AFI:RECORD).
+LOC:EDAD   = YEAR(LING:FECHA_DATE) - YEAR(AFI:FNACIMIENTO_DATE)
+LOC:SEXO   = AFI:SEXO
+Loc:NomAfiliado     = clip(afi:papellido) & ' ' & clip(afi:sapellido) & ' ' & clip(afi:pnombre) & ' ' & clip(afi:snombre)
+
+Loc:Titulo = fnvalorvariable('IDTITULOLAB')
+If LOC:TITULO = ''
+   case LING:AMBITOTR
+   Of 'LX'
+      LOC:TITULO = 'LABORATORIO'
+   Of fnvalorvariable('APOYODG_RX')
+      LOC:TITULO = 'IMAGENOLOGIA'
+   Of 'BS'
+      LOC:TITULO = 'BANCO DE SANGRE'
+   End
+End
+
+ciu:ciudad = afi:ciudad                            ! Assign linking field value
+Access:ciu.Fetch(CIU:CIUCIUDAD)
+Loc:CiudadAFI = ciu:nombre
+
+clear(TER:record)
+TER:IDTERCERO = ling:IDtercero
+IF access:TER.tryfetch(TER:TERIDTERCERO) THEN CLEAR(TER:RECORD).
+loc:CONVENIO = TER:RAZONSOCIAL
+
+clear(med:record)
+med:idmedico = LING:IDMEDICO
+IF ACCESS:MED.TRYFETCH(MED:MEDIDMEDICO) THEN CLEAR(MED:RECORD).
+Loc:NomSolicitado = MED:NOMBRE
+
+CLEAR(SER:RECORD)
+SER:IDSERVICIO = LORD:IDSERVICIO
+IF ACCESS:SER.TRYFETCH(SER:SERIDSERVICIO) THEN CLEAR(SER:RECORD).
+LOC:DESCSERVICIO = SER:DESCSERVICIO
+
+if fnvalorvariable('LXIMPCOMENTARIO') = 'SI'
+   LOC:COMENTARIOS = 'COMENTARIOS: '&SER:COMENTARIOS
+ELSE
+   LOC:COMENTARIOS = ''
+end
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 8001
+PROPERTY:END
+ clear(wdf:record)
+ wdf{prop:sql} = 'SELECT GETDATE()'
+ ACCESS:WDF.NEXT()
+ LOC:FECHA = WDF:C1_DATE
+ LOC:HORA  = WDF:C1_TIME
+ CLEAR(USUSU:RECORD)
+ USUSU:COMPANIA = GLO:COMPANIA
+ USUSU:USUARIO  = GLO:USUARIO
+ IF ACCESS:USUSU.TRYFETCH(USUSU:USUSUUSUARIO) THEN CLEAR(USUSU:RECORD).
+ LOC:USUARIO = USUSU:NOMBRE
+
+ !LOC:EDAD = (LOC:FECHA - AFI:FNACIMIENTO_DATE)/365.25
+
+ case LING:AMBITO
+ Of 'LX'
+    ?GROUP3{PROP:TEXT} = 'Firma Bacteriólogo'
+ Of 'RX'
+    ?GROUP3{PROP:TEXT} = 'Firma'
+ Of 'BS'
+    ?GROUP3{PROP:TEXT} = 'Firma'
+ End
+
+IF GLO:EXPORTARPDF=TRUE
+   SELF.SetReportTarget(PDFReporter.IReportGenerator)
+   SELF.PrintReport
+END
+[END]
+[END]
+WHEN 'OpenReport'
+[INSTANCES]
+WHEN '(),BYTE'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5001
+PROPERTY:END
+ !Window Manager - Open Report    - Despues del PC
+ set(dpr)
+ next(dpr)
+ glo:logocliente = dpr:ubicalogo
+ if loc:noregistros <> 1
+    Report$?logocliente{prop:text}=glo:logocliente
+ end
+ Case LING:AMBITOTR
+ of fnvalorvariable('APOYODG_RX')
+    if fnvalorvariable('APOYODG_RX_FMTO') = 'WORD'
+       LOC:FILIGRANA = 'RADIOLOGIA DIGITAL'
+    ELSE
+       LOC:FILIGRANA = ''
+    END
+ of fnvalorvariable('APOYODG_EG')
+    if fnvalorvariable('APOYODG_RX_FMTO') = 'WORD'
+       LOC:FILIGRANA = 'RADIOLOGIA DIGITAL'
+    ELSE
+       LOC:FILIGRANA = ''
+    END
+ of fnvalorvariable('APOYODG_TG')
+    if fnvalorvariable('APOYODG_RX_FMTO') = 'WORD'
+       LOC:FILIGRANA = 'RADIOLOGIA DIGITAL'
+    ELSE
+       LOC:FILIGRANA = ''
+    END
+ of fnvalorvariable('APOYODG_RM')
+    if fnvalorvariable('APOYODG_RX_FMTO') = 'WORD'
+       LOC:FILIGRANA = 'RADIOLOGIA DIGITAL'
+    ELSE
+       LOC:FILIGRANA = ''
+    END
+ else
+    LOC:FILIGRANA = ''
+ End
+ !window Manager Open Report Despues PC
+[END]
+[END]
+WHEN 'AskPreview'
+[INSTANCES]
+WHEN '()'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4500
+PROPERTY:END
+ !Local Objects - ABC Objects - Window Manager - AskPreview Antes del PC
+ if LORD:CONCLUSION <> ''
+     print(rpt:linea)
+     PRINT(RPT:conclusion)
+ end
+
+ Self.SkipPreview = GLO:EXPORTARPDF
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5001
+PROPERTY:END
+!Window  Manager AskPreview Despues PC
+ IF SELF.REPORT{PROP:FLUSHPREVIEW}
+
+ ELSE
+    GLO:RPTCANCEL = 1
+    !STOP('CANCELADO')
+ END
+[END]
+[END]
+WHEN 'TakeNoRecords'
+[INSTANCES]
+WHEN '()'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4500
+PROPERTY:END
+RETURN
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5001
+PROPERTY:END
+!Window Manager - Take norecord - Despues PC
+Loc:NoRegistros = 1
+[END]
+[END]
+[END]
+[END]
+[ADDITION]
+NAME AnyScreen AnyScreenProcedure
+[FIELDPROMPT]
+%HideOnClient DEPEND %Control LONG TIMES 4
+WHEN  ('?Progress:Cancel') (0)
+WHEN  ('?Progress:PctText') (0)
+WHEN  ('?Progress:Thermometer') (0)
+WHEN  ('?Progress:UserString') (0)
+
+%SynOnAccept DEPEND %Control LONG TIMES 4
+WHEN  ('?Progress:Cancel') (1)
+WHEN  ('?Progress:PctText') (1)
+WHEN  ('?Progress:Thermometer') (1)
+WHEN  ('?Progress:UserString') (1)
+
+%SynOnSelect DEPEND %Control LONG TIMES 4
+WHEN  ('?Progress:Cancel') (1)
+WHEN  ('?Progress:PctText') (1)
+WHEN  ('?Progress:Thermometer') (1)
+WHEN  ('?Progress:UserString') (1)
+
+%ThinControlMaxSize DEPEND %Control DEFAULT TIMES 4
+WHEN  ('?Progress:Cancel') ('250000')
+WHEN  ('?Progress:PctText') ('250000')
+WHEN  ('?Progress:Thermometer') ('250000')
+WHEN  ('?Progress:UserString') ('250000')
+
+%ThinControlListboxPipes DEPEND %Control LONG TIMES 4
+WHEN  ('?Progress:Cancel') (0)
+WHEN  ('?Progress:PctText') (0)
+WHEN  ('?Progress:Thermometer') (0)
+WHEN  ('?Progress:UserString') (0)
+
+%AnyScreenCSSclass DEPEND %Control DEFAULT TIMES 4
+WHEN  ('?Progress:Cancel') ('')
+WHEN  ('?Progress:PctText') ('')
+WHEN  ('?Progress:Thermometer') ('')
+WHEN  ('?Progress:UserString') ('')
+
+%EnableWithoutThinet DEPEND %Control LONG TIMES 4
+WHEN  ('?Progress:Cancel') (0)
+WHEN  ('?Progress:PctText') (0)
+WHEN  ('?Progress:Thermometer') (0)
+WHEN  ('?Progress:UserString') (0)
+
+%OverrideGlobalListboxHeaderColors DEPEND %Control LONG TIMES 4
+WHEN  ('?Progress:Cancel') (0)
+WHEN  ('?Progress:PctText') (0)
+WHEN  ('?Progress:Thermometer') (0)
+WHEN  ('?Progress:UserString') (0)
+
+%cNormal DEPEND %Control LONG TIMES 4
+WHEN  ('?Progress:Cancel') (-1)
+WHEN  ('?Progress:PctText') (-1)
+WHEN  ('?Progress:Thermometer') (-1)
+WHEN  ('?Progress:UserString') (-1)
+
+%cAccentTxt DEPEND %Control LONG TIMES 4
+WHEN  ('?Progress:Cancel') (14342874)
+WHEN  ('?Progress:PctText') (14342874)
+WHEN  ('?Progress:Thermometer') (14342874)
+WHEN  ('?Progress:UserString') (14342874)
+
+%cListHeaderBack DEPEND %Control LONG TIMES 4
+WHEN  ('?Progress:Cancel') (14342874)
+WHEN  ('?Progress:PctText') (14342874)
+WHEN  ('?Progress:Thermometer') (14342874)
+WHEN  ('?Progress:UserString') (14342874)
+
+%cListHeaderFore DEPEND %Control LONG TIMES 4
+WHEN  ('?Progress:Cancel') (0)
+WHEN  ('?Progress:PctText') (0)
+WHEN  ('?Progress:Thermometer') (0)
+WHEN  ('?Progress:UserString') (0)
+
+%cListHeaderGRBack DEPEND %Control LONG TIMES 4
+WHEN  ('?Progress:Cancel') (14342874)
+WHEN  ('?Progress:PctText') (14342874)
+WHEN  ('?Progress:Thermometer') (14342874)
+WHEN  ('?Progress:UserString') (14342874)
+
+%cListHeaderGrFore DEPEND %Control LONG TIMES 4
+WHEN  ('?Progress:Cancel') (0)
+WHEN  ('?Progress:PctText') (0)
+WHEN  ('?Progress:Thermometer') (0)
+WHEN  ('?Progress:UserString') (0)
+
+%cListHeaderArrow DEPEND %Control LONG TIMES 4
+WHEN  ('?Progress:Cancel') (8421504)
+WHEN  ('?Progress:PctText') (8421504)
+WHEN  ('?Progress:Thermometer') (8421504)
+WHEN  ('?Progress:UserString') (8421504)
+
+%cListHeaderArrow3D DEPEND %Control LONG TIMES 4
+WHEN  ('?Progress:Cancel') (16777215)
+WHEN  ('?Progress:PctText') (16777215)
+WHEN  ('?Progress:Thermometer') (16777215)
+WHEN  ('?Progress:UserString') (16777215)
+
+%ThinControlMaxSizeRTF DEPEND %Control DEFAULT TIMES 4
+WHEN  ('?Progress:Cancel') ('250000')
+WHEN  ('?Progress:PctText') ('250000')
+WHEN  ('?Progress:Thermometer') ('250000')
+WHEN  ('?Progress:UserString') ('250000')
+
+[INSTANCE]
+INSTANCE 3
+OWNER 3
+[PROMPTS]
+%AnyScreenTimerRefresh LONG  (0)
+[ADDITION]
+NAME SVReportToPDFSupport SVReportToPDF
+[INSTANCE]
+INSTANCE 1
+OWNER 6
+[PROMPTS]
+%ClassItem UNIQUE DEFAULT  ('PDFReporter')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('PDFReporter') ('PDFReportGenerator')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('PDFReporter') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+
+%Populate DEFAULT  ('Conditional')
+%PopulateCondition DEFAULT  ('GLO:EXPORTARPDF=TRUE')
+%OutputNameType DEFAULT  ('Variable')
+%OutputNameFixed DEFAULT  ('')
+%OutputNameVariable DEFAULT  ('GLO:PATHPDF&GLO:NOMARCHIVO')
+%DocumentTitle DEFAULT  ('CW Report')
+%ApplicationName DEFAULT  ('KDocXtpo')
+%ProgramName DEFAULT  ('RptRXWORDX')
+%PDFSubject DEFAULT  ('RptRXWORDX')
+%PDFAuthor DEFAULT  ('')
+%PDFKeywords DEFAULT  ('')
+%PagesAsParentBookmark LONG  (0)
+%UseScanCopyMode LONG  (0)
+%ScanCopyModeRes DEFAULT  ('Original')
+%CompressText LONG  (1)
+%CompressImages LONG  (1)
+%Encryptdoc DEFAULT  ('Never')
+%EncryptDocCondition DEFAULT  ('')
+%PDFPassword DEFAULT  ('')
+%PDFUseVariableAccess LONG  (0)
+%PDFVariableAccess DEFAULT  ('')
+%PDFAccessPrint LONG  (1)
+%PDFAccessModifyContent LONG  (1)
+%PDFAccessCopy LONG  (1)
+%PDFAccessModifyAnnotations LONG  (1)
+%PDFTempControlInstance DEFAULT  ('68')
+%PDFTempReportControl DEFAULT  ('?LOC:FILIGRANA')
+%PDFHideControl DEPEND %ReportControl LONG TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') (0)
+WHEN  ('?AFI:SEXO') (0)
+WHEN  ('?AFI:TIPO_DOC') (0)
+WHEN  ('?Conclusion') (0)
+WHEN  ('?DPR:Ciudad') (0)
+WHEN  ('?DPR:Direccion') (0)
+WHEN  ('?DPR:Nit') (0)
+WHEN  ('?DPR:RazonSocial') (0)
+WHEN  ('?DPR:Telefonos') (0)
+WHEN  ('?GLO:USUARIO') (0)
+WHEN  ('?Group2') (0)
+WHEN  ('?Group3') (0)
+WHEN  ('?Image2') (0)
+WHEN  ('?LOC:COMENTARIOS') (0)
+WHEN  ('?LOC:CONVENIO') (0)
+WHEN  ('?LOC:FECHA') (0)
+WHEN  ('?LOC:FECHAA') (0)
+WHEN  ('?LOC:FECHAA:2') (0)
+WHEN  ('?LOC:FILIGRANA') (0)
+WHEN  ('?LOC:HORA') (0)
+WHEN  ('?LOC:RESULTADOHTML') (0)
+WHEN  ('?LORD:CONCLUSION') (0)
+WHEN  ('?LORD:IDMEDICO') (0)
+WHEN  ('?LORD:IDSERVICIO') (0)
+WHEN  ('?LORD:NOINGRESO') (0)
+WHEN  ('?LORD:NORDEN') (0)
+WHEN  ('?LORD:OBSERVACION') (0)
+WHEN  ('?LORD:RESULTADO') (0)
+WHEN  ('?Line2:2') (0)
+WHEN  ('?Line3') (0)
+WHEN  ('?Line4') (0)
+WHEN  ('?Loc:Edad') (0)
+WHEN  ('?Loc:NomAfiliado') (0)
+WHEN  ('?Loc:NomSolicitado') (0)
+WHEN  ('?Loc:Titulo') (0)
+WHEN  ('?MED:NOMBRE') (0)
+WHEN  ('?MED:NO_REGISTRO') (0)
+WHEN  ('?MES:DESCRIPCION') (0)
+WHEN  ('?ReportPageNumber') (0)
+WHEN  ('?Resulhtml') (0)
+WHEN  ('?Resultado') (0)
+WHEN  ('?SER:DESCSERVICIO') (0)
+WHEN  ('?String10') (0)
+WHEN  ('?String11') (0)
+WHEN  ('?String13') (0)
+WHEN  ('?String14') (0)
+WHEN  ('?String34') (0)
+WHEN  ('?String34:2') (0)
+WHEN  ('?String37') (0)
+WHEN  ('?String37:2') (0)
+WHEN  ('?String37:3') (0)
+WHEN  ('?String40') (0)
+WHEN  ('?String41') (0)
+WHEN  ('?String45') (0)
+WHEN  ('?String45:2') (0)
+WHEN  ('?String49') (0)
+WHEN  ('?String56') (0)
+WHEN  ('?String57') (0)
+WHEN  ('?linea') (0)
+WHEN  ('?loc:fecha_enca') (0)
+WHEN  ('?loc:hora_enca') (0)
+WHEN  ('?loc:idproveedor') (0)
+WHEN  ('?loc:nomprovedor') (0)
+WHEN  ('?logocliente') (0)
+WHEN  ('?unnamed') (0)
+WHEN  ('?unnamed:2') (0)
+WHEN  ('?unnamed:3') (0)
+WHEN  ('?unnamed:4') (0)
+
+%PDFSkipControl DEPEND %ReportControl LONG TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') (0)
+WHEN  ('?AFI:SEXO') (0)
+WHEN  ('?AFI:TIPO_DOC') (0)
+WHEN  ('?Conclusion') (0)
+WHEN  ('?DPR:Ciudad') (0)
+WHEN  ('?DPR:Direccion') (0)
+WHEN  ('?DPR:Nit') (0)
+WHEN  ('?DPR:RazonSocial') (0)
+WHEN  ('?DPR:Telefonos') (0)
+WHEN  ('?GLO:USUARIO') (0)
+WHEN  ('?Group2') (0)
+WHEN  ('?Group3') (0)
+WHEN  ('?Image2') (0)
+WHEN  ('?LOC:COMENTARIOS') (0)
+WHEN  ('?LOC:CONVENIO') (0)
+WHEN  ('?LOC:FECHA') (0)
+WHEN  ('?LOC:FECHAA') (0)
+WHEN  ('?LOC:FECHAA:2') (0)
+WHEN  ('?LOC:FILIGRANA') (0)
+WHEN  ('?LOC:HORA') (0)
+WHEN  ('?LOC:RESULTADOHTML') (0)
+WHEN  ('?LORD:CONCLUSION') (0)
+WHEN  ('?LORD:IDMEDICO') (0)
+WHEN  ('?LORD:IDSERVICIO') (0)
+WHEN  ('?LORD:NOINGRESO') (0)
+WHEN  ('?LORD:NORDEN') (0)
+WHEN  ('?LORD:OBSERVACION') (0)
+WHEN  ('?LORD:RESULTADO') (0)
+WHEN  ('?Line2:2') (0)
+WHEN  ('?Line3') (0)
+WHEN  ('?Line4') (0)
+WHEN  ('?Loc:Edad') (0)
+WHEN  ('?Loc:NomAfiliado') (0)
+WHEN  ('?Loc:NomSolicitado') (0)
+WHEN  ('?Loc:Titulo') (0)
+WHEN  ('?MED:NOMBRE') (0)
+WHEN  ('?MED:NO_REGISTRO') (0)
+WHEN  ('?MES:DESCRIPCION') (0)
+WHEN  ('?ReportPageNumber') (0)
+WHEN  ('?Resulhtml') (0)
+WHEN  ('?Resultado') (0)
+WHEN  ('?SER:DESCSERVICIO') (0)
+WHEN  ('?String10') (0)
+WHEN  ('?String11') (0)
+WHEN  ('?String13') (0)
+WHEN  ('?String14') (0)
+WHEN  ('?String34') (0)
+WHEN  ('?String34:2') (0)
+WHEN  ('?String37') (0)
+WHEN  ('?String37:2') (0)
+WHEN  ('?String37:3') (0)
+WHEN  ('?String40') (0)
+WHEN  ('?String41') (0)
+WHEN  ('?String45') (0)
+WHEN  ('?String45:2') (0)
+WHEN  ('?String49') (0)
+WHEN  ('?String56') (0)
+WHEN  ('?String57') (0)
+WHEN  ('?linea') (0)
+WHEN  ('?loc:fecha_enca') (0)
+WHEN  ('?loc:hora_enca') (0)
+WHEN  ('?loc:idproveedor') (0)
+WHEN  ('?loc:nomprovedor') (0)
+WHEN  ('?logocliente') (0)
+WHEN  ('?unnamed') (0)
+WHEN  ('?unnamed:2') (0)
+WHEN  ('?unnamed:3') (0)
+WHEN  ('?unnamed:4') (0)
+
+%PDFHideControlOnPDF DEPEND %ReportControl LONG TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') (0)
+WHEN  ('?AFI:SEXO') (0)
+WHEN  ('?AFI:TIPO_DOC') (0)
+WHEN  ('?Conclusion') (0)
+WHEN  ('?DPR:Ciudad') (0)
+WHEN  ('?DPR:Direccion') (0)
+WHEN  ('?DPR:Nit') (0)
+WHEN  ('?DPR:RazonSocial') (0)
+WHEN  ('?DPR:Telefonos') (0)
+WHEN  ('?GLO:USUARIO') (0)
+WHEN  ('?Group2') (0)
+WHEN  ('?Group3') (0)
+WHEN  ('?Image2') (0)
+WHEN  ('?LOC:COMENTARIOS') (0)
+WHEN  ('?LOC:CONVENIO') (0)
+WHEN  ('?LOC:FECHA') (0)
+WHEN  ('?LOC:FECHAA') (0)
+WHEN  ('?LOC:FECHAA:2') (0)
+WHEN  ('?LOC:FILIGRANA') (0)
+WHEN  ('?LOC:HORA') (0)
+WHEN  ('?LOC:RESULTADOHTML') (0)
+WHEN  ('?LORD:CONCLUSION') (0)
+WHEN  ('?LORD:IDMEDICO') (0)
+WHEN  ('?LORD:IDSERVICIO') (0)
+WHEN  ('?LORD:NOINGRESO') (0)
+WHEN  ('?LORD:NORDEN') (0)
+WHEN  ('?LORD:OBSERVACION') (0)
+WHEN  ('?LORD:RESULTADO') (0)
+WHEN  ('?Line2:2') (0)
+WHEN  ('?Line3') (0)
+WHEN  ('?Line4') (0)
+WHEN  ('?Loc:Edad') (0)
+WHEN  ('?Loc:NomAfiliado') (0)
+WHEN  ('?Loc:NomSolicitado') (0)
+WHEN  ('?Loc:Titulo') (0)
+WHEN  ('?MED:NOMBRE') (0)
+WHEN  ('?MED:NO_REGISTRO') (0)
+WHEN  ('?MES:DESCRIPCION') (0)
+WHEN  ('?ReportPageNumber') (0)
+WHEN  ('?Resulhtml') (0)
+WHEN  ('?Resultado') (0)
+WHEN  ('?SER:DESCSERVICIO') (0)
+WHEN  ('?String10') (0)
+WHEN  ('?String11') (0)
+WHEN  ('?String13') (0)
+WHEN  ('?String14') (0)
+WHEN  ('?String34') (0)
+WHEN  ('?String34:2') (0)
+WHEN  ('?String37') (0)
+WHEN  ('?String37:2') (0)
+WHEN  ('?String37:3') (0)
+WHEN  ('?String40') (0)
+WHEN  ('?String41') (0)
+WHEN  ('?String45') (0)
+WHEN  ('?String45:2') (0)
+WHEN  ('?String49') (0)
+WHEN  ('?String56') (0)
+WHEN  ('?String57') (0)
+WHEN  ('?linea') (0)
+WHEN  ('?loc:fecha_enca') (0)
+WHEN  ('?loc:hora_enca') (0)
+WHEN  ('?loc:idproveedor') (0)
+WHEN  ('?loc:nomprovedor') (0)
+WHEN  ('?logocliente') (0)
+WHEN  ('?unnamed') (0)
+WHEN  ('?unnamed:2') (0)
+WHEN  ('?unnamed:3') (0)
+WHEN  ('?unnamed:4') (0)
+
+%PDFPossibleTextOrigin DEPEND %ReportControl DEFAULT TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?AFI:SEXO') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?AFI:TIPO_DOC') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Conclusion') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?DPR:Ciudad') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?DPR:Direccion') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?DPR:Nit') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?DPR:RazonSocial') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?DPR:Telefonos') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?GLO:USUARIO') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Group2') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Group3') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Image2') ('HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LOC:COMENTARIOS') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LOC:CONVENIO') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LOC:FECHA') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LOC:FECHAA') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LOC:FECHAA:2') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LOC:FILIGRANA') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LOC:HORA') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LOC:RESULTADOHTML') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LORD:CONCLUSION') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LORD:IDMEDICO') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LORD:IDSERVICIO') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LORD:NOINGRESO') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LORD:NORDEN') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LORD:OBSERVACION') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LORD:RESULTADO') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Line2:2') ('HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Line3') ('HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Line4') ('HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Loc:Edad') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Loc:NomAfiliado') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Loc:NomSolicitado') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Loc:Titulo') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?MED:NOMBRE') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?MED:NO_REGISTRO') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?MES:DESCRIPCION') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?ReportPageNumber') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Resulhtml') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Resultado') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?SER:DESCSERVICIO') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String10') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String11') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String13') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String14') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String34') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String34:2') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String37') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String37:2') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String37:3') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String40') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String41') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String45') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String45:2') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String49') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String56') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String57') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?linea') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?loc:fecha_enca') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?loc:hora_enca') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?loc:idproveedor') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?loc:nomprovedor') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?logocliente') ('HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?unnamed') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?unnamed:2') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?unnamed:3') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?unnamed:4') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+
+%PDFPossibleBookmarkTextOrigin DEPEND %ReportControl DEFAULT TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?AFI:SEXO') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?AFI:TIPO_DOC') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Conclusion') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?DPR:Ciudad') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?DPR:Direccion') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?DPR:Nit') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?DPR:RazonSocial') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?DPR:Telefonos') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?GLO:USUARIO') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Group2') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Group3') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Image2') ('HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LOC:COMENTARIOS') ('HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LOC:CONVENIO') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LOC:FECHA') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LOC:FECHAA') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LOC:FECHAA:2') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LOC:FILIGRANA') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LOC:HORA') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LOC:RESULTADOHTML') ('HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LORD:CONCLUSION') ('HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LORD:IDMEDICO') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LORD:IDSERVICIO') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LORD:NOINGRESO') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LORD:NORDEN') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LORD:OBSERVACION') ('HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?LORD:RESULTADO') ('HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Line2:2') ('HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Line3') ('HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Line4') ('HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Loc:Edad') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Loc:NomAfiliado') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Loc:NomSolicitado') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Loc:Titulo') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?MED:NOMBRE') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?MED:NO_REGISTRO') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?MES:DESCRIPCION') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?ReportPageNumber') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Resulhtml') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?Resultado') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?SER:DESCSERVICIO') ('HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String10') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String11') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String13') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String14') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String34') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String34:2') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String37') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String37:2') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String37:3') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String40') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String41') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String45') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String45:2') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String49') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String56') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?String57') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?linea') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?loc:fecha_enca') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?loc:hora_enca') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?loc:idproveedor') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?loc:nomprovedor') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?logocliente') ('HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?unnamed') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?unnamed:2') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?unnamed:3') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+WHEN  ('?unnamed:4') ('Control Text[Text]|HardCoded[HardCoded]|Dynamic[Dynamic]')
+
+%PDFFieldAction DEPEND %ReportControl LONG TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') (0)
+WHEN  ('?AFI:SEXO') (0)
+WHEN  ('?AFI:TIPO_DOC') (0)
+WHEN  ('?Conclusion') (0)
+WHEN  ('?DPR:Ciudad') (0)
+WHEN  ('?DPR:Direccion') (0)
+WHEN  ('?DPR:Nit') (0)
+WHEN  ('?DPR:RazonSocial') (0)
+WHEN  ('?DPR:Telefonos') (0)
+WHEN  ('?GLO:USUARIO') (0)
+WHEN  ('?Group2') (0)
+WHEN  ('?Group3') (0)
+WHEN  ('?Image2') (0)
+WHEN  ('?LOC:COMENTARIOS') (0)
+WHEN  ('?LOC:CONVENIO') (0)
+WHEN  ('?LOC:FECHA') (0)
+WHEN  ('?LOC:FECHAA') (0)
+WHEN  ('?LOC:FECHAA:2') (0)
+WHEN  ('?LOC:FILIGRANA') (0)
+WHEN  ('?LOC:HORA') (0)
+WHEN  ('?LOC:RESULTADOHTML') (0)
+WHEN  ('?LORD:CONCLUSION') (0)
+WHEN  ('?LORD:IDMEDICO') (0)
+WHEN  ('?LORD:IDSERVICIO') (0)
+WHEN  ('?LORD:NOINGRESO') (0)
+WHEN  ('?LORD:NORDEN') (0)
+WHEN  ('?LORD:OBSERVACION') (0)
+WHEN  ('?LORD:RESULTADO') (0)
+WHEN  ('?Line2:2') (0)
+WHEN  ('?Line3') (0)
+WHEN  ('?Line4') (0)
+WHEN  ('?Loc:Edad') (0)
+WHEN  ('?Loc:NomAfiliado') (0)
+WHEN  ('?Loc:NomSolicitado') (0)
+WHEN  ('?Loc:Titulo') (0)
+WHEN  ('?MED:NOMBRE') (0)
+WHEN  ('?MED:NO_REGISTRO') (0)
+WHEN  ('?MES:DESCRIPCION') (0)
+WHEN  ('?ReportPageNumber') (0)
+WHEN  ('?Resulhtml') (0)
+WHEN  ('?Resultado') (0)
+WHEN  ('?SER:DESCSERVICIO') (0)
+WHEN  ('?String10') (0)
+WHEN  ('?String11') (0)
+WHEN  ('?String13') (0)
+WHEN  ('?String14') (0)
+WHEN  ('?String34') (0)
+WHEN  ('?String34:2') (0)
+WHEN  ('?String37') (0)
+WHEN  ('?String37:2') (0)
+WHEN  ('?String37:3') (0)
+WHEN  ('?String40') (0)
+WHEN  ('?String41') (0)
+WHEN  ('?String45') (0)
+WHEN  ('?String45:2') (0)
+WHEN  ('?String49') (0)
+WHEN  ('?String56') (0)
+WHEN  ('?String57') (0)
+WHEN  ('?linea') (0)
+WHEN  ('?loc:fecha_enca') (0)
+WHEN  ('?loc:hora_enca') (0)
+WHEN  ('?loc:idproveedor') (0)
+WHEN  ('?loc:nomprovedor') (0)
+WHEN  ('?logocliente') (0)
+WHEN  ('?unnamed') (0)
+WHEN  ('?unnamed:2') (0)
+WHEN  ('?unnamed:3') (0)
+WHEN  ('?unnamed:4') (0)
+
+%PDFFieldActionType DEPEND %ReportControl DEFAULT TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') ('Hyperlink')
+WHEN  ('?AFI:SEXO') ('Hyperlink')
+WHEN  ('?AFI:TIPO_DOC') ('Hyperlink')
+WHEN  ('?Conclusion') ('Hyperlink')
+WHEN  ('?DPR:Ciudad') ('Hyperlink')
+WHEN  ('?DPR:Direccion') ('Hyperlink')
+WHEN  ('?DPR:Nit') ('Hyperlink')
+WHEN  ('?DPR:RazonSocial') ('Hyperlink')
+WHEN  ('?DPR:Telefonos') ('Hyperlink')
+WHEN  ('?GLO:USUARIO') ('Hyperlink')
+WHEN  ('?Group2') ('Hyperlink')
+WHEN  ('?Group3') ('Hyperlink')
+WHEN  ('?Image2') ('Hyperlink')
+WHEN  ('?LOC:COMENTARIOS') ('Hyperlink')
+WHEN  ('?LOC:CONVENIO') ('Hyperlink')
+WHEN  ('?LOC:FECHA') ('Hyperlink')
+WHEN  ('?LOC:FECHAA') ('Hyperlink')
+WHEN  ('?LOC:FECHAA:2') ('Hyperlink')
+WHEN  ('?LOC:FILIGRANA') ('Hyperlink')
+WHEN  ('?LOC:HORA') ('Hyperlink')
+WHEN  ('?LOC:RESULTADOHTML') ('Hyperlink')
+WHEN  ('?LORD:CONCLUSION') ('Hyperlink')
+WHEN  ('?LORD:IDMEDICO') ('Hyperlink')
+WHEN  ('?LORD:IDSERVICIO') ('Hyperlink')
+WHEN  ('?LORD:NOINGRESO') ('Hyperlink')
+WHEN  ('?LORD:NORDEN') ('Hyperlink')
+WHEN  ('?LORD:OBSERVACION') ('Hyperlink')
+WHEN  ('?LORD:RESULTADO') ('Hyperlink')
+WHEN  ('?Line2:2') ('Hyperlink')
+WHEN  ('?Line3') ('Hyperlink')
+WHEN  ('?Line4') ('Hyperlink')
+WHEN  ('?Loc:Edad') ('Hyperlink')
+WHEN  ('?Loc:NomAfiliado') ('Hyperlink')
+WHEN  ('?Loc:NomSolicitado') ('Hyperlink')
+WHEN  ('?Loc:Titulo') ('Hyperlink')
+WHEN  ('?MED:NOMBRE') ('Hyperlink')
+WHEN  ('?MED:NO_REGISTRO') ('Hyperlink')
+WHEN  ('?MES:DESCRIPCION') ('Hyperlink')
+WHEN  ('?ReportPageNumber') ('Hyperlink')
+WHEN  ('?Resulhtml') ('Hyperlink')
+WHEN  ('?Resultado') ('Hyperlink')
+WHEN  ('?SER:DESCSERVICIO') ('Hyperlink')
+WHEN  ('?String10') ('Hyperlink')
+WHEN  ('?String11') ('Hyperlink')
+WHEN  ('?String13') ('Hyperlink')
+WHEN  ('?String14') ('Hyperlink')
+WHEN  ('?String34') ('Hyperlink')
+WHEN  ('?String34:2') ('Hyperlink')
+WHEN  ('?String37') ('Hyperlink')
+WHEN  ('?String37:2') ('Hyperlink')
+WHEN  ('?String37:3') ('Hyperlink')
+WHEN  ('?String40') ('Hyperlink')
+WHEN  ('?String41') ('Hyperlink')
+WHEN  ('?String45') ('Hyperlink')
+WHEN  ('?String45:2') ('Hyperlink')
+WHEN  ('?String49') ('Hyperlink')
+WHEN  ('?String56') ('Hyperlink')
+WHEN  ('?String57') ('Hyperlink')
+WHEN  ('?linea') ('Hyperlink')
+WHEN  ('?loc:fecha_enca') ('Hyperlink')
+WHEN  ('?loc:hora_enca') ('Hyperlink')
+WHEN  ('?loc:idproveedor') ('Hyperlink')
+WHEN  ('?loc:nomprovedor') ('Hyperlink')
+WHEN  ('?logocliente') ('Hyperlink')
+WHEN  ('?unnamed') ('Hyperlink')
+WHEN  ('?unnamed:2') ('Hyperlink')
+WHEN  ('?unnamed:3') ('Hyperlink')
+WHEN  ('?unnamed:4') ('Hyperlink')
+
+%PDFAnnotationOrigin DEPEND %ReportControl DEFAULT TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') ('Text')
+WHEN  ('?AFI:SEXO') ('Text')
+WHEN  ('?AFI:TIPO_DOC') ('Text')
+WHEN  ('?Conclusion') ('Text')
+WHEN  ('?DPR:Ciudad') ('Text')
+WHEN  ('?DPR:Direccion') ('Text')
+WHEN  ('?DPR:Nit') ('Text')
+WHEN  ('?DPR:RazonSocial') ('Text')
+WHEN  ('?DPR:Telefonos') ('Text')
+WHEN  ('?GLO:USUARIO') ('Text')
+WHEN  ('?Group2') ('Text')
+WHEN  ('?Group3') ('Text')
+WHEN  ('?Image2') ('HardCoded')
+WHEN  ('?LOC:COMENTARIOS') ('Text')
+WHEN  ('?LOC:CONVENIO') ('Text')
+WHEN  ('?LOC:FECHA') ('Text')
+WHEN  ('?LOC:FECHAA') ('Text')
+WHEN  ('?LOC:FECHAA:2') ('Text')
+WHEN  ('?LOC:FILIGRANA') ('Text')
+WHEN  ('?LOC:HORA') ('Text')
+WHEN  ('?LOC:RESULTADOHTML') ('Text')
+WHEN  ('?LORD:CONCLUSION') ('Text')
+WHEN  ('?LORD:IDMEDICO') ('Text')
+WHEN  ('?LORD:IDSERVICIO') ('Text')
+WHEN  ('?LORD:NOINGRESO') ('Text')
+WHEN  ('?LORD:NORDEN') ('Text')
+WHEN  ('?LORD:OBSERVACION') ('Text')
+WHEN  ('?LORD:RESULTADO') ('Text')
+WHEN  ('?Line2:2') ('HardCoded')
+WHEN  ('?Line3') ('HardCoded')
+WHEN  ('?Line4') ('HardCoded')
+WHEN  ('?Loc:Edad') ('Text')
+WHEN  ('?Loc:NomAfiliado') ('Text')
+WHEN  ('?Loc:NomSolicitado') ('Text')
+WHEN  ('?Loc:Titulo') ('Text')
+WHEN  ('?MED:NOMBRE') ('Text')
+WHEN  ('?MED:NO_REGISTRO') ('Text')
+WHEN  ('?MES:DESCRIPCION') ('Text')
+WHEN  ('?ReportPageNumber') ('Text')
+WHEN  ('?Resulhtml') ('Text')
+WHEN  ('?Resultado') ('Text')
+WHEN  ('?SER:DESCSERVICIO') ('Text')
+WHEN  ('?String10') ('Text')
+WHEN  ('?String11') ('Text')
+WHEN  ('?String13') ('Text')
+WHEN  ('?String14') ('Text')
+WHEN  ('?String34') ('Text')
+WHEN  ('?String34:2') ('Text')
+WHEN  ('?String37') ('Text')
+WHEN  ('?String37:2') ('Text')
+WHEN  ('?String37:3') ('Text')
+WHEN  ('?String40') ('Text')
+WHEN  ('?String41') ('Text')
+WHEN  ('?String45') ('Text')
+WHEN  ('?String45:2') ('Text')
+WHEN  ('?String49') ('Text')
+WHEN  ('?String56') ('Text')
+WHEN  ('?String57') ('Text')
+WHEN  ('?linea') ('Text')
+WHEN  ('?loc:fecha_enca') ('Text')
+WHEN  ('?loc:hora_enca') ('Text')
+WHEN  ('?loc:idproveedor') ('Text')
+WHEN  ('?loc:nomprovedor') ('Text')
+WHEN  ('?logocliente') ('HardCoded')
+WHEN  ('?unnamed') ('Text')
+WHEN  ('?unnamed:2') ('Text')
+WHEN  ('?unnamed:3') ('Text')
+WHEN  ('?unnamed:4') ('Text')
+
+%PDFAnnotationHardCoded DEPEND %ReportControl DEFAULT TIMES 0
+
+%PDFAnnotationDynamic DEPEND %ReportControl DEFAULT TIMES 0
+
+%PDFPageAction DEPEND %ReportControl DEFAULT TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') ('NEXT')
+WHEN  ('?AFI:SEXO') ('NEXT')
+WHEN  ('?AFI:TIPO_DOC') ('NEXT')
+WHEN  ('?Conclusion') ('NEXT')
+WHEN  ('?DPR:Ciudad') ('NEXT')
+WHEN  ('?DPR:Direccion') ('NEXT')
+WHEN  ('?DPR:Nit') ('NEXT')
+WHEN  ('?DPR:RazonSocial') ('NEXT')
+WHEN  ('?DPR:Telefonos') ('NEXT')
+WHEN  ('?GLO:USUARIO') ('NEXT')
+WHEN  ('?Group2') ('NEXT')
+WHEN  ('?Group3') ('NEXT')
+WHEN  ('?Image2') ('NEXT')
+WHEN  ('?LOC:COMENTARIOS') ('NEXT')
+WHEN  ('?LOC:CONVENIO') ('NEXT')
+WHEN  ('?LOC:FECHA') ('NEXT')
+WHEN  ('?LOC:FECHAA') ('NEXT')
+WHEN  ('?LOC:FECHAA:2') ('NEXT')
+WHEN  ('?LOC:FILIGRANA') ('NEXT')
+WHEN  ('?LOC:HORA') ('NEXT')
+WHEN  ('?LOC:RESULTADOHTML') ('NEXT')
+WHEN  ('?LORD:CONCLUSION') ('NEXT')
+WHEN  ('?LORD:IDMEDICO') ('NEXT')
+WHEN  ('?LORD:IDSERVICIO') ('NEXT')
+WHEN  ('?LORD:NOINGRESO') ('NEXT')
+WHEN  ('?LORD:NORDEN') ('NEXT')
+WHEN  ('?LORD:OBSERVACION') ('NEXT')
+WHEN  ('?LORD:RESULTADO') ('NEXT')
+WHEN  ('?Line2:2') ('NEXT')
+WHEN  ('?Line3') ('NEXT')
+WHEN  ('?Line4') ('NEXT')
+WHEN  ('?Loc:Edad') ('NEXT')
+WHEN  ('?Loc:NomAfiliado') ('NEXT')
+WHEN  ('?Loc:NomSolicitado') ('NEXT')
+WHEN  ('?Loc:Titulo') ('NEXT')
+WHEN  ('?MED:NOMBRE') ('NEXT')
+WHEN  ('?MED:NO_REGISTRO') ('NEXT')
+WHEN  ('?MES:DESCRIPCION') ('NEXT')
+WHEN  ('?ReportPageNumber') ('NEXT')
+WHEN  ('?Resulhtml') ('NEXT')
+WHEN  ('?Resultado') ('NEXT')
+WHEN  ('?SER:DESCSERVICIO') ('NEXT')
+WHEN  ('?String10') ('NEXT')
+WHEN  ('?String11') ('NEXT')
+WHEN  ('?String13') ('NEXT')
+WHEN  ('?String14') ('NEXT')
+WHEN  ('?String34') ('NEXT')
+WHEN  ('?String34:2') ('NEXT')
+WHEN  ('?String37') ('NEXT')
+WHEN  ('?String37:2') ('NEXT')
+WHEN  ('?String37:3') ('NEXT')
+WHEN  ('?String40') ('NEXT')
+WHEN  ('?String41') ('NEXT')
+WHEN  ('?String45') ('NEXT')
+WHEN  ('?String45:2') ('NEXT')
+WHEN  ('?String49') ('NEXT')
+WHEN  ('?String56') ('NEXT')
+WHEN  ('?String57') ('NEXT')
+WHEN  ('?linea') ('NEXT')
+WHEN  ('?loc:fecha_enca') ('NEXT')
+WHEN  ('?loc:hora_enca') ('NEXT')
+WHEN  ('?loc:idproveedor') ('NEXT')
+WHEN  ('?loc:nomprovedor') ('NEXT')
+WHEN  ('?logocliente') ('NEXT')
+WHEN  ('?unnamed') ('NEXT')
+WHEN  ('?unnamed:2') ('NEXT')
+WHEN  ('?unnamed:3') ('NEXT')
+WHEN  ('?unnamed:4') ('NEXT')
+
+%PDFTargetCommand DEPEND %ReportControl DEFAULT TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') ('notepad.exe')
+WHEN  ('?AFI:SEXO') ('notepad.exe')
+WHEN  ('?AFI:TIPO_DOC') ('notepad.exe')
+WHEN  ('?Conclusion') ('notepad.exe')
+WHEN  ('?DPR:Ciudad') ('notepad.exe')
+WHEN  ('?DPR:Direccion') ('notepad.exe')
+WHEN  ('?DPR:Nit') ('notepad.exe')
+WHEN  ('?DPR:RazonSocial') ('notepad.exe')
+WHEN  ('?DPR:Telefonos') ('notepad.exe')
+WHEN  ('?GLO:USUARIO') ('notepad.exe')
+WHEN  ('?Group2') ('notepad.exe')
+WHEN  ('?Group3') ('notepad.exe')
+WHEN  ('?Image2') ('notepad.exe')
+WHEN  ('?LOC:COMENTARIOS') ('notepad.exe')
+WHEN  ('?LOC:CONVENIO') ('notepad.exe')
+WHEN  ('?LOC:FECHA') ('notepad.exe')
+WHEN  ('?LOC:FECHAA') ('notepad.exe')
+WHEN  ('?LOC:FECHAA:2') ('notepad.exe')
+WHEN  ('?LOC:FILIGRANA') ('notepad.exe')
+WHEN  ('?LOC:HORA') ('notepad.exe')
+WHEN  ('?LOC:RESULTADOHTML') ('notepad.exe')
+WHEN  ('?LORD:CONCLUSION') ('notepad.exe')
+WHEN  ('?LORD:IDMEDICO') ('notepad.exe')
+WHEN  ('?LORD:IDSERVICIO') ('notepad.exe')
+WHEN  ('?LORD:NOINGRESO') ('notepad.exe')
+WHEN  ('?LORD:NORDEN') ('notepad.exe')
+WHEN  ('?LORD:OBSERVACION') ('notepad.exe')
+WHEN  ('?LORD:RESULTADO') ('notepad.exe')
+WHEN  ('?Line2:2') ('notepad.exe')
+WHEN  ('?Line3') ('notepad.exe')
+WHEN  ('?Line4') ('notepad.exe')
+WHEN  ('?Loc:Edad') ('notepad.exe')
+WHEN  ('?Loc:NomAfiliado') ('notepad.exe')
+WHEN  ('?Loc:NomSolicitado') ('notepad.exe')
+WHEN  ('?Loc:Titulo') ('notepad.exe')
+WHEN  ('?MED:NOMBRE') ('notepad.exe')
+WHEN  ('?MED:NO_REGISTRO') ('notepad.exe')
+WHEN  ('?MES:DESCRIPCION') ('notepad.exe')
+WHEN  ('?ReportPageNumber') ('notepad.exe')
+WHEN  ('?Resulhtml') ('notepad.exe')
+WHEN  ('?Resultado') ('notepad.exe')
+WHEN  ('?SER:DESCSERVICIO') ('notepad.exe')
+WHEN  ('?String10') ('notepad.exe')
+WHEN  ('?String11') ('notepad.exe')
+WHEN  ('?String13') ('notepad.exe')
+WHEN  ('?String14') ('notepad.exe')
+WHEN  ('?String34') ('notepad.exe')
+WHEN  ('?String34:2') ('notepad.exe')
+WHEN  ('?String37') ('notepad.exe')
+WHEN  ('?String37:2') ('notepad.exe')
+WHEN  ('?String37:3') ('notepad.exe')
+WHEN  ('?String40') ('notepad.exe')
+WHEN  ('?String41') ('notepad.exe')
+WHEN  ('?String45') ('notepad.exe')
+WHEN  ('?String45:2') ('notepad.exe')
+WHEN  ('?String49') ('notepad.exe')
+WHEN  ('?String56') ('notepad.exe')
+WHEN  ('?String57') ('notepad.exe')
+WHEN  ('?linea') ('notepad.exe')
+WHEN  ('?loc:fecha_enca') ('notepad.exe')
+WHEN  ('?loc:hora_enca') ('notepad.exe')
+WHEN  ('?loc:idproveedor') ('notepad.exe')
+WHEN  ('?loc:nomprovedor') ('notepad.exe')
+WHEN  ('?logocliente') ('notepad.exe')
+WHEN  ('?unnamed') ('notepad.exe')
+WHEN  ('?unnamed:2') ('notepad.exe')
+WHEN  ('?unnamed:3') ('notepad.exe')
+WHEN  ('?unnamed:4') ('notepad.exe')
+
+%PDFTargetParameters DEPEND %ReportControl DEFAULT TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') ('note.txt')
+WHEN  ('?AFI:SEXO') ('note.txt')
+WHEN  ('?AFI:TIPO_DOC') ('note.txt')
+WHEN  ('?Conclusion') ('note.txt')
+WHEN  ('?DPR:Ciudad') ('note.txt')
+WHEN  ('?DPR:Direccion') ('note.txt')
+WHEN  ('?DPR:Nit') ('note.txt')
+WHEN  ('?DPR:RazonSocial') ('note.txt')
+WHEN  ('?DPR:Telefonos') ('note.txt')
+WHEN  ('?GLO:USUARIO') ('note.txt')
+WHEN  ('?Group2') ('note.txt')
+WHEN  ('?Group3') ('note.txt')
+WHEN  ('?Image2') ('note.txt')
+WHEN  ('?LOC:COMENTARIOS') ('note.txt')
+WHEN  ('?LOC:CONVENIO') ('note.txt')
+WHEN  ('?LOC:FECHA') ('note.txt')
+WHEN  ('?LOC:FECHAA') ('note.txt')
+WHEN  ('?LOC:FECHAA:2') ('note.txt')
+WHEN  ('?LOC:FILIGRANA') ('note.txt')
+WHEN  ('?LOC:HORA') ('note.txt')
+WHEN  ('?LOC:RESULTADOHTML') ('note.txt')
+WHEN  ('?LORD:CONCLUSION') ('note.txt')
+WHEN  ('?LORD:IDMEDICO') ('note.txt')
+WHEN  ('?LORD:IDSERVICIO') ('note.txt')
+WHEN  ('?LORD:NOINGRESO') ('note.txt')
+WHEN  ('?LORD:NORDEN') ('note.txt')
+WHEN  ('?LORD:OBSERVACION') ('note.txt')
+WHEN  ('?LORD:RESULTADO') ('note.txt')
+WHEN  ('?Line2:2') ('note.txt')
+WHEN  ('?Line3') ('note.txt')
+WHEN  ('?Line4') ('note.txt')
+WHEN  ('?Loc:Edad') ('note.txt')
+WHEN  ('?Loc:NomAfiliado') ('note.txt')
+WHEN  ('?Loc:NomSolicitado') ('note.txt')
+WHEN  ('?Loc:Titulo') ('note.txt')
+WHEN  ('?MED:NOMBRE') ('note.txt')
+WHEN  ('?MED:NO_REGISTRO') ('note.txt')
+WHEN  ('?MES:DESCRIPCION') ('note.txt')
+WHEN  ('?ReportPageNumber') ('note.txt')
+WHEN  ('?Resulhtml') ('note.txt')
+WHEN  ('?Resultado') ('note.txt')
+WHEN  ('?SER:DESCSERVICIO') ('note.txt')
+WHEN  ('?String10') ('note.txt')
+WHEN  ('?String11') ('note.txt')
+WHEN  ('?String13') ('note.txt')
+WHEN  ('?String14') ('note.txt')
+WHEN  ('?String34') ('note.txt')
+WHEN  ('?String34:2') ('note.txt')
+WHEN  ('?String37') ('note.txt')
+WHEN  ('?String37:2') ('note.txt')
+WHEN  ('?String37:3') ('note.txt')
+WHEN  ('?String40') ('note.txt')
+WHEN  ('?String41') ('note.txt')
+WHEN  ('?String45') ('note.txt')
+WHEN  ('?String45:2') ('note.txt')
+WHEN  ('?String49') ('note.txt')
+WHEN  ('?String56') ('note.txt')
+WHEN  ('?String57') ('note.txt')
+WHEN  ('?linea') ('note.txt')
+WHEN  ('?loc:fecha_enca') ('note.txt')
+WHEN  ('?loc:hora_enca') ('note.txt')
+WHEN  ('?loc:idproveedor') ('note.txt')
+WHEN  ('?loc:nomprovedor') ('note.txt')
+WHEN  ('?logocliente') ('note.txt')
+WHEN  ('?unnamed') ('note.txt')
+WHEN  ('?unnamed:2') ('note.txt')
+WHEN  ('?unnamed:3') ('note.txt')
+WHEN  ('?unnamed:4') ('note.txt')
+
+%PDFTargetOrigin DEPEND %ReportControl DEFAULT TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') ('Text')
+WHEN  ('?AFI:SEXO') ('Text')
+WHEN  ('?AFI:TIPO_DOC') ('Text')
+WHEN  ('?Conclusion') ('Text')
+WHEN  ('?DPR:Ciudad') ('Text')
+WHEN  ('?DPR:Direccion') ('Text')
+WHEN  ('?DPR:Nit') ('Text')
+WHEN  ('?DPR:RazonSocial') ('Text')
+WHEN  ('?DPR:Telefonos') ('Text')
+WHEN  ('?GLO:USUARIO') ('Text')
+WHEN  ('?Group2') ('Text')
+WHEN  ('?Group3') ('Text')
+WHEN  ('?Image2') ('HardCoded')
+WHEN  ('?LOC:COMENTARIOS') ('Text')
+WHEN  ('?LOC:CONVENIO') ('Text')
+WHEN  ('?LOC:FECHA') ('Text')
+WHEN  ('?LOC:FECHAA') ('Text')
+WHEN  ('?LOC:FECHAA:2') ('Text')
+WHEN  ('?LOC:FILIGRANA') ('Text')
+WHEN  ('?LOC:HORA') ('Text')
+WHEN  ('?LOC:RESULTADOHTML') ('Text')
+WHEN  ('?LORD:CONCLUSION') ('Text')
+WHEN  ('?LORD:IDMEDICO') ('Text')
+WHEN  ('?LORD:IDSERVICIO') ('Text')
+WHEN  ('?LORD:NOINGRESO') ('Text')
+WHEN  ('?LORD:NORDEN') ('Text')
+WHEN  ('?LORD:OBSERVACION') ('Text')
+WHEN  ('?LORD:RESULTADO') ('Text')
+WHEN  ('?Line2:2') ('HardCoded')
+WHEN  ('?Line3') ('HardCoded')
+WHEN  ('?Line4') ('HardCoded')
+WHEN  ('?Loc:Edad') ('Text')
+WHEN  ('?Loc:NomAfiliado') ('Text')
+WHEN  ('?Loc:NomSolicitado') ('Text')
+WHEN  ('?Loc:Titulo') ('Text')
+WHEN  ('?MED:NOMBRE') ('Text')
+WHEN  ('?MED:NO_REGISTRO') ('Text')
+WHEN  ('?MES:DESCRIPCION') ('Text')
+WHEN  ('?ReportPageNumber') ('Text')
+WHEN  ('?Resulhtml') ('Text')
+WHEN  ('?Resultado') ('Text')
+WHEN  ('?SER:DESCSERVICIO') ('Text')
+WHEN  ('?String10') ('Text')
+WHEN  ('?String11') ('Text')
+WHEN  ('?String13') ('Text')
+WHEN  ('?String14') ('Text')
+WHEN  ('?String34') ('Text')
+WHEN  ('?String34:2') ('Text')
+WHEN  ('?String37') ('Text')
+WHEN  ('?String37:2') ('Text')
+WHEN  ('?String37:3') ('Text')
+WHEN  ('?String40') ('Text')
+WHEN  ('?String41') ('Text')
+WHEN  ('?String45') ('Text')
+WHEN  ('?String45:2') ('Text')
+WHEN  ('?String49') ('Text')
+WHEN  ('?String56') ('Text')
+WHEN  ('?String57') ('Text')
+WHEN  ('?linea') ('Text')
+WHEN  ('?loc:fecha_enca') ('Text')
+WHEN  ('?loc:hora_enca') ('Text')
+WHEN  ('?loc:idproveedor') ('Text')
+WHEN  ('?loc:nomprovedor') ('Text')
+WHEN  ('?logocliente') ('HardCoded')
+WHEN  ('?unnamed') ('Text')
+WHEN  ('?unnamed:2') ('Text')
+WHEN  ('?unnamed:3') ('Text')
+WHEN  ('?unnamed:4') ('Text')
+
+%PDFTargetHardCoded DEPEND %ReportControl DEFAULT TIMES 0
+
+%PDFTargetDynamic DEPEND %ReportControl DEFAULT TIMES 0
+
+%PDFHyperlinkType DEPEND %ReportControl DEFAULT TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') ('None')
+WHEN  ('?AFI:SEXO') ('None')
+WHEN  ('?AFI:TIPO_DOC') ('None')
+WHEN  ('?Conclusion') ('None')
+WHEN  ('?DPR:Ciudad') ('None')
+WHEN  ('?DPR:Direccion') ('None')
+WHEN  ('?DPR:Nit') ('None')
+WHEN  ('?DPR:RazonSocial') ('None')
+WHEN  ('?DPR:Telefonos') ('None')
+WHEN  ('?GLO:USUARIO') ('None')
+WHEN  ('?Group2') ('None')
+WHEN  ('?Group3') ('None')
+WHEN  ('?Image2') ('None')
+WHEN  ('?LOC:COMENTARIOS') ('None')
+WHEN  ('?LOC:CONVENIO') ('None')
+WHEN  ('?LOC:FECHA') ('None')
+WHEN  ('?LOC:FECHAA') ('None')
+WHEN  ('?LOC:FECHAA:2') ('None')
+WHEN  ('?LOC:FILIGRANA') ('None')
+WHEN  ('?LOC:HORA') ('None')
+WHEN  ('?LOC:RESULTADOHTML') ('None')
+WHEN  ('?LORD:CONCLUSION') ('None')
+WHEN  ('?LORD:IDMEDICO') ('None')
+WHEN  ('?LORD:IDSERVICIO') ('None')
+WHEN  ('?LORD:NOINGRESO') ('None')
+WHEN  ('?LORD:NORDEN') ('None')
+WHEN  ('?LORD:OBSERVACION') ('None')
+WHEN  ('?LORD:RESULTADO') ('None')
+WHEN  ('?Line2:2') ('None')
+WHEN  ('?Line3') ('None')
+WHEN  ('?Line4') ('None')
+WHEN  ('?Loc:Edad') ('None')
+WHEN  ('?Loc:NomAfiliado') ('None')
+WHEN  ('?Loc:NomSolicitado') ('None')
+WHEN  ('?Loc:Titulo') ('None')
+WHEN  ('?MED:NOMBRE') ('None')
+WHEN  ('?MED:NO_REGISTRO') ('None')
+WHEN  ('?MES:DESCRIPCION') ('None')
+WHEN  ('?ReportPageNumber') ('None')
+WHEN  ('?Resulhtml') ('None')
+WHEN  ('?Resultado') ('None')
+WHEN  ('?SER:DESCSERVICIO') ('None')
+WHEN  ('?String10') ('None')
+WHEN  ('?String11') ('None')
+WHEN  ('?String13') ('None')
+WHEN  ('?String14') ('None')
+WHEN  ('?String34') ('None')
+WHEN  ('?String34:2') ('None')
+WHEN  ('?String37') ('None')
+WHEN  ('?String37:2') ('None')
+WHEN  ('?String37:3') ('None')
+WHEN  ('?String40') ('None')
+WHEN  ('?String41') ('None')
+WHEN  ('?String45') ('None')
+WHEN  ('?String45:2') ('None')
+WHEN  ('?String49') ('None')
+WHEN  ('?String56') ('None')
+WHEN  ('?String57') ('None')
+WHEN  ('?linea') ('None')
+WHEN  ('?loc:fecha_enca') ('None')
+WHEN  ('?loc:hora_enca') ('None')
+WHEN  ('?loc:idproveedor') ('None')
+WHEN  ('?loc:nomprovedor') ('None')
+WHEN  ('?logocliente') ('None')
+WHEN  ('?unnamed') ('None')
+WHEN  ('?unnamed:2') ('None')
+WHEN  ('?unnamed:3') ('None')
+WHEN  ('?unnamed:4') ('None')
+
+%PDFHyperlinkTypeOther DEPEND %ReportControl DEFAULT TIMES 0
+
+%PDFHyperlinkTypeOtherDynamic DEPEND %ReportControl DEFAULT TIMES 0
+
+%PDFHyperLinkBoxed DEPEND %ReportControl LONG TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') (0)
+WHEN  ('?AFI:SEXO') (0)
+WHEN  ('?AFI:TIPO_DOC') (0)
+WHEN  ('?Conclusion') (0)
+WHEN  ('?DPR:Ciudad') (0)
+WHEN  ('?DPR:Direccion') (0)
+WHEN  ('?DPR:Nit') (0)
+WHEN  ('?DPR:RazonSocial') (0)
+WHEN  ('?DPR:Telefonos') (0)
+WHEN  ('?GLO:USUARIO') (0)
+WHEN  ('?Group2') (0)
+WHEN  ('?Group3') (0)
+WHEN  ('?Image2') (0)
+WHEN  ('?LOC:COMENTARIOS') (0)
+WHEN  ('?LOC:CONVENIO') (0)
+WHEN  ('?LOC:FECHA') (0)
+WHEN  ('?LOC:FECHAA') (0)
+WHEN  ('?LOC:FECHAA:2') (0)
+WHEN  ('?LOC:FILIGRANA') (0)
+WHEN  ('?LOC:HORA') (0)
+WHEN  ('?LOC:RESULTADOHTML') (0)
+WHEN  ('?LORD:CONCLUSION') (0)
+WHEN  ('?LORD:IDMEDICO') (0)
+WHEN  ('?LORD:IDSERVICIO') (0)
+WHEN  ('?LORD:NOINGRESO') (0)
+WHEN  ('?LORD:NORDEN') (0)
+WHEN  ('?LORD:OBSERVACION') (0)
+WHEN  ('?LORD:RESULTADO') (0)
+WHEN  ('?Line2:2') (0)
+WHEN  ('?Line3') (0)
+WHEN  ('?Line4') (0)
+WHEN  ('?Loc:Edad') (0)
+WHEN  ('?Loc:NomAfiliado') (0)
+WHEN  ('?Loc:NomSolicitado') (0)
+WHEN  ('?Loc:Titulo') (0)
+WHEN  ('?MED:NOMBRE') (0)
+WHEN  ('?MED:NO_REGISTRO') (0)
+WHEN  ('?MES:DESCRIPCION') (0)
+WHEN  ('?ReportPageNumber') (0)
+WHEN  ('?Resulhtml') (0)
+WHEN  ('?Resultado') (0)
+WHEN  ('?SER:DESCSERVICIO') (0)
+WHEN  ('?String10') (0)
+WHEN  ('?String11') (0)
+WHEN  ('?String13') (0)
+WHEN  ('?String14') (0)
+WHEN  ('?String34') (0)
+WHEN  ('?String34:2') (0)
+WHEN  ('?String37') (0)
+WHEN  ('?String37:2') (0)
+WHEN  ('?String37:3') (0)
+WHEN  ('?String40') (0)
+WHEN  ('?String41') (0)
+WHEN  ('?String45') (0)
+WHEN  ('?String45:2') (0)
+WHEN  ('?String49') (0)
+WHEN  ('?String56') (0)
+WHEN  ('?String57') (0)
+WHEN  ('?linea') (0)
+WHEN  ('?loc:fecha_enca') (0)
+WHEN  ('?loc:hora_enca') (0)
+WHEN  ('?loc:idproveedor') (0)
+WHEN  ('?loc:nomprovedor') (0)
+WHEN  ('?logocliente') (0)
+WHEN  ('?unnamed') (0)
+WHEN  ('?unnamed:2') (0)
+WHEN  ('?unnamed:3') (0)
+WHEN  ('?unnamed:4') (0)
+
+%PDFHyperLinkBoxColor DEPEND %ReportControl LONG TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') (255)
+WHEN  ('?AFI:SEXO') (255)
+WHEN  ('?AFI:TIPO_DOC') (255)
+WHEN  ('?Conclusion') (255)
+WHEN  ('?DPR:Ciudad') (255)
+WHEN  ('?DPR:Direccion') (255)
+WHEN  ('?DPR:Nit') (255)
+WHEN  ('?DPR:RazonSocial') (255)
+WHEN  ('?DPR:Telefonos') (255)
+WHEN  ('?GLO:USUARIO') (255)
+WHEN  ('?Group2') (255)
+WHEN  ('?Group3') (255)
+WHEN  ('?Image2') (255)
+WHEN  ('?LOC:COMENTARIOS') (255)
+WHEN  ('?LOC:CONVENIO') (255)
+WHEN  ('?LOC:FECHA') (255)
+WHEN  ('?LOC:FECHAA') (255)
+WHEN  ('?LOC:FECHAA:2') (255)
+WHEN  ('?LOC:FILIGRANA') (255)
+WHEN  ('?LOC:HORA') (255)
+WHEN  ('?LOC:RESULTADOHTML') (255)
+WHEN  ('?LORD:CONCLUSION') (255)
+WHEN  ('?LORD:IDMEDICO') (255)
+WHEN  ('?LORD:IDSERVICIO') (255)
+WHEN  ('?LORD:NOINGRESO') (255)
+WHEN  ('?LORD:NORDEN') (255)
+WHEN  ('?LORD:OBSERVACION') (255)
+WHEN  ('?LORD:RESULTADO') (255)
+WHEN  ('?Line2:2') (255)
+WHEN  ('?Line3') (255)
+WHEN  ('?Line4') (255)
+WHEN  ('?Loc:Edad') (255)
+WHEN  ('?Loc:NomAfiliado') (255)
+WHEN  ('?Loc:NomSolicitado') (255)
+WHEN  ('?Loc:Titulo') (255)
+WHEN  ('?MED:NOMBRE') (255)
+WHEN  ('?MED:NO_REGISTRO') (255)
+WHEN  ('?MES:DESCRIPCION') (255)
+WHEN  ('?ReportPageNumber') (255)
+WHEN  ('?Resulhtml') (255)
+WHEN  ('?Resultado') (255)
+WHEN  ('?SER:DESCSERVICIO') (255)
+WHEN  ('?String10') (255)
+WHEN  ('?String11') (255)
+WHEN  ('?String13') (255)
+WHEN  ('?String14') (255)
+WHEN  ('?String34') (255)
+WHEN  ('?String34:2') (255)
+WHEN  ('?String37') (255)
+WHEN  ('?String37:2') (255)
+WHEN  ('?String37:3') (255)
+WHEN  ('?String40') (255)
+WHEN  ('?String41') (255)
+WHEN  ('?String45') (255)
+WHEN  ('?String45:2') (255)
+WHEN  ('?String49') (255)
+WHEN  ('?String56') (255)
+WHEN  ('?String57') (255)
+WHEN  ('?linea') (255)
+WHEN  ('?loc:fecha_enca') (255)
+WHEN  ('?loc:hora_enca') (255)
+WHEN  ('?loc:idproveedor') (255)
+WHEN  ('?loc:nomprovedor') (255)
+WHEN  ('?logocliente') (255)
+WHEN  ('?unnamed') (255)
+WHEN  ('?unnamed:2') (255)
+WHEN  ('?unnamed:3') (255)
+WHEN  ('?unnamed:4') (255)
+
+%PDFBookmark DEPEND %ReportControl LONG TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') (0)
+WHEN  ('?AFI:SEXO') (0)
+WHEN  ('?AFI:TIPO_DOC') (0)
+WHEN  ('?Conclusion') (0)
+WHEN  ('?DPR:Ciudad') (0)
+WHEN  ('?DPR:Direccion') (0)
+WHEN  ('?DPR:Nit') (0)
+WHEN  ('?DPR:RazonSocial') (0)
+WHEN  ('?DPR:Telefonos') (0)
+WHEN  ('?GLO:USUARIO') (0)
+WHEN  ('?Group2') (0)
+WHEN  ('?Group3') (0)
+WHEN  ('?Image2') (0)
+WHEN  ('?LOC:COMENTARIOS') (0)
+WHEN  ('?LOC:CONVENIO') (0)
+WHEN  ('?LOC:FECHA') (0)
+WHEN  ('?LOC:FECHAA') (0)
+WHEN  ('?LOC:FECHAA:2') (0)
+WHEN  ('?LOC:FILIGRANA') (0)
+WHEN  ('?LOC:HORA') (0)
+WHEN  ('?LOC:RESULTADOHTML') (0)
+WHEN  ('?LORD:CONCLUSION') (0)
+WHEN  ('?LORD:IDMEDICO') (0)
+WHEN  ('?LORD:IDSERVICIO') (0)
+WHEN  ('?LORD:NOINGRESO') (0)
+WHEN  ('?LORD:NORDEN') (0)
+WHEN  ('?LORD:OBSERVACION') (0)
+WHEN  ('?LORD:RESULTADO') (0)
+WHEN  ('?Line2:2') (0)
+WHEN  ('?Line3') (0)
+WHEN  ('?Line4') (0)
+WHEN  ('?Loc:Edad') (0)
+WHEN  ('?Loc:NomAfiliado') (0)
+WHEN  ('?Loc:NomSolicitado') (0)
+WHEN  ('?Loc:Titulo') (0)
+WHEN  ('?MED:NOMBRE') (0)
+WHEN  ('?MED:NO_REGISTRO') (0)
+WHEN  ('?MES:DESCRIPCION') (0)
+WHEN  ('?ReportPageNumber') (0)
+WHEN  ('?Resulhtml') (0)
+WHEN  ('?Resultado') (0)
+WHEN  ('?SER:DESCSERVICIO') (0)
+WHEN  ('?String10') (0)
+WHEN  ('?String11') (0)
+WHEN  ('?String13') (0)
+WHEN  ('?String14') (0)
+WHEN  ('?String34') (0)
+WHEN  ('?String34:2') (0)
+WHEN  ('?String37') (0)
+WHEN  ('?String37:2') (0)
+WHEN  ('?String37:3') (0)
+WHEN  ('?String40') (0)
+WHEN  ('?String41') (0)
+WHEN  ('?String45') (0)
+WHEN  ('?String45:2') (0)
+WHEN  ('?String49') (0)
+WHEN  ('?String56') (0)
+WHEN  ('?String57') (0)
+WHEN  ('?linea') (0)
+WHEN  ('?loc:fecha_enca') (0)
+WHEN  ('?loc:hora_enca') (0)
+WHEN  ('?loc:idproveedor') (0)
+WHEN  ('?loc:nomprovedor') (0)
+WHEN  ('?logocliente') (0)
+WHEN  ('?unnamed') (0)
+WHEN  ('?unnamed:2') (0)
+WHEN  ('?unnamed:3') (0)
+WHEN  ('?unnamed:4') (0)
+
+%PDFBookmarkOrigin DEPEND %ReportControl DEFAULT TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') ('Text')
+WHEN  ('?AFI:SEXO') ('Text')
+WHEN  ('?AFI:TIPO_DOC') ('Text')
+WHEN  ('?Conclusion') ('Text')
+WHEN  ('?DPR:Ciudad') ('Text')
+WHEN  ('?DPR:Direccion') ('Text')
+WHEN  ('?DPR:Nit') ('Text')
+WHEN  ('?DPR:RazonSocial') ('Text')
+WHEN  ('?DPR:Telefonos') ('Text')
+WHEN  ('?GLO:USUARIO') ('Text')
+WHEN  ('?Group2') ('Text')
+WHEN  ('?Group3') ('Text')
+WHEN  ('?Image2') ('HardCoded')
+WHEN  ('?LOC:COMENTARIOS') ('HardCoded')
+WHEN  ('?LOC:CONVENIO') ('Text')
+WHEN  ('?LOC:FECHA') ('Text')
+WHEN  ('?LOC:FECHAA') ('Text')
+WHEN  ('?LOC:FECHAA:2') ('Text')
+WHEN  ('?LOC:FILIGRANA') ('Text')
+WHEN  ('?LOC:HORA') ('Text')
+WHEN  ('?LOC:RESULTADOHTML') ('HardCoded')
+WHEN  ('?LORD:CONCLUSION') ('HardCoded')
+WHEN  ('?LORD:IDMEDICO') ('Text')
+WHEN  ('?LORD:IDSERVICIO') ('Text')
+WHEN  ('?LORD:NOINGRESO') ('Text')
+WHEN  ('?LORD:NORDEN') ('Text')
+WHEN  ('?LORD:OBSERVACION') ('HardCoded')
+WHEN  ('?LORD:RESULTADO') ('HardCoded')
+WHEN  ('?Line2:2') ('HardCoded')
+WHEN  ('?Line3') ('HardCoded')
+WHEN  ('?Line4') ('HardCoded')
+WHEN  ('?Loc:Edad') ('Text')
+WHEN  ('?Loc:NomAfiliado') ('Text')
+WHEN  ('?Loc:NomSolicitado') ('Text')
+WHEN  ('?Loc:Titulo') ('Text')
+WHEN  ('?MED:NOMBRE') ('Text')
+WHEN  ('?MED:NO_REGISTRO') ('Text')
+WHEN  ('?MES:DESCRIPCION') ('Text')
+WHEN  ('?ReportPageNumber') ('Text')
+WHEN  ('?Resulhtml') ('Text')
+WHEN  ('?Resultado') ('Text')
+WHEN  ('?SER:DESCSERVICIO') ('HardCoded')
+WHEN  ('?String10') ('Text')
+WHEN  ('?String11') ('Text')
+WHEN  ('?String13') ('Text')
+WHEN  ('?String14') ('Text')
+WHEN  ('?String34') ('Text')
+WHEN  ('?String34:2') ('Text')
+WHEN  ('?String37') ('Text')
+WHEN  ('?String37:2') ('Text')
+WHEN  ('?String37:3') ('Text')
+WHEN  ('?String40') ('Text')
+WHEN  ('?String41') ('Text')
+WHEN  ('?String45') ('Text')
+WHEN  ('?String45:2') ('Text')
+WHEN  ('?String49') ('Text')
+WHEN  ('?String56') ('Text')
+WHEN  ('?String57') ('Text')
+WHEN  ('?linea') ('Text')
+WHEN  ('?loc:fecha_enca') ('Text')
+WHEN  ('?loc:hora_enca') ('Text')
+WHEN  ('?loc:idproveedor') ('Text')
+WHEN  ('?loc:nomprovedor') ('Text')
+WHEN  ('?logocliente') ('HardCoded')
+WHEN  ('?unnamed') ('Text')
+WHEN  ('?unnamed:2') ('Text')
+WHEN  ('?unnamed:3') ('Text')
+WHEN  ('?unnamed:4') ('Text')
+
+%PDFBookmarkHardCoded DEPEND %ReportControl DEFAULT TIMES 0
+
+%PDFBookmarkDynamic DEPEND %ReportControl DEFAULT TIMES 0
+
+%PDFBookmarkParent DEPEND %ReportControl LONG TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') (0)
+WHEN  ('?AFI:SEXO') (0)
+WHEN  ('?AFI:TIPO_DOC') (0)
+WHEN  ('?Conclusion') (0)
+WHEN  ('?DPR:Ciudad') (0)
+WHEN  ('?DPR:Direccion') (0)
+WHEN  ('?DPR:Nit') (0)
+WHEN  ('?DPR:RazonSocial') (0)
+WHEN  ('?DPR:Telefonos') (0)
+WHEN  ('?GLO:USUARIO') (0)
+WHEN  ('?Group2') (0)
+WHEN  ('?Group3') (0)
+WHEN  ('?Image2') (0)
+WHEN  ('?LOC:COMENTARIOS') (0)
+WHEN  ('?LOC:CONVENIO') (0)
+WHEN  ('?LOC:FECHA') (0)
+WHEN  ('?LOC:FECHAA') (0)
+WHEN  ('?LOC:FECHAA:2') (0)
+WHEN  ('?LOC:FILIGRANA') (0)
+WHEN  ('?LOC:HORA') (0)
+WHEN  ('?LOC:RESULTADOHTML') (0)
+WHEN  ('?LORD:CONCLUSION') (0)
+WHEN  ('?LORD:IDMEDICO') (0)
+WHEN  ('?LORD:IDSERVICIO') (0)
+WHEN  ('?LORD:NOINGRESO') (0)
+WHEN  ('?LORD:NORDEN') (0)
+WHEN  ('?LORD:OBSERVACION') (0)
+WHEN  ('?LORD:RESULTADO') (0)
+WHEN  ('?Line2:2') (0)
+WHEN  ('?Line3') (0)
+WHEN  ('?Line4') (0)
+WHEN  ('?Loc:Edad') (0)
+WHEN  ('?Loc:NomAfiliado') (0)
+WHEN  ('?Loc:NomSolicitado') (0)
+WHEN  ('?Loc:Titulo') (0)
+WHEN  ('?MED:NOMBRE') (0)
+WHEN  ('?MED:NO_REGISTRO') (0)
+WHEN  ('?MES:DESCRIPCION') (0)
+WHEN  ('?ReportPageNumber') (0)
+WHEN  ('?Resulhtml') (0)
+WHEN  ('?Resultado') (0)
+WHEN  ('?SER:DESCSERVICIO') (0)
+WHEN  ('?String10') (0)
+WHEN  ('?String11') (0)
+WHEN  ('?String13') (0)
+WHEN  ('?String14') (0)
+WHEN  ('?String34') (0)
+WHEN  ('?String34:2') (0)
+WHEN  ('?String37') (0)
+WHEN  ('?String37:2') (0)
+WHEN  ('?String37:3') (0)
+WHEN  ('?String40') (0)
+WHEN  ('?String41') (0)
+WHEN  ('?String45') (0)
+WHEN  ('?String45:2') (0)
+WHEN  ('?String49') (0)
+WHEN  ('?String56') (0)
+WHEN  ('?String57') (0)
+WHEN  ('?linea') (0)
+WHEN  ('?loc:fecha_enca') (0)
+WHEN  ('?loc:hora_enca') (0)
+WHEN  ('?loc:idproveedor') (0)
+WHEN  ('?loc:nomprovedor') (0)
+WHEN  ('?logocliente') (0)
+WHEN  ('?unnamed') (0)
+WHEN  ('?unnamed:2') (0)
+WHEN  ('?unnamed:3') (0)
+WHEN  ('?unnamed:4') (0)
+
+%PDFParentBookmark DEPEND %ReportControl DEFAULT TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') ('?unnamed')
+WHEN  ('?AFI:SEXO') ('?unnamed')
+WHEN  ('?AFI:TIPO_DOC') ('?unnamed')
+WHEN  ('?Conclusion') ('?unnamed')
+WHEN  ('?DPR:Ciudad') ('?unnamed')
+WHEN  ('?DPR:Direccion') ('?unnamed')
+WHEN  ('?DPR:Nit') ('?unnamed')
+WHEN  ('?DPR:RazonSocial') ('?unnamed')
+WHEN  ('?DPR:Telefonos') ('?unnamed')
+WHEN  ('?GLO:USUARIO') ('?unnamed')
+WHEN  ('?Group2') ('?unnamed')
+WHEN  ('?Group3') ('?unnamed')
+WHEN  ('?Image2') ('?unnamed')
+WHEN  ('?LOC:COMENTARIOS') ('?unnamed')
+WHEN  ('?LOC:CONVENIO') ('?unnamed')
+WHEN  ('?LOC:FECHA') ('?unnamed')
+WHEN  ('?LOC:FECHAA') ('?unnamed')
+WHEN  ('?LOC:FECHAA:2') ('?unnamed')
+WHEN  ('?LOC:FILIGRANA') ('?unnamed')
+WHEN  ('?LOC:HORA') ('?unnamed')
+WHEN  ('?LOC:RESULTADOHTML') ('?unnamed')
+WHEN  ('?LORD:CONCLUSION') ('?unnamed')
+WHEN  ('?LORD:IDMEDICO') ('?unnamed')
+WHEN  ('?LORD:IDSERVICIO') ('?unnamed')
+WHEN  ('?LORD:NOINGRESO') ('?unnamed')
+WHEN  ('?LORD:NORDEN') ('?unnamed')
+WHEN  ('?LORD:OBSERVACION') ('?unnamed')
+WHEN  ('?LORD:RESULTADO') ('?unnamed')
+WHEN  ('?Line2:2') ('?unnamed')
+WHEN  ('?Line3') ('?unnamed')
+WHEN  ('?Line4') ('?unnamed')
+WHEN  ('?Loc:Edad') ('?unnamed')
+WHEN  ('?Loc:NomAfiliado') ('?unnamed')
+WHEN  ('?Loc:NomSolicitado') ('?unnamed')
+WHEN  ('?Loc:Titulo') ('?unnamed')
+WHEN  ('?MED:NOMBRE') ('?unnamed')
+WHEN  ('?MED:NO_REGISTRO') ('?unnamed')
+WHEN  ('?MES:DESCRIPCION') ('?unnamed')
+WHEN  ('?ReportPageNumber') ('?unnamed')
+WHEN  ('?Resulhtml') ('?unnamed')
+WHEN  ('?Resultado') ('?unnamed')
+WHEN  ('?SER:DESCSERVICIO') ('?unnamed')
+WHEN  ('?String10') ('?unnamed')
+WHEN  ('?String11') ('?unnamed')
+WHEN  ('?String13') ('?unnamed')
+WHEN  ('?String14') ('?unnamed')
+WHEN  ('?String34') ('?unnamed')
+WHEN  ('?String34:2') ('?unnamed')
+WHEN  ('?String37') ('?unnamed')
+WHEN  ('?String37:2') ('?unnamed')
+WHEN  ('?String37:3') ('?unnamed')
+WHEN  ('?String40') ('?unnamed')
+WHEN  ('?String41') ('?unnamed')
+WHEN  ('?String45') ('?unnamed')
+WHEN  ('?String45:2') ('?unnamed')
+WHEN  ('?String49') ('?unnamed')
+WHEN  ('?String56') ('?unnamed')
+WHEN  ('?String57') ('?unnamed')
+WHEN  ('?linea') ('?unnamed')
+WHEN  ('?loc:fecha_enca') ('?unnamed')
+WHEN  ('?loc:hora_enca') ('?unnamed')
+WHEN  ('?loc:idproveedor') ('?unnamed')
+WHEN  ('?loc:nomprovedor') ('?unnamed')
+WHEN  ('?logocliente') ('?unnamed')
+WHEN  ('?unnamed') ('?unnamed')
+WHEN  ('?unnamed:2') ('?unnamed')
+WHEN  ('?unnamed:3') ('?unnamed')
+WHEN  ('?unnamed:4') ('?unnamed')
+
+%PDFUsePDFFont DEPEND %ReportControl LONG TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') (0)
+WHEN  ('?AFI:SEXO') (0)
+WHEN  ('?AFI:TIPO_DOC') (0)
+WHEN  ('?Conclusion') (0)
+WHEN  ('?DPR:Ciudad') (0)
+WHEN  ('?DPR:Direccion') (0)
+WHEN  ('?DPR:Nit') (0)
+WHEN  ('?DPR:RazonSocial') (0)
+WHEN  ('?DPR:Telefonos') (0)
+WHEN  ('?GLO:USUARIO') (0)
+WHEN  ('?Group2') (0)
+WHEN  ('?Group3') (0)
+WHEN  ('?Image2') (0)
+WHEN  ('?LOC:COMENTARIOS') (0)
+WHEN  ('?LOC:CONVENIO') (0)
+WHEN  ('?LOC:FECHA') (0)
+WHEN  ('?LOC:FECHAA') (0)
+WHEN  ('?LOC:FECHAA:2') (0)
+WHEN  ('?LOC:FILIGRANA') (0)
+WHEN  ('?LOC:HORA') (0)
+WHEN  ('?LOC:RESULTADOHTML') (0)
+WHEN  ('?LORD:CONCLUSION') (0)
+WHEN  ('?LORD:IDMEDICO') (0)
+WHEN  ('?LORD:IDSERVICIO') (0)
+WHEN  ('?LORD:NOINGRESO') (0)
+WHEN  ('?LORD:NORDEN') (0)
+WHEN  ('?LORD:OBSERVACION') (0)
+WHEN  ('?LORD:RESULTADO') (0)
+WHEN  ('?Line2:2') (0)
+WHEN  ('?Line3') (0)
+WHEN  ('?Line4') (0)
+WHEN  ('?Loc:Edad') (0)
+WHEN  ('?Loc:NomAfiliado') (0)
+WHEN  ('?Loc:NomSolicitado') (0)
+WHEN  ('?Loc:Titulo') (0)
+WHEN  ('?MED:NOMBRE') (0)
+WHEN  ('?MED:NO_REGISTRO') (0)
+WHEN  ('?MES:DESCRIPCION') (0)
+WHEN  ('?ReportPageNumber') (0)
+WHEN  ('?Resulhtml') (0)
+WHEN  ('?Resultado') (0)
+WHEN  ('?SER:DESCSERVICIO') (0)
+WHEN  ('?String10') (0)
+WHEN  ('?String11') (0)
+WHEN  ('?String13') (0)
+WHEN  ('?String14') (0)
+WHEN  ('?String34') (0)
+WHEN  ('?String34:2') (0)
+WHEN  ('?String37') (0)
+WHEN  ('?String37:2') (0)
+WHEN  ('?String37:3') (0)
+WHEN  ('?String40') (0)
+WHEN  ('?String41') (0)
+WHEN  ('?String45') (0)
+WHEN  ('?String45:2') (0)
+WHEN  ('?String49') (0)
+WHEN  ('?String56') (0)
+WHEN  ('?String57') (0)
+WHEN  ('?linea') (0)
+WHEN  ('?loc:fecha_enca') (0)
+WHEN  ('?loc:hora_enca') (0)
+WHEN  ('?loc:idproveedor') (0)
+WHEN  ('?loc:nomprovedor') (0)
+WHEN  ('?logocliente') (0)
+WHEN  ('?unnamed') (0)
+WHEN  ('?unnamed:2') (0)
+WHEN  ('?unnamed:3') (0)
+WHEN  ('?unnamed:4') (0)
+
+%PDFOriginalFont DEPEND %ReportControl DEFAULT TIMES 68
+WHEN  ('?AFI:DOCIDAFILIADO') ('HELVETICA')
+WHEN  ('?AFI:SEXO') ('HELVETICA')
+WHEN  ('?AFI:TIPO_DOC') ('HELVETICA')
+WHEN  ('?Conclusion') ('HELVETICA')
+WHEN  ('?DPR:Ciudad') ('HELVETICA')
+WHEN  ('?DPR:Direccion') ('HELVETICA')
+WHEN  ('?DPR:Nit') ('HELVETICA')
+WHEN  ('?DPR:RazonSocial') ('HELVETICA')
+WHEN  ('?DPR:Telefonos') ('HELVETICA')
+WHEN  ('?GLO:USUARIO') ('HELVETICA')
+WHEN  ('?Group2') ('HELVETICA')
+WHEN  ('?Group3') ('HELVETICA')
+WHEN  ('?Image2') ('HELVETICA')
+WHEN  ('?LOC:COMENTARIOS') ('HELVETICA')
+WHEN  ('?LOC:CONVENIO') ('HELVETICA')
+WHEN  ('?LOC:FECHA') ('HELVETICA')
+WHEN  ('?LOC:FECHAA') ('HELVETICA')
+WHEN  ('?LOC:FECHAA:2') ('HELVETICA')
+WHEN  ('?LOC:FILIGRANA') ('HELVETICA')
+WHEN  ('?LOC:HORA') ('HELVETICA')
+WHEN  ('?LOC:RESULTADOHTML') ('HELVETICA')
+WHEN  ('?LORD:CONCLUSION') ('HELVETICA')
+WHEN  ('?LORD:IDMEDICO') ('HELVETICA')
+WHEN  ('?LORD:IDSERVICIO') ('HELVETICA')
+WHEN  ('?LORD:NOINGRESO') ('HELVETICA')
+WHEN  ('?LORD:NORDEN') ('HELVETICA')
+WHEN  ('?LORD:OBSERVACION') ('HELVETICA')
+WHEN  ('?LORD:RESULTADO') ('HELVETICA')
+WHEN  ('?Line2:2') ('HELVETICA')
+WHEN  ('?Line3') ('HELVETICA')
+WHEN  ('?Line4') ('HELVETICA')
+WHEN  ('?Loc:Edad') ('HELVETICA')
+WHEN  ('?Loc:NomAfiliado') ('HELVETICA')
+WHEN  ('?Loc:NomSolicitado') ('HELVETICA')
+WHEN  ('?Loc:Titulo') ('HELVETICA')
+WHEN  ('?MED:NOMBRE') ('HELVETICA')
+WHEN  ('?MED:NO_REGISTRO') ('HELVETICA')
+WHEN  ('?MES:DESCRIPCION') ('HELVETICA')
+WHEN  ('?ReportPageNumber') ('HELVETICA')
+WHEN  ('?Resulhtml') ('HELVETICA')
+WHEN  ('?Resultado') ('HELVETICA')
+WHEN  ('?SER:DESCSERVICIO') ('HELVETICA')
+WHEN  ('?String10') ('HELVETICA')
+WHEN  ('?String11') ('HELVETICA')
+WHEN  ('?String13') ('HELVETICA')
+WHEN  ('?String14') ('HELVETICA')
+WHEN  ('?String34') ('HELVETICA')
+WHEN  ('?String34:2') ('HELVETICA')
+WHEN  ('?String37') ('HELVETICA')
+WHEN  ('?String37:2') ('HELVETICA')
+WHEN  ('?String37:3') ('HELVETICA')
+WHEN  ('?String40') ('HELVETICA')
+WHEN  ('?String41') ('HELVETICA')
+WHEN  ('?String45') ('HELVETICA')
+WHEN  ('?String45:2') ('HELVETICA')
+WHEN  ('?String49') ('HELVETICA')
+WHEN  ('?String56') ('HELVETICA')
+WHEN  ('?String57') ('HELVETICA')
+WHEN  ('?linea') ('HELVETICA')
+WHEN  ('?loc:fecha_enca') ('HELVETICA')
+WHEN  ('?loc:hora_enca') ('HELVETICA')
+WHEN  ('?loc:idproveedor') ('HELVETICA')
+WHEN  ('?loc:nomprovedor') ('HELVETICA')
+WHEN  ('?logocliente') ('HELVETICA')
+WHEN  ('?unnamed') ('HELVETICA')
+WHEN  ('?unnamed:2') ('HELVETICA')
+WHEN  ('?unnamed:3') ('HELVETICA')
+WHEN  ('?unnamed:4') ('HELVETICA')
+
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('PDFReporter') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('PDFReporter') ('PDFReporter')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('PDFReporter') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('PDFReporter') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('PDFReporter') ('ADOBlob')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('PDFReporter') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('PDFReporter')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('PDFReporter')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%TargetLocalName DEFAULT  ('PDF')
+%TargetLocalObjectName DEFAULT  ('PDFReporter')
+%TargetLocalObjectClass DEFAULT  ('PDFReportGenerator')
+%UseImageToPDFLibrary LONG  (0)
+%LocalPDFLibrary DEFAULT  ('GLOBAL')
+[ADDITION]
+NAME ABC ReportPageNumber
+[INSTANCE]
+INSTANCE 2
+[WINDOW]
+ProgressWindow WINDOW('Avance de Progreso'),AT(,,195,49),FONT('Arial',8),DOUBLE,TILED,CENTER, |
+          GRAY,TIMER(1)
+          PROGRESS,AT(4,13,185,7),USE(Progress:Thermometer),RANGE(0,100),#ORIG(Progress:Thermometer), |
+            #ORDINAL(1)
+          STRING(''),AT(4,1,181,10),USE(?Progress:UserString),CENTER,TRN,#ORIG(?Progress:UserString), |
+            #ORDINAL(2)
+          STRING(''),AT(3,22,181,10),USE(?Progress:PctText),CENTER,TRN,#ORIG(?Progress:PctText), |
+            #ORDINAL(3)
+          BUTTON('Cancelar'),AT(131,29,57,17),USE(?Progress:Cancel),LEFT,ICON(ICON:Cross), |
+            FLAT,#ORIG(?Progress:Cancel),#ORDINAL(4)
+        END
+
+[REPORT]
+report  REPORT('Prestación'),AT(250,2635,8167,7094),PRE(RPT),PAPER(PAPER:LETTER),FONT('Arial', |
+          8),THOUS
+          HEADER,AT(250,240,8208,2354),USE(?unnamed),#ORDINAL(1)
+            IMAGE('.\ICONOS\ixcolor.gif'),AT(125,188,906,885),USE(?logocliente),#ORIG(?Image1), |
+              #ORDINAL(2)
+            STRING(@s20),AT(1260,563,1083,115),USE(DPR:Nit),FONT(,7),TRN,#FREEZE,#ORIG(?String57), |
+              #ORDINAL(3)
+            STRING(@s60),AT(1260,677,3458,115),USE(DPR:Direccion),FONT(,7),TRN,#FREEZE,#ORIG(?String57), |
+              #ORDINAL(4)
+            STRING(@s20),AT(1813,792,1323,115),USE(DPR:Telefonos),FONT(,7),TRN,#FREEZE,#ORIG(?String57), |
+              #ORDINAL(5)
+            STRING('No. Orden:'),AT(5333,844),USE(?String34:2),FONT(,12,,FONT:bold),TRN,#ORIG(?String34), |
+              #ORDINAL(6)
+            STRING(@s20),AT(6292,844),USE(LORD:NORDEN),FONT(,10),LEFT,TRN,#ORIG(LORD:NOINGRESO), |
+              #ORDINAL(7)
+            STRING('Teléfonos:'),AT(1260,792,458,115),USE(?String57),FONT(,7),TRN,#ORIG(?String57), |
+              #ORDINAL(8)
+            STRING(@s60),AT(1260,375,3219,156),USE(DPR:RazonSocial),FONT(,10,,FONT:bold),TRN, |
+              #ORIG(?String56),#ORDINAL(9)
+            STRING('No. Ingreso:'),AT(5219,521),USE(?String34),FONT(,12,,FONT:bold),TRN,#ORIG(?String34), |
+              #ORDINAL(10)
+            STRING(@s20),AT(6292,521),USE(LORD:NOINGRESO),FONT(,10),LEFT,#ORIG(LORD:NORDEN), |
+              #ORDINAL(11)
+            STRING(@s30),AT(1260,906,1906,115),USE(DPR:Ciudad),FONT(,7),TRN,#FREEZE,#ORIG(?String57), |
+              #ORDINAL(12)
+            STRING(@s40),AT(1740,94,4000,167),USE(Loc:Titulo),FONT(,12,,FONT:bold),CENTER, |
+              TRN,#ORIG(?String47),#ORDINAL(13)
+            GROUP,AT(115,1125,7771,833),USE(?unnamed:2),BOXED,#ORIG(?Group1),#ORDINAL(14)
+              STRING('Nombre:'),AT(510,1219),USE(?String10),RIGHT,TRN,#ORIG(?String10),#ORDINAL(15)
+              STRING(@s59),AT(958,1219,3830,179),USE(Loc:NomAfiliado),#FREEZE,#ORIG(?String6), |
+                #ORDINAL(16)
+              STRING('Fecha:'),AT(4906,1219,344,177),USE(?String49),TRN,#ORIG(?String49),#ORDINAL(17)
+              STRING(@d06.),AT(5302,1219),USE(loc:fecha_enca),#ORIG(loc:fecha_enca),#ORDINAL(18)
+              STRING(@t1),AT(5979,1219),USE(loc:hora_enca),#ORIG(loc:hora_enca),#ORDINAL(19)
+              STRING(@s20),AT(1229,1385,1302,135),USE(AFI:DOCIDAFILIADO),TRN,#FREEZE,#ORIG(?String42), |
+                #ORDINAL(20)
+              STRING('Identificación:'),AT(240,1385),USE(?String11),RIGHT,TRN,#ORIG(?String11), |
+                #ORDINAL(21)
+              STRING('Sexo:'),AT(2771,1385),USE(?String13),TRN,#ORIG(?String13),#ORDINAL(22)
+              STRING(@s9),AT(3104,1385),USE(AFI:SEXO),TRN,#FREEZE,#ORIG(?String44),#ORDINAL(23)
+              STRING('Edad:'),AT(3802,1385),USE(?String14),TRN,#ORIG(?String14),#ORDINAL(24)
+              STRING(@s10),AT(4125,1385),USE(Loc:Edad),TRN,#FREEZE,#ORIG(?String50),#ORDINAL(25)
+              STRING(@s3),AT(958,1385,240,135),USE(AFI:TIPO_DOC),#ORIG(AFI:TIPO_DOC),#ORDINAL(26)
+              STRING(@s80),AT(958,1573,5063,135),USE(LOC:CONVENIO),#ORIG(LOC:CONVENIO),#ORDINAL(27)
+              STRING('Solicitado Por:'),AT(115,1740,813,135),USE(?String45:2),RIGHT,TRN,#ORIG(?String45), |
+                #ORDINAL(28)
+              STRING(@s80),AT(958,1740,5167,135),USE(Loc:NomSolicitado),#ORIG(Loc:NomSolicitado), |
+                #ORDINAL(29)
+              STRING('Convenio:'),AT(427,1573,500,177),USE(?String45),CENTER,TRN,#ORIG(?String45), |
+                #ORDINAL(30)
+            END
+            STRING(@s20),AT(729,1969,1083,156),USE(LORD:IDSERVICIO),FONT(,9),#ORIG(LORD:IDSERVICIO), |
+              #ORDINAL(31)
+            STRING('Exámen :'),AT(94,1979,583,156),USE(?String40),FONT(,9,,FONT:bold+FONT:underline), |
+              TRN,#ORIG(?String40),#ORDINAL(32)
+            TEXT,AT(1833,1969,4760,156),USE(SER:DESCSERVICIO),BOXED,#ORIG(SER:DESCSERVICIO), |
+              #ORDINAL(33)
+            TEXT,AT(1865,2146,4698,156),USE(LORD:OBSERVACION),BOXED,RESIZE,#ORIG(LORD:OBSERVACION), |
+              #ORDINAL(34)
+            LINE,AT(146,2323,7854,0),USE(?Line3),COLOR(COLOR:Black),#ORIG(?Line3),#ORDINAL(35)
+          END
+Resultado DETAIL,AT(21,0,8146,1042),USE(?Resultado),#ORDINAL(36)
+            STRING('Resultado:'),AT(156,52),USE(?String37:2),FONT(,,,FONT:bold+FONT:underline), |
+              TRN,#ORIG(?String37),#ORDINAL(37)
+            STRING(@s30),AT(4719,52,1927,146),USE(LOC:FECHAA),FONT(,8,,FONT:bold),#ORIG(LOC:FECHAA), |
+              #ORDINAL(38)
+            TEXT,AT(188,281,7688,344),USE(LORD:RESULTADO),RTF(TEXT:Field),BOXED,RESIZE,TRN, |
+              #ORIG(LORD:RESULTADO),#ORDINAL(39)
+            TEXT,AT(187,687,7687,281),USE(LOC:COMENTARIOS),FONT(,10,,,CHARSET:DEFAULT),RTF(TEXT:Field), |
+              BOXED,RESIZE,TRN,#ORIG(LORD:RESULTADO),#ORDINAL(40)
+          END
+Resulhtml DETAIL,AT(0,0),USE(?Resulhtml),#ORDINAL(41)
+            STRING('Resultado:'),AT(240,31,615,177),USE(?String37:3),FONT(,,,FONT:bold+FONT:underline), |
+              TRN,#ORIG(?String37:2),#ORDINAL(42)
+            STRING(@s30),AT(4740,-10,1927,146),USE(LOC:FECHAA,,?LOC:FECHAA:2),FONT(,8,,FONT:bold), |
+              #ORIG(LOC:FECHAA),#ORDINAL(43)
+            TEXT,AT(240,219,7750,708),USE(LOC:RESULTADOHTML),RTF(TEXT:Field),BOXED,RESIZE, |
+              TRN,#ORIG(LORD:RESULTADO),#ORDINAL(44)
+          END
+Linea     DETAIL,AT(0,0,,52),USE(?linea),#ORDINAL(45)
+            LINE,AT(125,21,7885,0),USE(?Line2:2),COLOR(COLOR:Black),#ORIG(?Line2),#ORDINAL(46)
+          END
+Conclusion DETAIL,AT(0,0,,625),USE(?Conclusion),#ORDINAL(47)
+            STRING('Conclusión:'),AT(177,21),USE(?String37),FONT(,,,FONT:bold+FONT:underline), |
+              TRN,#ORIG(?String37),#ORDINAL(48)
+            TEXT,AT(219,219,7688,344),USE(LORD:CONCLUSION),RTF(TEXT:Field),BOXED,RESIZE,TRN, |
+              #ORIG(LORD:CONCLUSION),#ORDINAL(49)
+          END
+          FOOTER,AT(240,9781,8208,1146),USE(?unnamed:3),#ORDINAL(50)
+            STRING('Pág.No:'),AT(115,240),USE(?String56),FONT(,,COLOR:Black,FONT:bold,CHARSET:ANSI), |
+              TRN,#ORIG(?String56),#ORDINAL(51)
+            STRING(@N3),AT(594,229),USE(ReportPageNumber),FONT(,,COLOR:Black,FONT:bold,CHARSET:ANSI), |
+              #ORIG(ReportPageNumber),#SEQ(2),#ORDINAL(52)
+            GROUP('Impreso Por'),AT(73,677,2125,385),USE(?Group2),BOXED,#ORIG(?Group2),#ORDINAL(53)
+              STRING(@t6),AT(1531,833,542,115),USE(LOC:HORA),FONT(,7,COLOR:Black,,CHARSET:ANSI), |
+                TRN,#ORIG(?String58),#ORDINAL(54)
+              STRING(@d8.),AT(854,823,573,115),USE(LOC:FECHA),FONT(,7,COLOR:Black,,CHARSET:ANSI), |
+                TRN,#ORIG(?String58),#ORDINAL(55)
+              STRING(@s12),AT(146,844,677,115),USE(GLO:USUARIO),FONT(,7,COLOR:Black,,CHARSET:ANSI), |
+                TRN,#ORIG(?String58),#ORDINAL(56)
+            END
+            GROUP('Firma '),AT(3063,10,4771,1094),USE(?Group3),BOXED,#ORIG(?Group3),#ORDINAL(57)
+              IMAGE,AT(4396,156,1750,490),USE(?Image2),#ORIG(?Image2),#ORDINAL(58)
+              LINE,AT(3062,708,4760,0),USE(?Line4),COLOR(COLOR:Black),#ORIG(?Line4),#ORDINAL(59)
+              STRING(@s20),AT(6427,771,969,177),USE(MED:NO_REGISTRO),#ORIG(MED:NO_REGISTRO), |
+                #ORDINAL(60)
+              STRING(@s12),AT(3146,781,604,177),USE(LORD:IDMEDICO),#ORIG(LORD:IDMEDICO),#ORDINAL(61)
+              STRING(@s45),AT(3781,781,2292,177),USE(MED:NOMBRE),#ORIG(MED:NOMBRE),#ORDINAL(62)
+              STRING('R.M.'),AT(6125,781),USE(?String41),FONT(,,,FONT:bold),TRN,#ORIG(?String41), |
+                #ORDINAL(63)
+              STRING(@s45),AT(3145,927,2292,177),USE(MES:DESCRIPCION),#ORIG(MED:NOMBRE),#ORDINAL(64)
+            END
+            STRING(@s20),AT(135,52,740,177),USE(loc:idproveedor),TRN,#ORIG(?String48),#ORDINAL(65)
+            STRING(@s45),AT(917,42,1885,177),USE(loc:nomprovedor),TRN,#ORIG(?String49),#ORDINAL(66)
+          END
+          FORM,AT(250,2604,7917,7156),USE(?unnamed:4),#ORDINAL(67)
+            STRING(@s30),AT(177,104,6573,5979),USE(LOC:FILIGRANA),FONT('Verdana',39,00D5D5D5h, |
+              FONT:bold),CENTER,ANGLE(450),TRN,#ORIG(?String43),#ORDINAL(68)
+          END
+        END
+
+[END]

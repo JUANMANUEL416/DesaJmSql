@@ -1,0 +1,2255 @@
+[MODULE]
+[COMMON]
+FROM ABC GENERATED
+MODIFIED '2020/02/26' '19:45:29'
+[PROCEDURE]
+NAME Win:ImpMasivoFrt
+[COMMON]
+DESCRIPTION 'Window'
+FROM ABC Window
+CATEGORY 'Window'
+MODIFIED '2024/08/15' '18:14:19'
+[DATA]
+[SCREENCONTROLS]
+! PROMPT('LOC : FMTOORI:'),USE(?LOC:FMTOORI:Prompt)
+! ENTRY(@n-7),USE(LOC:FMTOORI),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n-7),USE(LOC:FMTOORI),RIGHT(1)
+LOC:FMTOORI              SHORT
+!!> GUID('2607325d-13fd-4912-90c4-78f5cdc82565'),PROMPT('LOC : FMTOORI:'),HEADER('LOC : FMTOORI'),PICTURE(@n-7),TYPEMODE(INS),JUSTIFY(RIGHT,1)
+[SCREENCONTROLS]
+! PROMPT('IDFORMATO:'),USE(?LOC:FMT:Prompt)
+! ENTRY(@s20),USE(LOC:FMT)
+[REPORTCONTROLS]
+! STRING(@s20),USE(LOC:FMT)
+LOC:FMT                  CSTRING(21)
+!!> GUID('a1152bf7-4f8b-4e81-9f95-6459a35f523b'),PROMPT('IDFORMATO:'),HEADER('IDFORMATO'),PICTURE(@s20),TYPEMODE(INS),FREEZE,DERIVEDFROM('FTR:IDFORMATO')
+[SCREENCONTROLS]
+! PROMPT('LOC : RUTA:'),USE(?LOC:RUTA:Prompt)
+! ENTRY(@s100),USE(LOC:RUTA)
+[REPORTCONTROLS]
+! STRING(@s100),USE(LOC:RUTA)
+LOC:RUTA                 CSTRING(101)
+!!> GUID('936d57ff-fc50-4d8c-a6f4-da760a81f7d9'),PROMPT('LOC : RUTA:'),HEADER('LOC : RUTA'),PICTURE(@s100),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('Numero de la Factura :'),USE(?LOC:N_FACTURAN:Prompt)
+! ENTRY(@s16),USE(LOC:N_FACTURAN),MSG('Numero de la Factura'),TIP('Numero de la Factura'),REQ,OVR
+[REPORTCONTROLS]
+! STRING(@s16),USE(LOC:N_FACTURAN)
+LOC:N_FACTURAN           CSTRING(17) !NUMERO DE LA FACTURA
+!!> GUID('a4adc0be-07a1-4f1f-b40f-58295e440374'),VALID(NONZERO),PROMPT('Numero de la Factura :'),HEADER('Numero de la Factura :'),MESSAGE('Numero de la Factura'),TOOLTIP('Numero de la Factura'),PICTURE(@s16),FREEZE,DERIVEDFROM('FTR:N_FACTURA')
+[SCREENCONTROLS]
+! PROMPT('LOC : PATH:'),USE(?LOC:PATH:Prompt)
+! ENTRY(@s100),USE(LOC:PATH)
+[REPORTCONTROLS]
+! STRING(@s100),USE(LOC:PATH)
+LOC:PATH                 CSTRING(101)
+!!> GUID('f2ab3319-00ad-4ba3-bfc8-e7c439869473'),PROMPT('LOC : PATH:'),HEADER('LOC : PATH'),PICTURE(@s100),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('LOC : MGE:'),USE(?LOC:MGE:Prompt)
+! ENTRY(@s100),USE(LOC:MGE)
+[REPORTCONTROLS]
+! STRING(@s100),USE(LOC:MGE)
+LOC:MGE                  CSTRING(101)
+!!> GUID('5f7c4a30-8603-4ac5-a3d6-8baf097e3b0e'),PROMPT('LOC : MGE:'),HEADER('LOC : MGE'),PICTURE(@s100),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('QFTRCXC:'),USE(?QFTRCXC:Prompt)
+! ENTRY(@s20),USE(QFTRCXC)
+[REPORTCONTROLS]
+! STRING(@s20),USE(QFTRCXC)
+QFTRCXC                  QUEUE,PRE()
+!!> GUID('942aa6c0-928c-48d4-b540-b51cc0ac437f'),PROMPT('QFTRCXC:'),HEADER('QFTRCXC'),PICTURE(@s20),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('Consecutivo :'),USE(?CNSEFTR:Prompt)
+! ENTRY(@s20),USE(CNSEFTR),MSG('Consecutivo Apertura'),TIP('Consecutivo Apertura')
+[REPORTCONTROLS]
+! STRING(@s20),USE(CNSEFTR)
+CNSEFTR                    CSTRING(21) !Consecutivo
+!!> GUID('eb23778f-c75b-4eed-b552-c13f44df04b5'),PROMPT('Consecutivo :'),HEADER('Consecutivo'),MESSAGE('Consecutivo Apertura'),TOOLTIP('Consecutivo Apertura'),PICTURE(@s20),TYPEMODE(INS),FREEZE,DERIVEDFROM('EFTR:CNSEFTR')
+[SCREENCONTROLS]
+! PROMPT('Numero de la Factura :'),USE(?N_FACTURA:Prompt)
+! ENTRY(@s16),USE(N_FACTURA),MSG('Numero de la Factura'),TIP('Numero de la Factura'),REQ,OVR
+[REPORTCONTROLS]
+! STRING(@s16),USE(N_FACTURA)
+N_FACTURA                  CSTRING(17) !NUMERO DE LA FACTURA
+!!> GUID('40e4b324-cd97-4a27-9605-f3162a6ecbde'),VALID(NONZERO),PROMPT('Numero de la Factura :'),HEADER('Numero de la Factura :'),MESSAGE('Numero de la Factura'),TOOLTIP('Numero de la Factura'),PICTURE(@s16),FREEZE,DERIVEDFROM('FTR:N_FACTURA')
+                         END
+!!> GUID('827217b4-320d-42d4-a509-050cecd5c859')
+[SCREENCONTROLS]
+! PROMPT('QERROR:'),USE(?QERROR:Prompt)
+! ENTRY(@s127),USE(QERROR)
+[REPORTCONTROLS]
+! STRING(@s127),USE(QERROR)
+QERROR                   QUEUE,PRE()
+!!> GUID('0db7a6e1-c5fc-41cb-9353-6ae5d2c61095'),PROMPT('QERROR:'),HEADER('QERROR'),PICTURE(@s127)
+[SCREENCONTROLS]
+! PROMPT('Numero de la Factura :'),USE(?EFACTURA:Prompt)
+! ENTRY(@s16),USE(EFACTURA),MSG('Numero de la Factura'),TIP('Numero de la Factura'),REQ,OVR
+[REPORTCONTROLS]
+! STRING(@s16),USE(EFACTURA)
+EFACTURA                   CSTRING(17) !NUMERO DE LA FACTURA
+!!> GUID('ebadea86-305c-47e2-bfb8-8327d4cbf019'),VALID(NONZERO),PROMPT('Numero de la Factura :'),HEADER('Numero de la Factura :'),MESSAGE('Numero de la Factura'),TOOLTIP('Numero de la Factura'),PICTURE(@s16),TYPEMODE(OVR),DERIVEDFROM('FTR:N_FACTURA')
+[SCREENCONTROLS]
+! PROMPT('ITEMS:'),USE(?ITEMS:Prompt)
+! ENTRY(@n-7),USE(ITEMS),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n-7),USE(ITEMS),RIGHT(1)
+ITEMS                      SHORT
+!!> GUID('8a1e3ca5-55f5-4e0c-9067-e8ea236c5f3e'),PROMPT('ITEMS:'),HEADER('ITEMS'),PICTURE(@n-7),TYPEMODE(INS),JUSTIFY(RIGHT,1)
+[SCREENCONTROLS]
+! PROMPT('EMENSAGE:'),USE(?EMENSAGE:Prompt)
+! ENTRY(@s100),USE(EMENSAGE)
+[REPORTCONTROLS]
+! STRING(@s100),USE(EMENSAGE)
+EMENSAGE                   CSTRING(101)
+!!> GUID('aa95cfb0-9e2e-4051-8515-aa6ce95af70e'),PROMPT('EMENSAGE:'),HEADER('EMENSAGE'),PICTURE(@s100)
+                         END
+!!> GUID('c4d12fc7-c7fe-493c-9a3a-f260ea5f7bf1')
+[SCREENCONTROLS]
+! PROMPT('LOC : CNSFCT INI:'),USE(?LOC:CNSFCT_INI:Prompt)
+! ENTRY(@s20),USE(LOC:CNSFCT_INI)
+[REPORTCONTROLS]
+! STRING(@s20),USE(LOC:CNSFCT_INI)
+LOC:CNSFCT_INI           CSTRING(21)
+!!> GUID('e8ce495d-75eb-4a11-9f05-a1226c594046'),PROMPT('LOC : CNSFCT INI:'),HEADER('LOC : CNSFCT INI'),PICTURE(@s20),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('LOC : CNSFCT FIN:'),USE(?LOC:CNSFCT_FIN:Prompt)
+! ENTRY(@s20),USE(LOC:CNSFCT_FIN)
+[REPORTCONTROLS]
+! STRING(@s20),USE(LOC:CNSFCT_FIN)
+LOC:CNSFCT_FIN           CSTRING(21)
+!!> GUID('7cf4be3f-5389-4b18-8b11-e10aae905232'),PROMPT('LOC : CNSFCT FIN:'),HEADER('LOC : CNSFCT FIN'),PICTURE(@s20),TYPEMODE(INS)
+[FILES]
+[OTHERS]
+Archivos
+ARCHGEN
+RPDX
+A_FTR
+WDU5
+[PROMPTS]
+%ButtonAction DEPEND %Control DEFAULT TIMES 7
+WHEN  ('?Aceptar') ('No Special Action')
+WHEN  ('?BComienza') ('No Special Action')
+WHEN  ('?BOX1') ('No Special Action')
+WHEN  ('?BProcesar') ('No Special Action')
+WHEN  ('?LookupFile') ('No Special Action')
+WHEN  ('?LookupFile:2') ('No Special Action')
+WHEN  ('?SMExcel') ('No Special Action')
+
+%ButtonRunName DEPEND %Control DEFAULT TIMES 2
+WHEN  ('?LookupFile') ('')
+WHEN  ('?LookupFile:2') ('')
+
+%ButtonRunParameters DEPEND %Control DEFAULT TIMES 2
+WHEN  ('?LookupFile') ('')
+WHEN  ('?LookupFile:2') ('')
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 2
+WHEN  ('?LookupFile') ()
+WHEN  ('?LookupFile:2') ()
+
+%ButtonThread DEPEND %Control LONG TIMES 2
+WHEN  ('?LookupFile') (0)
+WHEN  ('?LookupFile:2') (0)
+
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 7
+WHEN  ('?Aceptar') ('25000')
+WHEN  ('?BComienza') ('25000')
+WHEN  ('?BOX1') ('25000')
+WHEN  ('?BProcesar') ('25000')
+WHEN  ('?LookupFile') ('25000')
+WHEN  ('?LookupFile:2') ('25000')
+WHEN  ('?SMExcel') ('25000')
+
+%ButtonParameters DEPEND %Control DEFAULT TIMES 2
+WHEN  ('?LookupFile') ('')
+WHEN  ('?LookupFile:2') ('')
+
+%ButtonRequest DEPEND %Control DEFAULT TIMES 7
+WHEN  ('?Aceptar') ('None')
+WHEN  ('?BComienza') ('None')
+WHEN  ('?BOX1') ('None')
+WHEN  ('?BProcesar') ('None')
+WHEN  ('?LookupFile') ('None')
+WHEN  ('?LookupFile:2') ('None')
+WHEN  ('?SMExcel') ('None')
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+
+%ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('WindowManager')
+WHEN  ('WindowToolbar') ('ToolbarClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('')
+WHEN  ('WindowToolbar') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'SetAlerts {14}PROCEDURE(),DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
+
+%ReturnValue FIELD  ()
+%ProcedureOneInstance LONG  (0)
+%WindowOperationMode DEFAULT  ('Use WINDOW setting')
+%INISaveWindow LONG  (1)
+%ProcedureDisableEnhanceFocus LONG  (0)
+%ProcedureUseEnterInsteadTabOverride LONG  (0)
+%WindowUseEnterInsteadTab LONG  (1)
+%ProcedureUseEnterInsteadTabExcludeListCombo LONG  (0)
+%ProcedureUseEnterInsteadTabEnableNextTabStop LONG  (0)
+%ProcedureUseEnterInsteadTabExcludeG LONG  (1)
+%WindowUseEnterInsteadTabExclude MULTI DEFAULT  ()
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('NO')
+WHEN  ('WindowToolbar') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('ThisWindow')
+WHEN  ('WindowToolbar') ('Toolbar')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('ADOBlob')
+WHEN  ('WindowToolbar') ('ADOBlob')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (0)
+WHEN  ('WindowToolbar') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%WindowStyles MULTI LONG  ()
+%WindowStyleFontName DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontSize DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontStyle DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontColor DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontCharSet DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStylePicture DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleOtherListboxes MULTI DEFAULT  ()
+%ProcedureAutoBindFields MULTI LONG  ()
+%ProcedureAutoBindField DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldTPL DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedures MULTI LONG  ()
+%ProcedureAutoBindProcedure DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedureTPL DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldsIgnored MULTI LONG  ()
+%ProcedureAutoBindFieldIgnored DEPEND %ProcedureAutoBindFieldsIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindProceduresIgnored MULTI LONG  ()
+%ProcedureAutoBindProcedureIgnored DEPEND %ProcedureAutoBindProceduresIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindValidToAddField LONG  (0)
+%ProcedureUserBindFields MULTI LONG  ()
+%ProcedureUserBindField DEPEND %ProcedureUserBindFields FIELD TIMES 0
+
+%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 0
+
+%ProcedureUserBindProcedures MULTI LONG  ()
+%ProcedureUserBindProcedure DEPEND %ProcedureUserBindProcedures PROCEDURE TIMES 0
+
+%ProcedureAutoBindProcedureIgnore DEPEND %ProcedureAutoBindProcedures LONG TIMES 0
+
+%ProcedureUserBindExpressions MULTI LONG  ()
+%ProcedureUserBindExpressionName DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%ProcedureUserBindExpression DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%PreserveVarsLoc MULTI LONG  ()
+%PreserveVarLoc DEPEND %PreserveVarsLoc DEFAULT TIMES 0
+
+%ExtUITabIcon DEPEND %Control DEFAULT TIMES 0
+
+%ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
+
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 3
+WHEN  ('?LookupFile') ('Default')
+WHEN  ('?LookupFile:2') ('Default')
+WHEN  ('?SMExcel') ('Default')
+
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 4
+WHEN  ('?BOX1') ('Off')
+WHEN  ('?LookupFile') ('Off')
+WHEN  ('?LookupFile:2') ('Off')
+WHEN  ('?SMExcel') ('Off')
+
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 4
+WHEN  ('?BOX1') ('')
+WHEN  ('?LookupFile') ('')
+WHEN  ('?LookupFile:2') ('')
+WHEN  ('?SMExcel') ('')
+
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 4
+WHEN  ('?BOX1') (0)
+WHEN  ('?LookupFile') (0)
+WHEN  ('?LookupFile:2') (0)
+WHEN  ('?SMExcel') (0)
+
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 4
+WHEN  ('?BOX1') (-1)
+WHEN  ('?LookupFile') (-1)
+WHEN  ('?LookupFile:2') (-1)
+WHEN  ('?SMExcel') (-1)
+
+%FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 4
+WHEN  ('?BOX1') (0)
+WHEN  ('?LookupFile') (0)
+WHEN  ('?LookupFile:2') (0)
+WHEN  ('?SMExcel') (0)
+
+%FieldGradientColorTo DEPEND %Control LONG TIMES 4
+WHEN  ('?BOX1') (-1)
+WHEN  ('?LookupFile') (-1)
+WHEN  ('?LookupFile:2') (-1)
+WHEN  ('?SMExcel') (-1)
+
+%FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 4
+WHEN  ('?BOX1') (0)
+WHEN  ('?LookupFile') (0)
+WHEN  ('?LookupFile:2') (0)
+WHEN  ('?SMExcel') (0)
+
+%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 2
+WHEN  ('?LookupFile') ()
+WHEN  ('?LookupFile:2') ()
+
+%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 2
+WHEN  ('?LookupFile') (0)
+WHEN  ('?LookupFile:2') (0)
+
+%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 2
+WHEN  ('?LookupFile') ('')
+WHEN  ('?LookupFile:2') ('')
+
+%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 2
+WHEN  ('?LookupFile') ()
+WHEN  ('?LookupFile:2') ()
+
+%PreLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
+
+%PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
+
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 10
+WHEN  ('?GLO:CNSRPDX') (1)
+WHEN  ('?GLO:TXTARCHGEN') (1)
+WHEN  ('?LOC:CNSCXC') (1)
+WHEN  ('?LOC:COPIAS') (1)
+WHEN  ('?LOC:FACTFINAL') (1)
+WHEN  ('?LOC:N_FACINICIAL') (1)
+WHEN  ('?LOC:PREGUNTAR') (1)
+WHEN  ('?LookupFile') (1)
+WHEN  ('?LookupFile:2') (1)
+WHEN  ('?SMExcel') (1)
+
+%LookupAssign DEPEND %Control MULTI LONG TIMES 0
+
+%MoreTarget DEPEND %LookupAssign FIELD TIMES 0
+
+%MoreField DEPEND %LookupAssign DEFAULT TIMES 0
+
+%CheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedAssignVariable DEPEND %CheckedAssigns FIELD TIMES 0
+
+%CheckedAssignValue DEPEND %CheckedAssigns DEFAULT TIMES 0
+
+%CheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
+
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 3
+WHEN  ('?LookupFile')TIMES 0
+WHEN  ('?LookupFile:2')TIMES 0
+WHEN  ('?SMExcel')TIMES 0
+
+%CheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
+
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 3
+WHEN  ('?LookupFile')TIMES 0
+WHEN  ('?LookupFile:2')TIMES 0
+WHEN  ('?SMExcel')TIMES 0
+
+%UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%UncheckedAssignVariable DEPEND %UncheckedAssigns FIELD TIMES 0
+
+%UncheckedAssignValue DEPEND %UncheckedAssigns DEFAULT TIMES 0
+
+%UnCheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
+
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 3
+WHEN  ('?LookupFile')TIMES 0
+WHEN  ('?LookupFile:2')TIMES 0
+WHEN  ('?SMExcel')TIMES 0
+
+%UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
+
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 3
+WHEN  ('?LookupFile')TIMES 0
+WHEN  ('?LookupFile:2')TIMES 0
+WHEN  ('?SMExcel')TIMES 0
+
+%CheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
+
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 3
+WHEN  ('?LookupFile')TIMES 0
+WHEN  ('?LookupFile:2')TIMES 0
+WHEN  ('?SMExcel')TIMES 0
+
+%UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
+
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 3
+WHEN  ('?LookupFile')TIMES 0
+WHEN  ('?LookupFile:2')TIMES 0
+WHEN  ('?SMExcel')TIMES 0
+
+%ActiveImageEnable DEPEND %Control LONG TIMES 0
+
+%AIObjectName DEPEND %Control DEFAULT TIMES 3
+WHEN  ('?LookupFile') ('AIBtn24')
+WHEN  ('?LookupFile:2') ('AIBtn30')
+WHEN  ('?SMExcel') ('AIBtn26')
+
+%AIEnableMimicControl DEPEND %Control LONG TIMES 3
+WHEN  ('?LookupFile') (1)
+WHEN  ('?LookupFile:2') (1)
+WHEN  ('?SMExcel') (1)
+
+%AIMimicControl DEPEND %Control DEFAULT TIMES 3
+WHEN  ('?LookupFile') ('?Aceptar')
+WHEN  ('?LookupFile:2') ('?Aceptar')
+WHEN  ('?SMExcel') ('?Aceptar')
+
+%AIImgRound DEPEND %Control LONG TIMES 0
+
+%AIOverrideImg DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('?LookupFile') (0)
+WHEN  ('?LookupFile:2') (0)
+WHEN  ('?SMExcel') (0)
+
+%AIDisableImg DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('?LookupFile') (0)
+WHEN  ('?LookupFile:2') (0)
+WHEN  ('?SMExcel') (0)
+
+%AIHotImg DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('?LookupFile') (0)
+WHEN  ('?LookupFile:2') (0)
+WHEN  ('?SMExcel') (0)
+
+%AIPressedImg DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('?LookupFile') (0)
+WHEN  ('?LookupFile:2') (0)
+WHEN  ('?SMExcel') (0)
+
+[EMBED]
+EMBED %WindowManagerMethodCodeSection
+[INSTANCES]
+WHEN 'Init'
+[INSTANCES]
+WHEN '(),BYTE'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 6001
+PROPERTY:END
+Archivos{PROP:Owner}=GLO:DSN
+LOC:PATH=PATH()
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7300
+PROPERTY:END
+IF 1=0
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7800
+PROPERTY:END
+ ELSE
+Relate:A_FTR.Open                                        ! File A_FTR used by this procedure, so make sure it's RelationManager is open
+Relate:RPDX.SetOpenRelated()
+Relate:RPDX.Open                                         ! File RPDX used by this procedure, so make sure it's RelationManager is open
+Relate:WDU5.Open                                         ! File WDU5 used by this procedure, so make sure it's RelationManager is open
+SELF.FilesOpened = True
+
+END
+LOC:PATH=PATH()
+LOC:COPIAS=1
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 8001
+PROPERTY:END
+?LOC:FORMATOHADM{PROP:From}='01|01C|01CB|01T|02|03|03A|03B|03C|03CA|03D|03F|03FIVA|03FM|03G|03G1|03G_R|03G_RS|03GSG|03G_H|03G_CUM|04|04A|05'
+LOC:FORMATOHADM=fnValorVariable('IDFORMATOFTR')
+LOC:FORMATO=fnValorVariable('IDFORMATOFTR')
+IF GLO:CNSCXC<>''
+   DISABLE(?LOC:FACTFINAL)
+   DISABLE(?LOC:FACTFINAL:Prompt)
+   DISABLE(?LOC:N_FACINICIAL)
+   DISABLE(?LOC:N_FACINICIAL:Prompt)
+   ENABLE(?LOC:CNSCXC)
+   ENABLE(?LOC:CNSCXC:Prompt)
+   LOC:PREGUNTAR=0
+   DISABLE(?LOC:PREGUNTAR)
+   LOC:CNSCXC=GLO:CNSCXC
+ELSE
+   ENABLE(?LOC:FACTFINAL)
+   ENABLE(?LOC:FACTFINAL:Prompt)
+   ENABLE(?LOC:N_FACINICIAL)
+   ENABLE(?LOC:N_FACINICIAL:Prompt)
+   ENABLE(?LOC:PREGUNTAR)
+   DISABLE(?LOC:CNSCXC)
+   DISABLE(?LOC:CNSCXC:Prompt)
+END
+[END]
+[END]
+[END]
+EMBED %DataSection
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 1300
+PROPERTY:END
+LOC:N_FACINICIAL     CSTRING(21)                           !
+LOC:SQL              CSTRING(2049)                         !
+LOC:FACTFINAL        CSTRING(21)                           !
+LOC:COPIAS           SHORT                                 !
+LOC:PREGUNTAR        SHORT                                 !
+LOC:FORMATO          CSTRING(11)                           !
+LOC:FORMATOHADM      CSTRING(11)                           !
+LOC:DIRIMPRESORA     SHORT                                 !
+LOC:CNSCXC           CSTRING(21)                           !
+[END]
+EMBED %ControlEventHandling
+[INSTANCES]
+WHEN '?BComienza'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+LOC:MGE=''
+DISPLAY
+GLO:SYS_VISTAPREVIA = 1
+IF GLO:CNSCXC='' AND GLO:CNSRPDX=''
+   IF LOC:N_FACINICIAL=''
+      BEEP(BEEP:SystemHand)
+      MESSAGE('Debe Digirar el Nro Factura  de Incio Antes de Comenzar la Impresión','Impresión de Facturas',ICON:Hand)
+      CYCLE
+   END
+   IF LOC:FACTFINAL=''
+      BEEP(BEEP:SystemHand)
+      MESSAGE('Debe Digirar el Nro Factura  de Final Antes de Comenzar la Impresión','Impresión de Facturas',ICON:Hand)
+      CYCLE
+   END
+   IF LOC:COPIAS<=0
+      BEEP(BEEP:SystemHand)
+      MESSAGE('Debe Digirar el Nro Copias   Antes de Comenzar la Impresión','Impresión de Facturas',ICON:Hand)
+      CYCLE
+   END
+   IF LOC:FORMATO='' and LOC:FMTOORI=0
+      BEEP(BEEP:SystemHand)
+      MESSAGE('Debe Digirar Elegir un Formato Antes de Comenzar la Impresión','Impresión de Facturas',ICON:Hand)
+      CYCLE
+   END
+
+   IF LOC:PREGUNTAR<=0
+      BEEP(BEEP:SystemQuestion)
+      CASE MESSAGE('Para Evitar inconvenietes con la Impresora y el Sistema logre Terminar el Procceso; Se Sugiere Colocar un Nro para poder Detener la Impresion Si se Requier'&CHR(13)&|
+         'Esta Seguro de No Preguntar?','Impresión de Facturas',icon:question,button:yes+button:no, button:no,1)
+      OF BUTTON:No
+         cycle
+      End
+   END
+   CLEAR(A_FTR:Record)
+   A_FTR:N_FACTURA=LOC:N_FACINICIAL
+   IF Access:A_FTR.TryFetch(A_FTR:FTRN_FACTURA)
+      BEEP(BEEP:SystemHand)
+      MESSAGE('No Existe la Factura de Inicial, No se puede Comenzar la Impresión','Impresión de Facturas',ICON:Hand)
+      CYCLE
+   END
+   CLEAR(A_FTR:Record)
+   A_FTR:N_FACTURA=LOC:FACTFINAL
+   IF Access:A_FTR.TryFetch(A_FTR:FTRN_FACTURA)
+      BEEP(BEEP:SystemHand)
+      MESSAGE('No Existe la Factura de Final, No se puede Comenzar la Impresión','Impresión de Facturas',ICON:Hand)
+      CYCLE
+   END
+   I#=0 !NRO DE IMPRESIONES
+    J#=0 !COPIAS
+
+    LOC:SQL = ' SELECT CNSFCT FROM FTR WHERE N_FACTURA = '&FNSQLFMT(LOC:N_FACINICIAL)
+    WDUM{PROP:SQL} = LOC:SQL
+    Access:wdum.Next()
+    LOC:CNSFCT_INI = WDUM:C1
+
+    LOC:SQL = ' SELECT CNSFCT FROM FTR WHERE N_FACTURA = '&FNSQLFMT(LOC:FACTFINAL)
+    WDUM{PROP:SQL} = LOC:SQL
+    Access:wdum.Next()
+    LOC:CNSFCT_FIN = WDUM:C1
+
+
+    CLEAR(A_FTR:Record,-1)
+    A_FTR:CNSFCT = LOC:CNSFCT_INI
+    SET(A_FTR:FTRLLAVE0,A_FTR:FTRLLAVE0)
+    LOOP UNTIL Access:A_FTR.Next()
+!    CLEAR(A_FTR:Record,-1)
+!    A_FTR:N_FACTURA=LOC:N_FACINICIAL
+!    SET(A_FTR:FTRN_FACTURA,A_FTR:FTRN_FACTURA)
+!    LOOP UNTIL Access:A_FTR.Next()
+        IF LOC:DIRIMPRESORA=1
+            GLO:NROIMP=3
+        ELSE
+            GLO:NROIMP=0
+        END
+
+        IF A_FTR:CNSFCT < LOC:CNSFCT_INI THEN BREAK.
+        IF A_FTR:CNSFCT > LOC:CNSFCT_FIN THEN BREAK.
+        IF A_FTR:ESTADO='A' OR A_FTR:CLASEANULACION='NC' THEN CYCLE.
+!      IF A_FTR:N_FACTURA<LOC:N_FACINICIAL THEN BREAK.
+!      IF A_FTR:N_FACTURA>LOC:FACTFINAL THEN BREAK.
+!      IF A_FTR:ESTADO='A' OR A_FTR:CLASEANULACION='NC' THEN CYCLE.
+
+      IF I#=LOC:PREGUNTAR AND LOC:PREGUNTAR>0
+         BEEP(BEEP:SystemQuestion)
+         CASE MESSAGE('Continuar con la Impresión?','Impresión de Facturas',icon:question,button:yes+button:no, button:no,1)
+         OF BUTTON:No
+            BREAK
+         End
+         I#=0
+      END
+      I#+=1
+      GLO:CNSFCT=A_FTR:CNSFCT
+      GLO:NOADMISION=A_FTR:NOREFERENCIA
+      IF A_FTR:PROCEDENCIA ='SALUD'
+         IF LOC:FMTOORI=1 AND A_FTR:IDFORMATO<>''
+            LOC:FMT=A_FTR:IDFORMATO
+         ELSE
+            LOC:FMT=LOC:FORMATOHADM
+         END
+         Win:ImprimeMasivoFtr(GLO:NOADMISION,A_FTR:N_FACTURA,LOC:FMT,LOC:COPIAS)
+         CYCLE
+      END
+      LOOP J#=1 TO LOC:COPIAS BY 1
+         CASE A_FTR:PROCEDENCIA
+         OF 'FINANCIERO'
+            IF FNVALORVARIABLE('IDTIPOCXP_DEFAULT') = 'ARS'
+               CASE fnValorVariable('IDFORMATOFTR')
+               OF '01'
+                  RptFTR_ARS_1
+               OF '02'
+                  RptFTR_ARS_2
+               else
+                  Message('NO ha definido el formato de factura a trabajar')
+               end
+            ELSIF FNVALORVARIABLE('IDTIPOCXP_DEFAULT') = 'COMER'
+               !stop('si entre')
+               RPT:FACTURA(A_FTR:CNSFCT)
+            ELSE
+               IF UPPER(CLIP(FNVALORVARIABLE('IDFORMATOFTRFINANCIE'))) = '02' THEN
+                  RPT:FACTURA_02(A_FTR:CNSFCT)
+               ELSE
+                  if A_FTR:MONEDA <> FnValorVariable('IDMONEDABASE')
+                     RPT:FACTURA_MND_EXT
+                  ELSE
+                     LOC:SQL = 'EXEC SPK_FAC_IMPDEDUC '&FNSQLFMT(DPR:NIT)&','&FNSQLFMT(A_FTR:CNSFCT)&|
+                        ','&FNSQLFMT(A_FTR:N_FACTURA)&','&A_FTR:VR_TOTAL
+                     WDU5{PROP:SQL} = LOC:SQL
+                     IF FNVALORVARIABLE('IDFORMATOFTRFINANCIE')='03'
+                        RPT:FACTURAFINAN_03(A_FTR:CNSFCT)
+                     ELSIF  FNVALORVARIABLE('IDFORMATOFTRFINANCIE')='04'
+                        RPT:FACTURAFINAN_03_TUTEPROV(A_FTR:CNSFCT)
+                     ELSE
+                        RPT:FACTURA(A_FTR:CNSFCT)
+                     END
+                  END
+               END
+            END
+         OF 'INVENTARIO'
+            RPT:FACTURA_INV(A_FTR:CNSFCT)
+         OF 'CE' OROF 'CI'
+            CASE A_FTR:TIPOFAC
+            OF 'M'
+               CASE LOC:FORMATO
+               OF '03F'
+                  RptFTRCE03F
+               OF '03F2'
+                  RptFTRCE03F2
+               OF '03F3'
+                  RptFTRCE03F3
+               OF '03GS'
+                  RptFTRCE03GS
+               OF '03GSG'
+                 RptFTRCE03GSanG
+               ELSE
+                  RptFTRSaludMasiva
+               END
+            ELSE
+               GLO:TIPOCTA = 0
+               IF LOC:FMTOORI=1 AND A_FTR:IDFORMATO<>''
+                  LOC:FMT=A_FTR:IDFORMATO
+               ELSE
+                  LOC:FMT=LOC:FORMATO
+               END
+               CASE LOC:FMT
+               OF '01'
+                  IF A_FTR:PROCEDENCIA ='CI'
+                     IF FNVALORVARIABLE('IDFORMATOFTR_01_CI')='MEDIA'
+                        RptFTRCEMedia
+                     ELSE
+                        RptFTRCE
+                     END
+                  ELSE
+                     IF FNVALORVARIABLE('IDFORMATOFTR_01_CE')='MEDIA'
+                        RptFTRCEMedia
+                     ELSE
+                        RptFTRCE
+                     END
+                  END
+               OF '02'
+                !STOP('TIPO2')
+                  RptFTRCEnva_
+               OF '03B'
+                  IF A_FTR:PROCEDENCIA ='CI'
+                     RptFTRhadm03bCI('3',A_FTR:IDPLAN, A_FTR:N_FACTURA)
+                  ELSE
+                     RptFTRhadm03bCE('3',A_FTR:IDPLAN, A_FTR:N_FACTURA)
+                  END
+               OF '03C'
+                  IF A_FTR:PROCEDENCIA ='CI'
+                     RptFTRhadm03CI('3',A_FTR:IDPLAN, AUT:N_FACTURA)
+                  ELSE
+                     RptFTRhadm03CE('3',A_FTR:IDPLAN, AUT:N_FACTURA)
+                  END
+               of '03CA'
+                  IF A_FTR:PROCEDENCIA ='CI'
+                     RptFTRhadm03CA_CI('3',A_FTR:IDPLAN, AUT:N_FACTURA)
+                  Else
+                     RptFTRhadm03CA_CE('3',A_FTR:IDPLAN, AUT:N_FACTURA)
+                  End
+               of '03F'
+                  RptFTRCE03F
+               of '03F1'
+                  RptFTRCE03F1
+               OF '03F2'
+                  RptFTRCE03F2
+               OF '03GS'
+                  RptFTRCE03GS
+               OF '03GSG'
+                 RptFTRCE03GSanG
+                OF '03FIVA'
+                    RptFTRCE03FIVA
+               OF '04'
+                  RptFTRCE1
+               of '04A'
+                  RptFTRhadm04A_CE
+               OF '05'
+                  RptFTRCEA
+               else
+                  Message('NO ha definido el formato de factura a trabajar')
+               end
+            END
+         END
+      END
+   END
+ELSE
+
+   IF LOC:COPIAS<=0
+      BEEP(BEEP:SystemHand)
+      MESSAGE('Debe Digirar el Nro Copias   Antes de Comenzar la Impresión','Impresión de Facturas',ICON:Hand)
+      CYCLE
+   END
+   IF LOC:FORMATO=''
+      BEEP(BEEP:SystemHand)
+      MESSAGE('Debe Digirar Elegir un Formato Antes de Comenzar la Impresión','Impresión de Facturas',ICON:Hand)
+      CYCLE
+   END
+   I#=0 !NRO DE IMPRESIONES
+   J#=0 !COPIAS
+   CLEAR(WDU5:RECORD)
+   IF GLO:CNSCXC<>''
+      WDU5{PROP:SQL}='SELECT CNSFCT,FCXCD.N_FACTURA FROM FCXCD INNER JOIN FTR ON FCXCD.N_FACTURA=FTR.N_FACTURA WHERE CNSCXC='&FnSQLfmt(GLO:CNSCXC)
+   ELSE
+      WDU5{PROP:SQL}='SELECT CNSFCT,FTR.N_FACTURA FROM RPDX INNER JOIN FTR ON RPDX.ID1=FTR.N_FACTURA WHERE RPDX.CNS='&FnSQLfmt(GLO:CNSRPDX)
+   END
+   FREE(QFTRCXC)
+   LOOP UNTIL Access:WDU5.Next()
+      CNSEFTR=CLIP(WDU5:C1)
+      N_FACTURA=CLIP(WDU5:C2)
+      ADD(QFTRCXC,+CNSEFTR)
+   END
+   IF RECORDS(QFTRCXC)>0
+      GLO:EXPORTARPDF=1
+      GLO:NOMARCHIVO=CLIP(N_FACTURA)
+      GLO:PATHPDF=FileLookup6.Ask(0)
+      GLO:PATHPDF=GLO:PATHPDF&'\'
+   END
+   DISABLE(?BComienza)
+   SETPATH(LOC:PATH)
+   LOOP X#=1 TO RECORDS(QFTRCXC)
+      LOC:MGE='Exportando Factura Nro.'&CLIP(N_FACTURA)
+      DISPLAY
+      GET(QFTRCXC,X#)
+      CLEAR(A_FTR:Record)
+      A_FTR:CNSFCT=CNSEFTR
+      IF Access:A_FTR.TryFetch(A_FTR:FTRLLAVE0) THEN CYCLE.
+      IF LOC:DIRIMPRESORA=1
+         GLO:NROIMP=3
+      ELSE
+         GLO:NROIMP=0
+      END
+      I#+=1
+      GLO:CNSFCT=A_FTR:CNSFCT
+      GLO:NOADMISION=A_FTR:NOREFERENCIA
+      IF A_FTR:PROCEDENCIA ='SALUD'
+         IF LOC:FMTOORI=1 AND A_FTR:IDFORMATO<>''
+            LOC:FMT=A_FTR:IDFORMATO
+         ELSE
+            LOC:FMT=LOC:FORMATOHADM
+         END
+         Win:ImprimeMasivoFtr(GLO:NOADMISION,A_FTR:N_FACTURA,LOC:FMT,LOC:COPIAS)
+         CYCLE
+      END
+      LOOP J#=1 TO LOC:COPIAS BY 1
+         CASE A_FTR:PROCEDENCIA
+         OF 'FINANCIERO'
+            IF FNVALORVARIABLE('IDTIPOCXP_DEFAULT') = 'ARS'
+               CASE fnValorVariable('IDFORMATOFTR')
+               OF '01'
+                  RptFTR_ARS_1
+               OF '02'
+                  RptFTR_ARS_2
+               else
+                  Message('NO ha definido el formato de factura a trabajar')
+               end
+            ELSIF FNVALORVARIABLE('IDTIPOCXP_DEFAULT') = 'COMER'
+               !stop('si entre')
+               RPT:FACTURA(A_FTR:CNSFCT)
+            ELSE
+               IF UPPER(CLIP(FNVALORVARIABLE('IDFORMATOFTRFINANCIE'))) = '02' THEN
+                  RPT:FACTURA_02(A_FTR:CNSFCT)
+               ELSE
+                  if A_FTR:MONEDA <> FnValorVariable('IDMONEDABASE')
+                     RPT:FACTURA_MND_EXT
+                  ELSE
+                     LOC:SQL = 'EXEC SPK_FAC_IMPDEDUC '&FNSQLFMT(DPR:NIT)&','&FNSQLFMT(A_FTR:CNSFCT)&|
+                        ','&FNSQLFMT(A_FTR:N_FACTURA)&','&A_FTR:VR_TOTAL
+                     WDUM{PROP:SQL} = LOC:SQL
+                     IF FNVALORVARIABLE('IDFORMATOFTRFINANCIE')='03'
+                        RPT:FACTURAFINAN_03(A_FTR:CNSFCT)
+                     ELSIF  FNVALORVARIABLE('IDFORMATOFTRFINANCIE')='04'
+                        RPT:FACTURAFINAN_03_TUTEPROV(A_FTR:CNSFCT)
+                     ELSE
+                        RPT:FACTURA(A_FTR:CNSFCT)
+                     END
+                  END
+               END
+            END
+         OF 'INVENTARIO'
+            RPT:FACTURA_INV(A_FTR:CNSFCT)
+         OF 'CE' OROF 'CI'
+            CASE A_FTR:TIPOFAC
+            OF 'M'
+               case LOC:FORMATO
+               OF '03F'
+                  RptFTRCE03F
+               OF '03F2'
+                  RptFTRCE03F2
+               OF '03F3'
+                  RptFTRCE03F3
+               OF '03GS'
+                  RptFTRCE03GS
+               OF '03GSG'
+                 RptFTRCE03GSanG
+               Else
+                  RptFTRSaludMasiva
+               End
+            ELSE
+               GLO:TIPOCTA = 0
+               IF LOC:FMTOORI=1 AND A_FTR:IDFORMATO<>''
+                  LOC:FMT=A_FTR:IDFORMATO
+               ELSE
+                  LOC:FMT=LOC:FORMATO
+               END
+               CASE LOC:FMT
+               OF '01'
+                  IF A_FTR:PROCEDENCIA ='CI'
+                     IF FNVALORVARIABLE('IDFORMATOFTR_01_CI')='MEDIA'
+                        RptFTRCEMedia
+                     ELSE
+                        RptFTRCE
+                     END
+                  ELSE
+                     IF FNVALORVARIABLE('IDFORMATOFTR_01_CE')='MEDIA'
+                        RptFTRCEMedia
+                     ELSE
+                        RptFTRCE
+                     END
+                  END
+               OF '02'
+                !STOP('TIPO2')
+                  RptFTRCEnva_
+               OF '03B'
+                  IF A_FTR:PROCEDENCIA ='CI'
+                     RptFTRhadm03bCI('3',A_FTR:IDPLAN, A_FTR:N_FACTURA)
+                  ELSE
+                     RptFTRhadm03bCE('3',A_FTR:IDPLAN, A_FTR:N_FACTURA)
+                  END
+               OF '03C'
+                  IF A_FTR:PROCEDENCIA ='CI'
+                     RptFTRhadm03CI('3',A_FTR:IDPLAN, AUT:N_FACTURA)
+                  ELSE
+                     RptFTRhadm03CE('3',A_FTR:IDPLAN, AUT:N_FACTURA)
+                  END
+               of '03CA'
+                  IF A_FTR:PROCEDENCIA ='CI'
+                     RptFTRhadm03CA_CI('3',A_FTR:IDPLAN, AUT:N_FACTURA)
+                  Else
+                     RptFTRhadm03CA_CE('3',FTR:IDPLAN, AUT:N_FACTURA)
+                  End
+               of '03F'
+                  RptFTRCE03F
+               of '03F1'
+                  RptFTRCE03F1
+               OF '03F2'
+                  RptFTRCE03F2
+               OF '03GS'
+                  RptFTRCE03GS
+               OF '03GSG'
+                 RptFTRCE03GSanG
+               OF '04'
+                  RptFTRCE1
+               of '04A'
+                  RptFTRhadm04A_CE
+               OF '05'
+                  RptFTRCEA
+               else
+                  Message('NO ha definido el formato de factura a trabajar')
+               end
+            END
+         END
+      END
+   END
+END
+GLO:SYS_VISTAPREVIA = 0
+LOC:MGE=''
+ENABLE(?BComienza)
+Display
+GLO:EXPORTARPDF=0
+GLO:PATHPDF=''
+MESSAGE('Proceso Terminado Correctamente','Impresión Por Consecutivo',icon:clarion)
+[END]
+[END]
+WHEN '?LOC:N_FACINICIAL'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+IF LOC:FACTFINAL=''
+   LOC:FACTFINAL=LOC:N_FACINICIAL
+END
+DISPLAY
+[END]
+[END]
+WHEN '?BProcesar'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+IF GLO:TXTARCHGEN=''
+   CYCLE
+END
+DISABLE(?BProcesar)
+Relate:ARCHGEN.Open
+CLEAR(ARCHGEN:record,-1)
+SET(ARCHGEN)
+FREE(QERROR)
+I#=1
+IF GLO:CNSRPDX=''
+   GLO:CNSRPDX=CLIP(GLO:IDSEDE)&FORMAT(FNGENERACONSECUTIVO(GLO:IDSEDE,'@RPDX'),@N08)
+ELSE
+   CLEAR(WDU5:Record)
+   WDU5{PROP:SQL}='DELETE RPDX WHERE CNS='&FnSQLfmt(GLO:CNSRPDX)
+END
+LOOP UNTIL ACCESS:ARCHGEN.NEXT()
+   LOC:N_FACTURAN  = Column_Text (ARCHGEN:LINE,',',0)
+   LOC:MGE='Procesando Factura Nro.:'&LOC:N_FACTURAN&' item='&I#
+   DISPLAY
+   CLEAR(WDU5:RECORD)
+   WDU5{PROP:SQL}='SELECT COUNT(*) FROM FTR WHERE N_FACTURA='&FNSQLFMT(LOC:N_FACTURAN)
+   ACCESS:WDU5.NEXT()
+   IF WDU5:C1<=0
+      EFACTURA = LOC:N_FACTURAN
+      ITEMS   = I#
+      EMENSAGE = 'Factura No encontrada .. No se puede Imprimir'
+      ADD(QERROR,+EFACTURA)
+      CYCLE
+   END
+   I#+=1
+   CLEAR(RPDX:RECORD)
+   RPDX:CNS  = GLO:CNSRPDX
+   RPDX:ID1 = LOC:N_FACTURAN
+   Access:RPDX.Insert()
+END
+IF RECORDS(QERROR)>0
+   A.Init(QuickWindow,?SMExcel,1,1,1)
+   A.CreateFile()
+   A.Select('C3')
+   A.Assign('Facturas Con Inconsistencias')
+   A.SetAlignment(10)
+   I#=6
+   A.Assign(I#, 3, 'N_FACTURA')
+   A.setbold(true)
+   A.Assign(I#, 4, 'ITEM')
+   A.setbold(true)
+   I# +=1
+   LOOP J#=1 TO RECORDS(QERROR)
+      Get(QERROR , J#)
+      A.Assign(I#, 3,  EFACTURA)
+      A.Assign(I#, 4,  ITEMS)
+      A.Assign(I#, 5,  EMENSAGE)
+      I# +=1
+   END
+END
+ENABLE(?BProcesar)
+SETPATH(LOC:PATH)
+LOC:MGE='Plano Procesado....'
+DISPLAY
+[END]
+[END]
+[END]
+EMBED %WindowEventHandling
+[INSTANCES]
+WHEN 'CloseWindow'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+GLO:NROIMP=0
+GLO:NIVEL4=0
+GLO:CNSCXC=''
+GLO:TXTARCHGEN=''
+CLEAR(WDU5:RECORD)
+WDU5{PROP:SQL}='DELETE RPDX WHERE CNS='&FnSQLfmt(GLO:CNSRPDX)
+GLO:CNSRPDX=''
+[END]
+[END]
+[END]
+[ADDITION]
+NAME AnyScreen AnyScreenProcedure
+[FIELDPROMPT]
+%HideOnClient DEPEND %Control LONG TIMES 30
+WHEN  ('?Aceptar') (0)
+WHEN  ('?BComienza') (0)
+WHEN  ('?BOX1') (0)
+WHEN  ('?BProcesar') (0)
+WHEN  ('?GLO:CNSRPDX') (0)
+WHEN  ('?GLO:SYS_VISTAPREVIA') (0)
+WHEN  ('?GLO:TXTARCHGEN') (0)
+WHEN  ('?LOC:CNSCXC') (0)
+WHEN  ('?LOC:CNSCXC:Prompt') (0)
+WHEN  ('?LOC:COPIAS') (0)
+WHEN  ('?LOC:COPIAS:Prompt') (0)
+WHEN  ('?LOC:DIRIMPRESORA') (0)
+WHEN  ('?LOC:FACTFINAL') (0)
+WHEN  ('?LOC:FACTFINAL:Prompt') (0)
+WHEN  ('?LOC:FMTOORI') (0)
+WHEN  ('?LOC:FORMATO') (0)
+WHEN  ('?LOC:FORMATO:Prompt') (0)
+WHEN  ('?LOC:FORMATOHADM') (0)
+WHEN  ('?LOC:FORMATOHADM:Prompt') (0)
+WHEN  ('?LOC:MGE') (0)
+WHEN  ('?LOC:N_FACINICIAL') (0)
+WHEN  ('?LOC:N_FACINICIAL:Prompt') (0)
+WHEN  ('?LOC:PREGUNTAR') (0)
+WHEN  ('?LOC:PREGUNTAR:Prompt') (0)
+WHEN  ('?LOC:RUTA:Prompt') (0)
+WHEN  ('?LookupFile') (0)
+WHEN  ('?LookupFile:2') (0)
+WHEN  ('?SMExcel') (0)
+WHEN  ('?STRING1') (0)
+WHEN  ('?STRING2') (0)
+
+%SynOnAccept DEPEND %Control LONG TIMES 30
+WHEN  ('?Aceptar') (1)
+WHEN  ('?BComienza') (1)
+WHEN  ('?BOX1') (1)
+WHEN  ('?BProcesar') (1)
+WHEN  ('?GLO:CNSRPDX') (1)
+WHEN  ('?GLO:SYS_VISTAPREVIA') (1)
+WHEN  ('?GLO:TXTARCHGEN') (1)
+WHEN  ('?LOC:CNSCXC') (1)
+WHEN  ('?LOC:CNSCXC:Prompt') (1)
+WHEN  ('?LOC:COPIAS') (1)
+WHEN  ('?LOC:COPIAS:Prompt') (1)
+WHEN  ('?LOC:DIRIMPRESORA') (1)
+WHEN  ('?LOC:FACTFINAL') (1)
+WHEN  ('?LOC:FACTFINAL:Prompt') (1)
+WHEN  ('?LOC:FMTOORI') (1)
+WHEN  ('?LOC:FORMATO') (1)
+WHEN  ('?LOC:FORMATO:Prompt') (1)
+WHEN  ('?LOC:FORMATOHADM') (1)
+WHEN  ('?LOC:FORMATOHADM:Prompt') (1)
+WHEN  ('?LOC:MGE') (1)
+WHEN  ('?LOC:N_FACINICIAL') (1)
+WHEN  ('?LOC:N_FACINICIAL:Prompt') (1)
+WHEN  ('?LOC:PREGUNTAR') (1)
+WHEN  ('?LOC:PREGUNTAR:Prompt') (1)
+WHEN  ('?LOC:RUTA:Prompt') (1)
+WHEN  ('?LookupFile') (1)
+WHEN  ('?LookupFile:2') (1)
+WHEN  ('?SMExcel') (1)
+WHEN  ('?STRING1') (1)
+WHEN  ('?STRING2') (1)
+
+%SynOnSelect DEPEND %Control LONG TIMES 30
+WHEN  ('?Aceptar') (1)
+WHEN  ('?BComienza') (1)
+WHEN  ('?BOX1') (1)
+WHEN  ('?BProcesar') (1)
+WHEN  ('?GLO:CNSRPDX') (1)
+WHEN  ('?GLO:SYS_VISTAPREVIA') (1)
+WHEN  ('?GLO:TXTARCHGEN') (1)
+WHEN  ('?LOC:CNSCXC') (1)
+WHEN  ('?LOC:CNSCXC:Prompt') (1)
+WHEN  ('?LOC:COPIAS') (1)
+WHEN  ('?LOC:COPIAS:Prompt') (1)
+WHEN  ('?LOC:DIRIMPRESORA') (1)
+WHEN  ('?LOC:FACTFINAL') (1)
+WHEN  ('?LOC:FACTFINAL:Prompt') (1)
+WHEN  ('?LOC:FMTOORI') (1)
+WHEN  ('?LOC:FORMATO') (1)
+WHEN  ('?LOC:FORMATO:Prompt') (1)
+WHEN  ('?LOC:FORMATOHADM') (1)
+WHEN  ('?LOC:FORMATOHADM:Prompt') (1)
+WHEN  ('?LOC:MGE') (1)
+WHEN  ('?LOC:N_FACINICIAL') (1)
+WHEN  ('?LOC:N_FACINICIAL:Prompt') (1)
+WHEN  ('?LOC:PREGUNTAR') (1)
+WHEN  ('?LOC:PREGUNTAR:Prompt') (1)
+WHEN  ('?LOC:RUTA:Prompt') (1)
+WHEN  ('?LookupFile') (1)
+WHEN  ('?LookupFile:2') (1)
+WHEN  ('?SMExcel') (1)
+WHEN  ('?STRING1') (1)
+WHEN  ('?STRING2') (1)
+
+%ThinControlMaxSize DEPEND %Control DEFAULT TIMES 30
+WHEN  ('?Aceptar') ('250000')
+WHEN  ('?BComienza') ('250000')
+WHEN  ('?BOX1') ('250000')
+WHEN  ('?BProcesar') ('250000')
+WHEN  ('?GLO:CNSRPDX') ('250000')
+WHEN  ('?GLO:SYS_VISTAPREVIA') ('32000')
+WHEN  ('?GLO:TXTARCHGEN') ('250000')
+WHEN  ('?LOC:CNSCXC') ('250000')
+WHEN  ('?LOC:CNSCXC:Prompt') ('250000')
+WHEN  ('?LOC:COPIAS') ('250000')
+WHEN  ('?LOC:COPIAS:Prompt') ('250000')
+WHEN  ('?LOC:DIRIMPRESORA') ('250000')
+WHEN  ('?LOC:FACTFINAL') ('250000')
+WHEN  ('?LOC:FACTFINAL:Prompt') ('250000')
+WHEN  ('?LOC:FMTOORI') ('250000')
+WHEN  ('?LOC:FORMATO') ('250000')
+WHEN  ('?LOC:FORMATO:Prompt') ('250000')
+WHEN  ('?LOC:FORMATOHADM') ('250000')
+WHEN  ('?LOC:FORMATOHADM:Prompt') ('250000')
+WHEN  ('?LOC:MGE') ('250000')
+WHEN  ('?LOC:N_FACINICIAL') ('250000')
+WHEN  ('?LOC:N_FACINICIAL:Prompt') ('250000')
+WHEN  ('?LOC:PREGUNTAR') ('250000')
+WHEN  ('?LOC:PREGUNTAR:Prompt') ('250000')
+WHEN  ('?LOC:RUTA:Prompt') ('250000')
+WHEN  ('?LookupFile') ('250000')
+WHEN  ('?LookupFile:2') ('32000')
+WHEN  ('?SMExcel') ('250000')
+WHEN  ('?STRING1') ('250000')
+WHEN  ('?STRING2') ('250000')
+
+%ThinControlListboxPipes DEPEND %Control LONG TIMES 30
+WHEN  ('?Aceptar') (0)
+WHEN  ('?BComienza') (0)
+WHEN  ('?BOX1') (0)
+WHEN  ('?BProcesar') (0)
+WHEN  ('?GLO:CNSRPDX') (0)
+WHEN  ('?GLO:SYS_VISTAPREVIA') (0)
+WHEN  ('?GLO:TXTARCHGEN') (0)
+WHEN  ('?LOC:CNSCXC') (0)
+WHEN  ('?LOC:CNSCXC:Prompt') (0)
+WHEN  ('?LOC:COPIAS') (0)
+WHEN  ('?LOC:COPIAS:Prompt') (0)
+WHEN  ('?LOC:DIRIMPRESORA') (0)
+WHEN  ('?LOC:FACTFINAL') (0)
+WHEN  ('?LOC:FACTFINAL:Prompt') (0)
+WHEN  ('?LOC:FMTOORI') (0)
+WHEN  ('?LOC:FORMATO') (0)
+WHEN  ('?LOC:FORMATO:Prompt') (0)
+WHEN  ('?LOC:FORMATOHADM') (0)
+WHEN  ('?LOC:FORMATOHADM:Prompt') (0)
+WHEN  ('?LOC:MGE') (0)
+WHEN  ('?LOC:N_FACINICIAL') (0)
+WHEN  ('?LOC:N_FACINICIAL:Prompt') (0)
+WHEN  ('?LOC:PREGUNTAR') (0)
+WHEN  ('?LOC:PREGUNTAR:Prompt') (0)
+WHEN  ('?LOC:RUTA:Prompt') (0)
+WHEN  ('?LookupFile') (0)
+WHEN  ('?LookupFile:2') (0)
+WHEN  ('?SMExcel') (0)
+WHEN  ('?STRING1') (0)
+WHEN  ('?STRING2') (0)
+
+%AnyScreenCSSclass DEPEND %Control DEFAULT TIMES 30
+WHEN  ('?Aceptar') ('')
+WHEN  ('?BComienza') ('')
+WHEN  ('?BOX1') ('')
+WHEN  ('?BProcesar') ('')
+WHEN  ('?GLO:CNSRPDX') ('')
+WHEN  ('?GLO:SYS_VISTAPREVIA') ('')
+WHEN  ('?GLO:TXTARCHGEN') ('')
+WHEN  ('?LOC:CNSCXC') ('')
+WHEN  ('?LOC:CNSCXC:Prompt') ('')
+WHEN  ('?LOC:COPIAS') ('')
+WHEN  ('?LOC:COPIAS:Prompt') ('')
+WHEN  ('?LOC:DIRIMPRESORA') ('')
+WHEN  ('?LOC:FACTFINAL') ('')
+WHEN  ('?LOC:FACTFINAL:Prompt') ('')
+WHEN  ('?LOC:FMTOORI') ('')
+WHEN  ('?LOC:FORMATO') ('')
+WHEN  ('?LOC:FORMATO:Prompt') ('')
+WHEN  ('?LOC:FORMATOHADM') ('')
+WHEN  ('?LOC:FORMATOHADM:Prompt') ('')
+WHEN  ('?LOC:MGE') ('')
+WHEN  ('?LOC:N_FACINICIAL') ('')
+WHEN  ('?LOC:N_FACINICIAL:Prompt') ('')
+WHEN  ('?LOC:PREGUNTAR') ('')
+WHEN  ('?LOC:PREGUNTAR:Prompt') ('')
+WHEN  ('?LOC:RUTA:Prompt') ('')
+WHEN  ('?LookupFile') ('')
+WHEN  ('?LookupFile:2') ('')
+WHEN  ('?SMExcel') ('')
+WHEN  ('?STRING1') ('')
+WHEN  ('?STRING2') ('')
+
+%EnableWithoutThinet DEPEND %Control LONG TIMES 30
+WHEN  ('?Aceptar') (0)
+WHEN  ('?BComienza') (0)
+WHEN  ('?BOX1') (0)
+WHEN  ('?BProcesar') (0)
+WHEN  ('?GLO:CNSRPDX') (0)
+WHEN  ('?GLO:SYS_VISTAPREVIA') (0)
+WHEN  ('?GLO:TXTARCHGEN') (0)
+WHEN  ('?LOC:CNSCXC') (0)
+WHEN  ('?LOC:CNSCXC:Prompt') (0)
+WHEN  ('?LOC:COPIAS') (0)
+WHEN  ('?LOC:COPIAS:Prompt') (0)
+WHEN  ('?LOC:DIRIMPRESORA') (0)
+WHEN  ('?LOC:FACTFINAL') (0)
+WHEN  ('?LOC:FACTFINAL:Prompt') (0)
+WHEN  ('?LOC:FMTOORI') (0)
+WHEN  ('?LOC:FORMATO') (0)
+WHEN  ('?LOC:FORMATO:Prompt') (0)
+WHEN  ('?LOC:FORMATOHADM') (0)
+WHEN  ('?LOC:FORMATOHADM:Prompt') (0)
+WHEN  ('?LOC:MGE') (0)
+WHEN  ('?LOC:N_FACINICIAL') (0)
+WHEN  ('?LOC:N_FACINICIAL:Prompt') (0)
+WHEN  ('?LOC:PREGUNTAR') (0)
+WHEN  ('?LOC:PREGUNTAR:Prompt') (0)
+WHEN  ('?LOC:RUTA:Prompt') (0)
+WHEN  ('?LookupFile') (0)
+WHEN  ('?LookupFile:2') (0)
+WHEN  ('?SMExcel') (0)
+WHEN  ('?STRING1') (0)
+WHEN  ('?STRING2') (0)
+
+%OverrideGlobalListboxHeaderColors DEPEND %Control LONG TIMES 30
+WHEN  ('?Aceptar') (0)
+WHEN  ('?BComienza') (0)
+WHEN  ('?BOX1') (0)
+WHEN  ('?BProcesar') (0)
+WHEN  ('?GLO:CNSRPDX') (0)
+WHEN  ('?GLO:SYS_VISTAPREVIA') (0)
+WHEN  ('?GLO:TXTARCHGEN') (0)
+WHEN  ('?LOC:CNSCXC') (0)
+WHEN  ('?LOC:CNSCXC:Prompt') (0)
+WHEN  ('?LOC:COPIAS') (0)
+WHEN  ('?LOC:COPIAS:Prompt') (0)
+WHEN  ('?LOC:DIRIMPRESORA') (0)
+WHEN  ('?LOC:FACTFINAL') (0)
+WHEN  ('?LOC:FACTFINAL:Prompt') (0)
+WHEN  ('?LOC:FMTOORI') (0)
+WHEN  ('?LOC:FORMATO') (0)
+WHEN  ('?LOC:FORMATO:Prompt') (0)
+WHEN  ('?LOC:FORMATOHADM') (0)
+WHEN  ('?LOC:FORMATOHADM:Prompt') (0)
+WHEN  ('?LOC:MGE') (0)
+WHEN  ('?LOC:N_FACINICIAL') (0)
+WHEN  ('?LOC:N_FACINICIAL:Prompt') (0)
+WHEN  ('?LOC:PREGUNTAR') (0)
+WHEN  ('?LOC:PREGUNTAR:Prompt') (0)
+WHEN  ('?LOC:RUTA:Prompt') (0)
+WHEN  ('?LookupFile') (0)
+WHEN  ('?LookupFile:2') (0)
+WHEN  ('?SMExcel') (0)
+WHEN  ('?STRING1') (0)
+WHEN  ('?STRING2') (0)
+
+%cNormal DEPEND %Control LONG TIMES 30
+WHEN  ('?Aceptar') (-1)
+WHEN  ('?BComienza') (-1)
+WHEN  ('?BOX1') (-1)
+WHEN  ('?BProcesar') (-1)
+WHEN  ('?GLO:CNSRPDX') (-1)
+WHEN  ('?GLO:SYS_VISTAPREVIA') (-1)
+WHEN  ('?GLO:TXTARCHGEN') (-1)
+WHEN  ('?LOC:CNSCXC') (-1)
+WHEN  ('?LOC:CNSCXC:Prompt') (-1)
+WHEN  ('?LOC:COPIAS') (-1)
+WHEN  ('?LOC:COPIAS:Prompt') (-1)
+WHEN  ('?LOC:DIRIMPRESORA') (-1)
+WHEN  ('?LOC:FACTFINAL') (-1)
+WHEN  ('?LOC:FACTFINAL:Prompt') (-1)
+WHEN  ('?LOC:FMTOORI') (-1)
+WHEN  ('?LOC:FORMATO') (-1)
+WHEN  ('?LOC:FORMATO:Prompt') (-1)
+WHEN  ('?LOC:FORMATOHADM') (-1)
+WHEN  ('?LOC:FORMATOHADM:Prompt') (-1)
+WHEN  ('?LOC:MGE') (-1)
+WHEN  ('?LOC:N_FACINICIAL') (-1)
+WHEN  ('?LOC:N_FACINICIAL:Prompt') (-1)
+WHEN  ('?LOC:PREGUNTAR') (-1)
+WHEN  ('?LOC:PREGUNTAR:Prompt') (-1)
+WHEN  ('?LOC:RUTA:Prompt') (-1)
+WHEN  ('?LookupFile') (-1)
+WHEN  ('?LookupFile:2') (-1)
+WHEN  ('?SMExcel') (-1)
+WHEN  ('?STRING1') (-1)
+WHEN  ('?STRING2') (-1)
+
+%cAccentTxt DEPEND %Control LONG TIMES 30
+WHEN  ('?Aceptar') (14342874)
+WHEN  ('?BComienza') (14342874)
+WHEN  ('?BOX1') (14342874)
+WHEN  ('?BProcesar') (14342874)
+WHEN  ('?GLO:CNSRPDX') (14342874)
+WHEN  ('?GLO:SYS_VISTAPREVIA') (14342874)
+WHEN  ('?GLO:TXTARCHGEN') (14342874)
+WHEN  ('?LOC:CNSCXC') (14342874)
+WHEN  ('?LOC:CNSCXC:Prompt') (14342874)
+WHEN  ('?LOC:COPIAS') (14342874)
+WHEN  ('?LOC:COPIAS:Prompt') (14342874)
+WHEN  ('?LOC:DIRIMPRESORA') (14342874)
+WHEN  ('?LOC:FACTFINAL') (14342874)
+WHEN  ('?LOC:FACTFINAL:Prompt') (14342874)
+WHEN  ('?LOC:FMTOORI') (14342874)
+WHEN  ('?LOC:FORMATO') (14342874)
+WHEN  ('?LOC:FORMATO:Prompt') (14342874)
+WHEN  ('?LOC:FORMATOHADM') (14342874)
+WHEN  ('?LOC:FORMATOHADM:Prompt') (14342874)
+WHEN  ('?LOC:MGE') (14342874)
+WHEN  ('?LOC:N_FACINICIAL') (14342874)
+WHEN  ('?LOC:N_FACINICIAL:Prompt') (14342874)
+WHEN  ('?LOC:PREGUNTAR') (14342874)
+WHEN  ('?LOC:PREGUNTAR:Prompt') (14342874)
+WHEN  ('?LOC:RUTA:Prompt') (14342874)
+WHEN  ('?LookupFile') (14342874)
+WHEN  ('?LookupFile:2') (14342874)
+WHEN  ('?SMExcel') (14342874)
+WHEN  ('?STRING1') (14342874)
+WHEN  ('?STRING2') (14342874)
+
+%cListHeaderBack DEPEND %Control LONG TIMES 30
+WHEN  ('?Aceptar') (14342874)
+WHEN  ('?BComienza') (14342874)
+WHEN  ('?BOX1') (14342874)
+WHEN  ('?BProcesar') (14342874)
+WHEN  ('?GLO:CNSRPDX') (14342874)
+WHEN  ('?GLO:SYS_VISTAPREVIA') (14342874)
+WHEN  ('?GLO:TXTARCHGEN') (14342874)
+WHEN  ('?LOC:CNSCXC') (14342874)
+WHEN  ('?LOC:CNSCXC:Prompt') (14342874)
+WHEN  ('?LOC:COPIAS') (14342874)
+WHEN  ('?LOC:COPIAS:Prompt') (14342874)
+WHEN  ('?LOC:DIRIMPRESORA') (14342874)
+WHEN  ('?LOC:FACTFINAL') (14342874)
+WHEN  ('?LOC:FACTFINAL:Prompt') (14342874)
+WHEN  ('?LOC:FMTOORI') (14342874)
+WHEN  ('?LOC:FORMATO') (14342874)
+WHEN  ('?LOC:FORMATO:Prompt') (14342874)
+WHEN  ('?LOC:FORMATOHADM') (14342874)
+WHEN  ('?LOC:FORMATOHADM:Prompt') (14342874)
+WHEN  ('?LOC:MGE') (14342874)
+WHEN  ('?LOC:N_FACINICIAL') (14342874)
+WHEN  ('?LOC:N_FACINICIAL:Prompt') (14342874)
+WHEN  ('?LOC:PREGUNTAR') (14342874)
+WHEN  ('?LOC:PREGUNTAR:Prompt') (14342874)
+WHEN  ('?LOC:RUTA:Prompt') (14342874)
+WHEN  ('?LookupFile') (14342874)
+WHEN  ('?LookupFile:2') (14342874)
+WHEN  ('?SMExcel') (14342874)
+WHEN  ('?STRING1') (14342874)
+WHEN  ('?STRING2') (14342874)
+
+%cListHeaderFore DEPEND %Control LONG TIMES 30
+WHEN  ('?Aceptar') (0)
+WHEN  ('?BComienza') (0)
+WHEN  ('?BOX1') (0)
+WHEN  ('?BProcesar') (0)
+WHEN  ('?GLO:CNSRPDX') (0)
+WHEN  ('?GLO:SYS_VISTAPREVIA') (0)
+WHEN  ('?GLO:TXTARCHGEN') (0)
+WHEN  ('?LOC:CNSCXC') (0)
+WHEN  ('?LOC:CNSCXC:Prompt') (0)
+WHEN  ('?LOC:COPIAS') (0)
+WHEN  ('?LOC:COPIAS:Prompt') (0)
+WHEN  ('?LOC:DIRIMPRESORA') (0)
+WHEN  ('?LOC:FACTFINAL') (0)
+WHEN  ('?LOC:FACTFINAL:Prompt') (0)
+WHEN  ('?LOC:FMTOORI') (0)
+WHEN  ('?LOC:FORMATO') (0)
+WHEN  ('?LOC:FORMATO:Prompt') (0)
+WHEN  ('?LOC:FORMATOHADM') (0)
+WHEN  ('?LOC:FORMATOHADM:Prompt') (0)
+WHEN  ('?LOC:MGE') (0)
+WHEN  ('?LOC:N_FACINICIAL') (0)
+WHEN  ('?LOC:N_FACINICIAL:Prompt') (0)
+WHEN  ('?LOC:PREGUNTAR') (0)
+WHEN  ('?LOC:PREGUNTAR:Prompt') (0)
+WHEN  ('?LOC:RUTA:Prompt') (0)
+WHEN  ('?LookupFile') (0)
+WHEN  ('?LookupFile:2') (0)
+WHEN  ('?SMExcel') (0)
+WHEN  ('?STRING1') (0)
+WHEN  ('?STRING2') (0)
+
+%cListHeaderGRBack DEPEND %Control LONG TIMES 30
+WHEN  ('?Aceptar') (14342874)
+WHEN  ('?BComienza') (14342874)
+WHEN  ('?BOX1') (14342874)
+WHEN  ('?BProcesar') (14342874)
+WHEN  ('?GLO:CNSRPDX') (14342874)
+WHEN  ('?GLO:SYS_VISTAPREVIA') (14342874)
+WHEN  ('?GLO:TXTARCHGEN') (14342874)
+WHEN  ('?LOC:CNSCXC') (14342874)
+WHEN  ('?LOC:CNSCXC:Prompt') (14342874)
+WHEN  ('?LOC:COPIAS') (14342874)
+WHEN  ('?LOC:COPIAS:Prompt') (14342874)
+WHEN  ('?LOC:DIRIMPRESORA') (14342874)
+WHEN  ('?LOC:FACTFINAL') (14342874)
+WHEN  ('?LOC:FACTFINAL:Prompt') (14342874)
+WHEN  ('?LOC:FMTOORI') (14342874)
+WHEN  ('?LOC:FORMATO') (14342874)
+WHEN  ('?LOC:FORMATO:Prompt') (14342874)
+WHEN  ('?LOC:FORMATOHADM') (14342874)
+WHEN  ('?LOC:FORMATOHADM:Prompt') (14342874)
+WHEN  ('?LOC:MGE') (14342874)
+WHEN  ('?LOC:N_FACINICIAL') (14342874)
+WHEN  ('?LOC:N_FACINICIAL:Prompt') (14342874)
+WHEN  ('?LOC:PREGUNTAR') (14342874)
+WHEN  ('?LOC:PREGUNTAR:Prompt') (14342874)
+WHEN  ('?LOC:RUTA:Prompt') (14342874)
+WHEN  ('?LookupFile') (14342874)
+WHEN  ('?LookupFile:2') (14342874)
+WHEN  ('?SMExcel') (14342874)
+WHEN  ('?STRING1') (14342874)
+WHEN  ('?STRING2') (14342874)
+
+%cListHeaderGrFore DEPEND %Control LONG TIMES 30
+WHEN  ('?Aceptar') (0)
+WHEN  ('?BComienza') (0)
+WHEN  ('?BOX1') (0)
+WHEN  ('?BProcesar') (0)
+WHEN  ('?GLO:CNSRPDX') (0)
+WHEN  ('?GLO:SYS_VISTAPREVIA') (0)
+WHEN  ('?GLO:TXTARCHGEN') (0)
+WHEN  ('?LOC:CNSCXC') (0)
+WHEN  ('?LOC:CNSCXC:Prompt') (0)
+WHEN  ('?LOC:COPIAS') (0)
+WHEN  ('?LOC:COPIAS:Prompt') (0)
+WHEN  ('?LOC:DIRIMPRESORA') (0)
+WHEN  ('?LOC:FACTFINAL') (0)
+WHEN  ('?LOC:FACTFINAL:Prompt') (0)
+WHEN  ('?LOC:FMTOORI') (0)
+WHEN  ('?LOC:FORMATO') (0)
+WHEN  ('?LOC:FORMATO:Prompt') (0)
+WHEN  ('?LOC:FORMATOHADM') (0)
+WHEN  ('?LOC:FORMATOHADM:Prompt') (0)
+WHEN  ('?LOC:MGE') (0)
+WHEN  ('?LOC:N_FACINICIAL') (0)
+WHEN  ('?LOC:N_FACINICIAL:Prompt') (0)
+WHEN  ('?LOC:PREGUNTAR') (0)
+WHEN  ('?LOC:PREGUNTAR:Prompt') (0)
+WHEN  ('?LOC:RUTA:Prompt') (0)
+WHEN  ('?LookupFile') (0)
+WHEN  ('?LookupFile:2') (0)
+WHEN  ('?SMExcel') (0)
+WHEN  ('?STRING1') (0)
+WHEN  ('?STRING2') (0)
+
+%cListHeaderArrow DEPEND %Control LONG TIMES 30
+WHEN  ('?Aceptar') (8421504)
+WHEN  ('?BComienza') (8421504)
+WHEN  ('?BOX1') (8421504)
+WHEN  ('?BProcesar') (8421504)
+WHEN  ('?GLO:CNSRPDX') (8421504)
+WHEN  ('?GLO:SYS_VISTAPREVIA') (8421504)
+WHEN  ('?GLO:TXTARCHGEN') (8421504)
+WHEN  ('?LOC:CNSCXC') (8421504)
+WHEN  ('?LOC:CNSCXC:Prompt') (8421504)
+WHEN  ('?LOC:COPIAS') (8421504)
+WHEN  ('?LOC:COPIAS:Prompt') (8421504)
+WHEN  ('?LOC:DIRIMPRESORA') (8421504)
+WHEN  ('?LOC:FACTFINAL') (8421504)
+WHEN  ('?LOC:FACTFINAL:Prompt') (8421504)
+WHEN  ('?LOC:FMTOORI') (8421504)
+WHEN  ('?LOC:FORMATO') (8421504)
+WHEN  ('?LOC:FORMATO:Prompt') (8421504)
+WHEN  ('?LOC:FORMATOHADM') (8421504)
+WHEN  ('?LOC:FORMATOHADM:Prompt') (8421504)
+WHEN  ('?LOC:MGE') (8421504)
+WHEN  ('?LOC:N_FACINICIAL') (8421504)
+WHEN  ('?LOC:N_FACINICIAL:Prompt') (8421504)
+WHEN  ('?LOC:PREGUNTAR') (8421504)
+WHEN  ('?LOC:PREGUNTAR:Prompt') (8421504)
+WHEN  ('?LOC:RUTA:Prompt') (8421504)
+WHEN  ('?LookupFile') (8421504)
+WHEN  ('?LookupFile:2') (8421504)
+WHEN  ('?SMExcel') (8421504)
+WHEN  ('?STRING1') (8421504)
+WHEN  ('?STRING2') (8421504)
+
+%cListHeaderArrow3D DEPEND %Control LONG TIMES 30
+WHEN  ('?Aceptar') (16777215)
+WHEN  ('?BComienza') (16777215)
+WHEN  ('?BOX1') (16777215)
+WHEN  ('?BProcesar') (16777215)
+WHEN  ('?GLO:CNSRPDX') (16777215)
+WHEN  ('?GLO:SYS_VISTAPREVIA') (16777215)
+WHEN  ('?GLO:TXTARCHGEN') (16777215)
+WHEN  ('?LOC:CNSCXC') (16777215)
+WHEN  ('?LOC:CNSCXC:Prompt') (16777215)
+WHEN  ('?LOC:COPIAS') (16777215)
+WHEN  ('?LOC:COPIAS:Prompt') (16777215)
+WHEN  ('?LOC:DIRIMPRESORA') (16777215)
+WHEN  ('?LOC:FACTFINAL') (16777215)
+WHEN  ('?LOC:FACTFINAL:Prompt') (16777215)
+WHEN  ('?LOC:FMTOORI') (16777215)
+WHEN  ('?LOC:FORMATO') (16777215)
+WHEN  ('?LOC:FORMATO:Prompt') (16777215)
+WHEN  ('?LOC:FORMATOHADM') (16777215)
+WHEN  ('?LOC:FORMATOHADM:Prompt') (16777215)
+WHEN  ('?LOC:MGE') (16777215)
+WHEN  ('?LOC:N_FACINICIAL') (16777215)
+WHEN  ('?LOC:N_FACINICIAL:Prompt') (16777215)
+WHEN  ('?LOC:PREGUNTAR') (16777215)
+WHEN  ('?LOC:PREGUNTAR:Prompt') (16777215)
+WHEN  ('?LOC:RUTA:Prompt') (16777215)
+WHEN  ('?LookupFile') (16777215)
+WHEN  ('?LookupFile:2') (16777215)
+WHEN  ('?SMExcel') (16777215)
+WHEN  ('?STRING1') (16777215)
+WHEN  ('?STRING2') (16777215)
+
+%ThinControlMaxSizeRTF DEPEND %Control DEFAULT TIMES 30
+WHEN  ('?Aceptar') ('250000')
+WHEN  ('?BComienza') ('250000')
+WHEN  ('?BOX1') ('250000')
+WHEN  ('?BProcesar') ('250000')
+WHEN  ('?GLO:CNSRPDX') ('250000')
+WHEN  ('?GLO:SYS_VISTAPREVIA') ('250000')
+WHEN  ('?GLO:TXTARCHGEN') ('250000')
+WHEN  ('?LOC:CNSCXC') ('250000')
+WHEN  ('?LOC:CNSCXC:Prompt') ('250000')
+WHEN  ('?LOC:COPIAS') ('250000')
+WHEN  ('?LOC:COPIAS:Prompt') ('250000')
+WHEN  ('?LOC:DIRIMPRESORA') ('250000')
+WHEN  ('?LOC:FACTFINAL') ('250000')
+WHEN  ('?LOC:FACTFINAL:Prompt') ('250000')
+WHEN  ('?LOC:FMTOORI') ('250000')
+WHEN  ('?LOC:FORMATO') ('250000')
+WHEN  ('?LOC:FORMATO:Prompt') ('250000')
+WHEN  ('?LOC:FORMATOHADM') ('250000')
+WHEN  ('?LOC:FORMATOHADM:Prompt') ('250000')
+WHEN  ('?LOC:MGE') ('250000')
+WHEN  ('?LOC:N_FACINICIAL') ('250000')
+WHEN  ('?LOC:N_FACINICIAL:Prompt') ('250000')
+WHEN  ('?LOC:PREGUNTAR') ('250000')
+WHEN  ('?LOC:PREGUNTAR:Prompt') ('250000')
+WHEN  ('?LOC:RUTA:Prompt') ('250000')
+WHEN  ('?LookupFile') ('250000')
+WHEN  ('?LookupFile:2') ('250000')
+WHEN  ('?SMExcel') ('250000')
+WHEN  ('?STRING1') ('250000')
+WHEN  ('?STRING2') ('250000')
+
+[INSTANCE]
+INSTANCE 3
+OWNER 9
+[PROMPTS]
+%AnyScreenTimerRefresh LONG  (0)
+[ADDITION]
+NAME ABC CloseButton
+[INSTANCE]
+INSTANCE 1
+[ADDITION]
+NAME ABC WindowResize
+[FIELDPROMPT]
+%ResizeAnchorTop DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorLeft DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorRight DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorBottom DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowTop DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowLeft DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowRight DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowBottom DEPEND %Control LONG TIMES 0
+
+[INSTANCE]
+INSTANCE 4
+[PROMPTS]
+%UseAppStrategy DEFAULT  ('1')
+%AppStrategy DEFAULT  ('Surface')
+%RestrictMinSize LONG  (1)
+%WindowMinWidth DEFAULT  ('0')
+%WindowMaxWidth DEFAULT  ('0')
+%ClassItem UNIQUE DEFAULT  ('Default')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('WindowResizeClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Init {19}PROCEDURE(BYTE AppStrategy=AppStrategy:Resize,BYTE SetWindowMinSize=False,BYTE SetWindowMaxSize=False)')
+
+%WindowMinHeight DEFAULT  ('')
+%RestrictMaxSize LONG  (0)
+%WindowMaxHeight DEFAULT  ('')
+%AutoFindParents DEFAULT  ('Default')
+%DeferMoves DEFAULT  ('Default')
+%OverrideControls MULTI LONG  ()
+%OverrideControl DEPEND %OverrideControls DEFAULT TIMES 0
+
+%DisableResize DEPEND %OverrideControls LONG TIMES 0
+
+%HorizResize DEPEND %OverrideControls DEFAULT TIMES 0
+
+%VertResize DEPEND %OverrideControls DEFAULT TIMES 0
+
+%HorizPositional DEPEND %OverrideControls DEFAULT TIMES 0
+
+%VertPositional DEPEND %OverrideControls DEFAULT TIMES 0
+
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('Resizer')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('ADOBlob')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+[ADDITION]
+NAME ABC DOSFileLookup
+[INSTANCE]
+INSTANCE 2
+[PROMPTS]
+%ClassItem UNIQUE DEFAULT  ('Default')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('SelectFileClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+
+%DOSFileDialogHeader DEFAULT  ('Listado de Facturas para Imprimir')
+%DOSFileField FIELD  (GLO:TXTARCHGEN)
+%DOSInitialDirectory DEFAULT  ('')
+%DOSInitialFilename DEFAULT  ('')
+%ReturnToOriginalDir LONG  (0)
+%AllowLongFilenames LONG  (1)
+%DOSFileDialogType DEFAULT  ('Open')
+%AllowNoError LONG  (0)
+%DefaultOnCancel LONG  (0)
+%AllowMultiSelect LONG  (0)
+%ActionsToTake DEFAULT  ('')
+%AssignToImageControl LONG  (0)
+%ImageControl DEFAULT  ('')
+%ImageResize LONG  (1)
+%DOSVariableMask LONG  (0)
+%DOSMaskVariable DEFAULT  ('')
+%DOSMaskDesc DEFAULT  ('Archivos de Texto')
+%DOSMask DEFAULT  ('*.txt')
+%DOSMoreMasks MULTI LONG  ()
+%DOSMoreMaskDesc DEPEND %DOSMoreMasks DEFAULT TIMES 0
+
+%DOSMoreMask DEPEND %DOSMoreMasks DEFAULT TIMES 0
+
+%RedisplayWindow LONG  (1)
+%UpdateFields MULTI LONG  ()
+%UpdateFeq DEPEND %UpdateFields DEFAULT TIMES 0
+
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('FileLookup2')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('ADOBlob')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+[INSTANCE]
+INSTANCE 6
+[PROMPTS]
+%ClassItem UNIQUE DEFAULT  ('Default')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('SelectFileClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+
+%DOSFileDialogHeader DEFAULT  ('Exportar Facturas')
+%DOSFileField FIELD  (GLO:PATHPDF)
+%DOSInitialDirectory DEFAULT  ('')
+%DOSInitialFilename DEFAULT  ('')
+%ReturnToOriginalDir LONG  (0)
+%AllowLongFilenames LONG  (1)
+%DOSFileDialogType DEFAULT  ('Directory')
+%AllowNoError LONG  (0)
+%DefaultOnCancel LONG  (0)
+%AllowMultiSelect LONG  (0)
+%ActionsToTake DEFAULT  ('')
+%AssignToImageControl LONG  (0)
+%ImageControl DEFAULT  ('')
+%ImageResize LONG  (1)
+%DOSVariableMask LONG  (0)
+%DOSMaskVariable DEFAULT  ('')
+%DOSMaskDesc DEFAULT  ('All Files')
+%DOSMask DEFAULT  ('*.*')
+%DOSMoreMasks MULTI LONG  ()
+%DOSMoreMaskDesc DEPEND %DOSMoreMasks DEFAULT TIMES 0
+
+%DOSMoreMask DEPEND %DOSMoreMasks DEFAULT TIMES 0
+
+%RedisplayWindow LONG  (1)
+%UpdateFields MULTI LONG  ()
+%UpdateFeq DEPEND %UpdateFields DEFAULT TIMES 0
+
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('FileLookup6')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('ADOBlob')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+[ADDITION]
+NAME OfficeTemplates MSExcelControl
+[INSTANCE]
+INSTANCE 5
+[PROMPTS]
+%ClassItem UNIQUE DEFAULT  ('MSExcelClass')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('MSExcelClass') ('MSExcelClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('MSExcelClass') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('MSExcelClass') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('MSExcelClass') ('A')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('MSExcelClass') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('MSExcelClass') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('MSExcelClass') ('ADOBlob')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('MSExcelClass') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('MSExcelClass')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('MSExcelClass')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+[WINDOW]
+QuickWindow WINDOW('Impresión de Facturas Por Consecutivo'),AT(,,408,146),FONT('Microsoft ' & |
+          'Sans Serif',8,,FONT:regular,CHARSET:DEFAULT),CENTER,HLP('Win:ImpMasivoFrt'),WALLPAPER('ICONOS\fon' & |
+          'doazul_IX.jpg')
+          BUTTON('&Salir'),AT(351,125,49,14),USE(?Aceptar),LEFT,ICON('WAOK.ICO'),CURSOR(CURSOR:Hand), |
+            FLAT,MSG('Accept operation'),TIP('Accept Operation'),#ORIG(?Ok),#SEQ(1),#ORDINAL(1)
+          BOX,AT(9,9,394,109),USE(?BOX1),COLOR(0000C000h),FILL(00FFC0C0h),LINEWIDTH(1),#ORDINAL(2)
+          PROMPT('N_Factura Inicial:'),AT(24,36),USE(?LOC:N_FACINICIAL:Prompt),TRN,#ORDINAL(3)
+          ENTRY(@s20),AT(85,36,60,10),USE(LOC:N_FACINICIAL),#ORDINAL(4)
+          PROMPT('N_Factura Final:'),AT(165,36),USE(?LOC:FACTFINAL:Prompt),TRN,#ORDINAL(5)
+          ENTRY(@s20),AT(223,36,60,10),USE(LOC:FACTFINAL),#ORDINAL(6)
+          PROMPT('Nro de Copias:'),AT(301,36),USE(?LOC:COPIAS:Prompt),TRN,#ORDINAL(7)
+          ENTRY(@n-7),AT(352,36,35,10),USE(LOC:COPIAS),RIGHT(1),#ORDINAL(8)
+          PROMPT('Por Seguridad... Preguntar cada Cuantas Facturas Impresas:'),AT(24,54),USE(?LOC:PREGUNTAR:Prompt), |
+            TRN,#ORDINAL(9)
+          ENTRY(@n-7),AT(223,54,33,10),USE(LOC:PREGUNTAR),RIGHT(1),#ORDINAL(10)
+          PROMPT('Formato de Factura CE:'),AT(24,70),USE(?LOC:FORMATO:Prompt),TRN,#ORDINAL(11)
+          LIST,AT(103,71,45,10),USE(LOC:FORMATO),DROP(20),FROM('01|02|03F|03B|03C|03CA|' & |
+            '03F|03FIVA|04A|05|03F1|03F2|03G|03GS|03GSG'),#ORDINAL(12)
+          BUTTON('&Comenzar'),AT(179,121),USE(?BComienza),LEFT,ICON(ICON:Print),CURSOR(CURSOR:Hand), |
+            TRN,#ORDINAL(13)
+          PROMPT('Formato de Factura ASIS:'),AT(165,71),USE(?LOC:FORMATOHADM:Prompt),TRN,#ORDINAL(14)
+          LIST,AT(252,71,45,10),USE(LOC:FORMATOHADM),DROP(20),FROM('XX|#'),#ORDINAL(15)
+          CHECK('Directo A la Impresora?'),AT(301,54,87),USE(LOC:DIRIMPRESORA),LEFT,TRN,#ORDINAL(16)
+          PROMPT('Cuenta de Cobro Nro:'),AT(25,18),USE(?LOC:CNSCXC:Prompt),TRN,#ORDINAL(17)
+          ENTRY(@s20),AT(99,18,87,10),USE(LOC:CNSCXC),#ORDINAL(18)
+          CHECK('Formato Original Factura?'),AT(284,17),USE(LOC:FMTOORI),TRN,#ORDINAL(19)
+          PROMPT('Archivo:'),AT(24,92,28),USE(?LOC:RUTA:Prompt),TRN,#ORDINAL(20)
+          ENTRY(@s254),AT(57,92,190,10),USE(GLO:TXTARCHGEN),READONLY,#ORDINAL(21)
+          ENTRY(@s20),AT(59,105,89,10),USE(GLO:CNSRPDX),READONLY,#ORDINAL(22)
+          STRING('CnsMasivo:'),AT(17,106),USE(?STRING1),TRN,#ORDINAL(23)
+          BUTTON('...'),AT(251,91,12,12),USE(?LookupFile),#ORIG(?LookupFile),#SEQ(2),#ORDINAL(24)
+          BUTTON('&Procesar Plano'),AT(273,87,55,18),USE(?BProcesar),LEFT,ICON('ICONOS\EVO' & |
+            'C\column_preferences.ico'),CURSOR(CURSOR:Hand),TRN,#ORDINAL(25)
+          OLE,AT(369,81,10,10),USE(?SMExcel),HIDE,TRN,#ORIG(?SMExcel),#SEQ(5),#ORDINAL(26)
+          END
+          STRING(@s100),AT(240,106,160),USE(LOC:MGE),FONT('Arial',8,COLOR:HIGHLIGHT,,CHARSET:ANSI), |
+            LEFT,TRN,#ORDINAL(27)
+          STRING('Estructura (N_Factura,)'),AT(59,82),USE(?STRING2),FONT(,7),TRN,#ORDINAL(28)
+          CHECK('Sin vista previa'),AT(325,68,63,10),USE(GLO:SYS_VISTAPREVIA),LEFT,TRN,#ORDINAL(29)
+          BUTTON('...'),AT(347,89,12,12),USE(?LookupFile:2),HIDE,#ORIG(?LookupFile),#SEQ(6), |
+            #ORDINAL(30)
+        END
+
+[END]

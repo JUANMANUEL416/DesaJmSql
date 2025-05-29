@@ -1,0 +1,172 @@
+CREATE OR ALTER PROCEDURE DBO.SPQ_ESTERILIZA_COL @JSON NVARCHAR(MAX)
+	WITH ENCRYPTION
+AS
+SET DATEFORMAT dmy
+DECLARE @TBLERRORES TABLE (ERROR VARCHAR(MAX))
+DECLARE  @PARAMETROS NVARCHAR(MAX)			,@MODELO VARCHAR(100)			   ,@METODO VARCHAR(100)
+		,@USUARIO VARCHAR(12)				   ,@COMPANIA VARCHAR(2)		      ,@IDSEDE      VARCHAR(5)		
+      ,@SYS_COMPUTERNAME VARCHAR(200)     ,@DATOS    VARCHAR(MAX)
+      ,@PROCESO VARCHAR(20)               ,@CODPAQUETE VARCHAR(20)        ,@DESCRIPCION VARCHAR(100)
+      ,@IDARTICULO VARCHAR(20)            ,@CANT INT                      ,@NOITEM INT
+BEGIN
+	SELECT *
+	INTO #JSON
+	FROM OPENJSON(@json) WITH (
+			MODELO VARCHAR(100) '$.MODELO'
+			,METODO VARCHAR(100) '$.METODO'
+			,USUARIO VARCHAR(12) '$.USUARIO'
+			,PARAMETROS NVARCHAR(MAX) AS JSON
+	)
+
+	SELECT   @MODELO = MODELO			,@METODO = METODO
+			,@PARAMETROS = PARAMETROS	,@USUARIO = USUARIO
+	FROM #JSON
+   IF @METODO='CRUD_KCEPAQ'     
+   BEGIN         
+      SELECT @DATOS=DATOS        
+      FROM   OPENJSON (@PARAMETROS)
+      WITH (           
+         DATOS NVARCHAR(MAX) AS JSON 
+            )           
+         SELECT @PROCESO=PROCESO,@CODPAQUETE=CODPAQUETE,@DESCRIPCION=DESCRIPCION       
+         FROM   OPENJSON (@DATOS)
+         WITH   (    
+         PROCESO VARCHAR(20)      '$.PROCESO',
+         CODPAQUETE VARCHAR(20)   '$.CODPAQUETE',
+         DESCRIPCION VARCHAR(100) '$.DESCRIPCION'
+         )  
+      IF @PROCESO='Nuevo'
+      BEGIN
+         IF NOT EXISTS(SELECT * FROM KCEPAQ WHERE CODPAQUETE=@CODPAQUETE)
+         BEGIN
+            INSERT INTO KCEPAQ(CODPAQUETE,DESCRIPCION)
+            SELECT @CODPAQUETE,@DESCRIPCION
+         END
+         ELSE
+         BEGIN
+            INSERT INTO @TBLERRORES(ERROR)
+            SELECT 'Paquete ya existe'
+         END
+         IF(SELECT COUNT(*) FROM @TBLERRORES)>0
+         BEGIN
+            SELECT 'KO' OK, ERROR FROM @TBLERRORES
+            RETURN
+         END
+         SELECT 'OK' OK
+         RETURN 
+      END
+      IF @PROCESO='Edita'
+      BEGIN
+         IF EXISTS(SELECT * FROM KCEPAQ WHERE CODPAQUETE=@CODPAQUETE)
+         BEGIN
+            UPDATE KCEPAQ SET DESCRIPCION=@DESCRIPCION WHERE CODPAQUETE=@CODPAQUETE
+         END
+         ELSE
+         BEGIN
+            INSERT INTO @TBLERRORES(ERROR)
+            SELECT 'Paquete ya existe'      
+         END
+         IF(SELECT COUNT(*) FROM @TBLERRORES)>0
+         BEGIN
+            SELECT 'KO' OK, ERROR FROM @TBLERRORES
+            RETURN
+         END
+         SELECT 'OK' OK
+         RETURN 
+      END 
+      IF @PROCESO='Borrar'
+      BEGIN
+         IF NOT EXISTS(SELECT * FROM KCEPAQD WHERE CODPAQUETE=@CODPAQUETE)
+         BEGIN
+            DELETE KCEPAQ WHERE CODPAQUETE=@CODPAQUETE
+         END
+         ELSE
+         BEGIN
+            INSERT INTO @TBLERRORES(ERROR)
+            SELECT 'Paquete con Detalles No se puede Continuar'             
+         END
+         IF(SELECT COUNT(*) FROM @TBLERRORES)>0
+         BEGIN
+            SELECT 'KO' OK, ERROR FROM @TBLERRORES
+            RETURN
+         END
+         SELECT 'OK' OK
+         RETURN 
+      END
+   END
+   IF @METODO='CRUD_KCEPAQD'     
+   BEGIN         
+      SELECT @DATOS=DATOS        
+      FROM   OPENJSON (@PARAMETROS)
+      WITH (           
+         DATOS NVARCHAR(MAX) AS JSON 
+            )           
+         SELECT @PROCESO=PROCESO,@CODPAQUETE=CODPAQUETE,@IDARTICULO=IDARTICULO,@CANT=CANT      
+         FROM   OPENJSON (@DATOS)
+         WITH   (    
+         PROCESO VARCHAR(20)      '$.PROCESO',
+         CODPAQUETE VARCHAR(20)   '$.CODPAQUETE',
+         IDARTICULO VARCHAR(100) '$.IDARTICULO',
+         CANT       INT           '$.CANT'
+         )  
+      IF @PROCESO='Nuevo'
+      BEGIN
+         IF EXISTS(SELECT * FROM KCEPAQ WHERE CODPAQUETE=@CODPAQUETE)
+         BEGIN
+            SELECT @NOITEM=MAX(ITEM) FROM KCEPAQD WHERE CODPAQUETE=@CODPAQUETE
+            INSERT INTO KCEPAQD(CODPAQUETE,ITEM,IDARTICULO,CANT,ESTADO)
+            SELECT @CODPAQUETE,COALESCE(@NOITEM,0)+1,@IDARTICULO,@CANT,'Activo'
+         END
+         ELSE
+         BEGIN
+            INSERT INTO @TBLERRORES(ERROR)
+            SELECT 'Paquete no Encontrado'
+         END
+         IF(SELECT COUNT(*) FROM @TBLERRORES)>0
+         BEGIN
+            SELECT 'KO' OK, ERROR FROM @TBLERRORES
+            RETURN
+         END
+         SELECT 'OK' OK
+         RETURN 
+      END
+      IF @PROCESO='Edita'
+      BEGIN
+         IF EXISTS(SELECT * FROM KCEPAQ WHERE CODPAQUETE=@CODPAQUETE)
+         BEGIN
+            UPDATE KCEPAQ SET DESCRIPCION=@DESCRIPCION WHERE CODPAQUETE=@CODPAQUETE
+         END
+         ELSE
+         BEGIN
+            INSERT INTO @TBLERRORES(ERROR)
+            SELECT 'Paquete ya existe'      
+         END
+         IF(SELECT COUNT(*) FROM @TBLERRORES)>0
+         BEGIN
+            SELECT 'KO' OK, ERROR FROM @TBLERRORES
+            RETURN
+         END
+         SELECT 'OK' OK
+         RETURN 
+      END 
+      IF @PROCESO='Borrar'
+      BEGIN
+         IF NOT EXISTS(SELECT * FROM KCEPAQD WHERE CODPAQUETE=@CODPAQUETE)
+         BEGIN
+            DELETE KCEPAQ WHERE CODPAQUETE=@CODPAQUETE
+         END
+         ELSE
+         BEGIN
+            INSERT INTO @TBLERRORES(ERROR)
+            SELECT 'Paquete con Detalles No se puede Continuar'             
+         END
+         IF(SELECT COUNT(*) FROM @TBLERRORES)>0
+         BEGIN
+            SELECT 'KO' OK, ERROR FROM @TBLERRORES
+            RETURN
+         END
+         SELECT 'OK' OK
+         RETURN 
+      END
+   END
+END

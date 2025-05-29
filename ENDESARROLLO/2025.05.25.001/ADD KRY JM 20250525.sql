@@ -1,0 +1,5 @@
+IF NOT EXISTS ( SELECT O.object_id, C.column_id, C.NAME FROM  SYS.OBJECTS O INNER    JOIN SYS.columns C ON O.object_id = C.object_id  
+               WHERE O.NAME = 'FTR'  AND   C.NAME = 'FECHA_CAPRIPS')
+BEGIN
+   ALTER TABLE FTR  ADD FECHA_CAPRIPS DATETIME
+END

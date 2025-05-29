@@ -1,0 +1,5771 @@
+[MODULE]
+[COMMON]
+FROM ABC GENERATED
+MODIFIED '2019/08/31' ' 9:42:23'
+[PROCEDURE]
+NAME USUSU:Ficha
+NOEXPORT
+[COMMON]
+DESCRIPTION 'Actualizar la Tabla USUSU'
+FROM ABC Window
+CATEGORY 'Form'
+MODIFIED '2024/06/04' ' 9:27:16'
+[DATA]
+[SCREENCONTROLS]
+! ENTRY(@s80),USE(CurrentTab)
+[REPORTCONTROLS]
+! STRING(@s80),USE(CurrentTab)
+CurrentTab               STRING(80)
+!!> GUID('fa89f34d-4667-45f4-aec3-36f25e654b76'),PICTURE(@s80)
+[SCREENCONTROLS]
+! PROMPT('LOC : FILTROP:'),USE(?LOC:FILTROP:Prompt)
+! TEXT,USE(LOC:FILTROP)
+[REPORTCONTROLS]
+! TEXT,USE(LOC:FILTROP)
+LOC:FILTROP              CSTRING(2020)
+!!> GUID('5f3e4b72-58c4-4332-bd6c-607b5c444725'),PROMPT('LOC : FILTROP:'),HEADER('LOC : FILTROP'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('LOC : NOMUSUARIO:'),USE(?LOC:NOMUSUARIO:Prompt)
+! ENTRY(@s80),USE(LOC:NOMUSUARIO)
+[REPORTCONTROLS]
+! STRING(@s80),USE(LOC:NOMUSUARIO)
+LOC:NOMUSUARIO           CSTRING(81)
+!!> GUID('82799bb7-8a11-41cf-890c-ea644d43206a'),PROMPT('LOC : NOMUSUARIO:'),HEADER('LOC : NOMUSUARIO'),PICTURE(@s80)
+ActionMessage            CSTRING(40)
+!!> GUID('8bd57af9-7c2d-4835-9806-b14a3132d82b')
+[SCREENCONTROLS]
+! PROMPT('Clave:'),USE(?LOC:CLAVEANT:Prompt)
+! ENTRY(@s20),USE(LOC:CLAVEANT),MSG('Clave'),TIP('Clave'),REQ,UPR,PASSWORD
+[REPORTCONTROLS]
+! STRING(@s20),USE(LOC:CLAVEANT)
+LOC:CLAVEANT             CSTRING(21) !Clave
+!!> GUID('f256af08-0540-436b-aaec-7143df880302'),VALID(NONZERO),PROMPT('Clave:'),HEADER('Clave'),MESSAGE('Clave'),TOOLTIP('Clave'),PICTURE(@s20),CASE(UPPER),TYPEMODE(INS),PASSWORD,FREEZE
+[SCREENCONTROLS]
+! PROMPT('Clave:'),USE(?LOC:CLAVE:Prompt)
+! ENTRY(@s20),USE(LOC:CLAVE),MSG('Clave'),TIP('Clave'),REQ,UPR,PASSWORD
+[REPORTCONTROLS]
+! STRING(@s20),USE(LOC:CLAVE)
+LOC:CLAVE                CSTRING(21) !Clave
+!!> GUID('9d73e45e-90d3-47cc-9fd8-894d5a561c21'),VALID(NONZERO),PROMPT('Clave:'),HEADER('Clave'),MESSAGE('Clave'),TOOLTIP('Clave'),PICTURE(@s20),CASE(UPPER),TYPEMODE(INS),PASSWORD,FREEZE
+[SCREENCONTROLS]
+! PROMPT('Grupo:'),USE(?LOC:GRUPO:Prompt)
+! ENTRY(@s8),USE(LOC:GRUPO),MSG('Grupo'),TIP('Grupo'),REQ
+[REPORTCONTROLS]
+! STRING(@s8),USE(LOC:GRUPO)
+LOC:GRUPO                CSTRING(9) !Grupo
+!!> GUID('b5f5a2e2-a8e4-4762-b540-8375f07bdf65'),VALID(NONZERO),PROMPT('Grupo:'),HEADER('Grupo'),MESSAGE('Grupo'),TOOLTIP('Grupo'),PICTURE(@s8),TYPEMODE(INS),FREEZE,DERIVEDFROM('USUSU:GRUPO')
+[SCREENCONTROLS]
+! PROMPT('loc : cargafirma:'),USE(?loc:cargafirma:Prompt)
+! ENTRY(@n3),USE(loc:cargafirma)
+[REPORTCONTROLS]
+! STRING(@n3),USE(loc:cargafirma)
+loc:cargafirma           BYTE
+!!> GUID('b673bd60-b895-40c3-8d5d-b52899b8f266'),PROMPT('loc : cargafirma:'),HEADER('loc : cargafirma'),PICTURE(@n3)
+[SCREENCONTROLS]
+! PROMPT('loc : path:'),USE(?loc:path:Prompt)
+! ENTRY(@s254),USE(loc:path)
+[REPORTCONTROLS]
+! STRING(@s254),USE(loc:path)
+loc:path                 CSTRING(255)
+!!> GUID('a8b540be-35a9-4449-ad00-c0355359d7c9'),PROMPT('loc : path:'),HEADER('loc : path'),PICTURE(@s254)
+[SCREENCONTROLS]
+! PROMPT('Razón Social:'),USE(?LOC:RAZONSOCIAL:Prompt)
+! STRING(@s120),USE(LOC:RAZONSOCIAL)
+[REPORTCONTROLS]
+! STRING(@s120),USE(LOC:RAZONSOCIAL)
+LOC:RAZONSOCIAL          CSTRING(121) !RAZóN SOCIAL
+!!> GUID('523c80a6-c902-4069-b7f7-7ebe837c0804'),VALID(NONZERO),PROMPT('Razón Social:'),HEADER('Razón Social'),MESSAGE('Razón Social'),TOOLTIP('Razón Social'),PICTURE(@s120),DERIVEDFROM('TER:RAZONSOCIAL')
+[SCREENCONTROLS]
+! PROMPT('Descripción plantilla:'),USE(?LOC:DESCPLANTILLA:Prompt)
+! ENTRY(@s120),USE(LOC:DESCPLANTILLA),MSG('Descripcion del plan'),TIP('Descripcion del plan')
+[REPORTCONTROLS]
+! STRING(@s120),USE(LOC:DESCPLANTILLA)
+LOC:DESCPLANTILLA        CSTRING(121) !DESCRIPCION PLANTILLA
+!!> GUID('a71f1ad4-f32b-4b81-86a3-aa0f5295034a'),PROMPT('Descripción plantilla:'),HEADER('Descripción plantilla'),MESSAGE('Descripcion del plan'),TOOLTIP('Descripcion del plan'),PICTURE(@s120)
+[SCREENCONTROLS]
+! PROMPT('LOC : CLASE:'),USE(?LOC:CLASE:Prompt)
+! ENTRY(@s20),USE(LOC:CLASE)
+[REPORTCONTROLS]
+! STRING(@s20),USE(LOC:CLASE)
+LOC:CLASE                STRING(20)
+!!> GUID('fb4ecfc8-2d3b-4244-9632-a9df1445f500'),PROMPT('LOC : CLASE:'),HEADER('LOC : CLASE'),PICTURE(@s20)
+[SCREENCONTROLS]
+! PROMPT('Usuario:'),USE(?LOC:USUARIOC:Prompt)
+! ENTRY(@s12),USE(LOC:USUARIOC),MSG('Usuario'),TIP('Usuario'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@s12),USE(LOC:USUARIOC)
+LOC:USUARIOC             CSTRING(13) !Usuario
+!!> GUID('87334ec6-e3ea-4611-b426-2f061121dbfd'),VALID(NONZERO),PROMPT('Usuario:'),HEADER('Usuario'),MESSAGE('Usuario'),TOOLTIP('Usuario'),PICTURE(@s12),CASE(UPPER),DERIVEDFROM('USUSU:USUARIO')
+[SCREENCONTROLS]
+! PROMPT('LOC : SQL:'),USE(?LOC:SQL:Prompt)
+! TEXT,USE(LOC:SQL)
+[REPORTCONTROLS]
+! TEXT,USE(LOC:SQL)
+LOC:SQL                  CSTRING(2020)
+!!> GUID('8b324c23-a1b5-4538-b03d-1e7dec52fd8d'),PROMPT('LOC : SQL:'),HEADER('LOC : SQL'),PICTURE(@s255)
+[SCREENCONTROLS]
+! CHECK('loc : cargarfirma'),USE(loc:cargarfirma),RIGHT
+[REPORTCONTROLS]
+! STRING(@n-7),USE(loc:cargarfirma),RIGHT
+loc:cargarfirma          SHORT
+!!> GUID('432416ac-cbcb-429a-ae92-81bd8714d36b'),PROMPT('loc : cargarfirma:'),HEADER('loc : cargarfirma'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
+[SCREENCONTROLS]
+! PROMPT('LOC : USUSU:'),USE(?LOC:USUSU:Prompt)
+! ENTRY(@s20),USE(LOC:USUSU)
+[REPORTCONTROLS]
+! STRING(@s20),USE(LOC:USUSU)
+LOC:USUSU                LIKE(USUSU:RECORD)
+!!> GUID('c543e37d-2223-40b1-b517-3c656af04b4f'),PROMPT('LOC : USUSU:'),HEADER('LOC : USUSU'),PICTURE(@s20),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('loc : from:'),USE(?loc:from:Prompt)
+! ENTRY(@s255),USE(loc:from)
+[REPORTCONTROLS]
+! STRING(@s255),USE(loc:from)
+loc:from                 CSTRING(2049)
+!!> GUID('3ff94eff-f3cb-483a-ab55-6cfe850d06ae'),PROMPT('loc : from:'),HEADER('loc : from'),PICTURE(@s255),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('loc : vez:'),USE(?loc:vez:Prompt)
+! ENTRY(@n-7),USE(loc:vez),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n-7),USE(loc:vez),RIGHT(1)
+loc:vez                  SHORT
+!!> GUID('fb756360-bbec-4faa-875d-05ab2ae1796d'),PROMPT('loc : vez:'),HEADER('loc : vez'),PICTURE(@n-7),TYPEMODE(INS),JUSTIFY(RIGHT,1)
+[SCREENCONTROLS]
+! PROMPT('loc : tipousutemp:'),USE(?loc:tipousutemp:Prompt)
+! ENTRY(@s12),USE(loc:tipousutemp)
+[REPORTCONTROLS]
+! STRING(@s12),USE(loc:tipousutemp)
+loc:tipousutemp          CSTRING(13)
+!!> GUID('56dd159e-9df1-4426-8e97-fb465ad6c00f'),PROMPT('loc : tipousutemp:'),HEADER('loc : tipousutemp'),PICTURE(@s12),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('LOC : FROMSEDE:'),USE(?LOC:FROMSEDE:Prompt)
+! ENTRY(@s255),USE(LOC:FROMSEDE)
+[REPORTCONTROLS]
+! STRING(@s255),USE(LOC:FROMSEDE)
+LOC:FROMSEDE             CSTRING(8000)
+!!> GUID('0e3c95dc-4804-4038-aa18-c799ee9a6707'),PROMPT('LOC : FROMSEDE:'),HEADER('LOC : FROMSEDE'),PICTURE(@s255),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('LOC : PATHB:'),USE(?LOC:PATHB:Prompt)
+! ENTRY(@s254),USE(LOC:PATHB)
+[REPORTCONTROLS]
+! STRING(@s254),USE(LOC:PATHB)
+LOC:PATHB                CSTRING(255)
+!!> GUID('5d8b55f6-ff0f-4c1b-afe7-0bdf97fcae6f'),PROMPT('LOC : PATHB:'),HEADER('LOC : PATHB'),PICTURE(@s254),TYPEMODE(INS)
+[FILES]
+[PRIMARY]
+MPLXUSU
+[INSTANCE]
+9
+[KEY]
+MPLXUSU:MPLXUSUUSUARIO
+[PRIMARY]
+USUSU
+[INSTANCE]
+2
+[OTHERS]
+WDUM
+TGEN
+USLOGH
+USLOG
+USGRU
+CJR
+WDF
+SED
+Archivos
+MED
+VWK_TEXCA
+MPL
+[PROMPTS]
+%ButtonAction DEPEND %Control DEFAULT TIMES 52
+WHEN  ('') ('No Special Action')
+WHEN  ('?BCopiarMPL') ('No Special Action')
+WHEN  ('?BQuitarTodas') ('No Special Action')
+WHEN  ('?BUTTON1') ('No Special Action')
+WHEN  ('?CallLookup') ('No Special Action')
+WHEN  ('?CallLookup:2') ('No Special Action')
+WHEN  ('?CallLookup:4') ('No Special Action')
+WHEN  ('?CallLookup:5') ('No Special Action')
+WHEN  ('?CallLookup:6') ('No Special Action')
+WHEN  ('?Cancel') ('No Special Action')
+WHEN  ('?Change') ('No Special Action')
+WHEN  ('?Delete') ('No Special Action')
+WHEN  ('?Image1') ('No Special Action')
+WHEN  ('?Insert') ('No Special Action')
+WHEN  ('?LOC:CLASE:Prompt') ('No Special Action')
+WHEN  ('?LOC:GRUPO') ('No Special Action')
+WHEN  ('?LOC:RAZONSOCIAL') ('No Special Action')
+WHEN  ('?List') ('No Special Action')
+WHEN  ('?LookupFile') ('No Special Action')
+WHEN  ('?OK') ('No Special Action')
+WHEN  ('?Plantillas') ('No Special Action')
+WHEN  ('?TFirma') ('No Special Action')
+WHEN  ('?USUSU:CARGO:Prompt') ('No Special Action')
+WHEN  ('?USUSU:CELULAR:Prompt') ('No Special Action')
+WHEN  ('?USUSU:CODCAJERO') ('No Special Action')
+WHEN  ('?USUSU:CODCAJERO:Prompt') ('No Special Action')
+WHEN  ('?USUSU:ESTADO') ('No Special Action')
+WHEN  ('?USUSU:ESTADO:Prompt') ('No Special Action')
+WHEN  ('?USUSU:FECHACAMBIO_DATE') ('No Special Action')
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') ('No Special Action')
+WHEN  ('?USUSU:FECHACAMBIO_TIME') ('No Special Action')
+WHEN  ('?USUSU:GRUPO:Prompt') ('No Special Action')
+WHEN  ('?USUSU:IDEMPRESA') ('No Special Action')
+WHEN  ('?USUSU:IDMEDICO') ('No Special Action')
+WHEN  ('?USUSU:IDMEDICO:Prompt') ('No Special Action')
+WHEN  ('?USUSU:IDSEDE') ('No Special Action')
+WHEN  ('?USUSU:IDSEDE:Prompt') ('No Special Action')
+WHEN  ('?USUSU:IDTERCERO') ('No Special Action')
+WHEN  ('?USUSU:IDTERCERO:Prompt') ('No Special Action')
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') ('No Special Action')
+WHEN  ('?USUSU:NOMBRE') ('No Special Action')
+WHEN  ('?USUSU:NOMBRE:Prompt') ('No Special Action')
+WHEN  ('?USUSU:SYS_ComputerName') ('No Special Action')
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') ('No Special Action')
+WHEN  ('?USUSU:TELEFONO:Prompt') ('No Special Action')
+WHEN  ('?USUSU:TIPO') ('No Special Action')
+WHEN  ('?USUSU:TIPO:Prompt') ('No Special Action')
+WHEN  ('?USUSU:USUARIO') ('No Special Action')
+WHEN  ('?USUSU:USUARIO:Prompt') ('No Special Action')
+WHEN  ('?loc:cargafirma') ('No Special Action')
+WHEN  ('?loc:cargarfirma') ('No Special Action')
+WHEN  ('?loc:path:Prompt') ('No Special Action')
+
+%ButtonRunName DEPEND %Control DEFAULT TIMES 13
+WHEN  ('?BCopiarMPL') ('')
+WHEN  ('?BQuitarTodas') ('')
+WHEN  ('?CallLookup') ('')
+WHEN  ('?CallLookup:2') ('')
+WHEN  ('?CallLookup:4') ('')
+WHEN  ('?CallLookup:5') ('')
+WHEN  ('?CallLookup:6') ('')
+WHEN  ('?Cancel') ('')
+WHEN  ('?Change') ('')
+WHEN  ('?Delete') ('')
+WHEN  ('?Insert') ('')
+WHEN  ('?LookupFile') ('')
+WHEN  ('?OK') ('')
+
+%ButtonRunParameters DEPEND %Control DEFAULT TIMES 13
+WHEN  ('?BCopiarMPL') ('')
+WHEN  ('?BQuitarTodas') ('')
+WHEN  ('?CallLookup') ('')
+WHEN  ('?CallLookup:2') ('')
+WHEN  ('?CallLookup:4') ('')
+WHEN  ('?CallLookup:5') ('')
+WHEN  ('?CallLookup:6') ('')
+WHEN  ('?Cancel') ('')
+WHEN  ('?Change') ('')
+WHEN  ('?Delete') ('')
+WHEN  ('?Insert') ('')
+WHEN  ('?LookupFile') ('')
+WHEN  ('?OK') ('')
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 13
+WHEN  ('?BCopiarMPL') ()
+WHEN  ('?BQuitarTodas') ()
+WHEN  ('?CallLookup') ()
+WHEN  ('?CallLookup:2') ()
+WHEN  ('?CallLookup:4') ()
+WHEN  ('?CallLookup:5') ()
+WHEN  ('?CallLookup:6') ()
+WHEN  ('?Cancel') ()
+WHEN  ('?Change') ()
+WHEN  ('?Delete') ()
+WHEN  ('?Insert') ()
+WHEN  ('?LookupFile') ()
+WHEN  ('?OK') ()
+
+%ButtonThread DEPEND %Control LONG TIMES 13
+WHEN  ('?BCopiarMPL') (0)
+WHEN  ('?BQuitarTodas') (0)
+WHEN  ('?CallLookup') (0)
+WHEN  ('?CallLookup:2') (0)
+WHEN  ('?CallLookup:4') (0)
+WHEN  ('?CallLookup:5') (0)
+WHEN  ('?CallLookup:6') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?Change') (0)
+WHEN  ('?Delete') (0)
+WHEN  ('?Insert') (0)
+WHEN  ('?LookupFile') (0)
+WHEN  ('?OK') (0)
+
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 52
+WHEN  ('') ('25000')
+WHEN  ('?BCopiarMPL') ('25000')
+WHEN  ('?BQuitarTodas') ('25000')
+WHEN  ('?BUTTON1') ('25000')
+WHEN  ('?CallLookup') ('25000')
+WHEN  ('?CallLookup:2') ('25000')
+WHEN  ('?CallLookup:4') ('25000')
+WHEN  ('?CallLookup:5') ('25000')
+WHEN  ('?CallLookup:6') ('25000')
+WHEN  ('?Cancel') ('25000')
+WHEN  ('?Change') ('25000')
+WHEN  ('?Delete') ('25000')
+WHEN  ('?Image1') ('25000')
+WHEN  ('?Insert') ('25000')
+WHEN  ('?LOC:CLASE:Prompt') ('25000')
+WHEN  ('?LOC:GRUPO') ('25000')
+WHEN  ('?LOC:RAZONSOCIAL') ('25000')
+WHEN  ('?List') ('25000')
+WHEN  ('?LookupFile') ('25000')
+WHEN  ('?OK') ('25000')
+WHEN  ('?Plantillas') ('25000')
+WHEN  ('?TFirma') ('25000')
+WHEN  ('?USUSU:CARGO:Prompt') ('25000')
+WHEN  ('?USUSU:CELULAR:Prompt') ('25000')
+WHEN  ('?USUSU:CODCAJERO') ('25000')
+WHEN  ('?USUSU:CODCAJERO:Prompt') ('25000')
+WHEN  ('?USUSU:ESTADO') ('25000')
+WHEN  ('?USUSU:ESTADO:Prompt') ('25000')
+WHEN  ('?USUSU:FECHACAMBIO_DATE') ('25000')
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') ('25000')
+WHEN  ('?USUSU:FECHACAMBIO_TIME') ('25000')
+WHEN  ('?USUSU:GRUPO:Prompt') ('25000')
+WHEN  ('?USUSU:IDEMPRESA') ('25000')
+WHEN  ('?USUSU:IDMEDICO') ('25000')
+WHEN  ('?USUSU:IDMEDICO:Prompt') ('25000')
+WHEN  ('?USUSU:IDSEDE') ('25000')
+WHEN  ('?USUSU:IDSEDE:Prompt') ('25000')
+WHEN  ('?USUSU:IDTERCERO') ('25000')
+WHEN  ('?USUSU:IDTERCERO:Prompt') ('25000')
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') ('25000')
+WHEN  ('?USUSU:NOMBRE') ('25000')
+WHEN  ('?USUSU:NOMBRE:Prompt') ('25000')
+WHEN  ('?USUSU:SYS_ComputerName') ('25000')
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') ('25000')
+WHEN  ('?USUSU:TELEFONO:Prompt') ('25000')
+WHEN  ('?USUSU:TIPO') ('25000')
+WHEN  ('?USUSU:TIPO:Prompt') ('25000')
+WHEN  ('?USUSU:USUARIO') ('25000')
+WHEN  ('?USUSU:USUARIO:Prompt') ('25000')
+WHEN  ('?loc:cargafirma') ('25000')
+WHEN  ('?loc:cargarfirma') ('25000')
+WHEN  ('?loc:path:Prompt') ('25000')
+
+%ButtonParameters DEPEND %Control DEFAULT TIMES 13
+WHEN  ('?BCopiarMPL') ('')
+WHEN  ('?BQuitarTodas') ('')
+WHEN  ('?CallLookup') ('')
+WHEN  ('?CallLookup:2') ('')
+WHEN  ('?CallLookup:4') ('')
+WHEN  ('?CallLookup:5') ('')
+WHEN  ('?CallLookup:6') ('')
+WHEN  ('?Cancel') ('')
+WHEN  ('?Change') ('')
+WHEN  ('?Delete') ('')
+WHEN  ('?Insert') ('')
+WHEN  ('?LookupFile') ('')
+WHEN  ('?OK') ('')
+
+%ButtonRequest DEPEND %Control DEFAULT TIMES 52
+WHEN  ('') ('None')
+WHEN  ('?BCopiarMPL') ('None')
+WHEN  ('?BQuitarTodas') ('None')
+WHEN  ('?BUTTON1') ('None')
+WHEN  ('?CallLookup') ('None')
+WHEN  ('?CallLookup:2') ('None')
+WHEN  ('?CallLookup:4') ('None')
+WHEN  ('?CallLookup:5') ('None')
+WHEN  ('?CallLookup:6') ('None')
+WHEN  ('?Cancel') ('None')
+WHEN  ('?Change') ('None')
+WHEN  ('?Delete') ('None')
+WHEN  ('?Image1') ('None')
+WHEN  ('?Insert') ('None')
+WHEN  ('?LOC:CLASE:Prompt') ('None')
+WHEN  ('?LOC:GRUPO') ('None')
+WHEN  ('?LOC:RAZONSOCIAL') ('None')
+WHEN  ('?List') ('None')
+WHEN  ('?LookupFile') ('None')
+WHEN  ('?OK') ('None')
+WHEN  ('?Plantillas') ('None')
+WHEN  ('?TFirma') ('None')
+WHEN  ('?USUSU:CARGO:Prompt') ('None')
+WHEN  ('?USUSU:CELULAR:Prompt') ('None')
+WHEN  ('?USUSU:CODCAJERO') ('None')
+WHEN  ('?USUSU:CODCAJERO:Prompt') ('None')
+WHEN  ('?USUSU:ESTADO') ('None')
+WHEN  ('?USUSU:ESTADO:Prompt') ('None')
+WHEN  ('?USUSU:FECHACAMBIO_DATE') ('None')
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') ('None')
+WHEN  ('?USUSU:FECHACAMBIO_TIME') ('None')
+WHEN  ('?USUSU:GRUPO:Prompt') ('None')
+WHEN  ('?USUSU:IDEMPRESA') ('None')
+WHEN  ('?USUSU:IDMEDICO') ('None')
+WHEN  ('?USUSU:IDMEDICO:Prompt') ('None')
+WHEN  ('?USUSU:IDSEDE') ('None')
+WHEN  ('?USUSU:IDSEDE:Prompt') ('None')
+WHEN  ('?USUSU:IDTERCERO') ('None')
+WHEN  ('?USUSU:IDTERCERO:Prompt') ('None')
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') ('None')
+WHEN  ('?USUSU:NOMBRE') ('None')
+WHEN  ('?USUSU:NOMBRE:Prompt') ('None')
+WHEN  ('?USUSU:SYS_ComputerName') ('None')
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') ('None')
+WHEN  ('?USUSU:TELEFONO:Prompt') ('None')
+WHEN  ('?USUSU:TIPO') ('None')
+WHEN  ('?USUSU:TIPO:Prompt') ('None')
+WHEN  ('?USUSU:USUARIO') ('None')
+WHEN  ('?USUSU:USUARIO:Prompt') ('None')
+WHEN  ('?loc:cargafirma') ('None')
+WHEN  ('?loc:cargarfirma') ('None')
+WHEN  ('?loc:path:Prompt') ('None')
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 9
+WHEN  ('?LOC:GRUPO') ()
+WHEN  ('?USUSU:CODCAJERO') ()
+WHEN  ('?USUSU:FECHACAMBIO_DATE') ()
+WHEN  ('?USUSU:FECHACAMBIO_TIME') ()
+WHEN  ('?USUSU:IDEMPRESA') ()
+WHEN  ('?USUSU:IDMEDICO') ()
+WHEN  ('?USUSU:IDTERCERO') ()
+WHEN  ('?USUSU:NOMBRE') ()
+WHEN  ('?USUSU:USUARIO') ()
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 9
+WHEN  ('?LOC:GRUPO') ()
+WHEN  ('?USUSU:CODCAJERO') ()
+WHEN  ('?USUSU:FECHACAMBIO_DATE') ()
+WHEN  ('?USUSU:FECHACAMBIO_TIME') ()
+WHEN  ('?USUSU:IDEMPRESA') ()
+WHEN  ('?USUSU:IDMEDICO') ()
+WHEN  ('?USUSU:IDTERCERO') ()
+WHEN  ('?USUSU:NOMBRE') ()
+WHEN  ('?USUSU:USUARIO') ()
+
+%PostLookupKey DEPEND %Control KEY TIMES 6
+WHEN  ('?LOC:GRUPO') (USUGRU:USGRUGRUPO)
+WHEN  ('?USUSU:CODCAJERO') (CJR:CJRCODCAJERO)
+WHEN  ('?USUSU:IDEMPRESA') (VWK_TEXCA:VWK_TEXCAIDTERCERO)
+WHEN  ('?USUSU:IDMEDICO') (MED:MEDIDMEDICO)
+WHEN  ('?USUSU:IDTERCERO') (VWK_TEXCA:VWK_TEXCAIDTERCERO)
+WHEN  ('?USUSU:USUARIO') ()
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 9
+WHEN  ('?LOC:GRUPO') (USUGRU:GRUPO)
+WHEN  ('?USUSU:CODCAJERO') (CJR:CODCAJERO)
+WHEN  ('?USUSU:FECHACAMBIO_DATE') ()
+WHEN  ('?USUSU:FECHACAMBIO_TIME') ()
+WHEN  ('?USUSU:IDEMPRESA') (VWK_TEXCA:IDTERCERO)
+WHEN  ('?USUSU:IDMEDICO') (MED:IDMEDICO)
+WHEN  ('?USUSU:IDTERCERO') (VWK_TEXCA:IDTERCERO)
+WHEN  ('?USUSU:NOMBRE') ()
+WHEN  ('?USUSU:USUARIO') ()
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 9
+WHEN  ('?LOC:GRUPO') (Brw:Sel_Grupo)
+WHEN  ('?USUSU:CODCAJERO') (CJR:Elegir)
+WHEN  ('?USUSU:FECHACAMBIO_DATE') ()
+WHEN  ('?USUSU:FECHACAMBIO_TIME') ()
+WHEN  ('?USUSU:IDEMPRESA') (TercerosElegir)
+WHEN  ('?USUSU:IDMEDICO') (MED:ElegirUsu)
+WHEN  ('?USUSU:IDTERCERO') (TercerosElegir)
+WHEN  ('?USUSU:NOMBRE') ()
+WHEN  ('?USUSU:USUARIO') ()
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+
+%ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('WindowManager')
+WHEN  ('WindowToolbar') ('ToolbarClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('')
+WHEN  ('WindowToolbar') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Ask {20}PROCEDURE(),DERIVED', 'Init {19}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', 'PrimeFields {12}PROCEDURE(),PROC,DERIVED', |
+  'Run {20}PROCEDURE(),BYTE,PROC,DERIVED', 'Run {20}PROCEDURE(USHORT Number,BYTE Request),BYTE,PROC,DERIVED', |
+  'SetAlerts {14}PROCEDURE(),DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeCompleted {10}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeNewSelection       PROCEDURE(),BYTE,PROC,DERIVED', 'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
+
+%ReturnValue FIELD  ()
+%WindowOperationMode DEFAULT  ('Use WINDOW setting')
+%INISaveWindow LONG  (1)
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('NO')
+WHEN  ('WindowToolbar') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('ThisWindow')
+WHEN  ('WindowToolbar') ('Toolbar')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('AStringValue')
+WHEN  ('WindowToolbar') ('AStringValue')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (0)
+WHEN  ('WindowToolbar') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 13
+WHEN  ('?BCopiarMPL') ()
+WHEN  ('?BQuitarTodas') ()
+WHEN  ('?CallLookup') ()
+WHEN  ('?CallLookup:2') ()
+WHEN  ('?CallLookup:4') ()
+WHEN  ('?CallLookup:5') ()
+WHEN  ('?CallLookup:6') ()
+WHEN  ('?Cancel') ()
+WHEN  ('?Change') ()
+WHEN  ('?Delete') ()
+WHEN  ('?Insert') ()
+WHEN  ('?LookupFile') ()
+WHEN  ('?OK') ()
+
+%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 13
+WHEN  ('?BCopiarMPL') (0)
+WHEN  ('?BQuitarTodas') (0)
+WHEN  ('?CallLookup') (0)
+WHEN  ('?CallLookup:2') (0)
+WHEN  ('?CallLookup:4') (0)
+WHEN  ('?CallLookup:5') (0)
+WHEN  ('?CallLookup:6') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?Change') (0)
+WHEN  ('?Delete') (0)
+WHEN  ('?Insert') (0)
+WHEN  ('?LookupFile') (0)
+WHEN  ('?OK') (0)
+
+%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 13
+WHEN  ('?BCopiarMPL') ('')
+WHEN  ('?BQuitarTodas') ('')
+WHEN  ('?CallLookup') ('')
+WHEN  ('?CallLookup:2') ('')
+WHEN  ('?CallLookup:4') ('')
+WHEN  ('?CallLookup:5') ('')
+WHEN  ('?CallLookup:6') ('')
+WHEN  ('?Cancel') ('')
+WHEN  ('?Change') ('')
+WHEN  ('?Delete') ('')
+WHEN  ('?Insert') ('')
+WHEN  ('?LookupFile') ('')
+WHEN  ('?OK') ('')
+
+%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 13
+WHEN  ('?BCopiarMPL') ()
+WHEN  ('?BQuitarTodas') ()
+WHEN  ('?CallLookup') ()
+WHEN  ('?CallLookup:2') ()
+WHEN  ('?CallLookup:4') ()
+WHEN  ('?CallLookup:5') ()
+WHEN  ('?CallLookup:6') ()
+WHEN  ('?Cancel') ()
+WHEN  ('?Change') ()
+WHEN  ('?Delete') ()
+WHEN  ('?Insert') ()
+WHEN  ('?LookupFile') ()
+WHEN  ('?OK') ()
+
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 70
+WHEN  ('') (1)
+WHEN  ('?BCopiarMPL') (1)
+WHEN  ('?BQuitarTodas') (1)
+WHEN  ('?BUTTON1') (1)
+WHEN  ('?CallLookup') (1)
+WHEN  ('?CallLookup:2') (1)
+WHEN  ('?CallLookup:4') (1)
+WHEN  ('?CallLookup:5') (1)
+WHEN  ('?CallLookup:6') (1)
+WHEN  ('?Cancel') (1)
+WHEN  ('?Change') (1)
+WHEN  ('?Delete') (1)
+WHEN  ('?Image1') (1)
+WHEN  ('?Insert') (1)
+WHEN  ('?LOC:CLASE') (1)
+WHEN  ('?LOC:CLASE:Prompt') (1)
+WHEN  ('?LOC:CLAVE') (1)
+WHEN  ('?LOC:GRUPO') (1)
+WHEN  ('?LOC:RAZONSOCIAL') (1)
+WHEN  ('?List') (1)
+WHEN  ('?LookupFile') (1)
+WHEN  ('?OK') (1)
+WHEN  ('?Plantillas') (1)
+WHEN  ('?TFirma') (1)
+WHEN  ('?USUSU:APELLIDOS') (1)
+WHEN  ('?USUSU:CARGO') (1)
+WHEN  ('?USUSU:CARGO:2') (1)
+WHEN  ('?USUSU:CARGO:Prompt') (1)
+WHEN  ('?USUSU:CARNET') (1)
+WHEN  ('?USUSU:CELULAR') (1)
+WHEN  ('?USUSU:CELULAR:Prompt') (1)
+WHEN  ('?USUSU:CODCAJERO') (1)
+WHEN  ('?USUSU:CODCAJERO:Prompt') (1)
+WHEN  ('?USUSU:DEPARTAMENTO') (1)
+WHEN  ('?USUSU:DOCID') (1)
+WHEN  ('?USUSU:EMAIL') (1)
+WHEN  ('?USUSU:ESTADO') (1)
+WHEN  ('?USUSU:ESTADO:Prompt') (1)
+WHEN  ('?USUSU:FECHACAMBIO_DATE') (1)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') (1)
+WHEN  ('?USUSU:FECHACAMBIO_TIME') (1)
+WHEN  ('?USUSU:FECHAVENCE_DATE') (1)
+WHEN  ('?USUSU:F_RETIRO_DATE') (1)
+WHEN  ('?USUSU:GRUPO:Prompt') (1)
+WHEN  ('?USUSU:IDEMPRESA') (0)
+WHEN  ('?USUSU:IDMEDICO') (0)
+WHEN  ('?USUSU:IDMEDICO:Prompt') (1)
+WHEN  ('?USUSU:IDPLANT') (1)
+WHEN  ('?USUSU:IDSEDE') (1)
+WHEN  ('?USUSU:IDSEDE:Prompt') (1)
+WHEN  ('?USUSU:IDTERCERO') (1)
+WHEN  ('?USUSU:IDTERCERO:Prompt') (1)
+WHEN  ('?USUSU:NIVELFUNCIONARIO') (1)
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') (1)
+WHEN  ('?USUSU:NOMBRE') (1)
+WHEN  ('?USUSU:NOMBRE:Prompt') (1)
+WHEN  ('?USUSU:NOMBRES') (1)
+WHEN  ('?USUSU:SYS_ComputerName') (1)
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') (1)
+WHEN  ('?USUSU:TELEFONO') (1)
+WHEN  ('?USUSU:TELEFONO:Prompt') (1)
+WHEN  ('?USUSU:TELEGRAMID') (1)
+WHEN  ('?USUSU:TIPO') (1)
+WHEN  ('?USUSU:TIPO:Prompt') (1)
+WHEN  ('?USUSU:USUARIO') (1)
+WHEN  ('?USUSU:USUARIO:Prompt') (1)
+WHEN  ('?loc:cargafirma') (1)
+WHEN  ('?loc:cargarfirma') (1)
+WHEN  ('?loc:path') (1)
+WHEN  ('?loc:path:Prompt') (1)
+
+%LookupAssign DEPEND %Control MULTI LONG TIMES 1
+WHEN  ('?USUSU:IDTERCERO') (1)
+
+%MoreField DEPEND %LookupAssign DEFAULT TIMES 1
+WHEN  ('?USUSU:IDTERCERO')TIMES 1
+WHEN  (1) ('VWK_TEXCA:RAZONSOCIAL')
+
+%MoreTarget DEPEND %LookupAssign FIELD TIMES 1
+WHEN  ('?USUSU:IDTERCERO')TIMES 1
+WHEN  (1) (LOC:RAZONSOCIAL)
+
+%CheckedAssigns DEPEND %Control MULTI LONG TIMES 2
+WHEN  ('?loc:cargafirma') (1)
+WHEN  ('?loc:cargarfirma') (1)
+
+%CheckedAssignVariable DEPEND %CheckedAssigns FIELD TIMES 2
+WHEN  ('?loc:cargafirma')TIMES 1
+WHEN  (1) (loc:cargarfirma)
+WHEN  ('?loc:cargarfirma')TIMES 1
+WHEN  (1) (loc:cargafirma)
+
+%CheckedAssignValue DEPEND %CheckedAssigns DEFAULT TIMES 2
+WHEN  ('?loc:cargafirma')TIMES 1
+WHEN  (1) ('0')
+WHEN  ('?loc:cargarfirma')TIMES 1
+WHEN  (1) ('0')
+
+%CheckedHides DEPEND %Control MULTI LONG TIMES 2
+WHEN  ('?loc:cargafirma') (1)
+WHEN  ('?loc:cargarfirma') (1)
+
+%CheckedControl DEPEND %CheckedHides DEFAULT TIMES 2
+WHEN  ('?loc:cargafirma')TIMES 1
+WHEN  (1) ('?loc:cargarfirma')
+WHEN  ('?loc:cargarfirma')TIMES 1
+WHEN  (1) ('?loc:cargafirma')
+
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 52
+WHEN  ('')TIMES 0
+WHEN  ('?BCopiarMPL')TIMES 0
+WHEN  ('?BQuitarTodas')TIMES 0
+WHEN  ('?BUTTON1')TIMES 0
+WHEN  ('?CallLookup')TIMES 0
+WHEN  ('?CallLookup:2')TIMES 0
+WHEN  ('?CallLookup:4')TIMES 0
+WHEN  ('?CallLookup:5')TIMES 0
+WHEN  ('?CallLookup:6')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Image1')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?LOC:CLASE:Prompt')TIMES 0
+WHEN  ('?LOC:GRUPO')TIMES 0
+WHEN  ('?LOC:RAZONSOCIAL')TIMES 0
+WHEN  ('?List')TIMES 0
+WHEN  ('?LookupFile')TIMES 0
+WHEN  ('?OK')TIMES 0
+WHEN  ('?Plantillas')TIMES 0
+WHEN  ('?TFirma')TIMES 0
+WHEN  ('?USUSU:CARGO:Prompt')TIMES 0
+WHEN  ('?USUSU:CELULAR:Prompt')TIMES 0
+WHEN  ('?USUSU:CODCAJERO')TIMES 0
+WHEN  ('?USUSU:CODCAJERO:Prompt')TIMES 0
+WHEN  ('?USUSU:ESTADO')TIMES 0
+WHEN  ('?USUSU:ESTADO:Prompt')TIMES 0
+WHEN  ('?USUSU:FECHACAMBIO_DATE')TIMES 0
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt')TIMES 0
+WHEN  ('?USUSU:FECHACAMBIO_TIME')TIMES 0
+WHEN  ('?USUSU:GRUPO:Prompt')TIMES 0
+WHEN  ('?USUSU:IDEMPRESA')TIMES 0
+WHEN  ('?USUSU:IDMEDICO')TIMES 0
+WHEN  ('?USUSU:IDMEDICO:Prompt')TIMES 0
+WHEN  ('?USUSU:IDSEDE')TIMES 0
+WHEN  ('?USUSU:IDSEDE:Prompt')TIMES 0
+WHEN  ('?USUSU:IDTERCERO')TIMES 0
+WHEN  ('?USUSU:IDTERCERO:Prompt')TIMES 0
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt')TIMES 0
+WHEN  ('?USUSU:NOMBRE')TIMES 0
+WHEN  ('?USUSU:NOMBRE:Prompt')TIMES 0
+WHEN  ('?USUSU:SYS_ComputerName')TIMES 0
+WHEN  ('?USUSU:SYS_ComputerName:Prompt')TIMES 0
+WHEN  ('?USUSU:TELEFONO:Prompt')TIMES 0
+WHEN  ('?USUSU:TIPO')TIMES 0
+WHEN  ('?USUSU:TIPO:Prompt')TIMES 0
+WHEN  ('?USUSU:USUARIO')TIMES 0
+WHEN  ('?USUSU:USUARIO:Prompt')TIMES 0
+WHEN  ('?loc:cargafirma')TIMES 1
+WHEN  (1) ('Hide')
+WHEN  ('?loc:cargarfirma')TIMES 1
+WHEN  (1) ('Hide')
+WHEN  ('?loc:path:Prompt')TIMES 0
+
+%CheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
+
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 52
+WHEN  ('')TIMES 0
+WHEN  ('?BCopiarMPL')TIMES 0
+WHEN  ('?BQuitarTodas')TIMES 0
+WHEN  ('?BUTTON1')TIMES 0
+WHEN  ('?CallLookup')TIMES 0
+WHEN  ('?CallLookup:2')TIMES 0
+WHEN  ('?CallLookup:4')TIMES 0
+WHEN  ('?CallLookup:5')TIMES 0
+WHEN  ('?CallLookup:6')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Image1')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?LOC:CLASE:Prompt')TIMES 0
+WHEN  ('?LOC:GRUPO')TIMES 0
+WHEN  ('?LOC:RAZONSOCIAL')TIMES 0
+WHEN  ('?List')TIMES 0
+WHEN  ('?LookupFile')TIMES 0
+WHEN  ('?OK')TIMES 0
+WHEN  ('?Plantillas')TIMES 0
+WHEN  ('?TFirma')TIMES 0
+WHEN  ('?USUSU:CARGO:Prompt')TIMES 0
+WHEN  ('?USUSU:CELULAR:Prompt')TIMES 0
+WHEN  ('?USUSU:CODCAJERO')TIMES 0
+WHEN  ('?USUSU:CODCAJERO:Prompt')TIMES 0
+WHEN  ('?USUSU:ESTADO')TIMES 0
+WHEN  ('?USUSU:ESTADO:Prompt')TIMES 0
+WHEN  ('?USUSU:FECHACAMBIO_DATE')TIMES 0
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt')TIMES 0
+WHEN  ('?USUSU:FECHACAMBIO_TIME')TIMES 0
+WHEN  ('?USUSU:GRUPO:Prompt')TIMES 0
+WHEN  ('?USUSU:IDEMPRESA')TIMES 0
+WHEN  ('?USUSU:IDMEDICO')TIMES 0
+WHEN  ('?USUSU:IDMEDICO:Prompt')TIMES 0
+WHEN  ('?USUSU:IDSEDE')TIMES 0
+WHEN  ('?USUSU:IDSEDE:Prompt')TIMES 0
+WHEN  ('?USUSU:IDTERCERO')TIMES 0
+WHEN  ('?USUSU:IDTERCERO:Prompt')TIMES 0
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt')TIMES 0
+WHEN  ('?USUSU:NOMBRE')TIMES 0
+WHEN  ('?USUSU:NOMBRE:Prompt')TIMES 0
+WHEN  ('?USUSU:SYS_ComputerName')TIMES 0
+WHEN  ('?USUSU:SYS_ComputerName:Prompt')TIMES 0
+WHEN  ('?USUSU:TELEFONO:Prompt')TIMES 0
+WHEN  ('?USUSU:TIPO')TIMES 0
+WHEN  ('?USUSU:TIPO:Prompt')TIMES 0
+WHEN  ('?USUSU:USUARIO')TIMES 0
+WHEN  ('?USUSU:USUARIO:Prompt')TIMES 0
+WHEN  ('?loc:cargafirma')TIMES 0
+WHEN  ('?loc:cargarfirma')TIMES 0
+WHEN  ('?loc:path:Prompt')TIMES 0
+
+%UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%UncheckedAssignVariable DEPEND %UncheckedAssigns FIELD TIMES 0
+
+%UncheckedAssignValue DEPEND %UncheckedAssigns DEFAULT TIMES 0
+
+%UnCheckedHides DEPEND %Control MULTI LONG TIMES 2
+WHEN  ('?loc:cargafirma') (1)
+WHEN  ('?loc:cargarfirma') (1)
+
+%UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 2
+WHEN  ('?loc:cargafirma')TIMES 1
+WHEN  (1) ('?loc:cargarfirma')
+WHEN  ('?loc:cargarfirma')TIMES 1
+WHEN  (1) ('?loc:cargafirma')
+
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 52
+WHEN  ('')TIMES 0
+WHEN  ('?BCopiarMPL')TIMES 0
+WHEN  ('?BQuitarTodas')TIMES 0
+WHEN  ('?BUTTON1')TIMES 0
+WHEN  ('?CallLookup')TIMES 0
+WHEN  ('?CallLookup:2')TIMES 0
+WHEN  ('?CallLookup:4')TIMES 0
+WHEN  ('?CallLookup:5')TIMES 0
+WHEN  ('?CallLookup:6')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Image1')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?LOC:CLASE:Prompt')TIMES 0
+WHEN  ('?LOC:GRUPO')TIMES 0
+WHEN  ('?LOC:RAZONSOCIAL')TIMES 0
+WHEN  ('?List')TIMES 0
+WHEN  ('?LookupFile')TIMES 0
+WHEN  ('?OK')TIMES 0
+WHEN  ('?Plantillas')TIMES 0
+WHEN  ('?TFirma')TIMES 0
+WHEN  ('?USUSU:CARGO:Prompt')TIMES 0
+WHEN  ('?USUSU:CELULAR:Prompt')TIMES 0
+WHEN  ('?USUSU:CODCAJERO')TIMES 0
+WHEN  ('?USUSU:CODCAJERO:Prompt')TIMES 0
+WHEN  ('?USUSU:ESTADO')TIMES 0
+WHEN  ('?USUSU:ESTADO:Prompt')TIMES 0
+WHEN  ('?USUSU:FECHACAMBIO_DATE')TIMES 0
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt')TIMES 0
+WHEN  ('?USUSU:FECHACAMBIO_TIME')TIMES 0
+WHEN  ('?USUSU:GRUPO:Prompt')TIMES 0
+WHEN  ('?USUSU:IDEMPRESA')TIMES 0
+WHEN  ('?USUSU:IDMEDICO')TIMES 0
+WHEN  ('?USUSU:IDMEDICO:Prompt')TIMES 0
+WHEN  ('?USUSU:IDSEDE')TIMES 0
+WHEN  ('?USUSU:IDSEDE:Prompt')TIMES 0
+WHEN  ('?USUSU:IDTERCERO')TIMES 0
+WHEN  ('?USUSU:IDTERCERO:Prompt')TIMES 0
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt')TIMES 0
+WHEN  ('?USUSU:NOMBRE')TIMES 0
+WHEN  ('?USUSU:NOMBRE:Prompt')TIMES 0
+WHEN  ('?USUSU:SYS_ComputerName')TIMES 0
+WHEN  ('?USUSU:SYS_ComputerName:Prompt')TIMES 0
+WHEN  ('?USUSU:TELEFONO:Prompt')TIMES 0
+WHEN  ('?USUSU:TIPO')TIMES 0
+WHEN  ('?USUSU:TIPO:Prompt')TIMES 0
+WHEN  ('?USUSU:USUARIO')TIMES 0
+WHEN  ('?USUSU:USUARIO:Prompt')TIMES 0
+WHEN  ('?loc:cargafirma')TIMES 1
+WHEN  (1) ('Unhide')
+WHEN  ('?loc:cargarfirma')TIMES 1
+WHEN  (1) ('Unhide')
+WHEN  ('?loc:path:Prompt')TIMES 0
+
+%UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
+
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 52
+WHEN  ('')TIMES 0
+WHEN  ('?BCopiarMPL')TIMES 0
+WHEN  ('?BQuitarTodas')TIMES 0
+WHEN  ('?BUTTON1')TIMES 0
+WHEN  ('?CallLookup')TIMES 0
+WHEN  ('?CallLookup:2')TIMES 0
+WHEN  ('?CallLookup:4')TIMES 0
+WHEN  ('?CallLookup:5')TIMES 0
+WHEN  ('?CallLookup:6')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Image1')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?LOC:CLASE:Prompt')TIMES 0
+WHEN  ('?LOC:GRUPO')TIMES 0
+WHEN  ('?LOC:RAZONSOCIAL')TIMES 0
+WHEN  ('?List')TIMES 0
+WHEN  ('?LookupFile')TIMES 0
+WHEN  ('?OK')TIMES 0
+WHEN  ('?Plantillas')TIMES 0
+WHEN  ('?TFirma')TIMES 0
+WHEN  ('?USUSU:CARGO:Prompt')TIMES 0
+WHEN  ('?USUSU:CELULAR:Prompt')TIMES 0
+WHEN  ('?USUSU:CODCAJERO')TIMES 0
+WHEN  ('?USUSU:CODCAJERO:Prompt')TIMES 0
+WHEN  ('?USUSU:ESTADO')TIMES 0
+WHEN  ('?USUSU:ESTADO:Prompt')TIMES 0
+WHEN  ('?USUSU:FECHACAMBIO_DATE')TIMES 0
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt')TIMES 0
+WHEN  ('?USUSU:FECHACAMBIO_TIME')TIMES 0
+WHEN  ('?USUSU:GRUPO:Prompt')TIMES 0
+WHEN  ('?USUSU:IDEMPRESA')TIMES 0
+WHEN  ('?USUSU:IDMEDICO')TIMES 0
+WHEN  ('?USUSU:IDMEDICO:Prompt')TIMES 0
+WHEN  ('?USUSU:IDSEDE')TIMES 0
+WHEN  ('?USUSU:IDSEDE:Prompt')TIMES 0
+WHEN  ('?USUSU:IDTERCERO')TIMES 0
+WHEN  ('?USUSU:IDTERCERO:Prompt')TIMES 0
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt')TIMES 0
+WHEN  ('?USUSU:NOMBRE')TIMES 0
+WHEN  ('?USUSU:NOMBRE:Prompt')TIMES 0
+WHEN  ('?USUSU:SYS_ComputerName')TIMES 0
+WHEN  ('?USUSU:SYS_ComputerName:Prompt')TIMES 0
+WHEN  ('?USUSU:TELEFONO:Prompt')TIMES 0
+WHEN  ('?USUSU:TIPO')TIMES 0
+WHEN  ('?USUSU:TIPO:Prompt')TIMES 0
+WHEN  ('?USUSU:USUARIO')TIMES 0
+WHEN  ('?USUSU:USUARIO:Prompt')TIMES 0
+WHEN  ('?loc:cargafirma')TIMES 0
+WHEN  ('?loc:cargarfirma')TIMES 0
+WHEN  ('?loc:path:Prompt')TIMES 0
+
+%ProcedureDisableEnhanceFocus LONG  (0)
+%ProcedureUseEnterInsteadTabOverride LONG  (0)
+%WindowUseEnterInsteadTab LONG  (1)
+%ProcedureUseEnterInsteadTabExcludeListCombo LONG  (0)
+%ProcedureUseEnterInsteadTabEnableNextTabStop LONG  (0)
+%ProcedureUseEnterInsteadTabExcludeG LONG  (1)
+%WindowUseEnterInsteadTabExclude MULTI DEFAULT  ()
+%WindowStyles MULTI LONG  ()
+%WindowStyleFontName DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontSize DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontStyle DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontColor DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontCharSet DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStylePicture DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleOtherListboxes MULTI DEFAULT  ()
+%ProcedureAutoBindFields MULTI LONG  (1)
+%ProcedureAutoBindField DEPEND %ProcedureAutoBindFields DEFAULT TIMES 1
+WHEN  (1) ('LOC:DESCPLANTILLA')
+
+%ProcedureAutoBindFieldTPL DEPEND %ProcedureAutoBindFields DEFAULT TIMES 1
+WHEN  (1) ('BrowseBox(ABC)')
+
+%ProcedureAutoBindProcedures MULTI LONG  ()
+%ProcedureAutoBindProcedure DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedureTPL DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldsIgnored MULTI LONG  ()
+%ProcedureAutoBindFieldIgnored DEPEND %ProcedureAutoBindFieldsIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindProceduresIgnored MULTI LONG  ()
+%ProcedureAutoBindProcedureIgnored DEPEND %ProcedureAutoBindProceduresIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindValidToAddField LONG  (0)
+%ProcedureUserBindFields MULTI LONG  ()
+%ProcedureUserBindField DEPEND %ProcedureUserBindFields FIELD TIMES 0
+
+%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 0
+
+%ProcedureUserBindProcedures MULTI LONG  ()
+%ProcedureUserBindProcedure DEPEND %ProcedureUserBindProcedures PROCEDURE TIMES 0
+
+%ProcedureAutoBindProcedureIgnore DEPEND %ProcedureAutoBindProcedures LONG TIMES 0
+
+%ProcedureUserBindExpressions MULTI LONG  ()
+%ProcedureUserBindExpressionName DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%ProcedureUserBindExpression DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%PreLookupProcedureParameters DEPEND %Control DEFAULT TIMES 5
+WHEN  ('?USUSU:FECHACAMBIO_DATE') ('')
+WHEN  ('?USUSU:FECHACAMBIO_TIME') ('')
+WHEN  ('?USUSU:IDEMPRESA') ('')
+WHEN  ('?USUSU:IDMEDICO') ('')
+WHEN  ('?USUSU:IDTERCERO') ('')
+
+%PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 5
+WHEN  ('?USUSU:FECHACAMBIO_DATE') ('')
+WHEN  ('?USUSU:FECHACAMBIO_TIME') ('')
+WHEN  ('?USUSU:IDEMPRESA') ('')
+WHEN  ('?USUSU:IDMEDICO') ('')
+WHEN  ('?USUSU:IDTERCERO') ('')
+
+%ExtUITabIcon DEPEND %Control DEFAULT TIMES 0
+
+%ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
+
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 40
+WHEN  ('') ('Default')
+WHEN  ('?BCopiarMPL') ('Default')
+WHEN  ('?BQuitarTodas') ('Default')
+WHEN  ('?BUTTON1') ('Default')
+WHEN  ('?CallLookup') ('Default')
+WHEN  ('?CallLookup:2') ('Default')
+WHEN  ('?CallLookup:4') ('Default')
+WHEN  ('?CallLookup:5') ('Default')
+WHEN  ('?CallLookup:6') ('Default')
+WHEN  ('?Cancel') ('Default')
+WHEN  ('?Change') ('Default')
+WHEN  ('?CurrentTab') ('Default')
+WHEN  ('?Delete') ('Default')
+WHEN  ('?Image1') ('Default')
+WHEN  ('?Insert') ('Default')
+WHEN  ('?LOC:CLASE:Prompt') ('Default')
+WHEN  ('?LOC:GRUPO') ('Default')
+WHEN  ('?LOC:RAZONSOCIAL') ('Default')
+WHEN  ('?List') ('Default')
+WHEN  ('?LookupFile') ('Default')
+WHEN  ('?OK') ('Default')
+WHEN  ('?Plantillas') ('Default')
+WHEN  ('?TFirma') ('Default')
+WHEN  ('?USUSU:CARGO:Prompt') ('Default')
+WHEN  ('?USUSU:CELULAR:Prompt') ('Default')
+WHEN  ('?USUSU:CODCAJERO') ('Default')
+WHEN  ('?USUSU:ESTADO') ('Default')
+WHEN  ('?USUSU:IDEMPRESA') ('Default')
+WHEN  ('?USUSU:IDMEDICO') ('Default')
+WHEN  ('?USUSU:IDSEDE') ('Default')
+WHEN  ('?USUSU:IDSEDE:Prompt') ('Default')
+WHEN  ('?USUSU:IDTERCERO') ('Default')
+WHEN  ('?USUSU:IDTERCERO:Prompt') ('Default')
+WHEN  ('?USUSU:SYS_ComputerName') ('Default')
+WHEN  ('?USUSU:TELEFONO:Prompt') ('Default')
+WHEN  ('?USUSU:TIPO') ('Default')
+WHEN  ('?USUSU:TIPO:Prompt') ('Default')
+WHEN  ('?loc:cargafirma') ('Default')
+WHEN  ('?loc:cargarfirma') ('Default')
+WHEN  ('?loc:path:Prompt') ('Default')
+
+%CheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
+
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 39
+WHEN  ('')TIMES 0
+WHEN  ('?BCopiarMPL')TIMES 0
+WHEN  ('?BQuitarTodas')TIMES 0
+WHEN  ('?BUTTON1')TIMES 0
+WHEN  ('?CallLookup')TIMES 0
+WHEN  ('?CallLookup:2')TIMES 0
+WHEN  ('?CallLookup:4')TIMES 0
+WHEN  ('?CallLookup:5')TIMES 0
+WHEN  ('?CallLookup:6')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Image1')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?LOC:CLASE:Prompt')TIMES 0
+WHEN  ('?LOC:GRUPO')TIMES 0
+WHEN  ('?LOC:RAZONSOCIAL')TIMES 0
+WHEN  ('?List')TIMES 0
+WHEN  ('?LookupFile')TIMES 0
+WHEN  ('?OK')TIMES 0
+WHEN  ('?Plantillas')TIMES 0
+WHEN  ('?TFirma')TIMES 0
+WHEN  ('?USUSU:CARGO:Prompt')TIMES 0
+WHEN  ('?USUSU:CELULAR:Prompt')TIMES 0
+WHEN  ('?USUSU:CODCAJERO')TIMES 0
+WHEN  ('?USUSU:ESTADO')TIMES 0
+WHEN  ('?USUSU:IDEMPRESA')TIMES 0
+WHEN  ('?USUSU:IDMEDICO')TIMES 0
+WHEN  ('?USUSU:IDSEDE')TIMES 0
+WHEN  ('?USUSU:IDSEDE:Prompt')TIMES 0
+WHEN  ('?USUSU:IDTERCERO')TIMES 0
+WHEN  ('?USUSU:IDTERCERO:Prompt')TIMES 0
+WHEN  ('?USUSU:SYS_ComputerName')TIMES 0
+WHEN  ('?USUSU:TELEFONO:Prompt')TIMES 0
+WHEN  ('?USUSU:TIPO')TIMES 0
+WHEN  ('?USUSU:TIPO:Prompt')TIMES 0
+WHEN  ('?loc:cargafirma')TIMES 0
+WHEN  ('?loc:cargarfirma')TIMES 0
+WHEN  ('?loc:path:Prompt')TIMES 0
+
+%UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
+
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 39
+WHEN  ('')TIMES 0
+WHEN  ('?BCopiarMPL')TIMES 0
+WHEN  ('?BQuitarTodas')TIMES 0
+WHEN  ('?BUTTON1')TIMES 0
+WHEN  ('?CallLookup')TIMES 0
+WHEN  ('?CallLookup:2')TIMES 0
+WHEN  ('?CallLookup:4')TIMES 0
+WHEN  ('?CallLookup:5')TIMES 0
+WHEN  ('?CallLookup:6')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Image1')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?LOC:CLASE:Prompt')TIMES 0
+WHEN  ('?LOC:GRUPO')TIMES 0
+WHEN  ('?LOC:RAZONSOCIAL')TIMES 0
+WHEN  ('?List')TIMES 0
+WHEN  ('?LookupFile')TIMES 0
+WHEN  ('?OK')TIMES 0
+WHEN  ('?Plantillas')TIMES 0
+WHEN  ('?TFirma')TIMES 0
+WHEN  ('?USUSU:CARGO:Prompt')TIMES 0
+WHEN  ('?USUSU:CELULAR:Prompt')TIMES 0
+WHEN  ('?USUSU:CODCAJERO')TIMES 0
+WHEN  ('?USUSU:ESTADO')TIMES 0
+WHEN  ('?USUSU:IDEMPRESA')TIMES 0
+WHEN  ('?USUSU:IDMEDICO')TIMES 0
+WHEN  ('?USUSU:IDSEDE')TIMES 0
+WHEN  ('?USUSU:IDSEDE:Prompt')TIMES 0
+WHEN  ('?USUSU:IDTERCERO')TIMES 0
+WHEN  ('?USUSU:IDTERCERO:Prompt')TIMES 0
+WHEN  ('?USUSU:SYS_ComputerName')TIMES 0
+WHEN  ('?USUSU:TELEFONO:Prompt')TIMES 0
+WHEN  ('?USUSU:TIPO')TIMES 0
+WHEN  ('?USUSU:TIPO:Prompt')TIMES 0
+WHEN  ('?loc:cargafirma')TIMES 0
+WHEN  ('?loc:cargarfirma')TIMES 0
+WHEN  ('?loc:path:Prompt')TIMES 0
+
+%ProcedureOneInstance LONG  (0)
+%PreserveVarsLoc MULTI LONG  ()
+%PreserveVarLoc DEPEND %PreserveVarsLoc DEFAULT TIMES 0
+
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 19
+WHEN  ('') ('Off')
+WHEN  ('?BCopiarMPL') ('Off')
+WHEN  ('?BQuitarTodas') ('Off')
+WHEN  ('?BUTTON1') ('Off')
+WHEN  ('?CallLookup') ('Off')
+WHEN  ('?CallLookup:5') ('Off')
+WHEN  ('?CallLookup:6') ('Off')
+WHEN  ('?Cancel') ('Off')
+WHEN  ('?Change') ('Off')
+WHEN  ('?Delete') ('Off')
+WHEN  ('?Insert') ('Off')
+WHEN  ('?LOC:GRUPO') ('Off')
+WHEN  ('?List') ('Off')
+WHEN  ('?OK') ('Off')
+WHEN  ('?USUSU:CODCAJERO') ('Off')
+WHEN  ('?USUSU:IDEMPRESA') ('Off')
+WHEN  ('?USUSU:IDMEDICO') ('Off')
+WHEN  ('?USUSU:IDSEDE') ('Off')
+WHEN  ('?USUSU:IDTERCERO') ('Off')
+
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 19
+WHEN  ('') ('')
+WHEN  ('?BCopiarMPL') ('')
+WHEN  ('?BQuitarTodas') ('')
+WHEN  ('?BUTTON1') ('')
+WHEN  ('?CallLookup') ('')
+WHEN  ('?CallLookup:5') ('')
+WHEN  ('?CallLookup:6') ('')
+WHEN  ('?Cancel') ('')
+WHEN  ('?Change') ('')
+WHEN  ('?Delete') ('')
+WHEN  ('?Insert') ('')
+WHEN  ('?LOC:GRUPO') ('')
+WHEN  ('?List') ('')
+WHEN  ('?OK') ('')
+WHEN  ('?USUSU:CODCAJERO') ('')
+WHEN  ('?USUSU:IDEMPRESA') ('')
+WHEN  ('?USUSU:IDMEDICO') ('')
+WHEN  ('?USUSU:IDSEDE') ('')
+WHEN  ('?USUSU:IDTERCERO') ('')
+
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 19
+WHEN  ('') (0)
+WHEN  ('?BCopiarMPL') (0)
+WHEN  ('?BQuitarTodas') (0)
+WHEN  ('?BUTTON1') (0)
+WHEN  ('?CallLookup') (0)
+WHEN  ('?CallLookup:5') (0)
+WHEN  ('?CallLookup:6') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?Change') (0)
+WHEN  ('?Delete') (0)
+WHEN  ('?Insert') (0)
+WHEN  ('?LOC:GRUPO') (0)
+WHEN  ('?List') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?USUSU:CODCAJERO') (0)
+WHEN  ('?USUSU:IDEMPRESA') (0)
+WHEN  ('?USUSU:IDMEDICO') (0)
+WHEN  ('?USUSU:IDSEDE') (0)
+WHEN  ('?USUSU:IDTERCERO') (0)
+
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 19
+WHEN  ('') (-1)
+WHEN  ('?BCopiarMPL') (-1)
+WHEN  ('?BQuitarTodas') (-1)
+WHEN  ('?BUTTON1') (-1)
+WHEN  ('?CallLookup') (-1)
+WHEN  ('?CallLookup:5') (-1)
+WHEN  ('?CallLookup:6') (-1)
+WHEN  ('?Cancel') (-1)
+WHEN  ('?Change') (-1)
+WHEN  ('?Delete') (-1)
+WHEN  ('?Insert') (-1)
+WHEN  ('?LOC:GRUPO') (-1)
+WHEN  ('?List') (-1)
+WHEN  ('?OK') (-1)
+WHEN  ('?USUSU:CODCAJERO') (-1)
+WHEN  ('?USUSU:IDEMPRESA') (-1)
+WHEN  ('?USUSU:IDMEDICO') (-1)
+WHEN  ('?USUSU:IDSEDE') (-1)
+WHEN  ('?USUSU:IDTERCERO') (-1)
+
+%FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 19
+WHEN  ('') (0)
+WHEN  ('?BCopiarMPL') (0)
+WHEN  ('?BQuitarTodas') (0)
+WHEN  ('?BUTTON1') (0)
+WHEN  ('?CallLookup') (0)
+WHEN  ('?CallLookup:5') (0)
+WHEN  ('?CallLookup:6') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?Change') (0)
+WHEN  ('?Delete') (0)
+WHEN  ('?Insert') (0)
+WHEN  ('?LOC:GRUPO') (0)
+WHEN  ('?List') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?USUSU:CODCAJERO') (0)
+WHEN  ('?USUSU:IDEMPRESA') (0)
+WHEN  ('?USUSU:IDMEDICO') (0)
+WHEN  ('?USUSU:IDSEDE') (0)
+WHEN  ('?USUSU:IDTERCERO') (0)
+
+%FieldGradientColorTo DEPEND %Control LONG TIMES 19
+WHEN  ('') (-1)
+WHEN  ('?BCopiarMPL') (-1)
+WHEN  ('?BQuitarTodas') (-1)
+WHEN  ('?BUTTON1') (-1)
+WHEN  ('?CallLookup') (-1)
+WHEN  ('?CallLookup:5') (-1)
+WHEN  ('?CallLookup:6') (-1)
+WHEN  ('?Cancel') (-1)
+WHEN  ('?Change') (-1)
+WHEN  ('?Delete') (-1)
+WHEN  ('?Insert') (-1)
+WHEN  ('?LOC:GRUPO') (-1)
+WHEN  ('?List') (-1)
+WHEN  ('?OK') (-1)
+WHEN  ('?USUSU:CODCAJERO') (-1)
+WHEN  ('?USUSU:IDEMPRESA') (-1)
+WHEN  ('?USUSU:IDMEDICO') (-1)
+WHEN  ('?USUSU:IDSEDE') (-1)
+WHEN  ('?USUSU:IDTERCERO') (-1)
+
+%FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 19
+WHEN  ('') (0)
+WHEN  ('?BCopiarMPL') (0)
+WHEN  ('?BQuitarTodas') (0)
+WHEN  ('?BUTTON1') (0)
+WHEN  ('?CallLookup') (0)
+WHEN  ('?CallLookup:5') (0)
+WHEN  ('?CallLookup:6') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?Change') (0)
+WHEN  ('?Delete') (0)
+WHEN  ('?Insert') (0)
+WHEN  ('?LOC:GRUPO') (0)
+WHEN  ('?List') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?USUSU:CODCAJERO') (0)
+WHEN  ('?USUSU:IDEMPRESA') (0)
+WHEN  ('?USUSU:IDMEDICO') (0)
+WHEN  ('?USUSU:IDSEDE') (0)
+WHEN  ('?USUSU:IDTERCERO') (0)
+
+%ActiveImageEnable DEPEND %Control LONG TIMES 0
+
+%AIObjectName DEPEND %Control DEFAULT TIMES 20
+WHEN  ('') ('AIBtn0')
+WHEN  ('?BCopiarMPL') ('AIBtn42')
+WHEN  ('?BQuitarTodas') ('AIBtn43')
+WHEN  ('?BUTTON1') ('AIBtn76')
+WHEN  ('?CallLookup') ('AIBtn18')
+WHEN  ('?CallLookup:5') ('AIBtn45')
+WHEN  ('?CallLookup:6') ('AIBtn74')
+WHEN  ('?Cancel') ('AIBtn70')
+WHEN  ('?Change') ('AIBtn40')
+WHEN  ('?Delete') ('AIBtn41')
+WHEN  ('?Image1') ('AIBtn52')
+WHEN  ('?Insert') ('AIBtn39')
+WHEN  ('?LOC:GRUPO') ('AIBtn17')
+WHEN  ('?List') ('AIBtn64')
+WHEN  ('?OK') ('AIBtn75')
+WHEN  ('?USUSU:CODCAJERO') ('AIBtn33')
+WHEN  ('?USUSU:IDEMPRESA') ('AIBtn72')
+WHEN  ('?USUSU:IDMEDICO') ('AIBtn24')
+WHEN  ('?USUSU:IDSEDE') ('AIBtn10')
+WHEN  ('?USUSU:IDTERCERO') ('AIBtn43')
+
+%AIEnableMimicControl DEPEND %Control LONG TIMES 20
+WHEN  ('') (1)
+WHEN  ('?BCopiarMPL') (1)
+WHEN  ('?BQuitarTodas') (1)
+WHEN  ('?BUTTON1') (1)
+WHEN  ('?CallLookup') (1)
+WHEN  ('?CallLookup:5') (1)
+WHEN  ('?CallLookup:6') (1)
+WHEN  ('?Cancel') (1)
+WHEN  ('?Change') (1)
+WHEN  ('?Delete') (1)
+WHEN  ('?Image1') (1)
+WHEN  ('?Insert') (1)
+WHEN  ('?LOC:GRUPO') (1)
+WHEN  ('?List') (1)
+WHEN  ('?OK') (1)
+WHEN  ('?USUSU:CODCAJERO') (1)
+WHEN  ('?USUSU:IDEMPRESA') (1)
+WHEN  ('?USUSU:IDMEDICO') (1)
+WHEN  ('?USUSU:IDSEDE') (1)
+WHEN  ('?USUSU:IDTERCERO') (1)
+
+%AIMimicControl DEPEND %Control DEFAULT TIMES 20
+WHEN  ('') ('?CurrentTab')
+WHEN  ('?BCopiarMPL') ('?CurrentTab')
+WHEN  ('?BQuitarTodas') ('?CurrentTab')
+WHEN  ('?BUTTON1') ('?CurrentTab')
+WHEN  ('?CallLookup') ('?CurrentTab')
+WHEN  ('?CallLookup:5') ('?CurrentTab')
+WHEN  ('?CallLookup:6') ('?CurrentTab')
+WHEN  ('?Cancel') ('?CurrentTab')
+WHEN  ('?Change') ('?CurrentTab')
+WHEN  ('?Delete') ('?CurrentTab')
+WHEN  ('?Image1') ('?CurrentTab')
+WHEN  ('?Insert') ('?CurrentTab')
+WHEN  ('?LOC:GRUPO') ('?CurrentTab')
+WHEN  ('?List') ('?CurrentTab')
+WHEN  ('?OK') ('?CurrentTab')
+WHEN  ('?USUSU:CODCAJERO') ('?CurrentTab')
+WHEN  ('?USUSU:IDEMPRESA') ('?CurrentTab')
+WHEN  ('?USUSU:IDMEDICO') ('?CurrentTab')
+WHEN  ('?USUSU:IDSEDE') ('?CurrentTab')
+WHEN  ('?USUSU:IDTERCERO') ('?CurrentTab')
+
+%AIImgRound DEPEND %Control LONG TIMES 0
+
+%AIOverrideImg DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 20
+WHEN  ('') (0)
+WHEN  ('?BCopiarMPL') (0)
+WHEN  ('?BQuitarTodas') (0)
+WHEN  ('?BUTTON1') (0)
+WHEN  ('?CallLookup') (0)
+WHEN  ('?CallLookup:5') (0)
+WHEN  ('?CallLookup:6') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?Change') (0)
+WHEN  ('?Delete') (0)
+WHEN  ('?Image1') (0)
+WHEN  ('?Insert') (0)
+WHEN  ('?LOC:GRUPO') (0)
+WHEN  ('?List') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?USUSU:CODCAJERO') (0)
+WHEN  ('?USUSU:IDEMPRESA') (0)
+WHEN  ('?USUSU:IDMEDICO') (0)
+WHEN  ('?USUSU:IDSEDE') (0)
+WHEN  ('?USUSU:IDTERCERO') (0)
+
+%AIDisableImg DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 20
+WHEN  ('') (0)
+WHEN  ('?BCopiarMPL') (0)
+WHEN  ('?BQuitarTodas') (0)
+WHEN  ('?BUTTON1') (0)
+WHEN  ('?CallLookup') (0)
+WHEN  ('?CallLookup:5') (0)
+WHEN  ('?CallLookup:6') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?Change') (0)
+WHEN  ('?Delete') (0)
+WHEN  ('?Image1') (0)
+WHEN  ('?Insert') (0)
+WHEN  ('?LOC:GRUPO') (0)
+WHEN  ('?List') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?USUSU:CODCAJERO') (0)
+WHEN  ('?USUSU:IDEMPRESA') (0)
+WHEN  ('?USUSU:IDMEDICO') (0)
+WHEN  ('?USUSU:IDSEDE') (0)
+WHEN  ('?USUSU:IDTERCERO') (0)
+
+%AIHotImg DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 20
+WHEN  ('') (0)
+WHEN  ('?BCopiarMPL') (0)
+WHEN  ('?BQuitarTodas') (0)
+WHEN  ('?BUTTON1') (0)
+WHEN  ('?CallLookup') (0)
+WHEN  ('?CallLookup:5') (0)
+WHEN  ('?CallLookup:6') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?Change') (0)
+WHEN  ('?Delete') (0)
+WHEN  ('?Image1') (0)
+WHEN  ('?Insert') (0)
+WHEN  ('?LOC:GRUPO') (0)
+WHEN  ('?List') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?USUSU:CODCAJERO') (0)
+WHEN  ('?USUSU:IDEMPRESA') (0)
+WHEN  ('?USUSU:IDMEDICO') (0)
+WHEN  ('?USUSU:IDSEDE') (0)
+WHEN  ('?USUSU:IDTERCERO') (0)
+
+%AIPressedImg DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 20
+WHEN  ('') (0)
+WHEN  ('?BCopiarMPL') (0)
+WHEN  ('?BQuitarTodas') (0)
+WHEN  ('?BUTTON1') (0)
+WHEN  ('?CallLookup') (0)
+WHEN  ('?CallLookup:5') (0)
+WHEN  ('?CallLookup:6') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?Change') (0)
+WHEN  ('?Delete') (0)
+WHEN  ('?Image1') (0)
+WHEN  ('?Insert') (0)
+WHEN  ('?LOC:GRUPO') (0)
+WHEN  ('?List') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?USUSU:CODCAJERO') (0)
+WHEN  ('?USUSU:IDEMPRESA') (0)
+WHEN  ('?USUSU:IDMEDICO') (0)
+WHEN  ('?USUSU:IDSEDE') (0)
+WHEN  ('?USUSU:IDTERCERO') (0)
+
+[EMBED]
+EMBED %WindowManagerMethodCodeSection
+[INSTANCES]
+WHEN 'Init'
+[INSTANCES]
+WHEN '(),BYTE'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7001
+PROPERTY:END
+Archivos{PROP:Owner}=GLO:DSN
+GLO:THREAD = THREAD() !EZERPA 08/04/2020 Para obligar refrescar el browse de plantillas desde otra ventana en el Notify de esta
+LOC:PATHB=PATH()
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7501
+PROPERTY:END
+If ThisWindow.Request = ChangeRecord Then
+   LOC:CLAVE = 'SINCAMBIO'
+   LOC:GRUPO = FnEncriptaDes(USUSU:GRUPO,2)
+   LOC:CLAVEANT = LOC:CLAVE
+End
+
+!MESSAGE('INIT')
+IF ThisWindow.Request<> InsertRecord
+   LOC:USUSU=USUSU:RECORD
+ELSE
+   USUSU.COMPANIA = '01'
+   USUSU:IDSEDE = GLO:IDSEDE
+   USUSU:NIVELFUNCIONARIO = 1
+   USUSU:CODCAJERO = 'NA'
+END
+IF FnValorVariable('PIDE_SEDEMPRESA_USU')='SI'
+   ?USUSU:IDSEDE{prop:req}=TRUE
+   ?USUSU:IDEMPRESA{prop:req}=TRUE
+END
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 8001
+PROPERTY:END
+Arc:id = USUSU:IDIMAGEN
+access:archivos.fetch(Arc:PK_Archivos)
+?Image1{PROP:ImageBlob} =Arc:dicom{PROP:Handle}
+?Image1{PROP:Width}  = 100
+?Image1{PROP:Height} = 50
+
+! Impresion selectiva de Plantillas de HC
+IF UPPER(FnValorVariable('IMPRIMIRMPLXUSUARIO')) = 'SI' THEN
+   IF ThisWindow.Request=InsertRecord
+      DISABLE(?Plantillas)
+   ELSE
+      ENABLE(?Plantillas)
+   END
+ELSE
+   DISABLE(?Plantillas)
+END
+
+loc:vez = 0
+loc:from = 'No Aplica|#No Aplica'
+Clear(TGEN:Record,-1)
+TGEN:TABLA = 'USUADM'
+TGEN:CAMPO = 'TIPO_USUARIO'
+set(tgen:tgentabla,tgen:tgentabla)
+loop until access:TGEN.next()
+   IF TGEN:TABLA <> 'USUADM' THEN BREAK.
+   IF TGEN:CAMPO <> 'TIPO_USUARIO' THEN BREAK.
+   loc:vez += 1
+   if loc:vez = 1
+      loc:tipousutemp = tgen.CODIGO
+   end
+   IF LEN(CLIP(LOC:FROM)) >1
+      loc:from = clip(loc:from)&'|'
+   END
+   loc:from = clip(loc:from)&TGEN:DESCRIPCION&'|#'&TGEN:CODIGO
+end
+?USUSU:TIPO_USUARIOADM{prop:from} = loc:from
+
+LOC:SQL='SELECT IDSEDE, DESCRIPCION FROM SED '
+CLEAR(WDUM:RECORD)
+WDUM{PROP:SQL} = LOC:SQL
+LOOP UNTIL ACCESS:WDUM.NEXT()
+   LOC:FROMSEDE = CLIP(LOC:FROMSEDE)&CLIP(WDUM:C1)&' - '&LEFT(CLIP(WDUM:C2),100)&'|#'&CLIP(WDUM:C1)&'|'
+END
+A# = LEN(CLIP(LOC:FROMSEDE))
+LOC:FROMSEDE = SUB(LOC:FROMSEDE,1,a#-1)
+?USUSU:IDSEDE{PROP:FROM} = LOC:FROMSEDE
+
+
+if ThisWindow.request <> insertrecord
+   IF USUSU:TIPO='M'                         !OR USUSU:TIPO='T'
+      !ENABLE(?USUSU:IDMEDICO)
+      ?USUSU:IDMEDICO{PROP:REQ}=TRUE
+      !ENABLE(?CallLookup:4)
+      USUSU:TIPO_USUARIOADM{prop:req}=false
+      USUSU:TIPO_USUARIOADM = 'No Aplica'
+      DISABLE(?USUSU:TIPO_USUARIOADM)
+   ELSE
+      loc:tipousutemp = USUSU:TIPO_USUARIOADM
+      !DISABLE(?USUSU:IDMEDICO)
+      ?USUSU:IDMEDICO{PROP:REQ}=FALSE
+      !DISABLE(?CallLookup:4)
+      if USUSU:TIPO <> 'E'
+         ENABLE(?USUSU:TIPO_USUARIOADM)
+         USUSU:TIPO_USUARIOADM{prop:req}=true
+         IF USUSU:TIPO_USUARIOADM = 'No Aplica'
+            USUSU:TIPO_USUARIOADM = ''
+         ELSE
+            USUSU:TIPO_USUARIOADM = loc:tipousutemp
+         end
+      ELSE
+         USUSU:TIPO_USUARIOADM{prop:req}=false
+         USUSU:TIPO_USUARIOADM = 'No Aplica'
+         DISABLE(?USUSU:TIPO_USUARIOADM)
+      END
+   end
+ELSE
+   IF USUSU:TIPO='M'                         !OR USUSU:TIPO='T'
+      !ENABLE(?USUSU:IDMEDICO)
+      ?USUSU:IDMEDICO{PROP:REQ}=TRUE
+      !ENABLE(?CallLookup:4)
+      USUSU:TIPO_USUARIOADM{prop:req}=false
+      USUSU:TIPO_USUARIOADM = 'No Aplica'
+      DISABLE(?USUSU:TIPO_USUARIOADM)
+   ELSE
+      !DISABLE(?USUSU:IDMEDICO)
+      ?USUSU:IDMEDICO{PROP:REQ}=FALSE
+      !DISABLE(?CallLookup:4)
+      if USUSU:TIPO <> 'E'  !para los administrativos debe ser obligatorio
+         USUSU:TIPO_USUARIOADM{prop:req}=true
+         ENABLE(?USUSU:TIPO_USUARIOADM)
+      ELSE
+         USUSU:TIPO_USUARIOADM{prop:req}=false
+         DISABLE(?USUSU:TIPO_USUARIOADM)
+      END
+   END
+END
+
+
+LOC:SQL = 'SELECT STUFF((SELECT ''|''+DESCRIPCION+''|#''+CODIGO ' & |
+    'FROM TGEN ' & |
+    'WHERE TABLA=''General'' AND CAMPO=''TIPOIDENT'' ' & |
+    'ORDER BY DESCRIPCION ' & |
+    'FOR XML PATH('''')),1,1,'''')'
+
+CLEAR(WDUM:RECORD)
+WDUM{PROP:SQL} = LOC:SQL
+
+IF ERRORCODE()
+    SETCLIPBOARD(LOC:SQL)
+    BEEP(BEEP:SYSTEMHAND)
+    MESSAGE('Lo sentimos. Se produjo un error cuando tratamos de procesar su solicitud.<13>Tenga la seguridad de que estamos trabajando para resolver el problema tan pronto como sea posible.<13>Por favor, si el problema persiste contacte al departamento de tecnología.<13>ERROR:' & FILEERROR(),'Krystalos...',ICON:HAND)
+ELSE
+    Access:WDUM.Next()
+    ?USUSU:TIPOIDENT{PROP:From} = WDU:C1
+END
+[END]
+[END]
+WHEN 'TakeCompleted'
+[INSTANCES]
+WHEN '(),BYTE'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4500
+PROPERTY:END
+!revisamos que si se coloque el tipo de usuario administrativo si asi se debe hacer
+If USUSU:TIPO<>'M' AND  USUSU:TIPO <> 'E'
+   LOC:SQL = ' SELECT COUNT(*) FROM TGEN WHERE TABLA = ''USUADM'' AND CAMPO = ''TIPO_USUARIO'' AND CODIGO = '&FNSQLFMT(USUSU:TIPO_USUARIOADM)
+   setclipboard(LOC:SQL)
+   CLEAR(WDUM:RECORD)
+   WDUM{PROP:SQL} = LOC:SQL
+   ACCESS:WDUM.NEXT()
+   IF WDU:C1 = 0
+      Message('Tipo de Usuario Administrativo Invalido.','Seguridad...', ICON:Cross)
+      USUSU:TIPO_USUARIOADM = ''
+!      display
+      CYCLE
+   ELSE
+      IF USUSU:TIPO_USUARIOADM = 'No Aplica'
+         Message('Tipo de Usuario Administrativo Invalido.','Seguridad...', ICON:Cross)
+         USUSU:TIPO_USUARIOADM = ''
+!         Display
+         Cycle
+      end
+   End
+Else
+   USUSU:TIPO_USUARIOADM = ''
+End
+
+IF FnValorVariable('PIDE_SEDEMPRESA_USU')='SI'
+   IF USUSU:IDSEDE='' OR USUSU:IDEMPRESA=''
+      MESSAGE('Debe Elegir la Sede y la Empresa a la Cual Pertenece el Usuario','Seguridad Usuarios',ICON:Hand)
+      CYCLE
+   END
+END
+
+case ThisWindow.REQUEST
+of ChangeRecord
+   if loc:CLAVE <> 'SINCAMBIO'
+      loc:SQL = ' SELECT CAST(CASE WHEN CLAVE = HASHBYTES(''SHA2_512'','''&CLIP(loc:clave)&''')'&|
+                ' THEN 1 ELSE 0 END AS BIT), GRUPO FROM USUSU WHERE USUARIO = '''&CLIP(USUSU:USUARIO)&''''
+      CLEAR(WDUM:RECORD)
+      WDUM{PROP:SQL} = LOC:SQL
+      ACCESS:WDUM.NEXT()
+      IF WDUM:C1 = 1
+        Message('Debe colocar una Clave Diferente a la Anterior.','Krystalos',ICON:Cross)
+        cycle
+      ELSE
+          if CLIP(LOC:clave) = USUSU.USUARIO
+             message('El Password No Puede ser igual al Usuario','krystalos',icon:exclamation)
+             cycle
+          ELSE
+              if CLIP(LOC:CLAVE) = ''
+                 message('El Password NO puede ser blanco','krystalos',icon:exclamation)
+                 cycle
+              ELSE
+                  If LEN(CLIP(LOC:CLAVE)) < 6
+                     message( 'El Password debe tener mínimo 6 caracteres','Krystalos',icon:exclamation)
+                     cycle
+                  End
+              end
+          end
+      END
+   end
+end
+
+
+
+! Encripta
+!If LOC:CLAVE <> 'SINCAMBIO'
+!   clear(wdf:record)
+!   wdf{prop:sql} = ' SELECT DBO.FNK_FECHA_SIN_HORA(GETDATE()) '
+!   ACCESS:WDF.NEXT()
+!   USUSU:FECHACAMBIO_DATE = WDF:C1_DATE
+!   USUSU:FECHACAMBIO_TIME = WDF:C1_TIME
+!End
+IF loc:cargafirma=1 or loc:cargarfirma=1
+               Arc:nombre      = loc:path
+               GLO:DosFileName = Arc:nombre
+               OPEN(DosFile)
+               FileSize# = BYTES(DosFile)
+               Arc:nombre{PROP:Size} = FileSize#
+               LastRec# = FileSize# % SIZE(DOS:Record)
+               SavPtr# = 1
+               LOOP INT(FileSize#/SIZE(DOS:Record)) TIMES
+                  GET(DosFile,SavPtr#)
+                  ASSERT(NOT ERRORCODE())
+                  Arc:dicom[SavPtr# - 1 : SavPtr# + SIZE(DOS:Record) - 2] = DOS:Record
+                  SavPtr# += SIZE(DOS:Record)
+               END
+               IF LastRec#
+                  GET(DosFile,SavPtr#)
+                  ASSERT(BYTES(DosFile) = LastRec#)
+                  Arc:dicom[SavPtr# - 1 : SavPtr# + LastRec# - 2] = DOS:Record
+               END
+
+               ASSERT(NOT ERRORCODE())
+               CLOSE(DosFile)
+               if not access:archivos.insert()
+                  message('Archivo de Imagen Grabado.','krystalos',icon:question)
+               else
+                  message('Error al grabar archivo de imagen:' & fileerror() & errorcode())
+               end
+               archivos{PROP:SQL}  = 'SELECT @@IDENTITY'
+               NEXT(archivos)
+               if loc:cargafirma=1
+                  USUSU:IDIMAGEN        = Arc:id
+               END
+               IF loc:cargarfirma=1
+                  USUSU:IDFIRMA         =  Arc:id
+               END
+
+END
+!STOP('DESPUES DE FIRMAS')
+
+!USUSU:CLAVE = FnEncriptaDes(LOC:CLAVE,1)
+USUSU:GRUPO = FnEncriptaDes(LOC:GRUPO,1)
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5001
+PROPERTY:END
+SETPATH(LOC:PATHB)
+case ThisWindow.REQUEST
+of ChangeRecord
+   if loc:CLAVE <> 'SINCAMBIO'
+        LOC:SQL =  ' UPDATE USUSU SET CLAVE = HASHBYTES(''SHA2_512'','&fnsqlfmt(LOC:CLAVE)&' ) '&CHR(13)&CHR(10)&|
+                   '                 ,FECHACAMBIO = DBO.FNK_FECHA_SIN_HORA(GETDATE()), FECHAVENCE = DBO.FNK_FECHA_SIN_HORA(GETDATE()) + 90 '&CHR(13)&CHR(10)&|
+                   '                 ,CLAVE2 = PWDENCRYPT('&fnsqlfmt(LOC:CLAVE)&') '&CHR(13)&CHR(10)&|
+                   ' WHERE  USUARIO = '&FNSQLFMT(USUSU:USUARIO)
+      CLEAR(WDUM:RECORD)
+      WDUM{PROP:SQL} = LOC:SQL
+   END
+of InsertRecord
+   LOC:SQL =  ' UPDATE USUSU SET CLAVE = HASHBYTES(''SHA2_512'','&fnsqlfmt(LOC:CLAVE)&' ), FECHACAMBIO = DBO.FNK_FECHA_SIN_HORA(GETDATE()), FECHAVENCE = DBO.FNK_FECHA_SIN_HORA(GETDATE()) + 90 '&CHR(13)&CHR(10)&|
+              ' WHERE  USUARIO = '&FNSQLFMT(USUSU:USUARIO)
+   CLEAR(WDUM:RECORD)
+   WDUM{PROP:SQL} = LOC:SQL
+end
+
+CLEAR(WDF:RECORD)
+WDF{PROP:SQL} = 'SELECT GETDATE()'
+ACCESS:WDF.NEXT()
+IF ThisWindow.Request=1
+   CLEAR(USLOG:RECORD)
+   USLOG:CNSLOG     = clip(glo:idsede)&format(FnGeneraconsecutivo(glo:idsede,'@LOG'),@n08)
+   USLOG:COMPANIA   = GLO:COMPANIA
+   USLOG:NOADMISION = USUSU:USUARIO
+   USLOG:PROCESO    = 'USUARIOS'
+   USLOG:REQUEST    = 'INSERT'
+   USLOG:REFERENCIA = 'USUSU:USUARIO ='&USUSU:USUARIO
+   USLOG:USUARIO    = GLO:USUARIO
+   USLOG:FECHA_DATE = WDF:C1_DATE
+   USLOG:FECHA_TIME = WDF:C1_TIME
+   USLOG:SYS_ComputerName = GLO:SYS_ComputerName
+   USLOG:TABLA='USUSU'
+   ACCESS:USLOG.INSERT()
+   CLEAR(USLOGH:RECORD)
+   USLOGH:CNSLOG   = USLOG:CNSLOG
+   USLOGH:ITEM     = 1
+   USLOGH:CAMPO    = 'USUARIO'
+   USLOGH:VALORANT = ''
+   USLOGH:VALORNVO = USUSU:USUARIO
+   ACCESS:USLOGH.INSERT()
+   CLEAR(USLOGH:RECORD)
+   USLOGH:CNSLOG   = USLOG:CNSLOG
+   USLOGH:ITEM     = 2
+   USLOGH:CAMPO    = 'NOMBRE'
+   USLOGH:VALORANT = ''
+   USLOGH:VALORNVO = USUSU:NOMBRE
+   ACCESS:USLOGH.INSERT()
+   CLEAR(USLOGH:RECORD)
+   USLOGH:CNSLOG   = USLOG:CNSLOG
+   USLOGH:ITEM     = 3
+   USLOGH:CAMPO    = 'GRUPO'
+   USLOGH:VALORANT = ''
+   USLOGH:VALORNVO = FnEncriptaDes(USUSU:GRUPO,2)
+   ACCESS:USLOGH.INSERT()
+   CLEAR(USLOGH:RECORD)
+   USLOGH:CNSLOG   = USLOG:CNSLOG
+   USLOGH:ITEM     = 4
+   USLOGH:CAMPO    = 'TIPO'
+   USLOGH:VALORANT = ''
+   USLOGH:VALORNVO = USUSU:TIPO
+   ACCESS:USLOGH.INSERT()
+   CLEAR(USLOGH:RECORD)
+   USLOGH:CNSLOG   = USLOG:CNSLOG
+   USLOGH:ITEM     = 5
+   USLOGH:CAMPO    = 'IDMEDICO'
+   USLOGH:VALORANT = ''
+   USLOGH:VALORNVO = USUSU:IDMEDICO
+   ACCESS:USLOGH.INSERT()
+   CLEAR(USLOGH:RECORD)
+   USLOGH:CNSLOG   = USLOG:CNSLOG
+   USLOGH:ITEM     = 6
+   USLOGH:CAMPO    = 'CODCAJERO'
+   USLOGH:VALORANT = ''
+   USLOGH:VALORNVO = USUSU:CODCAJERO
+   ACCESS:USLOGH.INSERT()
+   CLEAR(USLOGH:RECORD)
+   USLOGH:CNSLOG   = USLOG:CNSLOG
+   USLOGH:ITEM     = 7
+   USLOGH:CAMPO    = 'ESTADO'
+   USLOGH:VALORANT = ''
+   USLOGH:VALORNVO = USUSU:ESTADO
+   ACCESS:USLOGH.INSERT()
+ELSIF ThisWindow.Request=2
+   CLEAR(USLOG:RECORD)
+   USLOG:CNSLOG     = clip(glo:idsede)&format(FnGeneraconsecutivo(glo:idsede,'@LOG'),@n08)
+   USLOG:COMPANIA   = GLO:COMPANIA
+   USLOG:NOADMISION = USUSU:USUARIO
+   USLOG:PROCESO    = 'USUARIOS'
+   USLOG:REQUEST    = 'CHANGE'
+   USLOG:REFERENCIA = 'USUSU:USUARIO ='&USUSU:USUARIO
+   USLOG:USUARIO    = GLO:USUARIO
+   USLOG:FECHA_DATE = WDF:C1_DATE
+   USLOG:FECHA_TIME = WDF:C1_TIME
+   USLOG:SYS_ComputerName = GLO:SYS_ComputerName
+   USLOG:TABLA='USUSU'
+   ACCESS:USLOG.INSERT()
+   IF USUSU:USUARIO<>LOC:USUSU:USUARIO
+      CLEAR(USLOGH:RECORD)
+      USLOGH:CNSLOG   = USLOG:CNSLOG
+      USLOGH:ITEM     = 1
+      USLOGH:CAMPO    = 'USUARIO'
+      USLOGH:VALORANT = LOC:USUSU:USUARIO
+      USLOGH:VALORNVO = USUSU:USUARIO
+      ACCESS:USLOGH.INSERT()
+   END
+   IF USUSU:NOMBRE<>LOC:USUSU:NOMBRE
+      CLEAR(USLOGH:RECORD)
+      USLOGH:CNSLOG   = USLOG:CNSLOG
+      USLOGH:ITEM     = 2
+      USLOGH:CAMPO    = 'NOMBRE'
+      USLOGH:VALORANT = LOC:USUSU:NOMBRE
+      USLOGH:VALORNVO = USUSU:NOMBRE
+      ACCESS:USLOGH.INSERT()
+   END
+   IF FnEncriptaDes(USUSU:GRUPO,2)<>FnEncriptaDes(LOC:USUSU:GRUPO,2)
+      CLEAR(USLOGH:RECORD)
+      USLOGH:CNSLOG   = USLOG:CNSLOG
+      USLOGH:ITEM     = 3
+      USLOGH:CAMPO    = 'GRUPO'
+      USLOGH:VALORANT = FnEncriptaDes(LOC:USUSU:GRUPO,2)
+      USLOGH:VALORNVO = FnEncriptaDes(USUSU:GRUPO,2)
+      ACCESS:USLOGH.INSERT()
+   END
+   IF USUSU:TIPO<>LOC:USUSU:TIPO
+      CLEAR(USLOGH:RECORD)
+      USLOGH:CNSLOG   = USLOG:CNSLOG
+      USLOGH:ITEM     = 4
+      USLOGH:CAMPO    = 'TIPO'
+      USLOGH:VALORANT = LOC:USUSU:TIPO
+      USLOGH:VALORNVO = USUSU:TIPO
+      ACCESS:USLOGH.INSERT()
+   END
+   IF USUSU:IDMEDICO<>USUSU:IDMEDICO
+      CLEAR(USLOGH:RECORD)
+      USLOGH:CNSLOG   = USLOG:CNSLOG
+      USLOGH:ITEM     = 5
+      USLOGH:CAMPO    = 'IDMEDICO'
+      USLOGH:VALORANT = LOC:USUSU:IDMEDICO
+      USLOGH:VALORNVO = USUSU:IDMEDICO
+      ACCESS:USLOGH.INSERT()
+   END
+   IF USUSU:CODCAJERO<>LOC:USUSU:CODCAJERO
+      CLEAR(USLOGH:RECORD)
+      USLOGH:CNSLOG   = USLOG:CNSLOG
+      USLOGH:ITEM     = 6
+      USLOGH:CAMPO    = 'CODCAJERO'
+      USLOGH:VALORANT = LOC:USUSU:CODCAJERO
+      USLOGH:VALORNVO = USUSU:CODCAJERO
+      ACCESS:USLOGH.INSERT()
+   END
+   IF USUSU:ESTADO<>LOC:USUSU:ESTADO
+      CLEAR(USLOGH:RECORD)
+      USLOGH:CNSLOG   = USLOG:CNSLOG
+      USLOGH:ITEM     = 7
+      USLOGH:CAMPO    = 'ESTADO'
+      USLOGH:VALORANT = LOC:USUSU:ESTADO
+      USLOGH:VALORNVO = USUSU:ESTADO
+      ACCESS:USLOGH.INSERT()
+   END
+ELSE
+   CLEAR(USLOG:RECORD)
+   USLOG:CNSLOG     = clip(glo:idsede)&format(FnGeneraconsecutivo(glo:idsede,'@LOG'),@n08)
+   USLOG:COMPANIA   = GLO:COMPANIA
+   USLOG:NOADMISION = USUSU:USUARIO
+   USLOG:PROCESO    = 'USUARIOS'
+   USLOG:REQUEST    = 'DELETE'
+   USLOG:REFERENCIA = 'USUSU:USUARIO ='&USUSU:USUARIO
+   USLOG:USUARIO    = GLO:USUARIO
+   USLOG:FECHA_DATE = WDF:C1_DATE
+   USLOG:FECHA_TIME = WDF:C1_TIME
+   USLOG:SYS_ComputerName = GLO:SYS_ComputerName
+   USLOG:TABLA='USUSU'
+   ACCESS:USLOG.INSERT()
+   CLEAR(USLOGH:RECORD)
+   USLOGH:CNSLOG   = USLOG:CNSLOG
+   USLOGH:ITEM     = 1
+   USLOGH:CAMPO    = 'USUARIO'
+   USLOGH:VALORANT = USUSU:USUARIO
+   USLOGH:VALORNVO = ''
+   ACCESS:USLOGH.INSERT()
+   CLEAR(USLOGH:RECORD)
+   USLOGH:CNSLOG   = USLOG:CNSLOG
+   USLOGH:ITEM     = 2
+   USLOGH:CAMPO    = 'NOMBRE'
+   USLOGH:VALORANT = USUSU:NOMBRE
+   USLOGH:VALORNVO = ''
+   ACCESS:USLOGH.INSERT()
+   CLEAR(USLOGH:RECORD)
+   USLOGH:CNSLOG   = USLOG:CNSLOG
+   USLOGH:ITEM     = 3
+   USLOGH:CAMPO    = 'GRUPO'
+   USLOGH:VALORANT = FnEncriptaDes(USUSU:GRUPO,2)
+   USLOGH:VALORNVO = ''
+   ACCESS:USLOGH.INSERT()
+   CLEAR(USLOGH:RECORD)
+   USLOGH:CNSLOG   = USLOG:CNSLOG
+   USLOGH:ITEM     = 4
+   USLOGH:CAMPO    = 'TIPO'
+   USLOGH:VALORANT = USUSU:TIPO
+   USLOGH:VALORNVO = ''
+   ACCESS:USLOGH.INSERT()
+   CLEAR(USLOGH:RECORD)
+   USLOGH:CNSLOG   = USLOG:CNSLOG
+   USLOGH:ITEM     = 5
+   USLOGH:CAMPO    = 'IDMEDICO'
+   USLOGH:VALORANT = USUSU:IDMEDICO
+   USLOGH:VALORNVO = ''
+   ACCESS:USLOGH.INSERT()
+   CLEAR(USLOGH:RECORD)
+   USLOGH:CNSLOG   = USLOG:CNSLOG
+   USLOGH:ITEM     = 6
+   USLOGH:CAMPO    = 'CODCAJERO'
+   USLOGH:VALORANT = USUSU:CODCAJERO
+   USLOGH:VALORNVO = ''
+   ACCESS:USLOGH.INSERT()
+   CLEAR(USLOGH:RECORD)
+   USLOGH:CNSLOG   = USLOG:CNSLOG
+   USLOGH:ITEM     = 7
+   USLOGH:CAMPO    = 'ESTADO'
+   USLOGH:VALORANT = USUSU:ESTADO
+   USLOGH:VALORNVO = ''
+   ACCESS:USLOGH.INSERT()
+END
+[END]
+[END]
+[END]
+EMBED %LocalDataAfterClasses
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7001
+PROPERTY:END
+DosFile    FILE,DRIVER('DOS'),PRE(DOS),NAME(GLO:DosFileName)
+
+Record      RECORD
+F1           STRING(2000)
+            END
+           END
+[END]
+EMBED %ControlEventHandling
+[INSTANCES]
+WHEN '?LookupFile'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7501
+PROPERTY:END
+?image1{prop:text}= loc:path
+display
+[END]
+[END]
+WHEN '?BCopiarMPL'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4999
+PROPERTY:END
+win:CopiaMpl(USUSU:USUARIO)
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7501
+PROPERTY:END
+BRW9.RESETFROMFILE()
+[END]
+[END]
+WHEN '?BQuitarTodas'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+LOC:SQL='DELETE MPLXUSU WHERE USUARIO='&FNSQLFMT(USUSU:USUARIO)
+CLEAR(WDUM)
+WDUM{PROP:SQL}=LOC:SQL
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 8800
+PROPERTY:END
+BRW9.RESETFROMFILE()
+[END]
+[END]
+WHEN '?USUSU:TIPO'
+[INSTANCES]
+WHEN 'NewSelection'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+IF USUSU:TIPO='M'                         !OR USUSU:TIPO='T'
+   !ENABLE(?USUSU:IDMEDICO)
+   ?USUSU:IDMEDICO{PROP:REQ}=TRUE
+   !ENABLE(?CallLookup:4)
+   USUSU:TIPO_USUARIOADM{prop:req}=false
+   USUSU:TIPO_USUARIOADM = 'No Aplica'
+   DISABLE(?USUSU:TIPO_USUARIOADM)
+ELSE
+   USUSU:IDMEDICO=''
+   !DISABLE(?USUSU:IDMEDICO)
+   ?USUSU:IDMEDICO{PROP:REQ}=FALSE
+   !DISABLE(?CallLookup:4)
+   if USUSU:TIPO <> 'E'  !para los administrativos debe ser obligatorio
+      USUSU:TIPO_USUARIOADM{prop:req}=true
+      ENABLE(?USUSU:TIPO_USUARIOADM)
+   ELSE
+      USUSU:TIPO_USUARIOADM{prop:req}=false
+      DISABLE(?USUSU:TIPO_USUARIOADM)
+   END
+END
+DISPLAY()
+[END]
+[END]
+WHEN '?CallLookup:5'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+GLO:CATEGORIA = FNVALORVARIABLE('TERCATCONTRATANTE')
+[END]
+[END]
+WHEN '?CallLookup:6'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+GLO:CATEGORIA = 'EMPRESA'
+[END]
+[END]
+WHEN '?USUSU:IDTERCERO'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7501
+PROPERTY:END
+GLO:CATEGORIA = FNVALORVARIABLE('TERCATCONTRATANTE')
+[END]
+[END]
+WHEN '?USUSU:IDEMPRESA'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7501
+PROPERTY:END
+GLO:CATEGORIA = 'EMPRESA'
+[END]
+[END]
+WHEN '?BUTTON1'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4499
+PROPERTY:END
+
+BEEP(BEEP:SystemQuestion)
+CASE MESSAGE('¿Confirma que desea reiniciar la clave web de este usuario?','Krystalos',ICON:Question,'&Si|&No',2,0)
+OF 2 !No
+    CYCLE
+OF 1 !Si
+    CLEAR(WDUM:RECORD)
+    LOC:SQL='UPDATE USUSU SET CLAVE2 = NULL WHERE USUARIO = '&FnSqlFmt(USUSU:USUARIO)
+    WDUM{PROP:SQL}=LOC:SQL
+    IF ERRORCODE()
+        SETCLIPBOARD(LOC:SQL)
+        BEEP(BEEP:SYSTEMHAND)
+        MESSAGE('Lo sentimos. Se produjo un error cuando tratamos de procesar su solicitud.<13>Tenga la seguridad de que estamos trabajando para resolver el problema tan pronto como sea posible.<13>Por favor, si el problema persiste contacte al departamento de tecnología.<13>ERROR:' & FILEERROR(),'Krystalos...',ICON:HAND)
+    ELSE
+        BEEP
+        MESSAGE('Clave web reiniciada para este usuario','Krystalos',ICON:Tick)
+    END
+END
+[END]
+[END]
+[END]
+EMBED %BrowserMethodCodeSection
+[INSTANCES]
+WHEN '9'
+[INSTANCES]
+WHEN 'ApplyFilter'
+[INSTANCES]
+WHEN '()'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+LOC:FILTROP=' USUARIO='&FNSQLFMT(USUSU:USUARIO)
+!STOP('USUSU:USUARIO='&USUSU:USUARIO)
+IF LOC:CLASE <> '' THEN
+   LOC:FILTROP=CLIP(LOC:FILTROP)&' AND CONCAT(CLASEPLANTILLA, DESCPLANTILLA) LIKE ''%'&CLIP(LOC:CLASE)&'%'''
+END
+BRW9::View:Browse{PROP:SQLFILTER}=LOC:FILTROP
+
+[END]
+[END]
+WHEN 'SetQueueRecord'
+[INSTANCES]
+WHEN '()'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4500
+PROPERTY:END
+loc:sql = 'SELECT DESCPLANTILLA FROM MPL WHERE CLASEPLANTILLA = '&FNSQLFMT(MPLXUSU:CLASEPLANTILLA)
+CLEAR(WDUM:RECORD)
+WDUM{PROP:SQL} = LOC:sQL
+Access:WDUM.Next()
+LOC:DESCPLANTILLA=WDU:C1
+[END]
+[END]
+[END]
+[END]
+EMBED %WindowEventHandling
+[INSTANCES]
+WHEN 'Notify'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+!MESSAGE('Ejecución de código desde el Notify')
+!BRW9.RESETFROMFILE() !EZERPA 08/04/2020 Al notificarle al hilo desde el boton borrar y reemplazar de la selección de plantillas refresca el browse de plantillas del usuario.
+[END]
+[END]
+[END]
+[ADDITION]
+NAME AnyScreen AnyScreenProcedure
+[FIELDPROMPT]
+%HideOnClient DEPEND %Control LONG TIMES 96
+WHEN  ('') (0)
+WHEN  ('?BCopiarMPL') (0)
+WHEN  ('?BQuitarTodas') (0)
+WHEN  ('?BUTTON1') (0)
+WHEN  ('?CallLookup') (0)
+WHEN  ('?CallLookup:2') (0)
+WHEN  ('?CallLookup:4') (0)
+WHEN  ('?CallLookup:5') (0)
+WHEN  ('?CallLookup:6') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?Change') (0)
+WHEN  ('?CurrentTab') (0)
+WHEN  ('?Delete') (0)
+WHEN  ('?GROUP1') (0)
+WHEN  ('?GROUP2') (0)
+WHEN  ('?GROUP4') (0)
+WHEN  ('?GROUP5') (0)
+WHEN  ('?Image1') (0)
+WHEN  ('?Insert') (0)
+WHEN  ('?LOC:CLASE') (0)
+WHEN  ('?LOC:CLASE:Prompt') (0)
+WHEN  ('?LOC:CLAVE') (0)
+WHEN  ('?LOC:CLAVE:Prompt') (0)
+WHEN  ('?LOC:GRUPO') (0)
+WHEN  ('?LOC:RAZONSOCIAL') (0)
+WHEN  ('?List') (0)
+WHEN  ('?LookupFile') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?Plantillas') (0)
+WHEN  ('?STRING1') (0)
+WHEN  ('?STRING1:2') (0)
+WHEN  ('?STRING1:3') (0)
+WHEN  ('?STRING1:4') (0)
+WHEN  ('?STRING1:5') (0)
+WHEN  ('?STRING1:6') (0)
+WHEN  ('?TAB1') (0)
+WHEN  ('?TAdicionales') (0)
+WHEN  ('?TBasicos') (0)
+WHEN  ('?TFirma') (0)
+WHEN  ('?USUSU:APELLIDOS') (0)
+WHEN  ('?USUSU:CARGO') (0)
+WHEN  ('?USUSU:CARGO:2') (0)
+WHEN  ('?USUSU:CARGO:Prompt') (0)
+WHEN  ('?USUSU:CARNET') (0)
+WHEN  ('?USUSU:CARNET:Prompt') (0)
+WHEN  ('?USUSU:CELULAR') (0)
+WHEN  ('?USUSU:CELULAR:Prompt') (0)
+WHEN  ('?USUSU:CELULAR:Prompt:2') (0)
+WHEN  ('?USUSU:CODCAJERO') (0)
+WHEN  ('?USUSU:CODCAJERO:Prompt') (0)
+WHEN  ('?USUSU:DEPARTAMENTO') (0)
+WHEN  ('?USUSU:DOCID') (0)
+WHEN  ('?USUSU:EMAIL') (0)
+WHEN  ('?USUSU:EMAIL:Prompt') (0)
+WHEN  ('?USUSU:ESTADO') (0)
+WHEN  ('?USUSU:ESTADO:Prompt') (0)
+WHEN  ('?USUSU:FECHACAMBIO_DATE') (0)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') (0)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt:2') (0)
+WHEN  ('?USUSU:FECHACAMBIO_TIME') (0)
+WHEN  ('?USUSU:FECHAVENCE_DATE') (0)
+WHEN  ('?USUSU:F_RETIRO_DATE') (0)
+WHEN  ('?USUSU:F_RETIRO_DATE:Prompt') (0)
+WHEN  ('?USUSU:GRUPO:Prompt') (0)
+WHEN  ('?USUSU:IDEMPRESA') (0)
+WHEN  ('?USUSU:IDEMPRESA:Prompt') (0)
+WHEN  ('?USUSU:IDMEDICO') (0)
+WHEN  ('?USUSU:IDMEDICO:Prompt') (0)
+WHEN  ('?USUSU:IDPLAN:Prompt') (0)
+WHEN  ('?USUSU:IDPLANT') (0)
+WHEN  ('?USUSU:IDSEDE') (0)
+WHEN  ('?USUSU:IDSEDE:Prompt') (0)
+WHEN  ('?USUSU:IDTERCERO') (0)
+WHEN  ('?USUSU:IDTERCERO:Prompt') (0)
+WHEN  ('?USUSU:NIVELFUNCIONARIO') (0)
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') (0)
+WHEN  ('?USUSU:NOMBRE') (0)
+WHEN  ('?USUSU:NOMBRE:Prompt') (0)
+WHEN  ('?USUSU:NOMBRES') (0)
+WHEN  ('?USUSU:SOLOWEB') (0)
+WHEN  ('?USUSU:SYS_ComputerName') (0)
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') (0)
+WHEN  ('?USUSU:TELEFONO') (0)
+WHEN  ('?USUSU:TELEFONO:Prompt') (0)
+WHEN  ('?USUSU:TELEGRAMID') (0)
+WHEN  ('?USUSU:TIPO') (0)
+WHEN  ('?USUSU:TIPO:Prompt') (0)
+WHEN  ('?USUSU:TIPOIDENT') (0)
+WHEN  ('?USUSU:TIPO_USUARIOADM') (0)
+WHEN  ('?USUSU:TIPO_USUARIOADM:Prompt') (0)
+WHEN  ('?USUSU:USUARIO') (0)
+WHEN  ('?USUSU:USUARIO:Prompt') (0)
+WHEN  ('?loc:cargafirma') (0)
+WHEN  ('?loc:cargarfirma') (0)
+WHEN  ('?loc:path') (0)
+WHEN  ('?loc:path:Prompt') (0)
+
+%SynOnAccept DEPEND %Control LONG TIMES 96
+WHEN  ('') (1)
+WHEN  ('?BCopiarMPL') (1)
+WHEN  ('?BQuitarTodas') (1)
+WHEN  ('?BUTTON1') (1)
+WHEN  ('?CallLookup') (1)
+WHEN  ('?CallLookup:2') (1)
+WHEN  ('?CallLookup:4') (1)
+WHEN  ('?CallLookup:5') (1)
+WHEN  ('?CallLookup:6') (1)
+WHEN  ('?Cancel') (1)
+WHEN  ('?Change') (1)
+WHEN  ('?CurrentTab') (1)
+WHEN  ('?Delete') (1)
+WHEN  ('?GROUP1') (1)
+WHEN  ('?GROUP2') (1)
+WHEN  ('?GROUP4') (1)
+WHEN  ('?GROUP5') (1)
+WHEN  ('?Image1') (1)
+WHEN  ('?Insert') (1)
+WHEN  ('?LOC:CLASE') (1)
+WHEN  ('?LOC:CLASE:Prompt') (1)
+WHEN  ('?LOC:CLAVE') (1)
+WHEN  ('?LOC:CLAVE:Prompt') (1)
+WHEN  ('?LOC:GRUPO') (1)
+WHEN  ('?LOC:RAZONSOCIAL') (1)
+WHEN  ('?List') (1)
+WHEN  ('?LookupFile') (1)
+WHEN  ('?OK') (1)
+WHEN  ('?Plantillas') (1)
+WHEN  ('?STRING1') (1)
+WHEN  ('?STRING1:2') (1)
+WHEN  ('?STRING1:3') (1)
+WHEN  ('?STRING1:4') (1)
+WHEN  ('?STRING1:5') (1)
+WHEN  ('?STRING1:6') (1)
+WHEN  ('?TAB1') (1)
+WHEN  ('?TAdicionales') (1)
+WHEN  ('?TBasicos') (1)
+WHEN  ('?TFirma') (1)
+WHEN  ('?USUSU:APELLIDOS') (1)
+WHEN  ('?USUSU:CARGO') (1)
+WHEN  ('?USUSU:CARGO:2') (1)
+WHEN  ('?USUSU:CARGO:Prompt') (1)
+WHEN  ('?USUSU:CARNET') (1)
+WHEN  ('?USUSU:CARNET:Prompt') (1)
+WHEN  ('?USUSU:CELULAR') (1)
+WHEN  ('?USUSU:CELULAR:Prompt') (1)
+WHEN  ('?USUSU:CELULAR:Prompt:2') (1)
+WHEN  ('?USUSU:CODCAJERO') (1)
+WHEN  ('?USUSU:CODCAJERO:Prompt') (1)
+WHEN  ('?USUSU:DEPARTAMENTO') (1)
+WHEN  ('?USUSU:DOCID') (1)
+WHEN  ('?USUSU:EMAIL') (1)
+WHEN  ('?USUSU:EMAIL:Prompt') (1)
+WHEN  ('?USUSU:ESTADO') (1)
+WHEN  ('?USUSU:ESTADO:Prompt') (1)
+WHEN  ('?USUSU:FECHACAMBIO_DATE') (1)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') (1)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt:2') (1)
+WHEN  ('?USUSU:FECHACAMBIO_TIME') (1)
+WHEN  ('?USUSU:FECHAVENCE_DATE') (1)
+WHEN  ('?USUSU:F_RETIRO_DATE') (1)
+WHEN  ('?USUSU:F_RETIRO_DATE:Prompt') (1)
+WHEN  ('?USUSU:GRUPO:Prompt') (1)
+WHEN  ('?USUSU:IDEMPRESA') (1)
+WHEN  ('?USUSU:IDEMPRESA:Prompt') (1)
+WHEN  ('?USUSU:IDMEDICO') (1)
+WHEN  ('?USUSU:IDMEDICO:Prompt') (1)
+WHEN  ('?USUSU:IDPLAN:Prompt') (1)
+WHEN  ('?USUSU:IDPLANT') (1)
+WHEN  ('?USUSU:IDSEDE') (1)
+WHEN  ('?USUSU:IDSEDE:Prompt') (1)
+WHEN  ('?USUSU:IDTERCERO') (1)
+WHEN  ('?USUSU:IDTERCERO:Prompt') (1)
+WHEN  ('?USUSU:NIVELFUNCIONARIO') (1)
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') (1)
+WHEN  ('?USUSU:NOMBRE') (1)
+WHEN  ('?USUSU:NOMBRE:Prompt') (1)
+WHEN  ('?USUSU:NOMBRES') (1)
+WHEN  ('?USUSU:SOLOWEB') (1)
+WHEN  ('?USUSU:SYS_ComputerName') (1)
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') (1)
+WHEN  ('?USUSU:TELEFONO') (1)
+WHEN  ('?USUSU:TELEFONO:Prompt') (1)
+WHEN  ('?USUSU:TELEGRAMID') (1)
+WHEN  ('?USUSU:TIPO') (1)
+WHEN  ('?USUSU:TIPO:Prompt') (1)
+WHEN  ('?USUSU:TIPOIDENT') (1)
+WHEN  ('?USUSU:TIPO_USUARIOADM') (1)
+WHEN  ('?USUSU:TIPO_USUARIOADM:Prompt') (1)
+WHEN  ('?USUSU:USUARIO') (1)
+WHEN  ('?USUSU:USUARIO:Prompt') (1)
+WHEN  ('?loc:cargafirma') (1)
+WHEN  ('?loc:cargarfirma') (1)
+WHEN  ('?loc:path') (1)
+WHEN  ('?loc:path:Prompt') (1)
+
+%SynOnSelect DEPEND %Control LONG TIMES 96
+WHEN  ('') (1)
+WHEN  ('?BCopiarMPL') (1)
+WHEN  ('?BQuitarTodas') (1)
+WHEN  ('?BUTTON1') (1)
+WHEN  ('?CallLookup') (1)
+WHEN  ('?CallLookup:2') (1)
+WHEN  ('?CallLookup:4') (1)
+WHEN  ('?CallLookup:5') (1)
+WHEN  ('?CallLookup:6') (1)
+WHEN  ('?Cancel') (1)
+WHEN  ('?Change') (1)
+WHEN  ('?CurrentTab') (1)
+WHEN  ('?Delete') (1)
+WHEN  ('?GROUP1') (1)
+WHEN  ('?GROUP2') (1)
+WHEN  ('?GROUP4') (1)
+WHEN  ('?GROUP5') (1)
+WHEN  ('?Image1') (1)
+WHEN  ('?Insert') (1)
+WHEN  ('?LOC:CLASE') (1)
+WHEN  ('?LOC:CLASE:Prompt') (1)
+WHEN  ('?LOC:CLAVE') (1)
+WHEN  ('?LOC:CLAVE:Prompt') (1)
+WHEN  ('?LOC:GRUPO') (1)
+WHEN  ('?LOC:RAZONSOCIAL') (1)
+WHEN  ('?List') (1)
+WHEN  ('?LookupFile') (1)
+WHEN  ('?OK') (1)
+WHEN  ('?Plantillas') (1)
+WHEN  ('?STRING1') (1)
+WHEN  ('?STRING1:2') (1)
+WHEN  ('?STRING1:3') (1)
+WHEN  ('?STRING1:4') (1)
+WHEN  ('?STRING1:5') (1)
+WHEN  ('?STRING1:6') (1)
+WHEN  ('?TAB1') (1)
+WHEN  ('?TAdicionales') (1)
+WHEN  ('?TBasicos') (1)
+WHEN  ('?TFirma') (1)
+WHEN  ('?USUSU:APELLIDOS') (1)
+WHEN  ('?USUSU:CARGO') (1)
+WHEN  ('?USUSU:CARGO:2') (1)
+WHEN  ('?USUSU:CARGO:Prompt') (1)
+WHEN  ('?USUSU:CARNET') (1)
+WHEN  ('?USUSU:CARNET:Prompt') (1)
+WHEN  ('?USUSU:CELULAR') (1)
+WHEN  ('?USUSU:CELULAR:Prompt') (1)
+WHEN  ('?USUSU:CELULAR:Prompt:2') (1)
+WHEN  ('?USUSU:CODCAJERO') (1)
+WHEN  ('?USUSU:CODCAJERO:Prompt') (1)
+WHEN  ('?USUSU:DEPARTAMENTO') (1)
+WHEN  ('?USUSU:DOCID') (1)
+WHEN  ('?USUSU:EMAIL') (1)
+WHEN  ('?USUSU:EMAIL:Prompt') (1)
+WHEN  ('?USUSU:ESTADO') (1)
+WHEN  ('?USUSU:ESTADO:Prompt') (1)
+WHEN  ('?USUSU:FECHACAMBIO_DATE') (1)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') (1)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt:2') (1)
+WHEN  ('?USUSU:FECHACAMBIO_TIME') (1)
+WHEN  ('?USUSU:FECHAVENCE_DATE') (1)
+WHEN  ('?USUSU:F_RETIRO_DATE') (1)
+WHEN  ('?USUSU:F_RETIRO_DATE:Prompt') (1)
+WHEN  ('?USUSU:GRUPO:Prompt') (1)
+WHEN  ('?USUSU:IDEMPRESA') (1)
+WHEN  ('?USUSU:IDEMPRESA:Prompt') (1)
+WHEN  ('?USUSU:IDMEDICO') (1)
+WHEN  ('?USUSU:IDMEDICO:Prompt') (1)
+WHEN  ('?USUSU:IDPLAN:Prompt') (1)
+WHEN  ('?USUSU:IDPLANT') (1)
+WHEN  ('?USUSU:IDSEDE') (1)
+WHEN  ('?USUSU:IDSEDE:Prompt') (1)
+WHEN  ('?USUSU:IDTERCERO') (1)
+WHEN  ('?USUSU:IDTERCERO:Prompt') (1)
+WHEN  ('?USUSU:NIVELFUNCIONARIO') (1)
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') (1)
+WHEN  ('?USUSU:NOMBRE') (1)
+WHEN  ('?USUSU:NOMBRE:Prompt') (1)
+WHEN  ('?USUSU:NOMBRES') (1)
+WHEN  ('?USUSU:SOLOWEB') (1)
+WHEN  ('?USUSU:SYS_ComputerName') (1)
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') (1)
+WHEN  ('?USUSU:TELEFONO') (1)
+WHEN  ('?USUSU:TELEFONO:Prompt') (1)
+WHEN  ('?USUSU:TELEGRAMID') (1)
+WHEN  ('?USUSU:TIPO') (1)
+WHEN  ('?USUSU:TIPO:Prompt') (1)
+WHEN  ('?USUSU:TIPOIDENT') (1)
+WHEN  ('?USUSU:TIPO_USUARIOADM') (1)
+WHEN  ('?USUSU:TIPO_USUARIOADM:Prompt') (1)
+WHEN  ('?USUSU:USUARIO') (1)
+WHEN  ('?USUSU:USUARIO:Prompt') (1)
+WHEN  ('?loc:cargafirma') (1)
+WHEN  ('?loc:cargarfirma') (1)
+WHEN  ('?loc:path') (1)
+WHEN  ('?loc:path:Prompt') (1)
+
+%ThinControlMaxSize DEPEND %Control DEFAULT TIMES 96
+WHEN  ('') ('32000')
+WHEN  ('?BCopiarMPL') ('250000')
+WHEN  ('?BQuitarTodas') ('250000')
+WHEN  ('?BUTTON1') ('250000')
+WHEN  ('?CallLookup') ('250000')
+WHEN  ('?CallLookup:2') ('250000')
+WHEN  ('?CallLookup:4') ('250000')
+WHEN  ('?CallLookup:5') ('250000')
+WHEN  ('?CallLookup:6') ('250000')
+WHEN  ('?Cancel') ('250000')
+WHEN  ('?Change') ('250000')
+WHEN  ('?CurrentTab') ('250000')
+WHEN  ('?Delete') ('250000')
+WHEN  ('?GROUP1') ('250000')
+WHEN  ('?GROUP2') ('32000')
+WHEN  ('?GROUP4') ('250000')
+WHEN  ('?GROUP5') ('250000')
+WHEN  ('?Image1') ('250000')
+WHEN  ('?Insert') ('250000')
+WHEN  ('?LOC:CLASE') ('250000')
+WHEN  ('?LOC:CLASE:Prompt') ('250000')
+WHEN  ('?LOC:CLAVE') ('32000')
+WHEN  ('?LOC:CLAVE:Prompt') ('32000')
+WHEN  ('?LOC:GRUPO') ('250000')
+WHEN  ('?LOC:RAZONSOCIAL') ('250000')
+WHEN  ('?List') ('250000')
+WHEN  ('?LookupFile') ('250000')
+WHEN  ('?OK') ('250000')
+WHEN  ('?Plantillas') ('250000')
+WHEN  ('?STRING1') ('32000')
+WHEN  ('?STRING1:2') ('32000')
+WHEN  ('?STRING1:3') ('32000')
+WHEN  ('?STRING1:4') ('32000')
+WHEN  ('?STRING1:5') ('32000')
+WHEN  ('?STRING1:6') ('32000')
+WHEN  ('?TAB1') ('32000')
+WHEN  ('?TAdicionales') ('250000')
+WHEN  ('?TBasicos') ('250000')
+WHEN  ('?TFirma') ('250000')
+WHEN  ('?USUSU:APELLIDOS') ('32000')
+WHEN  ('?USUSU:CARGO') ('250000')
+WHEN  ('?USUSU:CARGO:2') ('32000')
+WHEN  ('?USUSU:CARGO:Prompt') ('250000')
+WHEN  ('?USUSU:CARNET') ('250000')
+WHEN  ('?USUSU:CARNET:Prompt') ('250000')
+WHEN  ('?USUSU:CELULAR') ('250000')
+WHEN  ('?USUSU:CELULAR:Prompt') ('250000')
+WHEN  ('?USUSU:CELULAR:Prompt:2') ('250000')
+WHEN  ('?USUSU:CODCAJERO') ('250000')
+WHEN  ('?USUSU:CODCAJERO:Prompt') ('250000')
+WHEN  ('?USUSU:DEPARTAMENTO') ('32000')
+WHEN  ('?USUSU:DOCID') ('32000')
+WHEN  ('?USUSU:EMAIL') ('32000')
+WHEN  ('?USUSU:EMAIL:Prompt') ('32000')
+WHEN  ('?USUSU:ESTADO') ('250000')
+WHEN  ('?USUSU:ESTADO:Prompt') ('250000')
+WHEN  ('?USUSU:FECHACAMBIO_DATE') ('250000')
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') ('250000')
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt:2') ('250000')
+WHEN  ('?USUSU:FECHACAMBIO_TIME') ('250000')
+WHEN  ('?USUSU:FECHAVENCE_DATE') ('250000')
+WHEN  ('?USUSU:F_RETIRO_DATE') ('250000')
+WHEN  ('?USUSU:F_RETIRO_DATE:Prompt') ('250000')
+WHEN  ('?USUSU:GRUPO:Prompt') ('250000')
+WHEN  ('?USUSU:IDEMPRESA') ('250000')
+WHEN  ('?USUSU:IDEMPRESA:Prompt') ('250000')
+WHEN  ('?USUSU:IDMEDICO') ('250000')
+WHEN  ('?USUSU:IDMEDICO:Prompt') ('250000')
+WHEN  ('?USUSU:IDPLAN:Prompt') ('32000')
+WHEN  ('?USUSU:IDPLANT') ('32000')
+WHEN  ('?USUSU:IDSEDE') ('250000')
+WHEN  ('?USUSU:IDSEDE:Prompt') ('250000')
+WHEN  ('?USUSU:IDTERCERO') ('250000')
+WHEN  ('?USUSU:IDTERCERO:Prompt') ('250000')
+WHEN  ('?USUSU:NIVELFUNCIONARIO') ('250000')
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') ('250000')
+WHEN  ('?USUSU:NOMBRE') ('250000')
+WHEN  ('?USUSU:NOMBRE:Prompt') ('250000')
+WHEN  ('?USUSU:NOMBRES') ('32000')
+WHEN  ('?USUSU:SOLOWEB') ('32000')
+WHEN  ('?USUSU:SYS_ComputerName') ('250000')
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') ('250000')
+WHEN  ('?USUSU:TELEFONO') ('250000')
+WHEN  ('?USUSU:TELEFONO:Prompt') ('250000')
+WHEN  ('?USUSU:TELEGRAMID') ('250000')
+WHEN  ('?USUSU:TIPO') ('250000')
+WHEN  ('?USUSU:TIPO:Prompt') ('250000')
+WHEN  ('?USUSU:TIPOIDENT') ('32000')
+WHEN  ('?USUSU:TIPO_USUARIOADM') ('250000')
+WHEN  ('?USUSU:TIPO_USUARIOADM:Prompt') ('250000')
+WHEN  ('?USUSU:USUARIO') ('250000')
+WHEN  ('?USUSU:USUARIO:Prompt') ('250000')
+WHEN  ('?loc:cargafirma') ('250000')
+WHEN  ('?loc:cargarfirma') ('250000')
+WHEN  ('?loc:path') ('250000')
+WHEN  ('?loc:path:Prompt') ('250000')
+
+%ThinControlListboxPipes DEPEND %Control LONG TIMES 96
+WHEN  ('') (0)
+WHEN  ('?BCopiarMPL') (0)
+WHEN  ('?BQuitarTodas') (0)
+WHEN  ('?BUTTON1') (0)
+WHEN  ('?CallLookup') (0)
+WHEN  ('?CallLookup:2') (0)
+WHEN  ('?CallLookup:4') (0)
+WHEN  ('?CallLookup:5') (0)
+WHEN  ('?CallLookup:6') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?Change') (0)
+WHEN  ('?CurrentTab') (0)
+WHEN  ('?Delete') (0)
+WHEN  ('?GROUP1') (0)
+WHEN  ('?GROUP2') (0)
+WHEN  ('?GROUP4') (0)
+WHEN  ('?GROUP5') (0)
+WHEN  ('?Image1') (0)
+WHEN  ('?Insert') (0)
+WHEN  ('?LOC:CLASE') (0)
+WHEN  ('?LOC:CLASE:Prompt') (0)
+WHEN  ('?LOC:CLAVE') (0)
+WHEN  ('?LOC:CLAVE:Prompt') (0)
+WHEN  ('?LOC:GRUPO') (0)
+WHEN  ('?LOC:RAZONSOCIAL') (0)
+WHEN  ('?List') (0)
+WHEN  ('?LookupFile') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?Plantillas') (0)
+WHEN  ('?STRING1') (0)
+WHEN  ('?STRING1:2') (0)
+WHEN  ('?STRING1:3') (0)
+WHEN  ('?STRING1:4') (0)
+WHEN  ('?STRING1:5') (0)
+WHEN  ('?STRING1:6') (0)
+WHEN  ('?TAB1') (0)
+WHEN  ('?TAdicionales') (0)
+WHEN  ('?TBasicos') (0)
+WHEN  ('?TFirma') (0)
+WHEN  ('?USUSU:APELLIDOS') (0)
+WHEN  ('?USUSU:CARGO') (0)
+WHEN  ('?USUSU:CARGO:2') (0)
+WHEN  ('?USUSU:CARGO:Prompt') (0)
+WHEN  ('?USUSU:CARNET') (0)
+WHEN  ('?USUSU:CARNET:Prompt') (0)
+WHEN  ('?USUSU:CELULAR') (0)
+WHEN  ('?USUSU:CELULAR:Prompt') (0)
+WHEN  ('?USUSU:CELULAR:Prompt:2') (0)
+WHEN  ('?USUSU:CODCAJERO') (0)
+WHEN  ('?USUSU:CODCAJERO:Prompt') (0)
+WHEN  ('?USUSU:DEPARTAMENTO') (0)
+WHEN  ('?USUSU:DOCID') (0)
+WHEN  ('?USUSU:EMAIL') (0)
+WHEN  ('?USUSU:EMAIL:Prompt') (0)
+WHEN  ('?USUSU:ESTADO') (0)
+WHEN  ('?USUSU:ESTADO:Prompt') (0)
+WHEN  ('?USUSU:FECHACAMBIO_DATE') (0)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') (0)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt:2') (0)
+WHEN  ('?USUSU:FECHACAMBIO_TIME') (0)
+WHEN  ('?USUSU:FECHAVENCE_DATE') (0)
+WHEN  ('?USUSU:F_RETIRO_DATE') (0)
+WHEN  ('?USUSU:F_RETIRO_DATE:Prompt') (0)
+WHEN  ('?USUSU:GRUPO:Prompt') (0)
+WHEN  ('?USUSU:IDEMPRESA') (0)
+WHEN  ('?USUSU:IDEMPRESA:Prompt') (0)
+WHEN  ('?USUSU:IDMEDICO') (0)
+WHEN  ('?USUSU:IDMEDICO:Prompt') (0)
+WHEN  ('?USUSU:IDPLAN:Prompt') (0)
+WHEN  ('?USUSU:IDPLANT') (0)
+WHEN  ('?USUSU:IDSEDE') (0)
+WHEN  ('?USUSU:IDSEDE:Prompt') (0)
+WHEN  ('?USUSU:IDTERCERO') (0)
+WHEN  ('?USUSU:IDTERCERO:Prompt') (0)
+WHEN  ('?USUSU:NIVELFUNCIONARIO') (0)
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') (0)
+WHEN  ('?USUSU:NOMBRE') (0)
+WHEN  ('?USUSU:NOMBRE:Prompt') (0)
+WHEN  ('?USUSU:NOMBRES') (0)
+WHEN  ('?USUSU:SOLOWEB') (0)
+WHEN  ('?USUSU:SYS_ComputerName') (0)
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') (0)
+WHEN  ('?USUSU:TELEFONO') (0)
+WHEN  ('?USUSU:TELEFONO:Prompt') (0)
+WHEN  ('?USUSU:TELEGRAMID') (0)
+WHEN  ('?USUSU:TIPO') (0)
+WHEN  ('?USUSU:TIPO:Prompt') (0)
+WHEN  ('?USUSU:TIPOIDENT') (0)
+WHEN  ('?USUSU:TIPO_USUARIOADM') (0)
+WHEN  ('?USUSU:TIPO_USUARIOADM:Prompt') (0)
+WHEN  ('?USUSU:USUARIO') (0)
+WHEN  ('?USUSU:USUARIO:Prompt') (0)
+WHEN  ('?loc:cargafirma') (0)
+WHEN  ('?loc:cargarfirma') (0)
+WHEN  ('?loc:path') (0)
+WHEN  ('?loc:path:Prompt') (0)
+
+%AnyScreenCSSclass DEPEND %Control DEFAULT TIMES 96
+WHEN  ('') ('')
+WHEN  ('?BCopiarMPL') ('')
+WHEN  ('?BQuitarTodas') ('')
+WHEN  ('?BUTTON1') ('')
+WHEN  ('?CallLookup') ('')
+WHEN  ('?CallLookup:2') ('')
+WHEN  ('?CallLookup:4') ('')
+WHEN  ('?CallLookup:5') ('')
+WHEN  ('?CallLookup:6') ('')
+WHEN  ('?Cancel') ('')
+WHEN  ('?Change') ('')
+WHEN  ('?CurrentTab') ('')
+WHEN  ('?Delete') ('')
+WHEN  ('?GROUP1') ('')
+WHEN  ('?GROUP2') ('')
+WHEN  ('?GROUP4') ('')
+WHEN  ('?GROUP5') ('')
+WHEN  ('?Image1') ('')
+WHEN  ('?Insert') ('')
+WHEN  ('?LOC:CLASE') ('')
+WHEN  ('?LOC:CLASE:Prompt') ('')
+WHEN  ('?LOC:CLAVE') ('')
+WHEN  ('?LOC:CLAVE:Prompt') ('')
+WHEN  ('?LOC:GRUPO') ('')
+WHEN  ('?LOC:RAZONSOCIAL') ('')
+WHEN  ('?List') ('')
+WHEN  ('?LookupFile') ('')
+WHEN  ('?OK') ('')
+WHEN  ('?Plantillas') ('')
+WHEN  ('?STRING1') ('')
+WHEN  ('?STRING1:2') ('')
+WHEN  ('?STRING1:3') ('')
+WHEN  ('?STRING1:4') ('')
+WHEN  ('?STRING1:5') ('')
+WHEN  ('?STRING1:6') ('')
+WHEN  ('?TAB1') ('')
+WHEN  ('?TAdicionales') ('')
+WHEN  ('?TBasicos') ('')
+WHEN  ('?TFirma') ('')
+WHEN  ('?USUSU:APELLIDOS') ('')
+WHEN  ('?USUSU:CARGO') ('')
+WHEN  ('?USUSU:CARGO:2') ('')
+WHEN  ('?USUSU:CARGO:Prompt') ('')
+WHEN  ('?USUSU:CARNET') ('')
+WHEN  ('?USUSU:CARNET:Prompt') ('')
+WHEN  ('?USUSU:CELULAR') ('')
+WHEN  ('?USUSU:CELULAR:Prompt') ('')
+WHEN  ('?USUSU:CELULAR:Prompt:2') ('')
+WHEN  ('?USUSU:CODCAJERO') ('')
+WHEN  ('?USUSU:CODCAJERO:Prompt') ('')
+WHEN  ('?USUSU:DEPARTAMENTO') ('')
+WHEN  ('?USUSU:DOCID') ('')
+WHEN  ('?USUSU:EMAIL') ('')
+WHEN  ('?USUSU:EMAIL:Prompt') ('')
+WHEN  ('?USUSU:ESTADO') ('')
+WHEN  ('?USUSU:ESTADO:Prompt') ('')
+WHEN  ('?USUSU:FECHACAMBIO_DATE') ('')
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') ('')
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt:2') ('')
+WHEN  ('?USUSU:FECHACAMBIO_TIME') ('')
+WHEN  ('?USUSU:FECHAVENCE_DATE') ('')
+WHEN  ('?USUSU:F_RETIRO_DATE') ('')
+WHEN  ('?USUSU:F_RETIRO_DATE:Prompt') ('')
+WHEN  ('?USUSU:GRUPO:Prompt') ('')
+WHEN  ('?USUSU:IDEMPRESA') ('')
+WHEN  ('?USUSU:IDEMPRESA:Prompt') ('')
+WHEN  ('?USUSU:IDMEDICO') ('')
+WHEN  ('?USUSU:IDMEDICO:Prompt') ('')
+WHEN  ('?USUSU:IDPLAN:Prompt') ('')
+WHEN  ('?USUSU:IDPLANT') ('')
+WHEN  ('?USUSU:IDSEDE') ('')
+WHEN  ('?USUSU:IDSEDE:Prompt') ('')
+WHEN  ('?USUSU:IDTERCERO') ('')
+WHEN  ('?USUSU:IDTERCERO:Prompt') ('')
+WHEN  ('?USUSU:NIVELFUNCIONARIO') ('')
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') ('')
+WHEN  ('?USUSU:NOMBRE') ('')
+WHEN  ('?USUSU:NOMBRE:Prompt') ('')
+WHEN  ('?USUSU:NOMBRES') ('')
+WHEN  ('?USUSU:SOLOWEB') ('')
+WHEN  ('?USUSU:SYS_ComputerName') ('')
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') ('')
+WHEN  ('?USUSU:TELEFONO') ('')
+WHEN  ('?USUSU:TELEFONO:Prompt') ('')
+WHEN  ('?USUSU:TELEGRAMID') ('')
+WHEN  ('?USUSU:TIPO') ('')
+WHEN  ('?USUSU:TIPO:Prompt') ('')
+WHEN  ('?USUSU:TIPOIDENT') ('')
+WHEN  ('?USUSU:TIPO_USUARIOADM') ('')
+WHEN  ('?USUSU:TIPO_USUARIOADM:Prompt') ('')
+WHEN  ('?USUSU:USUARIO') ('')
+WHEN  ('?USUSU:USUARIO:Prompt') ('')
+WHEN  ('?loc:cargafirma') ('')
+WHEN  ('?loc:cargarfirma') ('')
+WHEN  ('?loc:path') ('')
+WHEN  ('?loc:path:Prompt') ('')
+
+%EnableWithoutThinet DEPEND %Control LONG TIMES 96
+WHEN  ('') (0)
+WHEN  ('?BCopiarMPL') (0)
+WHEN  ('?BQuitarTodas') (0)
+WHEN  ('?BUTTON1') (0)
+WHEN  ('?CallLookup') (0)
+WHEN  ('?CallLookup:2') (0)
+WHEN  ('?CallLookup:4') (0)
+WHEN  ('?CallLookup:5') (0)
+WHEN  ('?CallLookup:6') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?Change') (0)
+WHEN  ('?CurrentTab') (0)
+WHEN  ('?Delete') (0)
+WHEN  ('?GROUP1') (0)
+WHEN  ('?GROUP2') (0)
+WHEN  ('?GROUP4') (0)
+WHEN  ('?GROUP5') (0)
+WHEN  ('?Image1') (0)
+WHEN  ('?Insert') (0)
+WHEN  ('?LOC:CLASE') (0)
+WHEN  ('?LOC:CLASE:Prompt') (0)
+WHEN  ('?LOC:CLAVE') (0)
+WHEN  ('?LOC:CLAVE:Prompt') (0)
+WHEN  ('?LOC:GRUPO') (0)
+WHEN  ('?LOC:RAZONSOCIAL') (0)
+WHEN  ('?List') (0)
+WHEN  ('?LookupFile') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?Plantillas') (0)
+WHEN  ('?STRING1') (0)
+WHEN  ('?STRING1:2') (0)
+WHEN  ('?STRING1:3') (0)
+WHEN  ('?STRING1:4') (0)
+WHEN  ('?STRING1:5') (0)
+WHEN  ('?STRING1:6') (0)
+WHEN  ('?TAB1') (0)
+WHEN  ('?TAdicionales') (0)
+WHEN  ('?TBasicos') (0)
+WHEN  ('?TFirma') (0)
+WHEN  ('?USUSU:APELLIDOS') (0)
+WHEN  ('?USUSU:CARGO') (0)
+WHEN  ('?USUSU:CARGO:2') (0)
+WHEN  ('?USUSU:CARGO:Prompt') (0)
+WHEN  ('?USUSU:CARNET') (0)
+WHEN  ('?USUSU:CARNET:Prompt') (0)
+WHEN  ('?USUSU:CELULAR') (0)
+WHEN  ('?USUSU:CELULAR:Prompt') (0)
+WHEN  ('?USUSU:CELULAR:Prompt:2') (0)
+WHEN  ('?USUSU:CODCAJERO') (0)
+WHEN  ('?USUSU:CODCAJERO:Prompt') (0)
+WHEN  ('?USUSU:DEPARTAMENTO') (0)
+WHEN  ('?USUSU:DOCID') (0)
+WHEN  ('?USUSU:EMAIL') (0)
+WHEN  ('?USUSU:EMAIL:Prompt') (0)
+WHEN  ('?USUSU:ESTADO') (0)
+WHEN  ('?USUSU:ESTADO:Prompt') (0)
+WHEN  ('?USUSU:FECHACAMBIO_DATE') (0)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') (0)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt:2') (0)
+WHEN  ('?USUSU:FECHACAMBIO_TIME') (0)
+WHEN  ('?USUSU:FECHAVENCE_DATE') (0)
+WHEN  ('?USUSU:F_RETIRO_DATE') (0)
+WHEN  ('?USUSU:F_RETIRO_DATE:Prompt') (0)
+WHEN  ('?USUSU:GRUPO:Prompt') (0)
+WHEN  ('?USUSU:IDEMPRESA') (0)
+WHEN  ('?USUSU:IDEMPRESA:Prompt') (0)
+WHEN  ('?USUSU:IDMEDICO') (0)
+WHEN  ('?USUSU:IDMEDICO:Prompt') (0)
+WHEN  ('?USUSU:IDPLAN:Prompt') (0)
+WHEN  ('?USUSU:IDPLANT') (0)
+WHEN  ('?USUSU:IDSEDE') (0)
+WHEN  ('?USUSU:IDSEDE:Prompt') (0)
+WHEN  ('?USUSU:IDTERCERO') (0)
+WHEN  ('?USUSU:IDTERCERO:Prompt') (0)
+WHEN  ('?USUSU:NIVELFUNCIONARIO') (0)
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') (0)
+WHEN  ('?USUSU:NOMBRE') (0)
+WHEN  ('?USUSU:NOMBRE:Prompt') (0)
+WHEN  ('?USUSU:NOMBRES') (0)
+WHEN  ('?USUSU:SOLOWEB') (0)
+WHEN  ('?USUSU:SYS_ComputerName') (0)
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') (0)
+WHEN  ('?USUSU:TELEFONO') (0)
+WHEN  ('?USUSU:TELEFONO:Prompt') (0)
+WHEN  ('?USUSU:TELEGRAMID') (0)
+WHEN  ('?USUSU:TIPO') (0)
+WHEN  ('?USUSU:TIPO:Prompt') (0)
+WHEN  ('?USUSU:TIPOIDENT') (0)
+WHEN  ('?USUSU:TIPO_USUARIOADM') (0)
+WHEN  ('?USUSU:TIPO_USUARIOADM:Prompt') (0)
+WHEN  ('?USUSU:USUARIO') (0)
+WHEN  ('?USUSU:USUARIO:Prompt') (0)
+WHEN  ('?loc:cargafirma') (0)
+WHEN  ('?loc:cargarfirma') (0)
+WHEN  ('?loc:path') (0)
+WHEN  ('?loc:path:Prompt') (0)
+
+%OverrideGlobalListboxHeaderColors DEPEND %Control LONG TIMES 96
+WHEN  ('') (0)
+WHEN  ('?BCopiarMPL') (0)
+WHEN  ('?BQuitarTodas') (0)
+WHEN  ('?BUTTON1') (0)
+WHEN  ('?CallLookup') (0)
+WHEN  ('?CallLookup:2') (0)
+WHEN  ('?CallLookup:4') (0)
+WHEN  ('?CallLookup:5') (0)
+WHEN  ('?CallLookup:6') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?Change') (0)
+WHEN  ('?CurrentTab') (0)
+WHEN  ('?Delete') (0)
+WHEN  ('?GROUP1') (0)
+WHEN  ('?GROUP2') (0)
+WHEN  ('?GROUP4') (0)
+WHEN  ('?GROUP5') (0)
+WHEN  ('?Image1') (0)
+WHEN  ('?Insert') (0)
+WHEN  ('?LOC:CLASE') (0)
+WHEN  ('?LOC:CLASE:Prompt') (0)
+WHEN  ('?LOC:CLAVE') (0)
+WHEN  ('?LOC:CLAVE:Prompt') (0)
+WHEN  ('?LOC:GRUPO') (0)
+WHEN  ('?LOC:RAZONSOCIAL') (0)
+WHEN  ('?List') (0)
+WHEN  ('?LookupFile') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?Plantillas') (0)
+WHEN  ('?STRING1') (0)
+WHEN  ('?STRING1:2') (0)
+WHEN  ('?STRING1:3') (0)
+WHEN  ('?STRING1:4') (0)
+WHEN  ('?STRING1:5') (0)
+WHEN  ('?STRING1:6') (0)
+WHEN  ('?TAB1') (0)
+WHEN  ('?TAdicionales') (0)
+WHEN  ('?TBasicos') (0)
+WHEN  ('?TFirma') (0)
+WHEN  ('?USUSU:APELLIDOS') (0)
+WHEN  ('?USUSU:CARGO') (0)
+WHEN  ('?USUSU:CARGO:2') (0)
+WHEN  ('?USUSU:CARGO:Prompt') (0)
+WHEN  ('?USUSU:CARNET') (0)
+WHEN  ('?USUSU:CARNET:Prompt') (0)
+WHEN  ('?USUSU:CELULAR') (0)
+WHEN  ('?USUSU:CELULAR:Prompt') (0)
+WHEN  ('?USUSU:CELULAR:Prompt:2') (0)
+WHEN  ('?USUSU:CODCAJERO') (0)
+WHEN  ('?USUSU:CODCAJERO:Prompt') (0)
+WHEN  ('?USUSU:DEPARTAMENTO') (0)
+WHEN  ('?USUSU:DOCID') (0)
+WHEN  ('?USUSU:EMAIL') (0)
+WHEN  ('?USUSU:EMAIL:Prompt') (0)
+WHEN  ('?USUSU:ESTADO') (0)
+WHEN  ('?USUSU:ESTADO:Prompt') (0)
+WHEN  ('?USUSU:FECHACAMBIO_DATE') (0)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') (0)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt:2') (0)
+WHEN  ('?USUSU:FECHACAMBIO_TIME') (0)
+WHEN  ('?USUSU:FECHAVENCE_DATE') (0)
+WHEN  ('?USUSU:F_RETIRO_DATE') (0)
+WHEN  ('?USUSU:F_RETIRO_DATE:Prompt') (0)
+WHEN  ('?USUSU:GRUPO:Prompt') (0)
+WHEN  ('?USUSU:IDEMPRESA') (0)
+WHEN  ('?USUSU:IDEMPRESA:Prompt') (0)
+WHEN  ('?USUSU:IDMEDICO') (0)
+WHEN  ('?USUSU:IDMEDICO:Prompt') (0)
+WHEN  ('?USUSU:IDPLAN:Prompt') (0)
+WHEN  ('?USUSU:IDPLANT') (0)
+WHEN  ('?USUSU:IDSEDE') (0)
+WHEN  ('?USUSU:IDSEDE:Prompt') (0)
+WHEN  ('?USUSU:IDTERCERO') (0)
+WHEN  ('?USUSU:IDTERCERO:Prompt') (0)
+WHEN  ('?USUSU:NIVELFUNCIONARIO') (0)
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') (0)
+WHEN  ('?USUSU:NOMBRE') (0)
+WHEN  ('?USUSU:NOMBRE:Prompt') (0)
+WHEN  ('?USUSU:NOMBRES') (0)
+WHEN  ('?USUSU:SOLOWEB') (0)
+WHEN  ('?USUSU:SYS_ComputerName') (0)
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') (0)
+WHEN  ('?USUSU:TELEFONO') (0)
+WHEN  ('?USUSU:TELEFONO:Prompt') (0)
+WHEN  ('?USUSU:TELEGRAMID') (0)
+WHEN  ('?USUSU:TIPO') (0)
+WHEN  ('?USUSU:TIPO:Prompt') (0)
+WHEN  ('?USUSU:TIPOIDENT') (0)
+WHEN  ('?USUSU:TIPO_USUARIOADM') (0)
+WHEN  ('?USUSU:TIPO_USUARIOADM:Prompt') (0)
+WHEN  ('?USUSU:USUARIO') (0)
+WHEN  ('?USUSU:USUARIO:Prompt') (0)
+WHEN  ('?loc:cargafirma') (0)
+WHEN  ('?loc:cargarfirma') (0)
+WHEN  ('?loc:path') (0)
+WHEN  ('?loc:path:Prompt') (0)
+
+%cNormal DEPEND %Control LONG TIMES 96
+WHEN  ('') (-1)
+WHEN  ('?BCopiarMPL') (-1)
+WHEN  ('?BQuitarTodas') (-1)
+WHEN  ('?BUTTON1') (-1)
+WHEN  ('?CallLookup') (-1)
+WHEN  ('?CallLookup:2') (-1)
+WHEN  ('?CallLookup:4') (-1)
+WHEN  ('?CallLookup:5') (-1)
+WHEN  ('?CallLookup:6') (-1)
+WHEN  ('?Cancel') (-1)
+WHEN  ('?Change') (-1)
+WHEN  ('?CurrentTab') (-1)
+WHEN  ('?Delete') (-1)
+WHEN  ('?GROUP1') (-1)
+WHEN  ('?GROUP2') (-1)
+WHEN  ('?GROUP4') (-1)
+WHEN  ('?GROUP5') (-1)
+WHEN  ('?Image1') (-1)
+WHEN  ('?Insert') (-1)
+WHEN  ('?LOC:CLASE') (-1)
+WHEN  ('?LOC:CLASE:Prompt') (-1)
+WHEN  ('?LOC:CLAVE') (-1)
+WHEN  ('?LOC:CLAVE:Prompt') (-1)
+WHEN  ('?LOC:GRUPO') (-1)
+WHEN  ('?LOC:RAZONSOCIAL') (-1)
+WHEN  ('?List') (-1)
+WHEN  ('?LookupFile') (-1)
+WHEN  ('?OK') (-1)
+WHEN  ('?Plantillas') (-1)
+WHEN  ('?STRING1') (-1)
+WHEN  ('?STRING1:2') (-1)
+WHEN  ('?STRING1:3') (-1)
+WHEN  ('?STRING1:4') (-1)
+WHEN  ('?STRING1:5') (-1)
+WHEN  ('?STRING1:6') (-1)
+WHEN  ('?TAB1') (-1)
+WHEN  ('?TAdicionales') (-1)
+WHEN  ('?TBasicos') (-1)
+WHEN  ('?TFirma') (-1)
+WHEN  ('?USUSU:APELLIDOS') (-1)
+WHEN  ('?USUSU:CARGO') (-1)
+WHEN  ('?USUSU:CARGO:2') (-1)
+WHEN  ('?USUSU:CARGO:Prompt') (-1)
+WHEN  ('?USUSU:CARNET') (-1)
+WHEN  ('?USUSU:CARNET:Prompt') (-1)
+WHEN  ('?USUSU:CELULAR') (-1)
+WHEN  ('?USUSU:CELULAR:Prompt') (-1)
+WHEN  ('?USUSU:CELULAR:Prompt:2') (-1)
+WHEN  ('?USUSU:CODCAJERO') (-1)
+WHEN  ('?USUSU:CODCAJERO:Prompt') (-1)
+WHEN  ('?USUSU:DEPARTAMENTO') (-1)
+WHEN  ('?USUSU:DOCID') (-1)
+WHEN  ('?USUSU:EMAIL') (-1)
+WHEN  ('?USUSU:EMAIL:Prompt') (-1)
+WHEN  ('?USUSU:ESTADO') (-1)
+WHEN  ('?USUSU:ESTADO:Prompt') (-1)
+WHEN  ('?USUSU:FECHACAMBIO_DATE') (-1)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') (-1)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt:2') (-1)
+WHEN  ('?USUSU:FECHACAMBIO_TIME') (-1)
+WHEN  ('?USUSU:FECHAVENCE_DATE') (-1)
+WHEN  ('?USUSU:F_RETIRO_DATE') (-1)
+WHEN  ('?USUSU:F_RETIRO_DATE:Prompt') (-1)
+WHEN  ('?USUSU:GRUPO:Prompt') (-1)
+WHEN  ('?USUSU:IDEMPRESA') (-1)
+WHEN  ('?USUSU:IDEMPRESA:Prompt') (-1)
+WHEN  ('?USUSU:IDMEDICO') (-1)
+WHEN  ('?USUSU:IDMEDICO:Prompt') (-1)
+WHEN  ('?USUSU:IDPLAN:Prompt') (-1)
+WHEN  ('?USUSU:IDPLANT') (-1)
+WHEN  ('?USUSU:IDSEDE') (-1)
+WHEN  ('?USUSU:IDSEDE:Prompt') (-1)
+WHEN  ('?USUSU:IDTERCERO') (-1)
+WHEN  ('?USUSU:IDTERCERO:Prompt') (-1)
+WHEN  ('?USUSU:NIVELFUNCIONARIO') (-1)
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') (-1)
+WHEN  ('?USUSU:NOMBRE') (-1)
+WHEN  ('?USUSU:NOMBRE:Prompt') (-1)
+WHEN  ('?USUSU:NOMBRES') (-1)
+WHEN  ('?USUSU:SOLOWEB') (-1)
+WHEN  ('?USUSU:SYS_ComputerName') (-1)
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') (-1)
+WHEN  ('?USUSU:TELEFONO') (-1)
+WHEN  ('?USUSU:TELEFONO:Prompt') (-1)
+WHEN  ('?USUSU:TELEGRAMID') (-1)
+WHEN  ('?USUSU:TIPO') (-1)
+WHEN  ('?USUSU:TIPO:Prompt') (-1)
+WHEN  ('?USUSU:TIPOIDENT') (-1)
+WHEN  ('?USUSU:TIPO_USUARIOADM') (-1)
+WHEN  ('?USUSU:TIPO_USUARIOADM:Prompt') (-1)
+WHEN  ('?USUSU:USUARIO') (-1)
+WHEN  ('?USUSU:USUARIO:Prompt') (-1)
+WHEN  ('?loc:cargafirma') (-1)
+WHEN  ('?loc:cargarfirma') (-1)
+WHEN  ('?loc:path') (-1)
+WHEN  ('?loc:path:Prompt') (-1)
+
+%cAccentTxt DEPEND %Control LONG TIMES 96
+WHEN  ('') (14342874)
+WHEN  ('?BCopiarMPL') (14342874)
+WHEN  ('?BQuitarTodas') (14342874)
+WHEN  ('?BUTTON1') (14342874)
+WHEN  ('?CallLookup') (14342874)
+WHEN  ('?CallLookup:2') (14342874)
+WHEN  ('?CallLookup:4') (14342874)
+WHEN  ('?CallLookup:5') (14342874)
+WHEN  ('?CallLookup:6') (14342874)
+WHEN  ('?Cancel') (14342874)
+WHEN  ('?Change') (14342874)
+WHEN  ('?CurrentTab') (14342874)
+WHEN  ('?Delete') (14342874)
+WHEN  ('?GROUP1') (14342874)
+WHEN  ('?GROUP2') (14342874)
+WHEN  ('?GROUP4') (14342874)
+WHEN  ('?GROUP5') (14342874)
+WHEN  ('?Image1') (14342874)
+WHEN  ('?Insert') (14342874)
+WHEN  ('?LOC:CLASE') (14342874)
+WHEN  ('?LOC:CLASE:Prompt') (14342874)
+WHEN  ('?LOC:CLAVE') (14342874)
+WHEN  ('?LOC:CLAVE:Prompt') (14342874)
+WHEN  ('?LOC:GRUPO') (14342874)
+WHEN  ('?LOC:RAZONSOCIAL') (14342874)
+WHEN  ('?List') (14342874)
+WHEN  ('?LookupFile') (14342874)
+WHEN  ('?OK') (14342874)
+WHEN  ('?Plantillas') (14342874)
+WHEN  ('?STRING1') (14342874)
+WHEN  ('?STRING1:2') (14342874)
+WHEN  ('?STRING1:3') (14342874)
+WHEN  ('?STRING1:4') (14342874)
+WHEN  ('?STRING1:5') (14342874)
+WHEN  ('?STRING1:6') (14342874)
+WHEN  ('?TAB1') (14342874)
+WHEN  ('?TAdicionales') (14342874)
+WHEN  ('?TBasicos') (14342874)
+WHEN  ('?TFirma') (14342874)
+WHEN  ('?USUSU:APELLIDOS') (14342874)
+WHEN  ('?USUSU:CARGO') (14342874)
+WHEN  ('?USUSU:CARGO:2') (14342874)
+WHEN  ('?USUSU:CARGO:Prompt') (14342874)
+WHEN  ('?USUSU:CARNET') (14342874)
+WHEN  ('?USUSU:CARNET:Prompt') (14342874)
+WHEN  ('?USUSU:CELULAR') (14342874)
+WHEN  ('?USUSU:CELULAR:Prompt') (14342874)
+WHEN  ('?USUSU:CELULAR:Prompt:2') (14342874)
+WHEN  ('?USUSU:CODCAJERO') (14342874)
+WHEN  ('?USUSU:CODCAJERO:Prompt') (14342874)
+WHEN  ('?USUSU:DEPARTAMENTO') (14342874)
+WHEN  ('?USUSU:DOCID') (14342874)
+WHEN  ('?USUSU:EMAIL') (14342874)
+WHEN  ('?USUSU:EMAIL:Prompt') (14342874)
+WHEN  ('?USUSU:ESTADO') (14342874)
+WHEN  ('?USUSU:ESTADO:Prompt') (14342874)
+WHEN  ('?USUSU:FECHACAMBIO_DATE') (14342874)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') (14342874)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt:2') (14342874)
+WHEN  ('?USUSU:FECHACAMBIO_TIME') (14342874)
+WHEN  ('?USUSU:FECHAVENCE_DATE') (14342874)
+WHEN  ('?USUSU:F_RETIRO_DATE') (14342874)
+WHEN  ('?USUSU:F_RETIRO_DATE:Prompt') (14342874)
+WHEN  ('?USUSU:GRUPO:Prompt') (14342874)
+WHEN  ('?USUSU:IDEMPRESA') (14342874)
+WHEN  ('?USUSU:IDEMPRESA:Prompt') (14342874)
+WHEN  ('?USUSU:IDMEDICO') (14342874)
+WHEN  ('?USUSU:IDMEDICO:Prompt') (14342874)
+WHEN  ('?USUSU:IDPLAN:Prompt') (14342874)
+WHEN  ('?USUSU:IDPLANT') (14342874)
+WHEN  ('?USUSU:IDSEDE') (14342874)
+WHEN  ('?USUSU:IDSEDE:Prompt') (14342874)
+WHEN  ('?USUSU:IDTERCERO') (14342874)
+WHEN  ('?USUSU:IDTERCERO:Prompt') (14342874)
+WHEN  ('?USUSU:NIVELFUNCIONARIO') (14342874)
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') (14342874)
+WHEN  ('?USUSU:NOMBRE') (14342874)
+WHEN  ('?USUSU:NOMBRE:Prompt') (14342874)
+WHEN  ('?USUSU:NOMBRES') (14342874)
+WHEN  ('?USUSU:SOLOWEB') (14342874)
+WHEN  ('?USUSU:SYS_ComputerName') (14342874)
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') (14342874)
+WHEN  ('?USUSU:TELEFONO') (14342874)
+WHEN  ('?USUSU:TELEFONO:Prompt') (14342874)
+WHEN  ('?USUSU:TELEGRAMID') (14342874)
+WHEN  ('?USUSU:TIPO') (14342874)
+WHEN  ('?USUSU:TIPO:Prompt') (14342874)
+WHEN  ('?USUSU:TIPOIDENT') (14342874)
+WHEN  ('?USUSU:TIPO_USUARIOADM') (14342874)
+WHEN  ('?USUSU:TIPO_USUARIOADM:Prompt') (14342874)
+WHEN  ('?USUSU:USUARIO') (14342874)
+WHEN  ('?USUSU:USUARIO:Prompt') (14342874)
+WHEN  ('?loc:cargafirma') (14342874)
+WHEN  ('?loc:cargarfirma') (14342874)
+WHEN  ('?loc:path') (14342874)
+WHEN  ('?loc:path:Prompt') (14342874)
+
+%cListHeaderBack DEPEND %Control LONG TIMES 96
+WHEN  ('') (14342874)
+WHEN  ('?BCopiarMPL') (14342874)
+WHEN  ('?BQuitarTodas') (14342874)
+WHEN  ('?BUTTON1') (14342874)
+WHEN  ('?CallLookup') (14342874)
+WHEN  ('?CallLookup:2') (14342874)
+WHEN  ('?CallLookup:4') (14342874)
+WHEN  ('?CallLookup:5') (14342874)
+WHEN  ('?CallLookup:6') (14342874)
+WHEN  ('?Cancel') (14342874)
+WHEN  ('?Change') (14342874)
+WHEN  ('?CurrentTab') (14342874)
+WHEN  ('?Delete') (14342874)
+WHEN  ('?GROUP1') (14342874)
+WHEN  ('?GROUP2') (14342874)
+WHEN  ('?GROUP4') (14342874)
+WHEN  ('?GROUP5') (14342874)
+WHEN  ('?Image1') (14342874)
+WHEN  ('?Insert') (14342874)
+WHEN  ('?LOC:CLASE') (14342874)
+WHEN  ('?LOC:CLASE:Prompt') (14342874)
+WHEN  ('?LOC:CLAVE') (14342874)
+WHEN  ('?LOC:CLAVE:Prompt') (14342874)
+WHEN  ('?LOC:GRUPO') (14342874)
+WHEN  ('?LOC:RAZONSOCIAL') (14342874)
+WHEN  ('?List') (14342874)
+WHEN  ('?LookupFile') (14342874)
+WHEN  ('?OK') (14342874)
+WHEN  ('?Plantillas') (14342874)
+WHEN  ('?STRING1') (14342874)
+WHEN  ('?STRING1:2') (14342874)
+WHEN  ('?STRING1:3') (14342874)
+WHEN  ('?STRING1:4') (14342874)
+WHEN  ('?STRING1:5') (14342874)
+WHEN  ('?STRING1:6') (14342874)
+WHEN  ('?TAB1') (14342874)
+WHEN  ('?TAdicionales') (14342874)
+WHEN  ('?TBasicos') (14342874)
+WHEN  ('?TFirma') (14342874)
+WHEN  ('?USUSU:APELLIDOS') (14342874)
+WHEN  ('?USUSU:CARGO') (14342874)
+WHEN  ('?USUSU:CARGO:2') (14342874)
+WHEN  ('?USUSU:CARGO:Prompt') (14342874)
+WHEN  ('?USUSU:CARNET') (14342874)
+WHEN  ('?USUSU:CARNET:Prompt') (14342874)
+WHEN  ('?USUSU:CELULAR') (14342874)
+WHEN  ('?USUSU:CELULAR:Prompt') (14342874)
+WHEN  ('?USUSU:CELULAR:Prompt:2') (14342874)
+WHEN  ('?USUSU:CODCAJERO') (14342874)
+WHEN  ('?USUSU:CODCAJERO:Prompt') (14342874)
+WHEN  ('?USUSU:DEPARTAMENTO') (14342874)
+WHEN  ('?USUSU:DOCID') (14342874)
+WHEN  ('?USUSU:EMAIL') (14342874)
+WHEN  ('?USUSU:EMAIL:Prompt') (14342874)
+WHEN  ('?USUSU:ESTADO') (14342874)
+WHEN  ('?USUSU:ESTADO:Prompt') (14342874)
+WHEN  ('?USUSU:FECHACAMBIO_DATE') (14342874)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') (14342874)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt:2') (14342874)
+WHEN  ('?USUSU:FECHACAMBIO_TIME') (14342874)
+WHEN  ('?USUSU:FECHAVENCE_DATE') (14342874)
+WHEN  ('?USUSU:F_RETIRO_DATE') (14342874)
+WHEN  ('?USUSU:F_RETIRO_DATE:Prompt') (14342874)
+WHEN  ('?USUSU:GRUPO:Prompt') (14342874)
+WHEN  ('?USUSU:IDEMPRESA') (14342874)
+WHEN  ('?USUSU:IDEMPRESA:Prompt') (14342874)
+WHEN  ('?USUSU:IDMEDICO') (14342874)
+WHEN  ('?USUSU:IDMEDICO:Prompt') (14342874)
+WHEN  ('?USUSU:IDPLAN:Prompt') (14342874)
+WHEN  ('?USUSU:IDPLANT') (14342874)
+WHEN  ('?USUSU:IDSEDE') (14342874)
+WHEN  ('?USUSU:IDSEDE:Prompt') (14342874)
+WHEN  ('?USUSU:IDTERCERO') (14342874)
+WHEN  ('?USUSU:IDTERCERO:Prompt') (14342874)
+WHEN  ('?USUSU:NIVELFUNCIONARIO') (14342874)
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') (14342874)
+WHEN  ('?USUSU:NOMBRE') (14342874)
+WHEN  ('?USUSU:NOMBRE:Prompt') (14342874)
+WHEN  ('?USUSU:NOMBRES') (14342874)
+WHEN  ('?USUSU:SOLOWEB') (14342874)
+WHEN  ('?USUSU:SYS_ComputerName') (14342874)
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') (14342874)
+WHEN  ('?USUSU:TELEFONO') (14342874)
+WHEN  ('?USUSU:TELEFONO:Prompt') (14342874)
+WHEN  ('?USUSU:TELEGRAMID') (14342874)
+WHEN  ('?USUSU:TIPO') (14342874)
+WHEN  ('?USUSU:TIPO:Prompt') (14342874)
+WHEN  ('?USUSU:TIPOIDENT') (14342874)
+WHEN  ('?USUSU:TIPO_USUARIOADM') (14342874)
+WHEN  ('?USUSU:TIPO_USUARIOADM:Prompt') (14342874)
+WHEN  ('?USUSU:USUARIO') (14342874)
+WHEN  ('?USUSU:USUARIO:Prompt') (14342874)
+WHEN  ('?loc:cargafirma') (14342874)
+WHEN  ('?loc:cargarfirma') (14342874)
+WHEN  ('?loc:path') (14342874)
+WHEN  ('?loc:path:Prompt') (14342874)
+
+%cListHeaderFore DEPEND %Control LONG TIMES 96
+WHEN  ('') (0)
+WHEN  ('?BCopiarMPL') (0)
+WHEN  ('?BQuitarTodas') (0)
+WHEN  ('?BUTTON1') (0)
+WHEN  ('?CallLookup') (0)
+WHEN  ('?CallLookup:2') (0)
+WHEN  ('?CallLookup:4') (0)
+WHEN  ('?CallLookup:5') (0)
+WHEN  ('?CallLookup:6') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?Change') (0)
+WHEN  ('?CurrentTab') (0)
+WHEN  ('?Delete') (0)
+WHEN  ('?GROUP1') (0)
+WHEN  ('?GROUP2') (0)
+WHEN  ('?GROUP4') (0)
+WHEN  ('?GROUP5') (0)
+WHEN  ('?Image1') (0)
+WHEN  ('?Insert') (0)
+WHEN  ('?LOC:CLASE') (0)
+WHEN  ('?LOC:CLASE:Prompt') (0)
+WHEN  ('?LOC:CLAVE') (0)
+WHEN  ('?LOC:CLAVE:Prompt') (0)
+WHEN  ('?LOC:GRUPO') (0)
+WHEN  ('?LOC:RAZONSOCIAL') (0)
+WHEN  ('?List') (0)
+WHEN  ('?LookupFile') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?Plantillas') (0)
+WHEN  ('?STRING1') (0)
+WHEN  ('?STRING1:2') (0)
+WHEN  ('?STRING1:3') (0)
+WHEN  ('?STRING1:4') (0)
+WHEN  ('?STRING1:5') (0)
+WHEN  ('?STRING1:6') (0)
+WHEN  ('?TAB1') (0)
+WHEN  ('?TAdicionales') (0)
+WHEN  ('?TBasicos') (0)
+WHEN  ('?TFirma') (0)
+WHEN  ('?USUSU:APELLIDOS') (0)
+WHEN  ('?USUSU:CARGO') (0)
+WHEN  ('?USUSU:CARGO:2') (0)
+WHEN  ('?USUSU:CARGO:Prompt') (0)
+WHEN  ('?USUSU:CARNET') (0)
+WHEN  ('?USUSU:CARNET:Prompt') (0)
+WHEN  ('?USUSU:CELULAR') (0)
+WHEN  ('?USUSU:CELULAR:Prompt') (0)
+WHEN  ('?USUSU:CELULAR:Prompt:2') (0)
+WHEN  ('?USUSU:CODCAJERO') (0)
+WHEN  ('?USUSU:CODCAJERO:Prompt') (0)
+WHEN  ('?USUSU:DEPARTAMENTO') (0)
+WHEN  ('?USUSU:DOCID') (0)
+WHEN  ('?USUSU:EMAIL') (0)
+WHEN  ('?USUSU:EMAIL:Prompt') (0)
+WHEN  ('?USUSU:ESTADO') (0)
+WHEN  ('?USUSU:ESTADO:Prompt') (0)
+WHEN  ('?USUSU:FECHACAMBIO_DATE') (0)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') (0)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt:2') (0)
+WHEN  ('?USUSU:FECHACAMBIO_TIME') (0)
+WHEN  ('?USUSU:FECHAVENCE_DATE') (0)
+WHEN  ('?USUSU:F_RETIRO_DATE') (0)
+WHEN  ('?USUSU:F_RETIRO_DATE:Prompt') (0)
+WHEN  ('?USUSU:GRUPO:Prompt') (0)
+WHEN  ('?USUSU:IDEMPRESA') (0)
+WHEN  ('?USUSU:IDEMPRESA:Prompt') (0)
+WHEN  ('?USUSU:IDMEDICO') (0)
+WHEN  ('?USUSU:IDMEDICO:Prompt') (0)
+WHEN  ('?USUSU:IDPLAN:Prompt') (0)
+WHEN  ('?USUSU:IDPLANT') (0)
+WHEN  ('?USUSU:IDSEDE') (0)
+WHEN  ('?USUSU:IDSEDE:Prompt') (0)
+WHEN  ('?USUSU:IDTERCERO') (0)
+WHEN  ('?USUSU:IDTERCERO:Prompt') (0)
+WHEN  ('?USUSU:NIVELFUNCIONARIO') (0)
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') (0)
+WHEN  ('?USUSU:NOMBRE') (0)
+WHEN  ('?USUSU:NOMBRE:Prompt') (0)
+WHEN  ('?USUSU:NOMBRES') (0)
+WHEN  ('?USUSU:SOLOWEB') (0)
+WHEN  ('?USUSU:SYS_ComputerName') (0)
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') (0)
+WHEN  ('?USUSU:TELEFONO') (0)
+WHEN  ('?USUSU:TELEFONO:Prompt') (0)
+WHEN  ('?USUSU:TELEGRAMID') (0)
+WHEN  ('?USUSU:TIPO') (0)
+WHEN  ('?USUSU:TIPO:Prompt') (0)
+WHEN  ('?USUSU:TIPOIDENT') (0)
+WHEN  ('?USUSU:TIPO_USUARIOADM') (0)
+WHEN  ('?USUSU:TIPO_USUARIOADM:Prompt') (0)
+WHEN  ('?USUSU:USUARIO') (0)
+WHEN  ('?USUSU:USUARIO:Prompt') (0)
+WHEN  ('?loc:cargafirma') (0)
+WHEN  ('?loc:cargarfirma') (0)
+WHEN  ('?loc:path') (0)
+WHEN  ('?loc:path:Prompt') (0)
+
+%cListHeaderGRBack DEPEND %Control LONG TIMES 96
+WHEN  ('') (14342874)
+WHEN  ('?BCopiarMPL') (14342874)
+WHEN  ('?BQuitarTodas') (14342874)
+WHEN  ('?BUTTON1') (14342874)
+WHEN  ('?CallLookup') (14342874)
+WHEN  ('?CallLookup:2') (14342874)
+WHEN  ('?CallLookup:4') (14342874)
+WHEN  ('?CallLookup:5') (14342874)
+WHEN  ('?CallLookup:6') (14342874)
+WHEN  ('?Cancel') (14342874)
+WHEN  ('?Change') (14342874)
+WHEN  ('?CurrentTab') (14342874)
+WHEN  ('?Delete') (14342874)
+WHEN  ('?GROUP1') (14342874)
+WHEN  ('?GROUP2') (14342874)
+WHEN  ('?GROUP4') (14342874)
+WHEN  ('?GROUP5') (14342874)
+WHEN  ('?Image1') (14342874)
+WHEN  ('?Insert') (14342874)
+WHEN  ('?LOC:CLASE') (14342874)
+WHEN  ('?LOC:CLASE:Prompt') (14342874)
+WHEN  ('?LOC:CLAVE') (14342874)
+WHEN  ('?LOC:CLAVE:Prompt') (14342874)
+WHEN  ('?LOC:GRUPO') (14342874)
+WHEN  ('?LOC:RAZONSOCIAL') (14342874)
+WHEN  ('?List') (14342874)
+WHEN  ('?LookupFile') (14342874)
+WHEN  ('?OK') (14342874)
+WHEN  ('?Plantillas') (14342874)
+WHEN  ('?STRING1') (14342874)
+WHEN  ('?STRING1:2') (14342874)
+WHEN  ('?STRING1:3') (14342874)
+WHEN  ('?STRING1:4') (14342874)
+WHEN  ('?STRING1:5') (14342874)
+WHEN  ('?STRING1:6') (14342874)
+WHEN  ('?TAB1') (14342874)
+WHEN  ('?TAdicionales') (14342874)
+WHEN  ('?TBasicos') (14342874)
+WHEN  ('?TFirma') (14342874)
+WHEN  ('?USUSU:APELLIDOS') (14342874)
+WHEN  ('?USUSU:CARGO') (14342874)
+WHEN  ('?USUSU:CARGO:2') (14342874)
+WHEN  ('?USUSU:CARGO:Prompt') (14342874)
+WHEN  ('?USUSU:CARNET') (14342874)
+WHEN  ('?USUSU:CARNET:Prompt') (14342874)
+WHEN  ('?USUSU:CELULAR') (14342874)
+WHEN  ('?USUSU:CELULAR:Prompt') (14342874)
+WHEN  ('?USUSU:CELULAR:Prompt:2') (14342874)
+WHEN  ('?USUSU:CODCAJERO') (14342874)
+WHEN  ('?USUSU:CODCAJERO:Prompt') (14342874)
+WHEN  ('?USUSU:DEPARTAMENTO') (14342874)
+WHEN  ('?USUSU:DOCID') (14342874)
+WHEN  ('?USUSU:EMAIL') (14342874)
+WHEN  ('?USUSU:EMAIL:Prompt') (14342874)
+WHEN  ('?USUSU:ESTADO') (14342874)
+WHEN  ('?USUSU:ESTADO:Prompt') (14342874)
+WHEN  ('?USUSU:FECHACAMBIO_DATE') (14342874)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') (14342874)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt:2') (14342874)
+WHEN  ('?USUSU:FECHACAMBIO_TIME') (14342874)
+WHEN  ('?USUSU:FECHAVENCE_DATE') (14342874)
+WHEN  ('?USUSU:F_RETIRO_DATE') (14342874)
+WHEN  ('?USUSU:F_RETIRO_DATE:Prompt') (14342874)
+WHEN  ('?USUSU:GRUPO:Prompt') (14342874)
+WHEN  ('?USUSU:IDEMPRESA') (14342874)
+WHEN  ('?USUSU:IDEMPRESA:Prompt') (14342874)
+WHEN  ('?USUSU:IDMEDICO') (14342874)
+WHEN  ('?USUSU:IDMEDICO:Prompt') (14342874)
+WHEN  ('?USUSU:IDPLAN:Prompt') (14342874)
+WHEN  ('?USUSU:IDPLANT') (14342874)
+WHEN  ('?USUSU:IDSEDE') (14342874)
+WHEN  ('?USUSU:IDSEDE:Prompt') (14342874)
+WHEN  ('?USUSU:IDTERCERO') (14342874)
+WHEN  ('?USUSU:IDTERCERO:Prompt') (14342874)
+WHEN  ('?USUSU:NIVELFUNCIONARIO') (14342874)
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') (14342874)
+WHEN  ('?USUSU:NOMBRE') (14342874)
+WHEN  ('?USUSU:NOMBRE:Prompt') (14342874)
+WHEN  ('?USUSU:NOMBRES') (14342874)
+WHEN  ('?USUSU:SOLOWEB') (14342874)
+WHEN  ('?USUSU:SYS_ComputerName') (14342874)
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') (14342874)
+WHEN  ('?USUSU:TELEFONO') (14342874)
+WHEN  ('?USUSU:TELEFONO:Prompt') (14342874)
+WHEN  ('?USUSU:TELEGRAMID') (14342874)
+WHEN  ('?USUSU:TIPO') (14342874)
+WHEN  ('?USUSU:TIPO:Prompt') (14342874)
+WHEN  ('?USUSU:TIPOIDENT') (14342874)
+WHEN  ('?USUSU:TIPO_USUARIOADM') (14342874)
+WHEN  ('?USUSU:TIPO_USUARIOADM:Prompt') (14342874)
+WHEN  ('?USUSU:USUARIO') (14342874)
+WHEN  ('?USUSU:USUARIO:Prompt') (14342874)
+WHEN  ('?loc:cargafirma') (14342874)
+WHEN  ('?loc:cargarfirma') (14342874)
+WHEN  ('?loc:path') (14342874)
+WHEN  ('?loc:path:Prompt') (14342874)
+
+%cListHeaderGrFore DEPEND %Control LONG TIMES 96
+WHEN  ('') (0)
+WHEN  ('?BCopiarMPL') (0)
+WHEN  ('?BQuitarTodas') (0)
+WHEN  ('?BUTTON1') (0)
+WHEN  ('?CallLookup') (0)
+WHEN  ('?CallLookup:2') (0)
+WHEN  ('?CallLookup:4') (0)
+WHEN  ('?CallLookup:5') (0)
+WHEN  ('?CallLookup:6') (0)
+WHEN  ('?Cancel') (0)
+WHEN  ('?Change') (0)
+WHEN  ('?CurrentTab') (0)
+WHEN  ('?Delete') (0)
+WHEN  ('?GROUP1') (0)
+WHEN  ('?GROUP2') (0)
+WHEN  ('?GROUP4') (0)
+WHEN  ('?GROUP5') (0)
+WHEN  ('?Image1') (0)
+WHEN  ('?Insert') (0)
+WHEN  ('?LOC:CLASE') (0)
+WHEN  ('?LOC:CLASE:Prompt') (0)
+WHEN  ('?LOC:CLAVE') (0)
+WHEN  ('?LOC:CLAVE:Prompt') (0)
+WHEN  ('?LOC:GRUPO') (0)
+WHEN  ('?LOC:RAZONSOCIAL') (0)
+WHEN  ('?List') (0)
+WHEN  ('?LookupFile') (0)
+WHEN  ('?OK') (0)
+WHEN  ('?Plantillas') (0)
+WHEN  ('?STRING1') (0)
+WHEN  ('?STRING1:2') (0)
+WHEN  ('?STRING1:3') (0)
+WHEN  ('?STRING1:4') (0)
+WHEN  ('?STRING1:5') (0)
+WHEN  ('?STRING1:6') (0)
+WHEN  ('?TAB1') (0)
+WHEN  ('?TAdicionales') (0)
+WHEN  ('?TBasicos') (0)
+WHEN  ('?TFirma') (0)
+WHEN  ('?USUSU:APELLIDOS') (0)
+WHEN  ('?USUSU:CARGO') (0)
+WHEN  ('?USUSU:CARGO:2') (0)
+WHEN  ('?USUSU:CARGO:Prompt') (0)
+WHEN  ('?USUSU:CARNET') (0)
+WHEN  ('?USUSU:CARNET:Prompt') (0)
+WHEN  ('?USUSU:CELULAR') (0)
+WHEN  ('?USUSU:CELULAR:Prompt') (0)
+WHEN  ('?USUSU:CELULAR:Prompt:2') (0)
+WHEN  ('?USUSU:CODCAJERO') (0)
+WHEN  ('?USUSU:CODCAJERO:Prompt') (0)
+WHEN  ('?USUSU:DEPARTAMENTO') (0)
+WHEN  ('?USUSU:DOCID') (0)
+WHEN  ('?USUSU:EMAIL') (0)
+WHEN  ('?USUSU:EMAIL:Prompt') (0)
+WHEN  ('?USUSU:ESTADO') (0)
+WHEN  ('?USUSU:ESTADO:Prompt') (0)
+WHEN  ('?USUSU:FECHACAMBIO_DATE') (0)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') (0)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt:2') (0)
+WHEN  ('?USUSU:FECHACAMBIO_TIME') (0)
+WHEN  ('?USUSU:FECHAVENCE_DATE') (0)
+WHEN  ('?USUSU:F_RETIRO_DATE') (0)
+WHEN  ('?USUSU:F_RETIRO_DATE:Prompt') (0)
+WHEN  ('?USUSU:GRUPO:Prompt') (0)
+WHEN  ('?USUSU:IDEMPRESA') (0)
+WHEN  ('?USUSU:IDEMPRESA:Prompt') (0)
+WHEN  ('?USUSU:IDMEDICO') (0)
+WHEN  ('?USUSU:IDMEDICO:Prompt') (0)
+WHEN  ('?USUSU:IDPLAN:Prompt') (0)
+WHEN  ('?USUSU:IDPLANT') (0)
+WHEN  ('?USUSU:IDSEDE') (0)
+WHEN  ('?USUSU:IDSEDE:Prompt') (0)
+WHEN  ('?USUSU:IDTERCERO') (0)
+WHEN  ('?USUSU:IDTERCERO:Prompt') (0)
+WHEN  ('?USUSU:NIVELFUNCIONARIO') (0)
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') (0)
+WHEN  ('?USUSU:NOMBRE') (0)
+WHEN  ('?USUSU:NOMBRE:Prompt') (0)
+WHEN  ('?USUSU:NOMBRES') (0)
+WHEN  ('?USUSU:SOLOWEB') (0)
+WHEN  ('?USUSU:SYS_ComputerName') (0)
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') (0)
+WHEN  ('?USUSU:TELEFONO') (0)
+WHEN  ('?USUSU:TELEFONO:Prompt') (0)
+WHEN  ('?USUSU:TELEGRAMID') (0)
+WHEN  ('?USUSU:TIPO') (0)
+WHEN  ('?USUSU:TIPO:Prompt') (0)
+WHEN  ('?USUSU:TIPOIDENT') (0)
+WHEN  ('?USUSU:TIPO_USUARIOADM') (0)
+WHEN  ('?USUSU:TIPO_USUARIOADM:Prompt') (0)
+WHEN  ('?USUSU:USUARIO') (0)
+WHEN  ('?USUSU:USUARIO:Prompt') (0)
+WHEN  ('?loc:cargafirma') (0)
+WHEN  ('?loc:cargarfirma') (0)
+WHEN  ('?loc:path') (0)
+WHEN  ('?loc:path:Prompt') (0)
+
+%cListHeaderArrow DEPEND %Control LONG TIMES 96
+WHEN  ('') (8421504)
+WHEN  ('?BCopiarMPL') (8421504)
+WHEN  ('?BQuitarTodas') (8421504)
+WHEN  ('?BUTTON1') (8421504)
+WHEN  ('?CallLookup') (8421504)
+WHEN  ('?CallLookup:2') (8421504)
+WHEN  ('?CallLookup:4') (8421504)
+WHEN  ('?CallLookup:5') (8421504)
+WHEN  ('?CallLookup:6') (8421504)
+WHEN  ('?Cancel') (8421504)
+WHEN  ('?Change') (8421504)
+WHEN  ('?CurrentTab') (8421504)
+WHEN  ('?Delete') (8421504)
+WHEN  ('?GROUP1') (8421504)
+WHEN  ('?GROUP2') (8421504)
+WHEN  ('?GROUP4') (8421504)
+WHEN  ('?GROUP5') (8421504)
+WHEN  ('?Image1') (8421504)
+WHEN  ('?Insert') (8421504)
+WHEN  ('?LOC:CLASE') (8421504)
+WHEN  ('?LOC:CLASE:Prompt') (8421504)
+WHEN  ('?LOC:CLAVE') (8421504)
+WHEN  ('?LOC:CLAVE:Prompt') (8421504)
+WHEN  ('?LOC:GRUPO') (8421504)
+WHEN  ('?LOC:RAZONSOCIAL') (8421504)
+WHEN  ('?List') (8421504)
+WHEN  ('?LookupFile') (8421504)
+WHEN  ('?OK') (8421504)
+WHEN  ('?Plantillas') (8421504)
+WHEN  ('?STRING1') (8421504)
+WHEN  ('?STRING1:2') (8421504)
+WHEN  ('?STRING1:3') (8421504)
+WHEN  ('?STRING1:4') (8421504)
+WHEN  ('?STRING1:5') (8421504)
+WHEN  ('?STRING1:6') (8421504)
+WHEN  ('?TAB1') (8421504)
+WHEN  ('?TAdicionales') (8421504)
+WHEN  ('?TBasicos') (8421504)
+WHEN  ('?TFirma') (8421504)
+WHEN  ('?USUSU:APELLIDOS') (8421504)
+WHEN  ('?USUSU:CARGO') (8421504)
+WHEN  ('?USUSU:CARGO:2') (8421504)
+WHEN  ('?USUSU:CARGO:Prompt') (8421504)
+WHEN  ('?USUSU:CARNET') (8421504)
+WHEN  ('?USUSU:CARNET:Prompt') (8421504)
+WHEN  ('?USUSU:CELULAR') (8421504)
+WHEN  ('?USUSU:CELULAR:Prompt') (8421504)
+WHEN  ('?USUSU:CELULAR:Prompt:2') (8421504)
+WHEN  ('?USUSU:CODCAJERO') (8421504)
+WHEN  ('?USUSU:CODCAJERO:Prompt') (8421504)
+WHEN  ('?USUSU:DEPARTAMENTO') (8421504)
+WHEN  ('?USUSU:DOCID') (8421504)
+WHEN  ('?USUSU:EMAIL') (8421504)
+WHEN  ('?USUSU:EMAIL:Prompt') (8421504)
+WHEN  ('?USUSU:ESTADO') (8421504)
+WHEN  ('?USUSU:ESTADO:Prompt') (8421504)
+WHEN  ('?USUSU:FECHACAMBIO_DATE') (8421504)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') (8421504)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt:2') (8421504)
+WHEN  ('?USUSU:FECHACAMBIO_TIME') (8421504)
+WHEN  ('?USUSU:FECHAVENCE_DATE') (8421504)
+WHEN  ('?USUSU:F_RETIRO_DATE') (8421504)
+WHEN  ('?USUSU:F_RETIRO_DATE:Prompt') (8421504)
+WHEN  ('?USUSU:GRUPO:Prompt') (8421504)
+WHEN  ('?USUSU:IDEMPRESA') (8421504)
+WHEN  ('?USUSU:IDEMPRESA:Prompt') (8421504)
+WHEN  ('?USUSU:IDMEDICO') (8421504)
+WHEN  ('?USUSU:IDMEDICO:Prompt') (8421504)
+WHEN  ('?USUSU:IDPLAN:Prompt') (8421504)
+WHEN  ('?USUSU:IDPLANT') (8421504)
+WHEN  ('?USUSU:IDSEDE') (8421504)
+WHEN  ('?USUSU:IDSEDE:Prompt') (8421504)
+WHEN  ('?USUSU:IDTERCERO') (8421504)
+WHEN  ('?USUSU:IDTERCERO:Prompt') (8421504)
+WHEN  ('?USUSU:NIVELFUNCIONARIO') (8421504)
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') (8421504)
+WHEN  ('?USUSU:NOMBRE') (8421504)
+WHEN  ('?USUSU:NOMBRE:Prompt') (8421504)
+WHEN  ('?USUSU:NOMBRES') (8421504)
+WHEN  ('?USUSU:SOLOWEB') (8421504)
+WHEN  ('?USUSU:SYS_ComputerName') (8421504)
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') (8421504)
+WHEN  ('?USUSU:TELEFONO') (8421504)
+WHEN  ('?USUSU:TELEFONO:Prompt') (8421504)
+WHEN  ('?USUSU:TELEGRAMID') (8421504)
+WHEN  ('?USUSU:TIPO') (8421504)
+WHEN  ('?USUSU:TIPO:Prompt') (8421504)
+WHEN  ('?USUSU:TIPOIDENT') (8421504)
+WHEN  ('?USUSU:TIPO_USUARIOADM') (8421504)
+WHEN  ('?USUSU:TIPO_USUARIOADM:Prompt') (8421504)
+WHEN  ('?USUSU:USUARIO') (8421504)
+WHEN  ('?USUSU:USUARIO:Prompt') (8421504)
+WHEN  ('?loc:cargafirma') (8421504)
+WHEN  ('?loc:cargarfirma') (8421504)
+WHEN  ('?loc:path') (8421504)
+WHEN  ('?loc:path:Prompt') (8421504)
+
+%cListHeaderArrow3D DEPEND %Control LONG TIMES 96
+WHEN  ('') (16777215)
+WHEN  ('?BCopiarMPL') (16777215)
+WHEN  ('?BQuitarTodas') (16777215)
+WHEN  ('?BUTTON1') (16777215)
+WHEN  ('?CallLookup') (16777215)
+WHEN  ('?CallLookup:2') (16777215)
+WHEN  ('?CallLookup:4') (16777215)
+WHEN  ('?CallLookup:5') (16777215)
+WHEN  ('?CallLookup:6') (16777215)
+WHEN  ('?Cancel') (16777215)
+WHEN  ('?Change') (16777215)
+WHEN  ('?CurrentTab') (16777215)
+WHEN  ('?Delete') (16777215)
+WHEN  ('?GROUP1') (16777215)
+WHEN  ('?GROUP2') (16777215)
+WHEN  ('?GROUP4') (16777215)
+WHEN  ('?GROUP5') (16777215)
+WHEN  ('?Image1') (16777215)
+WHEN  ('?Insert') (16777215)
+WHEN  ('?LOC:CLASE') (16777215)
+WHEN  ('?LOC:CLASE:Prompt') (16777215)
+WHEN  ('?LOC:CLAVE') (16777215)
+WHEN  ('?LOC:CLAVE:Prompt') (16777215)
+WHEN  ('?LOC:GRUPO') (16777215)
+WHEN  ('?LOC:RAZONSOCIAL') (16777215)
+WHEN  ('?List') (16777215)
+WHEN  ('?LookupFile') (16777215)
+WHEN  ('?OK') (16777215)
+WHEN  ('?Plantillas') (16777215)
+WHEN  ('?STRING1') (16777215)
+WHEN  ('?STRING1:2') (16777215)
+WHEN  ('?STRING1:3') (16777215)
+WHEN  ('?STRING1:4') (16777215)
+WHEN  ('?STRING1:5') (16777215)
+WHEN  ('?STRING1:6') (16777215)
+WHEN  ('?TAB1') (16777215)
+WHEN  ('?TAdicionales') (16777215)
+WHEN  ('?TBasicos') (16777215)
+WHEN  ('?TFirma') (16777215)
+WHEN  ('?USUSU:APELLIDOS') (16777215)
+WHEN  ('?USUSU:CARGO') (16777215)
+WHEN  ('?USUSU:CARGO:2') (16777215)
+WHEN  ('?USUSU:CARGO:Prompt') (16777215)
+WHEN  ('?USUSU:CARNET') (16777215)
+WHEN  ('?USUSU:CARNET:Prompt') (16777215)
+WHEN  ('?USUSU:CELULAR') (16777215)
+WHEN  ('?USUSU:CELULAR:Prompt') (16777215)
+WHEN  ('?USUSU:CELULAR:Prompt:2') (16777215)
+WHEN  ('?USUSU:CODCAJERO') (16777215)
+WHEN  ('?USUSU:CODCAJERO:Prompt') (16777215)
+WHEN  ('?USUSU:DEPARTAMENTO') (16777215)
+WHEN  ('?USUSU:DOCID') (16777215)
+WHEN  ('?USUSU:EMAIL') (16777215)
+WHEN  ('?USUSU:EMAIL:Prompt') (16777215)
+WHEN  ('?USUSU:ESTADO') (16777215)
+WHEN  ('?USUSU:ESTADO:Prompt') (16777215)
+WHEN  ('?USUSU:FECHACAMBIO_DATE') (16777215)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') (16777215)
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt:2') (16777215)
+WHEN  ('?USUSU:FECHACAMBIO_TIME') (16777215)
+WHEN  ('?USUSU:FECHAVENCE_DATE') (16777215)
+WHEN  ('?USUSU:F_RETIRO_DATE') (16777215)
+WHEN  ('?USUSU:F_RETIRO_DATE:Prompt') (16777215)
+WHEN  ('?USUSU:GRUPO:Prompt') (16777215)
+WHEN  ('?USUSU:IDEMPRESA') (16777215)
+WHEN  ('?USUSU:IDEMPRESA:Prompt') (16777215)
+WHEN  ('?USUSU:IDMEDICO') (16777215)
+WHEN  ('?USUSU:IDMEDICO:Prompt') (16777215)
+WHEN  ('?USUSU:IDPLAN:Prompt') (16777215)
+WHEN  ('?USUSU:IDPLANT') (16777215)
+WHEN  ('?USUSU:IDSEDE') (16777215)
+WHEN  ('?USUSU:IDSEDE:Prompt') (16777215)
+WHEN  ('?USUSU:IDTERCERO') (16777215)
+WHEN  ('?USUSU:IDTERCERO:Prompt') (16777215)
+WHEN  ('?USUSU:NIVELFUNCIONARIO') (16777215)
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') (16777215)
+WHEN  ('?USUSU:NOMBRE') (16777215)
+WHEN  ('?USUSU:NOMBRE:Prompt') (16777215)
+WHEN  ('?USUSU:NOMBRES') (16777215)
+WHEN  ('?USUSU:SOLOWEB') (16777215)
+WHEN  ('?USUSU:SYS_ComputerName') (16777215)
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') (16777215)
+WHEN  ('?USUSU:TELEFONO') (16777215)
+WHEN  ('?USUSU:TELEFONO:Prompt') (16777215)
+WHEN  ('?USUSU:TELEGRAMID') (16777215)
+WHEN  ('?USUSU:TIPO') (16777215)
+WHEN  ('?USUSU:TIPO:Prompt') (16777215)
+WHEN  ('?USUSU:TIPOIDENT') (16777215)
+WHEN  ('?USUSU:TIPO_USUARIOADM') (16777215)
+WHEN  ('?USUSU:TIPO_USUARIOADM:Prompt') (16777215)
+WHEN  ('?USUSU:USUARIO') (16777215)
+WHEN  ('?USUSU:USUARIO:Prompt') (16777215)
+WHEN  ('?loc:cargafirma') (16777215)
+WHEN  ('?loc:cargarfirma') (16777215)
+WHEN  ('?loc:path') (16777215)
+WHEN  ('?loc:path:Prompt') (16777215)
+
+%ThinControlMaxSizeRTF DEPEND %Control DEFAULT TIMES 96
+WHEN  ('') ('250000')
+WHEN  ('?BCopiarMPL') ('250000')
+WHEN  ('?BQuitarTodas') ('250000')
+WHEN  ('?BUTTON1') ('250000')
+WHEN  ('?CallLookup') ('250000')
+WHEN  ('?CallLookup:2') ('250000')
+WHEN  ('?CallLookup:4') ('250000')
+WHEN  ('?CallLookup:5') ('250000')
+WHEN  ('?CallLookup:6') ('250000')
+WHEN  ('?Cancel') ('250000')
+WHEN  ('?Change') ('250000')
+WHEN  ('?CurrentTab') ('250000')
+WHEN  ('?Delete') ('250000')
+WHEN  ('?GROUP1') ('250000')
+WHEN  ('?GROUP2') ('250000')
+WHEN  ('?GROUP4') ('250000')
+WHEN  ('?GROUP5') ('250000')
+WHEN  ('?Image1') ('250000')
+WHEN  ('?Insert') ('250000')
+WHEN  ('?LOC:CLASE') ('250000')
+WHEN  ('?LOC:CLASE:Prompt') ('250000')
+WHEN  ('?LOC:CLAVE') ('250000')
+WHEN  ('?LOC:CLAVE:Prompt') ('250000')
+WHEN  ('?LOC:GRUPO') ('250000')
+WHEN  ('?LOC:RAZONSOCIAL') ('250000')
+WHEN  ('?List') ('250000')
+WHEN  ('?LookupFile') ('250000')
+WHEN  ('?OK') ('250000')
+WHEN  ('?Plantillas') ('250000')
+WHEN  ('?STRING1') ('250000')
+WHEN  ('?STRING1:2') ('250000')
+WHEN  ('?STRING1:3') ('250000')
+WHEN  ('?STRING1:4') ('250000')
+WHEN  ('?STRING1:5') ('250000')
+WHEN  ('?STRING1:6') ('250000')
+WHEN  ('?TAB1') ('250000')
+WHEN  ('?TAdicionales') ('250000')
+WHEN  ('?TBasicos') ('250000')
+WHEN  ('?TFirma') ('250000')
+WHEN  ('?USUSU:APELLIDOS') ('250000')
+WHEN  ('?USUSU:CARGO') ('250000')
+WHEN  ('?USUSU:CARGO:2') ('250000')
+WHEN  ('?USUSU:CARGO:Prompt') ('250000')
+WHEN  ('?USUSU:CARNET') ('250000')
+WHEN  ('?USUSU:CARNET:Prompt') ('250000')
+WHEN  ('?USUSU:CELULAR') ('250000')
+WHEN  ('?USUSU:CELULAR:Prompt') ('250000')
+WHEN  ('?USUSU:CELULAR:Prompt:2') ('250000')
+WHEN  ('?USUSU:CODCAJERO') ('250000')
+WHEN  ('?USUSU:CODCAJERO:Prompt') ('250000')
+WHEN  ('?USUSU:DEPARTAMENTO') ('250000')
+WHEN  ('?USUSU:DOCID') ('250000')
+WHEN  ('?USUSU:EMAIL') ('250000')
+WHEN  ('?USUSU:EMAIL:Prompt') ('250000')
+WHEN  ('?USUSU:ESTADO') ('250000')
+WHEN  ('?USUSU:ESTADO:Prompt') ('250000')
+WHEN  ('?USUSU:FECHACAMBIO_DATE') ('250000')
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt') ('250000')
+WHEN  ('?USUSU:FECHACAMBIO_DATE:Prompt:2') ('250000')
+WHEN  ('?USUSU:FECHACAMBIO_TIME') ('250000')
+WHEN  ('?USUSU:FECHAVENCE_DATE') ('250000')
+WHEN  ('?USUSU:F_RETIRO_DATE') ('250000')
+WHEN  ('?USUSU:F_RETIRO_DATE:Prompt') ('250000')
+WHEN  ('?USUSU:GRUPO:Prompt') ('250000')
+WHEN  ('?USUSU:IDEMPRESA') ('250000')
+WHEN  ('?USUSU:IDEMPRESA:Prompt') ('250000')
+WHEN  ('?USUSU:IDMEDICO') ('250000')
+WHEN  ('?USUSU:IDMEDICO:Prompt') ('250000')
+WHEN  ('?USUSU:IDPLAN:Prompt') ('250000')
+WHEN  ('?USUSU:IDPLANT') ('250000')
+WHEN  ('?USUSU:IDSEDE') ('250000')
+WHEN  ('?USUSU:IDSEDE:Prompt') ('250000')
+WHEN  ('?USUSU:IDTERCERO') ('250000')
+WHEN  ('?USUSU:IDTERCERO:Prompt') ('250000')
+WHEN  ('?USUSU:NIVELFUNCIONARIO') ('250000')
+WHEN  ('?USUSU:NIVELFUNCIONARIO:Prompt') ('250000')
+WHEN  ('?USUSU:NOMBRE') ('250000')
+WHEN  ('?USUSU:NOMBRE:Prompt') ('250000')
+WHEN  ('?USUSU:NOMBRES') ('250000')
+WHEN  ('?USUSU:SOLOWEB') ('250000')
+WHEN  ('?USUSU:SYS_ComputerName') ('250000')
+WHEN  ('?USUSU:SYS_ComputerName:Prompt') ('250000')
+WHEN  ('?USUSU:TELEFONO') ('250000')
+WHEN  ('?USUSU:TELEFONO:Prompt') ('250000')
+WHEN  ('?USUSU:TELEGRAMID') ('250000')
+WHEN  ('?USUSU:TIPO') ('250000')
+WHEN  ('?USUSU:TIPO:Prompt') ('250000')
+WHEN  ('?USUSU:TIPOIDENT') ('250000')
+WHEN  ('?USUSU:TIPO_USUARIOADM') ('250000')
+WHEN  ('?USUSU:TIPO_USUARIOADM:Prompt') ('250000')
+WHEN  ('?USUSU:USUARIO') ('250000')
+WHEN  ('?USUSU:USUARIO:Prompt') ('250000')
+WHEN  ('?loc:cargafirma') ('250000')
+WHEN  ('?loc:cargarfirma') ('250000')
+WHEN  ('?loc:path') ('250000')
+WHEN  ('?loc:path:Prompt') ('250000')
+
+[INSTANCE]
+INSTANCE 4
+OWNER 4
+[PROMPTS]
+%AnyScreenTimerRefresh LONG  (0)
+[ADDITION]
+NAME ABC RecordValidation
+[INSTANCE]
+INSTANCE 1
+PROCPROP
+[PROMPTS]
+%ValidateOnAccept LONG  (1)
+%ValidateOnNonStopSelect LONG  (1)
+%ControlsExcluded MULTI LONG  ()
+%ControlToExclude DEPEND %ControlsExcluded DEFAULT TIMES 0
+
+%ValidateUsingColoration LONG  (0)
+%InvalidFieldColor LONG  (255)
+%InvalidPromptColor LONG  (255)
+%UseValidateMessage LONG  (0)
+%ValidationMessage DEFAULT  ('The values of Colored Fields are invalid, Please correct this information.')
+%MessageControl FIELD  ()
+[ADDITION]
+NAME ABC SaveButton
+[INSTANCE]
+INSTANCE 2
+PROCPROP
+[PROMPTS]
+%InsertAllowed LONG  (1)
+%InsertMessage DEFAULT  ('Nuevo usuario')
+%ChangeAllowed LONG  (1)
+%ChangeMessage DEFAULT  ('Editar usuario')
+%DeleteAllowed LONG  (1)
+%DeleteMessage DEFAULT  ('Borrar usuario')
+%MessageHeader LONG  (0)
+%ActionOnDelete DEFAULT  ('Standard Warning')
+%PrimingFields MULTI LONG  (1)
+%PrimedField DEPEND %PrimingFields FIELD TIMES 1
+WHEN  (1) (USUSU:ESTADO)
+
+%PrimedValue DEPEND %PrimingFields DEFAULT TIMES 1
+WHEN  (1) ('''Activo''')
+
+%ActionOnCancel DEFAULT  ('Confirm Cancel')
+%MessageLocation DEFAULT  ('Title Bar')
+%MessageStatusSection DEFAULT  ('0')
+%HistoryKey DEFAULT  ('734')
+%AppendToTitle LONG  (0)
+%AppendToTitleID DEFAULT  ('')
+%ViewMessage DEFAULT  ('View Record')
+%AfterGoodInsert DEFAULT  ('Return to caller')
+%AskAfterAdd LONG  (0)
+[ADDITION]
+NAME ABC CancelButton
+[INSTANCE]
+INSTANCE 3
+[ADDITION]
+NAME ABC WindowResize
+[FIELDPROMPT]
+%ResizeAnchorTop DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorLeft DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorRight DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorBottom DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowTop DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowLeft DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowRight DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowBottom DEPEND %Control LONG TIMES 0
+
+[INSTANCE]
+INSTANCE 5
+[PROMPTS]
+%UseAppStrategy DEFAULT  ('1')
+%AppStrategy DEFAULT  ('Surface')
+%RestrictMinSize LONG  (1)
+%WindowMinWidth DEFAULT  ('0')
+%WindowMaxWidth DEFAULT  ('0')
+%ClassItem UNIQUE DEFAULT  ('Default')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('WindowResizeClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Init {19}PROCEDURE(BYTE AppStrategy=AppStrategy:Resize,BYTE SetWindowMinSize=False,BYTE SetWindowMaxSize=False)')
+
+%WindowMinHeight DEFAULT  ('')
+%RestrictMaxSize LONG  (0)
+%WindowMaxHeight DEFAULT  ('')
+%OverrideControls MULTI LONG  ()
+%OverrideControl DEPEND %OverrideControls DEFAULT TIMES 0
+
+%DisableResize DEPEND %OverrideControls LONG TIMES 0
+
+%HorizResize DEPEND %OverrideControls DEFAULT TIMES 0
+
+%VertResize DEPEND %OverrideControls DEFAULT TIMES 0
+
+%HorizPositional DEPEND %OverrideControls DEFAULT TIMES 0
+
+%VertPositional DEPEND %OverrideControls DEFAULT TIMES 0
+
+%AutoFindParents DEFAULT  ('Default')
+%DeferMoves DEFAULT  ('Default')
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('Resizer')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('AStringValue')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+[ADDITION]
+NAME ABC FieldLookupButton
+[INSTANCE]
+INSTANCE 6
+[PROMPTS]
+%ControlToLookup DEFAULT  ('?LOC:GRUPO')
+[INSTANCE]
+INSTANCE 7
+[PROMPTS]
+%ControlToLookup DEFAULT  ('?USUSU:CODCAJERO')
+[INSTANCE]
+INSTANCE 11
+[PROMPTS]
+%ControlToLookup DEFAULT  ('?USUSU:IDMEDICO')
+[INSTANCE]
+INSTANCE 12
+[PROMPTS]
+%ControlToLookup DEFAULT  ('?USUSU:IDTERCERO')
+[INSTANCE]
+INSTANCE 13
+[PROMPTS]
+%ControlToLookup DEFAULT  ('?USUSU:IDEMPRESA')
+[ADDITION]
+NAME ABC DOSFileLookup
+[INSTANCE]
+INSTANCE 8
+[PROMPTS]
+%ClassItem UNIQUE DEFAULT  ('Default')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('SelectFileClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+
+%DOSFileDialogHeader DEFAULT  ('')
+%DOSFileField FIELD  (loc:path)
+%DOSInitialDirectory DEFAULT  ('')
+%DOSInitialFilename DEFAULT  ('')
+%ReturnToOriginalDir LONG  (0)
+%AllowLongFilenames LONG  (1)
+%DOSFileDialogType DEFAULT  ('Open')
+%AllowNoError LONG  (0)
+%DefaultOnCancel LONG  (0)
+%AllowMultiSelect LONG  (0)
+%ActionsToTake DEFAULT  ('')
+%AssignToImageControl LONG  (0)
+%ImageControl DEFAULT  ('?CurrentTab')
+%ImageResize LONG  (1)
+%DOSVariableMask LONG  (0)
+%DOSMaskVariable DEFAULT  ('')
+%DOSMaskDesc DEFAULT  ('All Files')
+%DOSMask DEFAULT  ('*.*')
+%DOSMoreMasks MULTI LONG  ()
+%DOSMoreMaskDesc DEPEND %DOSMoreMasks DEFAULT TIMES 0
+
+%DOSMoreMask DEPEND %DOSMoreMasks DEFAULT TIMES 0
+
+%RedisplayWindow LONG  (1)
+%UpdateFields MULTI LONG  ()
+%UpdateFeq DEPEND %UpdateFields DEFAULT TIMES 0
+
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('FileLookup8')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('ADOBlob')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+[ADDITION]
+NAME ABC BrowseBox
+[INSTANCE]
+INSTANCE 9
+[PROMPTS]
+%ClassItem UNIQUE DEFAULT  ('Default', 'Locator', 'Locator0', 'Step', 'Step0')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('BrowseClass')
+WHEN  ('Locator0') ('StepLocatorClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('')
+WHEN  ('Locator0') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Q {22}&Queue:Browse {18}!Reference to browse queue', 'ApplyFilter {12}PROCEDURE(),DERIVED', |
+  'Fetch {18}PROCEDURE(BYTE Direction),DERIVED', 'Init {19}PROCEDURE(SIGNED ListBox,*STRING Posit,VIEW V,QUEUE Q,RelationManager RM,WindowManager WM)', |
+  'SetAlerts {14}PROCEDURE(),DERIVED', 'SetQueueRecord {9}PROCEDURE(),DERIVED', |
+  'SetSort {16}PROCEDURE(BYTE NewOrder,BYTE Force),BYTE,PROC,DERIVED')
+
+%SQLViewFields MULTI DEFAULT  ('MPLXUSU:CLASEPLANTILLA', 'LOC:DESCPLANTILLA', 'MPLXUSU:IMPMPL', |
+  'MPLXUSU:MCONFIDENCIAL', 'MPLXUSU:COMPANIA', 'MPLXUSU:USUARIO')
+%TableSchematicsDescription DEFAULT  ('')
+%EnableQuickScan LONG  (0)
+%LoadMethod DEFAULT  ('Page')
+%AcceptToolBarControl LONG  (1)
+%InterLine DEFAULT  ('0')
+%LocatorType DEFAULT  ('Step')
+%OverrideDefaultLocator LONG  (0)
+%OverrideLocator DEFAULT  ('')
+%FindDefaultAnywhere LONG  (0)
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 3
+WHEN  ('Default') ('NO')
+WHEN  ('Locator0') ('NO')
+WHEN  ('Step0') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('BRW9')
+WHEN  ('Locator0') ('BRW9::Sort0:Locator')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 3
+WHEN  ('Default') (1)
+WHEN  ('Locator0') (1)
+WHEN  ('Step0') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 3
+WHEN  ('Default') (1)
+WHEN  ('Locator0') (1)
+WHEN  ('Step0') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 3
+WHEN  ('Default') ('ADOBlob')
+WHEN  ('Locator0') ('ADOBlob')
+WHEN  ('Step0') ('ADOBlob')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 3
+WHEN  ('Default') (0)
+WHEN  ('Locator0') (0)
+WHEN  ('Step0') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 2
+WHEN  ('Default')TIMES 0
+WHEN  ('Locator0')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 2
+WHEN  ('Default')TIMES 0
+WHEN  ('Locator0')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%RecordFilter DEFAULT  ('')
+%RangeField COMPONENT  ()
+%RangeLimitType DEFAULT  ('Current Value')
+%HigherKeys MULTI LONG  ()
+%HigherKey DEPEND %HigherKeys COMPONENT TIMES 0
+
+%HigherKeyField DEPEND %HigherKeys FIELD TIMES 0
+
+%HigherKeyValueType DEPEND %HigherKeys DEFAULT TIMES 0
+
+%HigherKeyValueVariable DEPEND %HigherKeys FIELD TIMES 0
+
+%HigherKeyValueFixed DEPEND %HigherKeys DEFAULT TIMES 0
+
+%RangeLimit FIELD  (USUSU:USUARIO)
+%RangeLow FIELD  ()
+%RangeHigh FIELD  ()
+%RangeFile FILE  ()
+%AdditionalSortType DEFAULT  ('Manual')
+%AddSortFields DEFAULT  ('')
+%AddSortFieldsAssisted MULTI LONG  ()
+%AddSortFieldAssisted DEPEND %AddSortFieldsAssisted FIELD TIMES 0
+
+%AddSortFieldAssistedOrder DEPEND %AddSortFieldsAssisted DEFAULT TIMES 0
+
+%ResetFields MULTI LONG  (1)
+%ResetField DEPEND %ResetFields FIELD TIMES 1
+WHEN  (1) (LOC:CLASE)
+
+%ScrollBehavior DEFAULT  ('Fixed Thumb')
+%ScrollKeyDistribution DEFAULT  ('Alpha')
+%CustomKeyDistribution MULTI LONG  ()
+%KeyDistributionValue DEPEND %CustomKeyDistribution DEFAULT TIMES 0
+
+%ScrollAlpha LONG  (1)
+%ScrollNumeric LONG  (0)
+%ScrollAlt LONG  (0)
+%SortOrder MULTI LONG  ()
+%SortCondition DEPEND %SortOrder DEFAULT TIMES 0
+
+%SortKey DEPEND %SortOrder KEY TIMES 0
+
+%SortLocatorType DEPEND %SortOrder DEFAULT TIMES 0
+
+%SortOverrideDefaultLocator DEPEND %SortOrder LONG TIMES 0
+
+%SortOverrideLocator DEPEND %SortOrder DEFAULT TIMES 0
+
+%SortFindAnywhere DEPEND %SortOrder LONG TIMES 0
+
+%SortRecordFilter DEPEND %SortOrder DEFAULT TIMES 0
+
+%SortRangeField DEPEND %SortOrder COMPONENT TIMES 0
+
+%SortRangeLimitType DEPEND %SortOrder DEFAULT TIMES 0
+
+%SortHigherKeys DEPEND %SortOrder MULTI LONG TIMES 0
+
+%SortHigherKey DEPEND %SortHigherKeys COMPONENT TIMES 0
+
+%SortHigherKeyField DEPEND %SortOrder DEPEND %SortHigherKeys FIELD TIMES 0
+
+%SortHigherKeyValueType DEPEND %SortOrder DEPEND %SortHigherKeys DEFAULT TIMES 0
+
+%SortHigherKeyValueVariable DEPEND %SortOrder DEPEND %SortHigherKeys FIELD TIMES 0
+
+%SortHigherKeyValueFixed DEPEND %SortOrder DEPEND %SortHigherKeys DEFAULT TIMES 0
+
+%SortRangeLimit DEPEND %SortOrder FIELD TIMES 0
+
+%SortRangeLow DEPEND %SortOrder FIELD TIMES 0
+
+%SortRangeHigh DEPEND %SortOrder FIELD TIMES 0
+
+%SortRangeFile DEPEND %SortOrder FILE TIMES 0
+
+%SortAdditionalSortType DEPEND %SortOrder DEFAULT TIMES 0
+
+%SortAddSortFields DEPEND %SortOrder DEFAULT TIMES 0
+
+%SortAddSortFieldsAssisted DEPEND %SortOrder MULTI LONG TIMES 0
+
+%SortAddSortFieldAssisted DEPEND %SortAddSortFieldsAssisted FIELD TIMES 0
+
+%SortAddSortFieldAssistedOrder DEPEND %SortAddSortFieldsAssisted DEFAULT TIMES 0
+
+%SortResetFields DEPEND %SortOrder MULTI LONG TIMES 0
+
+%SortResetField DEPEND %SortResetFields FIELD TIMES 0
+
+%SortScrollBehavior DEPEND %SortOrder DEFAULT TIMES 0
+
+%SortScrollKeyDistribution DEPEND %SortOrder DEFAULT TIMES 0
+
+%SortCustomKeyDistribution DEPEND %SortOrder MULTI LONG TIMES 0
+
+%SortKeyDistributionValue DEPEND %SortCustomKeyDistribution DEFAULT TIMES 0
+
+%SortScrollAlpha DEPEND %SortOrder LONG TIMES 0
+
+%SortScrollNumeric DEPEND %SortOrder LONG TIMES 0
+
+%SortScrollAlt DEPEND %SortOrder LONG TIMES 0
+
+%HotFields MULTI LONG  (1)
+%HotField DEPEND %HotFields FIELD TIMES 1
+WHEN  (1) (MPLXUSU:COMPANIA)
+
+%HotFieldBound DEPEND %HotFields LONG TIMES 1
+WHEN  (1) (1)
+
+%HotFieldBindOnly DEPEND %HotFields LONG TIMES 0
+
+%UseSameColorForAll LONG  (1)
+%ControlGreenBarColor DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (0)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (0)
+WHEN  ('MPLXUSU:IMPMPL') (0)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (0)
+
+%ControlFieldForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (-1)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (-1)
+WHEN  ('MPLXUSU:IMPMPL') (-1)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (-1)
+
+%ControlFieldBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (-1)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (-1)
+WHEN  ('MPLXUSU:IMPMPL') (-1)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (-1)
+
+%ControlFieldForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (-1)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (-1)
+WHEN  ('MPLXUSU:IMPMPL') (-1)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (-1)
+
+%ControlFieldBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (-1)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (-1)
+WHEN  ('MPLXUSU:IMPMPL') (-1)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (-1)
+
+%ConditionalColors DEPEND %Control DEPEND %ControlField MULTI LONG TIMES 0
+
+%ColorCondition DEPEND %ConditionalColors DEFAULT TIMES 0
+
+%ConditionalControlFieldForegroundNormal DEPEND %ConditionalColors LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 0
+
+%ConditionalControlFieldBackgroundNormal DEPEND %ConditionalColors LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 0
+
+%ConditionalControlFieldForegroundSelected DEPEND %ConditionalColors LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 0
+
+%ConditionalControlFieldBackgroundSelected DEPEND %ConditionalColors LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 0
+
+%GreenBarOnForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (-1)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (-1)
+WHEN  ('MPLXUSU:IMPMPL') (-1)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (-1)
+
+%GreenBarOnBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (-1)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (-1)
+WHEN  ('MPLXUSU:IMPMPL') (-1)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (-1)
+
+%GreenBarOnForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (-1)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (-1)
+WHEN  ('MPLXUSU:IMPMPL') (-1)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (-1)
+
+%GreenBarOnBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (-1)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (-1)
+WHEN  ('MPLXUSU:IMPMPL') (-1)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (-1)
+
+%GreenBarOffForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (-1)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (-1)
+WHEN  ('MPLXUSU:IMPMPL') (-1)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (-1)
+
+%GreenBarOffBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (-1)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (-1)
+WHEN  ('MPLXUSU:IMPMPL') (-1)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (-1)
+
+%GreenBarOffForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (-1)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (-1)
+WHEN  ('MPLXUSU:IMPMPL') (-1)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (-1)
+
+%GreenBarOffBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (-1)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (-1)
+WHEN  ('MPLXUSU:IMPMPL') (-1)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (-1)
+
+%AllControlGreenBarColor LONG  (1)
+%AllControlGreenBarColorAlternate LONG  (0)
+%AllControlFieldForegroundNormal LONG  (-1)
+%AllControlFieldBackgroundNormal LONG  (-1)
+%AllControlFieldForegroundSelected LONG  (-1)
+%AllControlFieldBackgroundSelected LONG  (-1)
+%ConditionalColorsAll MULTI LONG  ()
+%ColorConditionAll DEPEND %ConditionalColorsAll DEFAULT TIMES 0
+
+%ConditionalAllControlFieldForegroundNormal DEPEND %ConditionalColorsAll LONG TIMES 0
+
+%ConditionalAllControlFieldBackgroundNormal DEPEND %ConditionalColorsAll LONG TIMES 0
+
+%ConditionalAllControlFieldForegroundSelected DEPEND %ConditionalColorsAll LONG TIMES 0
+
+%ConditionalAllControlFieldBackgroundSelected DEPEND %ConditionalColorsAll LONG TIMES 0
+
+%AllGreenBarOnForegroundNormal LONG  (-1)
+%AllGreenBarOnBackgroundNormal LONG  (16777215)
+%AllGreenBarOnForegroundSelected LONG  (-1)
+%AllGreenBarOnBackgroundSelected LONG  (16748574)
+%AllGreenBarOffForegroundNormal LONG  (-1)
+%AllGreenBarOffBackgroundNormal LONG  (15790320)
+%AllGreenBarOffForegroundSelected LONG  (-1)
+%AllGreenBarOffBackgroundSelected LONG  (16748574)
+%ControlFieldIcon DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%ControlFieldIconIsNumber DEPEND %Control DEPEND %ControlField LONG TIMES 0
+
+%ConditionalIcons DEPEND %Control DEPEND %ControlField MULTI LONG TIMES 0
+
+%IconCondition DEPEND %ConditionalIcons DEFAULT TIMES 0
+
+%ConditionalControlFieldIcon DEPEND %ConditionalIcons DEFAULT TIMES 0
+
+%ConditionalControlFieldIconIsNumber DEPEND %ConditionalIcons LONG TIMES 0
+
+%UseSameStyleForAll LONG  (0)
+%ControlGreenBarStyle DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (0)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (0)
+WHEN  ('MPLXUSU:IMPMPL') (0)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (0)
+
+%GreenBarOnStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Local List')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('Local List')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('Local List')
+WHEN  ('MPLXUSU:IMPMPL') ('Local List')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('Local List')
+
+%GreenBarOnStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('')
+WHEN  ('MPLXUSU:IMPMPL') ('')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('')
+
+%GreenBarOnStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%GreenBarOffStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Local List')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('Local List')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('Local List')
+WHEN  ('MPLXUSU:IMPMPL') ('Local List')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('Local List')
+
+%GreenBarOffStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('')
+WHEN  ('MPLXUSU:IMPMPL') ('')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('')
+
+%GreenBarOffStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%ControlFieldStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Local List')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('Local List')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('Local List')
+WHEN  ('MPLXUSU:IMPMPL') ('Local List')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('Local List')
+
+%ControlFieldStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('')
+WHEN  ('MPLXUSU:IMPMPL') ('')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('')
+
+%ControlFieldStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%ConditionalStyles DEPEND %Control DEPEND %ControlField MULTI LONG TIMES 0
+
+%StyleCondition DEPEND %ConditionalStyles DEFAULT TIMES 0
+
+%ConditionalControlFieldStyleType DEPEND %ConditionalStyles DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 0
+
+%ConditionalControlFieldStyleLocalList DEPEND %ConditionalStyles DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 0
+
+%ConditionalControlFieldStyle DEPEND %ConditionalStyles DEFAULT TIMES 0
+
+%AllControlGreenBarStyle LONG  (0)
+%AllControlGreenBarStyleAlternate LONG  (0)
+%AllControlFieldStyleType DEFAULT  ('Local List')
+%AllControlFieldStyleLocalList DEFAULT  ('')
+%AllControlFieldStyle DEFAULT  ('')
+%ConditionalStylesAll MULTI LONG  ()
+%StyleConditionAll DEPEND %ConditionalStylesAll DEFAULT TIMES 0
+
+%ConditionalAllControlFieldStyleType DEPEND %ConditionalStylesAll DEFAULT TIMES 0
+
+%ConditionalAllControlFieldStyleLocalList DEPEND %ConditionalStylesAll DEFAULT TIMES 0
+
+%ConditionalAllControlFieldStyle DEPEND %ConditionalStylesAll DEFAULT TIMES 0
+
+%AllGreenBarOnStyleType DEFAULT  ('Local List')
+%AllGreenBarOnStyleLocalList DEFAULT  ('')
+%AllGreenBarOnStyle DEFAULT  ('')
+%AllGreenBarOffStyleType DEFAULT  ('Local List')
+%AllGreenBarOffStyleLocalList DEFAULT  ('')
+%AllGreenBarOffStyle DEFAULT  ('')
+%ControlFieldTipField DEPEND %Control DEPEND %ControlField FIELD TIMES 0
+
+%BrowseAllTotalOnOff LONG  (1)
+%BrowseAllTotalOnOffCondition DEFAULT  ('')
+%BrowseTotals MULTI LONG  ()
+%BrowseTotalTarget DEPEND %BrowseTotals FIELD TIMES 0
+
+%BrowseTotalType DEPEND %BrowseTotals DEFAULT TIMES 0
+
+%BrowseTotalField DEPEND %BrowseTotals DEFAULT TIMES 0
+
+%BrowseTotalBasedOn DEPEND %BrowseTotals DEFAULT TIMES 0
+
+%BrowseTotalCondition DEPEND %BrowseTotals DEFAULT TIMES 0
+
+%BrowseBoxDoNotIncludePrimaryKey LONG  (0)
+%DisableUsePopup LONG  (0)
+%EnableSortHeader LONG  (1)
+%ControlFieldSortHeaderSave LONG  (0)
+%ControlFieldSortHeaderMulti LONG  (1)
+%ControlFieldSortHeaderOnlyAsc DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (0)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (0)
+WHEN  ('MPLXUSU:IMPMPL') (0)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (0)
+
+%ControlFieldSortHeaderOverride DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (0)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (0)
+WHEN  ('MPLXUSU:IMPMPL') (0)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (0)
+
+%ControlFieldSortHeaderDisableColumn DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (0)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (0)
+WHEN  ('MPLXUSU:IMPMPL') (0)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (0)
+
+%ControlFieldSortHeaderFields DEPEND %Control DEPEND %ControlField MULTI LONG TIMES 0
+
+%ControlFieldSortHeaderField DEPEND %ControlFieldSortHeaderFields FIELD TIMES 0
+
+%ControlFieldSortHeaderFieldOrder DEPEND %ControlFieldSortHeaderFields DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 0
+
+%ControlFieldSortHeaderFieldCase DEPEND %ControlFieldSortHeaderFields LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?List')TIMES 0
+
+%DisableAutoSizeColumn LONG  (0)
+%DisableListFormatManager LONG  (0)
+%ListFormatManagerAllowPopupInEmptyList DEFAULT  ('Enable')
+%ListFormatManagerCheckType DEFAULT  ('Icon')
+%ListFormatManagerItemsSortBy DEFAULT  ('Alpha')
+%ListFormatManagerUseIdentificationTip DEFAULT  ('Enable')
+%ListFormatManagerSaveWindowPosition DEFAULT  ('Enable')
+%ListFormatManagerSortOrder LONG  (1)
+%ListFormatManagerMenuAppendSortOrder LONG  (1)
+%ListFormatManagerSave LONG  (1)
+%UseMRP LONG  (1)
+%AddPopUp MULTI LONG  ()
+%AddPopUpChoice DEPEND %AddPopUp DEFAULT TIMES 0
+
+%AddPopUpControl DEPEND %AddPopUp DEFAULT TIMES 0
+
+%AddPopUpAction DEPEND %AddPopUp DEFAULT TIMES 0
+
+%AddPopUpProcedure DEPEND %AddPopUp PROCEDURE TIMES 0
+
+%AddPopUpThreadProcedure DEPEND %AddPopUp LONG TIMES 0
+
+%AddPopUpThreadStack DEPEND %AddPopUp DEFAULT TIMES 0
+
+%AddPopUpText DEPEND %AddPopUp DEFAULT TIMES 0
+
+%AddPopUpIcon DEPEND %AddPopUp DEFAULT TIMES 0
+
+%TypeAddPopupIcon DEPEND %AddPopUp DEFAULT TIMES 0
+
+%OtherPopupIcon DEPEND %AddPopUp DEFAULT TIMES 0
+
+%AddPopUpDisable DEPEND %AddPopUp DEFAULT TIMES 0
+
+%AddPopUpSeparate DEPEND %AddPopUp LONG TIMES 0
+
+%SQLAssignments MULTI LONG  ()
+%SQLViewField DEPEND %SQLAssignments DEFAULT TIMES 0
+
+%SQLViewFieldAssignment DEPEND %SQLAssignments DEFAULT TIMES 0
+
+%SQLHasGroupBy LONG  (0)
+%SQLGrouping DEFAULT  ('')
+%SQLHasHaving LONG  (0)
+%SQLHas DEFAULT  ('')
+%SortHeaderColumnsUseColor LONG  (0)
+%SortHeaderColorBkHdrAsc LONG  (10526303)
+%SortHeaderColorBkColAsc LONG  (15128749)
+%SortHeaderColorBkHdrDec LONG  (10526303)
+%SortHeaderColorBkColDec LONG  (15128749)
+%DefaultEnableOnEmpty LONG  (0)
+%SortEnableOnEmpty DEPEND %SortOrder LONG TIMES 0
+
+%AddSortFieldAssistedNoCase DEPEND %AddSortFieldsAssisted LONG TIMES 0
+
+[ADDITION]
+NAME ABC BrowseUpdateButtons
+[INSTANCE]
+INSTANCE 10
+PARENT 9
+[PROMPTS]
+%EditInPlace LONG  (0)
+%ClassItem UNIQUE DEFAULT  ('BrowseEIPManager', 'EIP_MPLXUSU:CLASEPLANTILLA', 'EIP_MPLXUSU:MCONFIDENCIAL')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('BrowseEIPManager') ('BrowseEIPManager')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('BrowseEIPManager') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 3
+WHEN  ('BrowseEIPManager') ('NO')
+WHEN  ('EIP_MPLXUSU:CLASEPLANTILLA') ('NO')
+WHEN  ('EIP_MPLXUSU:MCONFIDENCIAL') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('BrowseEIPManager') ('BRW9::EIPManager')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 3
+WHEN  ('BrowseEIPManager') (1)
+WHEN  ('EIP_MPLXUSU:CLASEPLANTILLA') (1)
+WHEN  ('EIP_MPLXUSU:MCONFIDENCIAL') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 3
+WHEN  ('BrowseEIPManager') (1)
+WHEN  ('EIP_MPLXUSU:CLASEPLANTILLA') (1)
+WHEN  ('EIP_MPLXUSU:MCONFIDENCIAL') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 3
+WHEN  ('BrowseEIPManager') ('ADOBlob')
+WHEN  ('EIP_MPLXUSU:CLASEPLANTILLA') ('')
+WHEN  ('EIP_MPLXUSU:MCONFIDENCIAL') ('')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 3
+WHEN  ('BrowseEIPManager') (0)
+WHEN  ('EIP_MPLXUSU:CLASEPLANTILLA') (0)
+WHEN  ('EIP_MPLXUSU:MCONFIDENCIAL') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 2
+WHEN  ('BrowseEIPManager')TIMES 0
+WHEN  ('EIP_MPLXUSU:MCONFIDENCIAL')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 2
+WHEN  ('BrowseEIPManager')TIMES 0
+WHEN  ('EIP_MPLXUSU:MCONFIDENCIAL')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%EIPTabAction DEFAULT  ('Default')
+%EIPTabRemain LONG  (0)
+%EIPEnterAction DEFAULT  ('Default')
+%EIPEnterRemain LONG  (0)
+%EIPArrowAction DEFAULT  ('Default')
+%EIPArrowRemain LONG  (1)
+%EIPArrowRetain LONG  (1)
+%EIPFocusAction DEFAULT  ('Default')
+%EIPInsertionPoint DEFAULT  ('After')
+%EIPAskOnDelete DEFAULT  ('Always')
+%PrimingFields MULTI LONG  ()
+%PrimedField DEPEND %PrimingFields FIELD TIMES 0
+
+%PrimedValue DEPEND %PrimingFields DEFAULT TIMES 0
+
+%AllowEIPExt DEPEND %Control DEPEND %ControlField LONG TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') (1)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (1)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (1)
+WHEN  ('MPLXUSU:IMPMPL') (1)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (1)
+
+%EditInPlaceTypeExt DEPEND %Control DEPEND %ControlField DEFAULT TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') ('Entry')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('Entry')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('Entry')
+WHEN  ('MPLXUSU:IMPMPL') ('Entry')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('Entry')
+
+%EditInPlaceFEQTitle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%EditInPlaceFEQJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') ('Default')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('Default')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('Default')
+WHEN  ('MPLXUSU:IMPMPL') ('Default')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('Default')
+
+%EditInPlaceFEQOffset DEPEND %Control DEPEND %ControlField DEFAULT TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') ('0')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('0')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('0')
+WHEN  ('MPLXUSU:IMPMPL') ('0')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('0')
+
+%EditInPlaceFEQTransparent DEPEND %Control DEPEND %ControlField LONG TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (0)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (0)
+WHEN  ('MPLXUSU:IMPMPL') (0)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (0)
+
+%EditInPlaceFEQReadOnly DEPEND %Control DEPEND %ControlField LONG TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (0)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (0)
+WHEN  ('MPLXUSU:IMPMPL') (0)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (0)
+
+%EditInPlaceFEQRequired DEPEND %Control DEPEND %ControlField LONG TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (0)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (0)
+WHEN  ('MPLXUSU:IMPMPL') (0)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (0)
+
+%EditInPlaceFEQDataSource DEPEND %Control DEPEND %ControlField DEFAULT TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') ('Fixed')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('Fixed')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('Fixed')
+WHEN  ('MPLXUSU:IMPMPL') ('Fixed')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('Fixed')
+
+%EditInPlaceFEQFixedDataSource DEPEND %Control DEPEND %ControlField MULTI LONG TIMES 0
+
+%EditInPlaceFEQFixedDataSourceValue DEPEND %EditInPlaceFEQFixedDataSource DEFAULT TIMES 0
+
+%EditInPlaceFEQFixedDataSourceSelected DEPEND %EditInPlaceFEQFixedDataSource LONG TIMES 5
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+
+%EditInPlaceFEQQueueDataSourceQN DEPEND %Control DEPEND %ControlField FIELD TIMES 0
+
+%EditInPlaceFEQQueueDataSourceV DEPEND %Control DEPEND %ControlField FIELD TIMES 0
+
+%EditInPlaceFEQQueueDataSourceS DEPEND %Control DEPEND %ControlField FIELD TIMES 0
+
+%EditInPlaceFEQAutoSerializeField DEPEND %Control DEPEND %ControlField LONG TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (0)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (0)
+WHEN  ('MPLXUSU:IMPMPL') (0)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (0)
+
+%EditInPlaceFEQAutoSerializeFieldDelimiter DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%ReturnToOriginalDir DEPEND %Control DEPEND %ControlField LONG TIMES 0
+
+%AllowLongFilenames DEPEND %Control DEPEND %ControlField LONG TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') (1)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (1)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (1)
+WHEN  ('MPLXUSU:IMPMPL') (1)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (1)
+
+%DOSFileDialogType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') ('Open')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('Open')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('Open')
+WHEN  ('MPLXUSU:IMPMPL') ('Open')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('Open')
+
+%AllowNoError DEPEND %Control DEPEND %ControlField LONG TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (0)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (0)
+WHEN  ('MPLXUSU:IMPMPL') (0)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (0)
+
+%AllowMultiSelect DEPEND %Control DEPEND %ControlField LONG TIMES 0
+
+%DOSMaskDesc DEPEND %Control DEPEND %ControlField DEFAULT TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') ('All Files')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('All Files')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('All Files')
+WHEN  ('MPLXUSU:IMPMPL') ('All Files')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('All Files')
+
+%DOSMask DEPEND %Control DEPEND %ControlField DEFAULT TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') ('*.*')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('*.*')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('*.*')
+WHEN  ('MPLXUSU:IMPMPL') ('*.*')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('*.*')
+
+%DOSMoreMasks DEPEND %Control DEPEND %ControlField MULTI LONG TIMES 0
+
+%DOSMoreMaskDesc DEPEND %DOSMoreMasks DEFAULT TIMES 0
+
+%DOSMoreMask DEPEND %DOSMoreMasks DEFAULT TIMES 0
+
+%EditInPlaceFEQForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (-1)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (-1)
+WHEN  ('MPLXUSU:IMPMPL') (-1)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (-1)
+
+%EditInPlaceFEQBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (-1)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (-1)
+WHEN  ('MPLXUSU:IMPMPL') (-1)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (-1)
+
+%EditInPlaceFEQForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (-1)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (-1)
+WHEN  ('MPLXUSU:IMPMPL') (-1)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (-1)
+
+%EditInPlaceFEQBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (-1)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (-1)
+WHEN  ('MPLXUSU:IMPMPL') (-1)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (-1)
+
+%EditInPlaceFEQFrom DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%EditInPlaceFEQColumnFrom DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%EditInPlaceFEQPicture DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%EditInPlaceFEQListFormat DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%EditInPlaceFEQDrop DEPEND %Control DEPEND %ControlField DEFAULT TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') ('0')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('0')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('0')
+WHEN  ('MPLXUSU:IMPMPL') ('0')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('0')
+
+%EditInPlaceFEQWidth DEPEND %Control DEPEND %ControlField DEFAULT TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') ('0')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('0')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('0')
+WHEN  ('MPLXUSU:IMPMPL') ('0')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('0')
+
+%EditInPlaceFEQCase DEPEND %Control DEPEND %ControlField DEFAULT TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') ('Default')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('Default')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('Default')
+WHEN  ('MPLXUSU:IMPMPL') ('Default')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('Default')
+
+%EditInPlaceFEQFlat DEPEND %Control DEPEND %ControlField LONG TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (0)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (0)
+WHEN  ('MPLXUSU:IMPMPL') (0)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (0)
+
+%EditInPlaceFEQHorizontal DEPEND %Control DEPEND %ControlField LONG TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (0)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (0)
+WHEN  ('MPLXUSU:IMPMPL') (0)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (0)
+
+%EditInPlaceFEQVertical DEPEND %Control DEPEND %ControlField LONG TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (0)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (0)
+WHEN  ('MPLXUSU:IMPMPL') (0)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (0)
+
+%EditInPlaceFEQImmediate DEPEND %Control DEPEND %ControlField LONG TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (0)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (0)
+WHEN  ('MPLXUSU:IMPMPL') (0)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (0)
+
+%EditInPlaceFEQEntryCompletion DEPEND %Control DEPEND %ControlField LONG TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (0)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (0)
+WHEN  ('MPLXUSU:IMPMPL') (0)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (0)
+
+%LookupAssign DEPEND %Control DEPEND %ControlField MULTI LONG TIMES 0
+
+%MoreTarget DEPEND %LookupAssign FIELD TIMES 0
+
+%MoreField DEPEND %LookupAssign DEFAULT TIMES 0
+
+%EditInPlaceFEQFixedDataSourceText DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%EditInPlaceFEQCheckJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') ('Default')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('Default')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('Default')
+WHEN  ('MPLXUSU:IMPMPL') ('Default')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('Default')
+
+%EditInPlaceFEQTrue DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%EditInPlaceFEQFalse DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%EditInPlaceFEQTrueLabel DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%EditInPlaceFEQFalseLabel DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%EditInPlaceFEQEntryMode DEPEND %Control DEPEND %ControlField DEFAULT TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') ('Default')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('Default')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('Default')
+WHEN  ('MPLXUSU:IMPMPL') ('Default')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('Default')
+
+%EditInPlaceFEQLower DEPEND %Control DEPEND %ControlField DEFAULT TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') ('0')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('0')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('0')
+WHEN  ('MPLXUSU:IMPMPL') ('0')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('0')
+
+%EditInPlaceFEQUpper DEPEND %Control DEPEND %ControlField DEFAULT TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') ('0')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('0')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('0')
+WHEN  ('MPLXUSU:IMPMPL') ('0')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('0')
+
+%EditInPlaceFEQStep DEPEND %Control DEPEND %ControlField DEFAULT TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') ('0')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('0')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('0')
+WHEN  ('MPLXUSU:IMPMPL') ('0')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('0')
+
+%EditInPlaceFEQPassword DEPEND %Control DEPEND %ControlField LONG TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') (0)
+WHEN  ('MPLXUSU:CLASEPLANTILLA') (0)
+WHEN  ('MPLXUSU:IMPMPL') (0)
+WHEN  ('MPLXUSU:MCONFIDENCIAL') (0)
+
+%LookupType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 6
+WHEN  ('')TIMES 1
+WHEN  ('') ('Related Field')
+WHEN  ('?Cancel')TIMES 0
+WHEN  ('?Change')TIMES 0
+WHEN  ('?Delete')TIMES 0
+WHEN  ('?Insert')TIMES 0
+WHEN  ('?List')TIMES 4
+WHEN  ('LOC:DESCPLANTILLA') ('Related Field')
+WHEN  ('MPLXUSU:CLASEPLANTILLA') ('Related Field')
+WHEN  ('MPLXUSU:IMPMPL') ('Related Field')
+WHEN  ('MPLXUSU:MCONFIDENCIAL') ('Related Field')
+
+%PostLookupKey DEPEND %Control DEPEND %ControlField KEY TIMES 0
+
+%PostLookupField DEPEND %Control DEPEND %ControlField COMPONENT TIMES 0
+
+%PostLookupFieldNoRelated DEPEND %Control DEPEND %ControlField FIELD TIMES 0
+
+%PostLookupProcedure DEPEND %Control DEPEND %ControlField PROCEDURE TIMES 0
+
+%PostLookupProcedureParameters DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%PostLookupProcedureReturnValue DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%EIPThisObjectName DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%EditInPlaceList MULTI LONG  ()
+%EditInPlaceField DEPEND %EditInPlaceList FIELD TIMES 0
+
+%AllowEIP DEPEND %EditInPlaceList LONG TIMES 0
+
+%UpdateProcedure PROCEDURE  (Forma:MPLXUSU)
+%UpdateProcedureParameters DEFAULT  ('USUSU:USUARIO,USUSU:COMPANIA')
+%EditViaPopup LONG  (0)
+%ConditionalEditInPlace LONG  (0)
+%ConditionalEditInPlaceCondition DEFAULT  ('')
+[WINDOW]
+QuickWindow WINDOW('Actualizar la Tabla USUARIOS'),AT(,,234,217),FONT('Arial',8),CENTER,GRAY, |
+          IMM,MDI,HLP('USUSU:Ficha'),SYSTEM,WALLPAPER('.\iconos\fondoazul_IX.jpg')
+          SHEET,AT(3,2,230,190),USE(?CurrentTab),JOIN,SPREAD,#ORIG(CurrentTab),#ORDINAL(1)
+            TAB(' Básicos '),USE(?TBasicos),#ORDINAL(2)
+              PROMPT('Usuario:'),AT(15,31),USE(?USUSU:USUARIO:Prompt),TRN,#LINK(?USUSU:USUARIO), |
+                #ORIG(?USUSU:USUARIO:Prompt),#ORDINAL(3)
+              ENTRY(@s12),AT(43,31,56,10),USE(USUSU:USUARIO),UPR,FLAT,MSG('Usuario'),REQ,TIP('Usuario'), |
+                #LINK(?USUSU:USUARIO:Prompt),#ORIG(USUSU:USUARIO),#ORDINAL(4)
+              ENTRY(@s20),AT(140,31,64,10),USE(LOC:CLAVE),UPR,FLAT,MSG('Clave'),PASSWORD,REQ, |
+                TIP('Clave'),#ORDINAL(5)
+              PROMPT('Clave:'),AT(115,31),USE(?LOC:CLAVE:Prompt),TRN,#ORDINAL(6)
+              PROMPT('Nombre:'),AT(14,44),USE(?USUSU:NOMBRE:Prompt),TRN,#LINK(?USUSU:NOMBRE), |
+                #ORIG(?USUSU:NOMBRE:Prompt),#ORDINAL(7)
+              ENTRY(@s40),AT(43,44,171,10),USE(USUSU:NOMBRE),FLAT,MSG('Nombre'),TIP('Nombre'), |
+                #LINK(?USUSU:NOMBRE:Prompt),#ORIG(USUSU:NOMBRE),#ORDINAL(8)
+              PROMPT('Sede:'),AT(22,59),USE(?USUSU:IDSEDE:Prompt),TRN,#ORIG(?USUSU:IDSEDE:Prompt), |
+                #ORDINAL(9)
+              LIST,AT(43,59,171,10),USE(USUSU:IDSEDE),DROP(6),FLAT,MSG('Sede'),TIP('Sede'), |
+                #ORIG(USUSU:TIPO),#ORDINAL(10)
+              PROMPT('Cajero:'),AT(18,75),USE(?USUSU:CODCAJERO:Prompt),TRN,#LINK(?USUSU:CODCAJERO), |
+                #ORIG(?USUSU:CODCAJERO:Prompt),#ORDINAL(11)
+              ENTRY(@s20),AT(43,75,43,10),USE(USUSU:CODCAJERO),FLAT,MSG('Código Caja'),REQ, |
+                TIP('Código Caja'),#LINK(?USUSU:CODCAJERO:Prompt),#ORIG(USUSU:CODCAJERO),#ORDINAL(12)
+              BUTTON,AT(89,75,11,10),USE(?CallLookup:2),ICON(ICON:Zoom),FLAT,#ORIG(?CallLookup), |
+                #SEQ(7),#ORDINAL(13)
+              PROMPT('Nivel  de autorización:'),AT(114,75),USE(?USUSU:NIVELFUNCIONARIO:Prompt), |
+                TRN,#LINK(?USUSU:NIVELFUNCIONARIO),#ORIG(?USUSU:NIVELFUNCIONARIO:Prompt),#ORDINAL(14)
+              SPIN(@n02),AT(187,75,27,10),USE(USUSU:NIVELFUNCIONARIO),FLAT,MSG('Nivel Autorización'), |
+                RANGE(1,99),TIP('Nivel Autorización'),#LINK(?USUSU:NIVELFUNCIONARIO:Prompt), |
+                #ORIG(USUSU:NIVELFUNCIONARIO),#ORDINAL(15)
+              PROMPT('Grupo:'),AT(18,91),USE(?USUSU:GRUPO:Prompt),TRN,#LINK(?USUSU:GRUPO), |
+                #ORIG(?USUSU:GRUPO:Prompt),#ORDINAL(16)
+              ENTRY(@s8),AT(43,91,43,10),USE(LOC:GRUPO),FLAT,MSG('Grupo'),REQ,TIP('Grupo'), |
+                #LINK(?USUSU:GRUPO:Prompt),#ORIG(USUSU:GRUPO),#ORDINAL(17)
+              BUTTON,AT(89,91,11,10),USE(?CallLookup),ICON(ICON:Zoom),FLAT,#ORIG(?CallLookup), |
+                #SEQ(6),#ORDINAL(18)
+              PROMPT('Estado:'),AT(114,91),USE(?USUSU:ESTADO:Prompt),TRN,#ORIG(?USUSU:ESTADO:Prompt), |
+                #ORDINAL(19)
+              LIST,AT(143,91,71,10),USE(USUSU:ESTADO),DROP(5),FLAT,FROM('Activo|Inactivo'), |
+                MSG('Estado (Activo/Inactivo)'),TIP('Estado (Activo/Inactivo)'),#LINK(?USUSU:ESTADO:Prompt), |
+                #ORIG(USUSU:ESTADO),#ORDINAL(20)
+              PROMPT('Tipo:'),AT(23,107),USE(?USUSU:TIPO:Prompt),TRN,#FREEZE,#ORIG(?USUSU:TIPO:Prompt), |
+                #ORDINAL(21)
+              LIST,AT(43,107,80,10),USE(USUSU:TIPO),DROP(6),FLAT,FROM('Interno|#I|Exter' & |
+                'no|#E|Transcriptor Salud|#T|Médico|#M|Farmacia|#F'),MSG('Tipo'),TIP('Tipo'), |
+                #LINK(?USUSU:TIPO:Prompt),#ORIG(USUSU:TIPO),#ORDINAL(22)
+              PROMPT('Código:'),AT(15,123),USE(?USUSU:IDMEDICO:Prompt),TRN,#LINK(?USUSU:IDMEDICO), |
+                #ORIG(?USUSU:IDMEDICO:Prompt),#ORDINAL(23)
+              ENTRY(@s12),AT(43,123,62,10),USE(USUSU:IDMEDICO),UPR,FLAT,MSG('Código del usuario'), |
+                TIP('Código del usuario'),#LINK(?USUSU:IDMEDICO:Prompt),#ORIG(USUSU:IDMEDICO), |
+                #ORDINAL(24)
+              BUTTON('...'),AT(109,123,11,10),USE(?CallLookup:4),LEFT,ICON(ICON:Zoom),FLAT, |
+                #ORIG(?CallLookup),#SEQ(11),#ORDINAL(25)
+              PROMPT('Sub-tipo:'),AT(11,139),USE(?USUSU:TIPO_USUARIOADM:Prompt),TRN,#ORDINAL(26)
+              LIST,AT(43,139,171,10),USE(USUSU:TIPO_USUARIOADM),DROP(14),FLAT,FROM('xx'),#ORDINAL(27)
+              CHECK('Solo Web'),AT(181,18,46),USE(USUSU:SOLOWEB),TRN,#ORDINAL(28)
+            END
+            TAB(' Foto/Firma '),USE(?TFirma),#ORIG(?Tab2),#ORDINAL(29)
+              PROMPT('Ubicación:'),AT(11,26),USE(?loc:path:Prompt),TRN,#LINK(?loc:path),#ORIG(?loc:path:Prompt), |
+                #ORDINAL(30)
+              ENTRY(@s254),AT(47,26,149,10),USE(loc:path),FLAT,#LINK(?loc:path:Prompt),#ORIG(loc:path), |
+                #ORDINAL(31)
+              BUTTON,AT(203,26,12,10),USE(?LookupFile),ICON(ICON:Zoom),FLAT,TRN,#ORIG(?LookupFile), |
+                #SEQ(8),#ORDINAL(32)
+              CHECK('Carga Foto'),AT(47,42),USE(loc:cargafirma),TRN,VALUE('1','0'),#ORIG(loc:cargafirma), |
+                #ORDINAL(33)
+              CHECK('Cargar Firma'),AT(115,42),USE(loc:cargarfirma),RIGHT,TRN,#ORIG(loc:cargarfirma), |
+                #ORDINAL(34)
+              IMAGE,AT(47,62,119,78),USE(?Image1),#ORIG(?Image1),#ORDINAL(35)
+            END
+            TAB(' Plantillas '),USE(?Plantillas),#ORIG(?Tab3),#ORDINAL(36)
+              PROMPT('Plantilla:'),AT(11,26),USE(?LOC:CLASE:Prompt),TRN,#LINK(?LOC:CLASE), |
+                #ORIG(?LOC:CLASE:Prompt),#ORDINAL(37)
+              ENTRY(@s20),AT(39,26,67,10),USE(LOC:CLASE),FLAT,#LINK(?LOC:CLASE:Prompt),#ORIG(LOC:CLASE), |
+                #ORDINAL(38)
+              LIST,AT(11,41,203,83),USE(?List),VSCROLL,FLAT,FORMAT('40L(2)M*~Plantilla~' & |
+                '@s8@150L(2)M*~Descripción de plantilla~@s120@30CM*~Imprimir~@n-7@30CM*' & |
+                '~Confid.~@n-7@'),FROM(Queue:Browse),IMM,MSG('Browsing Records'),TRN,#FIELDS(MPLXUSU:CLASEPLANTILLA, |
+                LOC:DESCPLANTILLA,MPLXUSU:IMPMPL,MPLXUSU:MCONFIDENCIAL),#ORIG(?List),#SEQ(9), |
+                #ORDINAL(39)
+              BUTTON('&Agregar'),AT(47,128,52,15),USE(?Insert),LEFT,ICON('wizins.ico'),CURSOR(CURSOR:Hand), |
+                FLAT,TRN,#ORIG(?Insert),#SEQ(10),#ORDINAL(40)
+              BUTTON('&Cambiar'),AT(107,128,52,15),USE(?Change),LEFT,ICON('wizedit.ico'),CURSOR(CURSOR:Hand), |
+                FLAT,TRN,#ORIG(?Change),#SEQ(10),#ORDINAL(41)
+              BUTTON('&Borrar'),AT(167,128,49,15),USE(?Delete),LEFT,ICON('wizdel.ico'),CURSOR(CURSOR:Hand), |
+                FLAT,TRN,#ORIG(?Delete),#SEQ(10),#ORDINAL(42)
+              BUTTON('Copiar plantillas'),AT(47,147,85,15),USE(?BCopiarMPL),LEFT,ICON('.\iconos\M' & |
+                'edical\ICO\Regular\Doctor 1 Configuration.ico'),CURSOR(CURSOR:Hand),FLAT, |
+                TRN,#ORIG(?Button12),#ORDINAL(43)
+              BUTTON('Quitar todas'),AT(139,147,77,15),USE(?BQuitarTodas),LEFT,ICON('.\iconos\M' & |
+                'edical\ICO\Regular\Chief of Staff 2 Delete.ico'),CURSOR(CURSOR:Hand),FLAT, |
+                TRN,#ORIG(?Button13),#ORDINAL(44)
+            END
+            TAB(' Adicionales '),USE(?TAdicionales),#ORDINAL(45)
+              GROUP('Datos adicionales:'),AT(7,20,211,76),USE(?GROUP1),BOXED,TRN,#ORDINAL(46)
+                PROMPT('Cargo:'),AT(18,32),USE(?USUSU:CARGO:Prompt),TRN,#ORIG(?USUSU:CARGO:Prompt), |
+                  #ORDINAL(47)
+                ENTRY(@s50),AT(43,32,171,10),USE(USUSU:CARGO),FLAT,MSG('Cargo del Usuario'), |
+                  TIP('Cargo del Usuario'),#LINK(?USUSU:CARGO:Prompt),#ORIG(USUSU:CARGO),#ORDINAL(48)
+                PROMPT('Teléfono:'),AT(10,45),USE(?USUSU:TELEFONO:Prompt),TRN,#ORIG(?USUSU:TELEFONO:Prompt), |
+                  #ORDINAL(49)
+                ENTRY(@s50),AT(43,45,56,10),USE(USUSU:TELEFONO),FLAT,MSG('Telefono del Usuario'), |
+                  TIP('Telefono del Usuario'),#LINK(?USUSU:TELEFONO:Prompt),#ORIG(USUSU:TELEFONO), |
+                  #ORDINAL(50)
+                PROMPT('Celular:'),AT(127,45),USE(?USUSU:CELULAR:Prompt),TRN,#ORIG(?USUSU:CELULAR:Prompt), |
+                  #ORDINAL(51)
+                ENTRY(@s50),AT(155,45,57,10),USE(USUSU:CELULAR),FLAT,MSG('Celular del Usuario'), |
+                  TIP('Celular del Usuario'),#LINK(?USUSU:CELULAR:Prompt),#ORIG(USUSU:CELULAR), |
+                  #ORDINAL(52)
+                PROMPT('Empresa:'),AT(10,59),USE(?USUSU:IDEMPRESA:Prompt),TRN,#ORIG(?USUSU:CELULAR:Prompt), |
+                  #ORDINAL(53)
+                ENTRY(@s50),AT(43,59,56,10),USE(USUSU:IDEMPRESA),FLAT,MSG('Celular del Usuario'), |
+                  TIP('Celular del Usuario'),#ORIG(USUSU:CELULAR),#ORDINAL(54)
+                BUTTON,AT(103,59,11,10),USE(?CallLookup:6),LEFT,ICON(ICON:Zoom),FLAT,TRN,#ORIG(?CallLookup), |
+                  #SEQ(13),#ORDINAL(55)
+                PROMPT('Carnet:'),AT(17,72),USE(?USUSU:CARNET:Prompt),TRN,#ORIG(?USUSU:IDEMPRESA:Prompt), |
+                  #ORDINAL(56)
+                ENTRY(@s20),AT(43,72,87,10),USE(USUSU:CARNET),FLAT,MSG('Cargo del Usuario'), |
+                  TIP('Cargo del Usuario'),#ORIG(USUSU:CARGO),#ORDINAL(57)
+                PROMPT('Telegram:'),AT(121,59),USE(?USUSU:CELULAR:Prompt:2),TRN,#ORIG(?USUSU:CELULAR:Prompt), |
+                  #ORDINAL(58)
+                ENTRY(@s20),AT(155,59,57,10),USE(USUSU:TELEGRAMID),FLAT,MSG('Id Telegram'), |
+                  TIP('Id Telegram'),#ORIG(USUSU:CELULAR),#ORDINAL(59)
+                ENTRY(@s100),AT(43,85,169,10),USE(USUSU:EMAIL),FLAT,MSG('Cargo del Usuario'), |
+                  TIP('Cargo del Usuario'),#ORIG(USUSU:CARNET),#ORDINAL(60)
+                PROMPT('Email:'),AT(22,85),USE(?USUSU:EMAIL:Prompt),TRN,#ORIG(?USUSU:CARNET:Prompt), |
+                  #ORDINAL(61)
+              END
+              GROUP('Datos externos'),AT(7,99,211,53),USE(?GROUP4),BOXED,TRN,#ORDINAL(62)
+                PROMPT('Tercero:'),AT(14,110),USE(?USUSU:IDTERCERO:Prompt),TRN,#ORIG(?USUSU:IDTERCERO:Prompt), |
+                  #ORDINAL(63)
+                ENTRY(@s20),AT(43,110,56,10),USE(USUSU:IDTERCERO),UPR,FLAT,MSG('Id. Tercero'), |
+                  TIP('Id. Tercero'),#LINK(?USUSU:IDTERCERO:Prompt),#ORIG(USUSU:IDTERCERO), |
+                  #ORDINAL(64)
+                BUTTON,AT(103,110,11,10),USE(?CallLookup:5),ICON(ICON:Zoom),FLAT,#ORIG(?CallLookup), |
+                  #SEQ(12),#ORDINAL(65)
+                STRING(@s120),AT(118,110,95,10),USE(LOC:RAZONSOCIAL),TRN,#ORIG(LOC:RAZONSOCIAL), |
+                  #ORDINAL(66)
+                PROMPT('Equipo:'),AT(15,134),USE(?USUSU:SYS_ComputerName:Prompt),TRN,#LINK(?USUSU:SYS_ComputerName), |
+                  #ORIG(?USUSU:SYS_ComputerName:Prompt),#ORDINAL(67)
+                ENTRY(@s254),AT(43,134,171,10),USE(USUSU:SYS_ComputerName),FLAT,MSG('Nombre Computador'), |
+                  TIP('Nombre Computador'),#LINK(?USUSU:SYS_ComputerName:Prompt),#ORIG(USUSU:SYS_ComputerName), |
+                  #ORDINAL(68)
+                ENTRY(@s6),AT(43,122,55,8),USE(USUSU:IDPLANT),UPR,MSG('Identificación plan'), |
+                  TIP('Identificación plan'),#ORDINAL(69)
+                PROMPT('Id. plan:'),AT(15,121),USE(?USUSU:IDPLAN:Prompt),TRN,#ORDINAL(70)
+              END
+              GROUP('Fechas'),AT(7,155,211,32),USE(?GROUP5),BOXED,TRN,#ORDINAL(71)
+                PROMPT('Ultimo cambio:'),AT(94,163),USE(?USUSU:FECHACAMBIO_DATE:Prompt),TRN, |
+                  #ORIG(?USUSU:FECHACAMBIO_DATE:Prompt),#ORDINAL(72)
+                ENTRY(@d6.),AT(142,163,44,10),USE(USUSU:FECHACAMBIO_DATE),DISABLE,FLAT,MSG('Fecha Ultimo Cambio'), |
+                  TIP('Fecha Ultimo Cambio'),#LINK(?USUSU:FECHACAMBIO_DATE:Prompt),#ORIG(USUSU:FECHACAMBIO_DATE), |
+                  #ORDINAL(73)
+                ENTRY(@t1),AT(187,163,26,10),USE(USUSU:FECHACAMBIO_TIME),DISABLE,FLAT,MSG('Hora Ultimo Cambio'), |
+                  TIP('Hora Ultimo Cambio'),#ORIG(USUSU:FECHACAMBIO_TIME),#ORDINAL(74)
+                PROMPT('Vence:'),AT(18,163),USE(?USUSU:FECHACAMBIO_DATE:Prompt:2),TRN,#ORIG(?USUSU:FECHACAMBIO_DATE:Prompt), |
+                  #ORDINAL(75)
+                ENTRY(@d6.),AT(43,163,43,10),USE(USUSU:FECHAVENCE_DATE),FLAT,#ORIG(USUSU:FECHAVENCE_DATE), |
+                  #ORDINAL(76)
+                PROMPT('Retiro:'),AT(19,174),USE(?USUSU:F_RETIRO_DATE:Prompt),TRN,#ORDINAL(77)
+                ENTRY(@d6.),AT(43,174,43,10),USE(USUSU:F_RETIRO_DATE),FLAT,#ORDINAL(78)
+                BUTTON('Reiniciar Clave Web'),AT(99,174,113,11),USE(?BUTTON1),TRN,#ORDINAL(79)
+              END
+            END
+            TAB('Radian'),USE(?TAB1),#ORDINAL(80)
+              GROUP('Datos exigibles en RADIAN'),AT(7,23,219,101),USE(?GROUP2),BOXED,TRN,#ORDINAL(81)
+                LIST,AT(75,34,144,10),USE(USUSU:TIPOIDENT),DROP(6),FLAT,FROM('Adulto sin' & |
+                  ' identificar|#AS|Carné Diplomático|#CD|Cédula de Ciudadanía|#CC|Cédu' & |
+                  'la de Extranjería|#CE|Certificado de nacido vivo|#CN|Documento de id' & |
+                  'entificación extranjero|#DE|Menor sin identificar|#MS|Nacido vivo|#N' & |
+                  'V|NIT|#NIT|Pasaporte|#PA|Permiso Especial de Permanencia|#PE|Permiso' & |
+                  ' por proteccion temporal|#PT|Registro Civil|#RC|Salvoconducto|#SC|Si' & |
+                  'n Identificación|#SI|Tarjeta de Identidad|#TI'),MSG('Tipo'),TIP('Tipo'), |
+                  #ORIG(USUSU:TIPO),#ORDINAL(82)
+                STRING('Tipo de Identidad:'),AT(14,34,60,10),USE(?STRING1:3),RIGHT,TRN,#ORDINAL(83)
+                STRING('Documento de Id.:'),AT(11,47,63,10),USE(?STRING1:4),RIGHT,TRN,#ORDINAL(84)
+                STRING('Nombres:'),AT(35,61,39,10),USE(?STRING1),RIGHT,TRN,#ORDINAL(85)
+                STRING('Apellidos:'),AT(35,74,39,10),USE(?STRING1:2),RIGHT,TRN,#ORDINAL(86)
+                STRING('Departamento:'),AT(25,89,49,10),USE(?STRING1:5),RIGHT,TRN,#ORDINAL(87)
+                STRING('Cargo:'),AT(25,103,49,10),USE(?STRING1:6),RIGHT,TRN,#ORDINAL(88)
+                ENTRY(@s50),AT(75,47,143,10),USE(USUSU:DOCID),FLAT,#ORDINAL(89)
+                ENTRY(@s50),AT(75,61,143,10),USE(USUSU:NOMBRES),FLAT,#ORDINAL(90)
+                ENTRY(@s50),AT(75,74,143,10),USE(USUSU:APELLIDOS),FLAT,#ORDINAL(91)
+                ENTRY(@s50),AT(75,89,143,10),USE(USUSU:DEPARTAMENTO),FLAT,#ORDINAL(92)
+                ENTRY(@s50),AT(75,103,143,10),USE(USUSU:CARGO,,?USUSU:CARGO:2),FLAT,#ORDINAL(93)
+              END
+            END
+          END
+          BUTTON('Guardar'),AT(43,195,59,14),USE(?OK),FONT(,,,FONT:bold+FONT:underline),LEFT, |
+            ICON('wizsave.ico'),CURSOR(CURSOR:Hand),FLAT,TRN,#ORIG(?OK),#SEQ(2),#ORDINAL(94)
+          BUTTON('Cancelar'),AT(127,195,59,14),USE(?Cancel),FONT(,,,FONT:bold+FONT:underline), |
+            LEFT,ICON('wizcncl.ico'),CURSOR(CURSOR:Hand),FLAT,TRN,#ORIG(?Cancel),#SEQ(3),#ORDINAL(95)
+        END
+
+[END]

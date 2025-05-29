@@ -1,0 +1,2360 @@
+[PROCEDURE]
+NAME Brw:CitasFacturaMasiva
+PROTOTYPE '(string,string,string)'
+PARAMETERS '(string idter,string idplan,string cnsf)'
+[COMMON]
+DESCRIPTION 'Browse the CIT file'
+FROM ABC Window
+CATEGORY 'Browse'
+MODIFIED '2024/06/10' '14:49:01'
+[DATA]
+CurrentTab               STRING(80)
+!!> GUID('3fde4204-0324-4074-8c76-fa4d930e9b4d')
+[SCREENCONTROLS]
+! PROMPT('LOC : FILTRO:'),USE(?LOC:FILTRO:Prompt)
+! ENTRY(@s255),USE(LOC:FILTRO)
+[REPORTCONTROLS]
+! STRING(@s255),USE(LOC:FILTRO)
+LOC:FILTRO               CSTRING(2019)
+!!> GUID('08635b2a-b88d-4b03-a19e-cca8d05d5727'),PROMPT('LOC : FILTRO:'),HEADER('LOC : FILTRO'),PICTURE(@s255),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('LOC : SQL:'),USE(?LOC:SQL:Prompt)
+! ENTRY(@s255),USE(LOC:SQL)
+[REPORTCONTROLS]
+! STRING(@s255),USE(LOC:SQL)
+LOC:SQL                  CSTRING(2049)
+!!> GUID('7b789ccd-61f6-4d06-b33b-c68d08515fd3'),PROMPT('LOC : SQL:'),HEADER('LOC : SQL'),PICTURE(@s255),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('LOC : CNSRPDX:'),USE(?LOC:CNSRPDX:Prompt)
+! ENTRY(@s20),USE(LOC:CNSRPDX)
+[REPORTCONTROLS]
+! STRING(@s20),USE(LOC:CNSRPDX)
+LOC:CNSRPDX              CSTRING(21)
+!!> GUID('eaf358f3-3394-4540-8b36-567098b0d26a'),PROMPT('LOC : CNSRPDX:'),HEADER('LOC : CNSRPDX'),PICTURE(@s20),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('LOC : FECHAINI:'),USE(?LOC:FECHAINI:Prompt)
+! ENTRY(@d17),USE(LOC:FECHAINI)
+[REPORTCONTROLS]
+! STRING(@d17),USE(LOC:FECHAINI)
+LOC:FECHAINI             DATE
+!!> GUID('0b96e00c-2b6c-476c-bd9b-eea334a97f13'),PROMPT('LOC : FECHAINI:'),HEADER('LOC : FECHAINI'),PICTURE(@d17),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('LOC : FECHAFIN:'),USE(?LOC:FECHAFIN:Prompt)
+! ENTRY(@d17),USE(LOC:FECHAFIN)
+[REPORTCONTROLS]
+! STRING(@d17),USE(LOC:FECHAFIN)
+LOC:FECHAFIN             DATE
+!!> GUID('8a5c15f0-95d1-4cad-a5f1-3167c7e804d2'),PROMPT('LOC : FECHAFIN:'),HEADER('LOC : FECHAFIN'),PICTURE(@d17),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('LOC : IDAFILIADO:'),USE(?LOC:IDAFILIADO:Prompt)
+! ENTRY(@s100),USE(LOC:IDAFILIADO)
+[REPORTCONTROLS]
+! STRING(@s100),USE(LOC:IDAFILIADO)
+LOC:IDAFILIADO           CSTRING(101)
+!!> GUID('0914de26-adec-4c6a-b623-12d0d01a947d'),PROMPT('LOC : IDAFILIADO:'),HEADER('LOC : IDAFILIADO'),PICTURE(@s100),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('LOC : MARCA:'),USE(?LOC:MARCA:Prompt)
+! ENTRY(@n3),USE(LOC:MARCA)
+[REPORTCONTROLS]
+! STRING(@n3),USE(LOC:MARCA)
+LOC:MARCA                BYTE
+!!> GUID('3a7b9386-71bf-4234-b9f3-dce51076bb2c'),PROMPT('LOC : MARCA:'),HEADER('LOC : MARCA'),PICTURE(@n3),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('LOC : MEDICO:'),USE(?LOC:MEDICO:Prompt)
+! ENTRY(@s100),USE(LOC:MEDICO)
+[REPORTCONTROLS]
+! STRING(@s100),USE(LOC:MEDICO)
+LOC:MEDICO               CSTRING(101)
+!!> GUID('526e1fb3-66b5-431e-a8e7-eab0fec64b71'),PROMPT('LOC : MEDICO:'),HEADER('LOC : MEDICO'),PICTURE(@s100),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('LOC : SERVICIO:'),USE(?LOC:SERVICIO:Prompt)
+! ENTRY(@s100),USE(LOC:SERVICIO)
+[REPORTCONTROLS]
+! STRING(@s100),USE(LOC:SERVICIO)
+LOC:SERVICIO             CSTRING(101)
+!!> GUID('ee53ca40-b800-479f-bf4f-a098ccb6191a'),PROMPT('LOC : SERVICIO:'),HEADER('LOC : SERVICIO'),PICTURE(@s100),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('LOC : MARCAR:'),USE(?LOC:MARCAR:Prompt)
+! ENTRY(@n3),USE(LOC:MARCAR)
+[REPORTCONTROLS]
+! STRING(@n3),USE(LOC:MARCAR)
+LOC:MARCAR               BYTE
+!!> GUID('a1837c93-a3ef-49bc-b2d4-4a29ae9539a1'),PROMPT('LOC : MARCAR:'),HEADER('LOC : MARCAR'),PICTURE(@n3),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('LOC : TOTAL:'),USE(?LOC:TOTAL:Prompt)
+! ENTRY(@s50),USE(LOC:TOTAL),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@s50),USE(LOC:TOTAL),RIGHT(1)
+LOC:TOTAL                CSTRING(51)
+!!> GUID('7252625b-f452-4db4-8875-8272d9ad75eb'),PROMPT('LOC : TOTAL:'),HEADER('LOC : TOTAL'),PICTURE(@s50),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('LOC : AUTORIZACION:'),USE(?LOC:AUTORIZACION:Prompt)
+! ENTRY(@s50),USE(LOC:AUTORIZACION)
+[REPORTCONTROLS]
+! STRING(@s50),USE(LOC:AUTORIZACION)
+LOC:AUTORIZACION         CSTRING(51)
+!!> GUID('2987e950-e703-4267-bcd7-c50d16329a65'),PROMPT('LOC : AUTORIZACION:'),HEADER('LOC : AUTORIZACION'),PICTURE(@s50),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('LOC : AUTORIZACIONF:'),USE(?LOC:AUTORIZACIONF:Prompt)
+! ENTRY(@s20),USE(LOC:AUTORIZACIONF)
+[REPORTCONTROLS]
+! STRING(@s20),USE(LOC:AUTORIZACIONF)
+LOC:AUTORIZACIONF        CSTRING(21)
+!!> GUID('064438c0-feec-40a6-9a12-810d80c7b14f'),PROMPT('LOC : AUTORIZACIONF:'),HEADER('LOC : AUTORIZACIONF'),PICTURE(@s20),TYPEMODE(INS)
+[FILES]
+[PRIMARY]
+CIT
+[INSTANCE]
+1
+[KEY]
+CIT:CITIDAFILIADO
+[OTHERS]
+WDUM
+A_AFI
+A_MED
+A_SER
+[PROMPTS]
+%ButtonAction DEPEND %Control DEFAULT TIMES 9
+WHEN  ('?BAsignar') ('No Special Action')
+WHEN  ('?BAutorizacion') ('No Special Action')
+WHEN  ('?BDmarcat') ('No Special Action')
+WHEN  ('?BMarcaT') ('No Special Action')
+WHEN  ('?BMarcar') ('No Special Action')
+WHEN  ('?Browse:1') ('No Special Action')
+WHEN  ('?Close') ('No Special Action')
+WHEN  ('?LOC:FECHAINI') ('No Special Action')
+WHEN  ('?LOC:IDAFILIADO') ('No Special Action')
+
+%ButtonRunName DEPEND %Control DEFAULT TIMES 0
+
+%ButtonRunParameters DEPEND %Control DEFAULT TIMES 0
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ButtonThread DEPEND %Control LONG TIMES 0
+
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 9
+WHEN  ('?BAsignar') ('25000')
+WHEN  ('?BAutorizacion') ('25000')
+WHEN  ('?BDmarcat') ('25000')
+WHEN  ('?BMarcaT') ('25000')
+WHEN  ('?BMarcar') ('25000')
+WHEN  ('?Browse:1') ('25000')
+WHEN  ('?Close') ('25000')
+WHEN  ('?LOC:FECHAINI') ('25000')
+WHEN  ('?LOC:IDAFILIADO') ('25000')
+
+%ButtonParameters DEPEND %Control DEFAULT TIMES 0
+
+%ButtonRequest DEPEND %Control DEFAULT TIMES 9
+WHEN  ('?BAsignar') ('None')
+WHEN  ('?BAutorizacion') ('None')
+WHEN  ('?BDmarcat') ('None')
+WHEN  ('?BMarcaT') ('None')
+WHEN  ('?BMarcar') ('None')
+WHEN  ('?Browse:1') ('None')
+WHEN  ('?Close') ('None')
+WHEN  ('?LOC:FECHAINI') ('None')
+WHEN  ('?LOC:IDAFILIADO') ('None')
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 1
+WHEN  ('?LOC:IDAFILIADO') ()
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 1
+WHEN  ('?LOC:IDAFILIADO') ()
+
+%PostLookupKey DEPEND %Control KEY TIMES 1
+WHEN  ('?LOC:IDAFILIADO') ()
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 1
+WHEN  ('?LOC:IDAFILIADO') ()
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 1
+WHEN  ('?LOC:IDAFILIADO') ()
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+
+%ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('WindowManager')
+WHEN  ('WindowToolbar') ('ToolbarClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('')
+WHEN  ('WindowToolbar') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'Reset {18}PROCEDURE(BYTE Force=0),DERIVED', 'SetAlerts {14}PROCEDURE(),DERIVED', |
+  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
+
+%ReturnValue FIELD  ()
+%ProcedureOneInstance LONG  (0)
+%WindowOperationMode DEFAULT  ('Use WINDOW setting')
+%INISaveWindow LONG  (1)
+%ProcedureDisableEnhanceFocus LONG  (0)
+%ProcedureUseEnterInsteadTabOverride LONG  (0)
+%WindowUseEnterInsteadTab LONG  (1)
+%ProcedureUseEnterInsteadTabExcludeListCombo LONG  (0)
+%ProcedureUseEnterInsteadTabEnableNextTabStop LONG  (0)
+%ProcedureUseEnterInsteadTabExcludeG LONG  (1)
+%WindowUseEnterInsteadTabExclude MULTI DEFAULT  ()
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('NO')
+WHEN  ('WindowToolbar') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('ThisWindow')
+WHEN  ('WindowToolbar') ('Toolbar')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('ADOBlob')
+WHEN  ('WindowToolbar') ('ADOBlob')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (0)
+WHEN  ('WindowToolbar') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%WindowStyles MULTI LONG  ()
+%WindowStyleFontName DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontSize DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontStyle DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontColor DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontCharSet DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStylePicture DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleOtherListboxes MULTI DEFAULT  ()
+%ProcedureAutoBindFields MULTI LONG  (1)
+%ProcedureAutoBindField DEPEND %ProcedureAutoBindFields DEFAULT TIMES 1
+WHEN  (1) ('A_AFI:NOMBREAFI')
+
+%ProcedureAutoBindFieldTPL DEPEND %ProcedureAutoBindFields DEFAULT TIMES 1
+WHEN  (1) ('BrowseBox(ABC)')
+
+%ProcedureAutoBindProcedures MULTI LONG  ()
+%ProcedureAutoBindProcedure DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedureTPL DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldsIgnored MULTI LONG  ()
+%ProcedureAutoBindFieldIgnored DEPEND %ProcedureAutoBindFieldsIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindProceduresIgnored MULTI LONG  ()
+%ProcedureAutoBindProcedureIgnored DEPEND %ProcedureAutoBindProceduresIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindValidToAddField LONG  (0)
+%ProcedureUserBindFields MULTI LONG  ()
+%ProcedureUserBindField DEPEND %ProcedureUserBindFields FIELD TIMES 0
+
+%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 0
+
+%ProcedureUserBindProcedures MULTI LONG  ()
+%ProcedureUserBindProcedure DEPEND %ProcedureUserBindProcedures PROCEDURE TIMES 0
+
+%ProcedureAutoBindProcedureIgnore DEPEND %ProcedureAutoBindProcedures LONG TIMES 0
+
+%ProcedureUserBindExpressions MULTI LONG  ()
+%ProcedureUserBindExpressionName DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%ProcedureUserBindExpression DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%PreserveVarsLoc MULTI LONG  ()
+%PreserveVarLoc DEPEND %PreserveVarsLoc DEFAULT TIMES 0
+
+%ExtUITabIcon DEPEND %Control DEFAULT TIMES 0
+
+%ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
+
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 6
+WHEN  ('?BAsignar') ('Default')
+WHEN  ('?BMarcar') ('Default')
+WHEN  ('?Browse:1') ('Default')
+WHEN  ('?CurrentTab') ('Default')
+WHEN  ('?LOC:FECHAINI') ('Default')
+WHEN  ('?LOC:IDAFILIADO') ('Default')
+
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 5
+WHEN  ('?BAsignar') ('Off')
+WHEN  ('?BMarcar') ('Off')
+WHEN  ('?Browse:1') ('Off')
+WHEN  ('?LOC:FECHAINI') ('Off')
+WHEN  ('?LOC:IDAFILIADO') ('Off')
+
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 5
+WHEN  ('?BAsignar') ('')
+WHEN  ('?BMarcar') ('')
+WHEN  ('?Browse:1') ('')
+WHEN  ('?LOC:FECHAINI') ('')
+WHEN  ('?LOC:IDAFILIADO') ('')
+
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 5
+WHEN  ('?BAsignar') (0)
+WHEN  ('?BMarcar') (0)
+WHEN  ('?Browse:1') (0)
+WHEN  ('?LOC:FECHAINI') (0)
+WHEN  ('?LOC:IDAFILIADO') (0)
+
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 5
+WHEN  ('?BAsignar') (-1)
+WHEN  ('?BMarcar') (-1)
+WHEN  ('?Browse:1') (-1)
+WHEN  ('?LOC:FECHAINI') (-1)
+WHEN  ('?LOC:IDAFILIADO') (-1)
+
+%FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 5
+WHEN  ('?BAsignar') (0)
+WHEN  ('?BMarcar') (0)
+WHEN  ('?Browse:1') (0)
+WHEN  ('?LOC:FECHAINI') (0)
+WHEN  ('?LOC:IDAFILIADO') (0)
+
+%FieldGradientColorTo DEPEND %Control LONG TIMES 5
+WHEN  ('?BAsignar') (-1)
+WHEN  ('?BMarcar') (-1)
+WHEN  ('?Browse:1') (-1)
+WHEN  ('?LOC:FECHAINI') (-1)
+WHEN  ('?LOC:IDAFILIADO') (-1)
+
+%FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 5
+WHEN  ('?BAsignar') (0)
+WHEN  ('?BMarcar') (0)
+WHEN  ('?Browse:1') (0)
+WHEN  ('?LOC:FECHAINI') (0)
+WHEN  ('?LOC:IDAFILIADO') (0)
+
+%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 0
+
+%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 0
+
+%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 0
+
+%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 0
+
+%PreLookupProcedureParameters DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?LOC:IDAFILIADO') ('')
+
+%PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?LOC:IDAFILIADO') ('')
+
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 10
+WHEN  ('?BAsignar') (1)
+WHEN  ('?BMarcar') (1)
+WHEN  ('?Browse:1') (1)
+WHEN  ('?LOC:AUTORIZACION') (1)
+WHEN  ('?LOC:AUTORIZACIONF') (1)
+WHEN  ('?LOC:FECHAFIN') (1)
+WHEN  ('?LOC:FECHAINI') (1)
+WHEN  ('?LOC:IDAFILIADO') (1)
+WHEN  ('?LOC:MEDICO') (1)
+WHEN  ('?LOC:SERVICIO') (1)
+
+%LookupAssign DEPEND %Control MULTI LONG TIMES 0
+
+%MoreTarget DEPEND %LookupAssign FIELD TIMES 0
+
+%MoreField DEPEND %LookupAssign DEFAULT TIMES 0
+
+%CheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedAssignVariable DEPEND %CheckedAssigns FIELD TIMES 0
+
+%CheckedAssignValue DEPEND %CheckedAssigns DEFAULT TIMES 0
+
+%CheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
+
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 5
+WHEN  ('?BAsignar')TIMES 0
+WHEN  ('?BMarcar')TIMES 0
+WHEN  ('?Browse:1')TIMES 0
+WHEN  ('?LOC:FECHAINI')TIMES 0
+WHEN  ('?LOC:IDAFILIADO')TIMES 0
+
+%CheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
+
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 5
+WHEN  ('?BAsignar')TIMES 0
+WHEN  ('?BMarcar')TIMES 0
+WHEN  ('?Browse:1')TIMES 0
+WHEN  ('?LOC:FECHAINI')TIMES 0
+WHEN  ('?LOC:IDAFILIADO')TIMES 0
+
+%UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%UncheckedAssignVariable DEPEND %UncheckedAssigns FIELD TIMES 0
+
+%UncheckedAssignValue DEPEND %UncheckedAssigns DEFAULT TIMES 0
+
+%UnCheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
+
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 5
+WHEN  ('?BAsignar')TIMES 0
+WHEN  ('?BMarcar')TIMES 0
+WHEN  ('?Browse:1')TIMES 0
+WHEN  ('?LOC:FECHAINI')TIMES 0
+WHEN  ('?LOC:IDAFILIADO')TIMES 0
+
+%UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
+
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 5
+WHEN  ('?BAsignar')TIMES 0
+WHEN  ('?BMarcar')TIMES 0
+WHEN  ('?Browse:1')TIMES 0
+WHEN  ('?LOC:FECHAINI')TIMES 0
+WHEN  ('?LOC:IDAFILIADO')TIMES 0
+
+%CheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
+
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 5
+WHEN  ('?BAsignar')TIMES 0
+WHEN  ('?BMarcar')TIMES 0
+WHEN  ('?Browse:1')TIMES 0
+WHEN  ('?LOC:FECHAINI')TIMES 0
+WHEN  ('?LOC:IDAFILIADO')TIMES 0
+
+%UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
+
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 5
+WHEN  ('?BAsignar')TIMES 0
+WHEN  ('?BMarcar')TIMES 0
+WHEN  ('?Browse:1')TIMES 0
+WHEN  ('?LOC:FECHAINI')TIMES 0
+WHEN  ('?LOC:IDAFILIADO')TIMES 0
+
+%ActiveImageEnable DEPEND %Control LONG TIMES 0
+
+%AIObjectName DEPEND %Control DEFAULT TIMES 5
+WHEN  ('?BAsignar') ('AIBtn18')
+WHEN  ('?BMarcar') ('AIBtn15')
+WHEN  ('?Browse:1') ('AIBtn1')
+WHEN  ('?LOC:FECHAINI') ('AIBtn5')
+WHEN  ('?LOC:IDAFILIADO') ('AIBtn9')
+
+%AIEnableMimicControl DEPEND %Control LONG TIMES 5
+WHEN  ('?BAsignar') (1)
+WHEN  ('?BMarcar') (1)
+WHEN  ('?Browse:1') (1)
+WHEN  ('?LOC:FECHAINI') (1)
+WHEN  ('?LOC:IDAFILIADO') (1)
+
+%AIMimicControl DEPEND %Control DEFAULT TIMES 5
+WHEN  ('?BAsignar') ('?Browse:1')
+WHEN  ('?BMarcar') ('?Browse:1')
+WHEN  ('?Browse:1') ('?Browse:1')
+WHEN  ('?LOC:FECHAINI') ('?Browse:1')
+WHEN  ('?LOC:IDAFILIADO') ('?Browse:1')
+
+%AIImgRound DEPEND %Control LONG TIMES 0
+
+%AIOverrideImg DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 5
+WHEN  ('?BAsignar') (0)
+WHEN  ('?BMarcar') (0)
+WHEN  ('?Browse:1') (0)
+WHEN  ('?LOC:FECHAINI') (0)
+WHEN  ('?LOC:IDAFILIADO') (0)
+
+%AIDisableImg DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 5
+WHEN  ('?BAsignar') (0)
+WHEN  ('?BMarcar') (0)
+WHEN  ('?Browse:1') (0)
+WHEN  ('?LOC:FECHAINI') (0)
+WHEN  ('?LOC:IDAFILIADO') (0)
+
+%AIHotImg DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 5
+WHEN  ('?BAsignar') (0)
+WHEN  ('?BMarcar') (0)
+WHEN  ('?Browse:1') (0)
+WHEN  ('?LOC:FECHAINI') (0)
+WHEN  ('?LOC:IDAFILIADO') (0)
+
+%AIPressedImg DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 5
+WHEN  ('?BAsignar') (0)
+WHEN  ('?BMarcar') (0)
+WHEN  ('?Browse:1') (0)
+WHEN  ('?LOC:FECHAINI') (0)
+WHEN  ('?LOC:IDAFILIADO') (0)
+
+[EMBED]
+EMBED %BrowserMethodCodeSection
+[INSTANCES]
+WHEN '1'
+[INSTANCES]
+WHEN 'ApplyFilter'
+[INSTANCES]
+WHEN '()'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4500
+PROPERTY:END
+LOC:FILTRO=' A.IDTERCEROCA='&FnSQLFmt(IDTER)&' AND A.IDPLAN='&FnSQLFmt(IDPLAN)&' AND COALESCE(A.FACTURADA,0)=0 AND COALESCE(VALORTOTAL,0)>0 AND NOT EXISTS(SELECT * FROM FMASD WHERE FMASD.CNSFMAS='&FnSQLFmt(CNSF)&' AND NOADMISION=A.CONSECUTIVO)'
+
+IF LOC:FECHAINI<>''
+   LOC:FILTRO=CLIP(LOC:FILTRO)&' AND A.FECHA>='&FnSQLFmt(FORMAT(LOC:FECHAINI,@D06))
+END
+IF LOC:FECHAFIN<>''
+   LOC:FILTRO=CLIP(LOC:FILTRO)&' AND A.FECHA<'&FnSQLFmt(FORMAT(LOC:fECHAFIN+1,@D06))
+END
+IF LOC:MARCA=1
+   LOC:FILTRO=CLIP(LOC:FILTRO)&' AND A.MARCAFAC=1 AND A.CNSFACT='&FnSQLFmt(CNSF)
+END
+IF LOC:IDAFILIADO<>''
+   LOC:FILTRO=CLIP(LOC:FILTRO)&' AND EXISTS(SELECT * FROM AFI WHERE AFI.IDAFILIADO=A.IDAFILIADO AND CONCAT(AFI.IDAFILIADO, AFI.DOCIDAFILIADO, AFI.NOMBREAFI) LIKE ''%'&LOC:IDAFILIADO&'%'')'
+END
+IF LOC:MEDICO<>''
+   LOC:FILTRO=CLIP(LOC:FILTRO)&' AND EXISTS(SELECT * FROM MED WHERE MED.IDMEDICO=A.IDMEDICO AND CONCAT(MED.IDMEDICO, MED.NOMBRE) LIKE ''%'&LOC:MEDICO&'%'')'
+END
+IF LOC:SERVICIO<>''
+   LOC:FILTRO=CLIP(LOC:FILTRO)&' AND EXISTS(SELECT * FROM SER WHERE SER.IDSERVICIO=A.IDSERVICIO AND CONCAT(SER.IDSERVICIO, SER.DESCSERVICIO ) LIKE ''%'&LOC:SERVICIO&'%'')'
+END
+IF LOC:AUTORIZACIONF<>''
+   LOC:FILTRO=CLIP(LOC:FILTRO)&' AND A.NOAUTORIZACION LIKE ''%'&CLIP(LOC:AUTORIZACIONF)&'%'' '
+END
+
+
+
+BRW1::View:Browse{PROP:SQLFilter}=LOC:FILTRO
+[END]
+[END]
+WHEN 'SetQueueRecord'
+[INSTANCES]
+WHEN '()'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4500
+PROPERTY:END
+CLEAR(A_SER:Record)
+A_SER:IDSERVICIO=CIT:IDSERVICIO
+IF Access:A_SER.TryFetch(A_SER:SERIDSERVICIO) THEN CLEAR(A_SER:Record).
+
+CLEAR(A_MED:Record)
+A_MED:IDMEDICO=CIT:IDMEDICO
+IF Access:A_MED.TryFetch(A_MED:MEDIDMEDICO) THEN CLEAR(A_MED:Record).
+
+CLEAR(A_AFI:Record)
+A_AFI:IDAFILIADO=CIT.IDAFILIADO
+IF Access:A_AFI.TryFetch(A_AFI:AFIIDAFILIADO) THEN CLEAR(A_AFI:RECORD).
+[END]
+[END]
+[END]
+[END]
+EMBED %ControlEventHandling
+[INSTANCES]
+WHEN '?BMarcar'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+SETCURSOR(CURSOR:WAIT)
+CIT:MARCAFAC = 1 - CIT:MARCAFAC
+IF CIT:MARCAFAC = 1
+   CIT:CNSFACT  = CNSF
+ELSE
+   SETNULL(CIT:CNSFACT)
+END
+ACCESS:CIT.UPDATE()
+BRW1.RESETFROMFILE
+!ThisWindow.Reset(1)
+POST(Event:ScrollDown,?Browse:1)
+Select(?Browse:1)
+SETCURSOR(CURSOR:ARROW)
+!do CONTAR
+[END]
+[END]
+WHEN '?BMarcaT'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+ LOC:SQL='UPDATE CIT SET MARCAFAC = 1, CNSFACT = '&FNSQLFMT(CNSF)&CHR(13)&|
+         'FROM CIT A INNER JOIN SER B ON A.IDSERVICIO=B.IDSERVICIO INNER JOIN AFI C ON A.IDAFILIADO=C.IDAFILIADO '&chr(13)&|
+         'WHERE ISNULL(MARCAFAC,0)=0 AND '&loc:filtro
+ IF FnValorVariable('IDDEPURAR')='SI'
+    SETCLIPBOARD(LOC:SQL)
+    STOP('Marcar todo')
+ END
+ clear(wdum:record)
+ wdum{prop:sql}=LOC:SQL
+ BRW1.RESETFROMFILE
+ !do CONTAR
+ ThisWindow.Reset(1)
+
+[END]
+[END]
+WHEN '?BDmarcat'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+ LOC:SQL='UPDATE CIT SET MARCAFAC = 0, CNSFACT = NULL '&CHR(13)&|
+         'FROM CIT A INNER JOIN SER B ON A.IDSERVICIO=B.IDSERVICIO INNER JOIN AFI C ON A.IDAFILIADO=C.IDAFILIADO '&chr(13)&|
+         'WHERE MARCAFAC = 1 AND '&loc:filtro
+ IF FnValorVariable('IDDEPURAR')='SI'
+    SETCLIPBOARD(LOC:SQL)
+    STOP('Desmarcar todo')
+ END
+ clear(wdum:record)
+ wdum{prop:sql}=LOC:SQL
+ BRW1.RESETFROMFILE
+ ThisWindow.Reset(1)
+ !do CONTAR
+
+[END]
+[END]
+WHEN '?BAsignar'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+LOC:MARCA=1
+ThisWindow.Reset(1)
+POST(EVENT:ScrollTop,?Browse:1)
+Select(?Browse:1)
+SET(BRW1.View)
+LOOP
+   NEXT(BRW1.View)
+   IF ERRORCODE() THEN BREAK.
+   BRW1.SETQUEUERECORD
+   LOC:sQL='INSERT INTO FMASD(CNSFMAS,NOADMISION,VR_TOTAL,FACTURADA,VLR_IVA)'&CHR(13)&|
+      ' SELECT '&FnSQLFmt(CNSF)&', '&FnSQLFmt(CIT:CONSECUTIVO)&','&CIT:VALORTOTAL&', 0, '&CIT:VALORCOPAGO
+   CLEAR(WDUM:RECORD)
+   WDUM{PROP:SQL}=LOC:SQL
+END
+POST(EVENT:CloseWindow)
+[END]
+[END]
+WHEN '?BAutorizacion'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+ SETCURSOR(CURSOR:WAIT)
+ LOC:SQL='UPDATE CIT SET NOAUTORIZACION='&FnSQLFmt(LOC:AUTORIZACION)&CHR(13)&|
+         'FROM CIT A INNER JOIN SER B ON A.IDSERVICIO=B.IDSERVICIO INNER JOIN AFI C ON A.IDAFILIADO=C.IDAFILIADO '&chr(13)&|
+         'WHERE MARCAFAC = 1 AND CNSFACT = '&FNSQLFMT(CNSF)&' AND '&loc:filtro
+ IF FnValorVariable('IDDEPURAR')='SI'
+    SETCLIPBOARD(LOC:SQL)
+    STOP('Actualizar Autorizacion')
+ END
+ clear(wdum:record)
+ wdum{prop:sql}=LOC:SQL
+ BRW1.RESETFROMFILE
+ SETCURSOR(CURSOR:Arrow)
+ !ThisWindow.Reset(1)
+
+
+[END]
+[END]
+WHEN '?Browse:1'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+IF LOC:MARCAR=1
+   IF KEYCODE() = 1 THEN
+      POST(EVENT:Accepted,?BMarcar)
+   END
+END
+[END]
+[END]
+[END]
+EMBED %ProcedureRoutines
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+Contar ROUTINE
+
+ LOC:SQL='SELECT SUM(CASE WHEN MARCAFAC = 1 AND CNSFACT = '&FNSQLFMT(CNSF)&' THEN 1 ELSE 0 END),COUNT(1) '&chr(13)&|
+                 ' FROM CIT A'&chr(13)&|
+                  'INNER JOIN SER B ON A.IDSERVICIO=B.IDSERVICIO INNER JOIN AFI C ON A.IDAFILIADO=C.IDAFILIADO '&chr(13)&|
+                  'WHERE 1=1 '
+ IF LOC:FILTRO<>''
+        LOC:SQL=CLIP(LOC:SQL)&' AND '&LOC:FILTRO
+ END
+ CLEAR(WDUM:RECORD)
+ IF FnValorVariable('IDDEPURAR')='SI'
+         SETCLIPBOARD(LOC:SQL)
+         STOP('CONTEO')
+ END
+ WDUM{PROP:SQL}=LOC:SQL
+ Access:WDUM.Next()
+
+ LOC:TOTAL='Marcadas: '&WDUM:C1&' de '&WDUM:C2
+[END]
+EMBED %WindowManagerMethodCodeSection
+[INSTANCES]
+WHEN 'Init'
+[INSTANCES]
+WHEN '(),BYTE'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 9001
+PROPERTY:END
+!DO CONTAR
+[END]
+[END]
+WHEN 'Reset'
+[INSTANCES]
+WHEN '(BYTE Force=0)'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7500
+PROPERTY:END
+ DO CONTAR
+[END]
+[END]
+[END]
+EMBED %WindowEventHandling
+[INSTANCES]
+WHEN 'CloseWindow'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+ LOC:SQL = 'UPDATE CIT SET MARCAFAC = 0, CNSFACT = NULL WHERE MARCAFAC=1 AND CNSFACT='&FnSQLFmt(CNSF)
+ IF FnValorVariable('IDDEPURAR') = 'SI' THEN
+         SETCLIPBOARD(LOC:SQL)
+         STOP('SQL')
+ END
+ CLEAR(WDUM:RECORD)
+ WDUM{PROP:SQL} = LOC:SQL
+ IF ERRORCODE()
+         SETCLIPBOARD(LOC:SQL)
+         MESSAGE('Lo sentimos. Se produjo un error cuando tratamos de procesar su solicitud.<13>Tenga la seguridad de que estamos trabajando para resolver el problema tan pronto como sea posible.<13>Por favor, si el problema persiste contacte al departamento de tecnología.<13>ERROR:' & FILEERROR(),'Krystalos...',ICON:HAND)
+ END
+
+[END]
+[END]
+[END]
+[ADDITION]
+NAME AnyScreen AnyScreenProcedure
+[FIELDPROMPT]
+%HideOnClient DEPEND %Control LONG TIMES 24
+WHEN  ('?BAsignar') (0)
+WHEN  ('?BAutorizacion') (0)
+WHEN  ('?BDmarcat') (0)
+WHEN  ('?BMarcaT') (0)
+WHEN  ('?BMarcar') (0)
+WHEN  ('?Browse:1') (0)
+WHEN  ('?Close') (0)
+WHEN  ('?CurrentTab') (0)
+WHEN  ('?LOC:AUTORIZACION') (0)
+WHEN  ('?LOC:AUTORIZACIONF') (0)
+WHEN  ('?LOC:AUTORIZACIONF:Prompt') (0)
+WHEN  ('?LOC:FECHAFIN') (0)
+WHEN  ('?LOC:FECHAINI') (0)
+WHEN  ('?LOC:FECHAINI:Prompt') (0)
+WHEN  ('?LOC:FECHAINI:Prompt:2') (0)
+WHEN  ('?LOC:IDAFILIADO') (0)
+WHEN  ('?LOC:IDAFILIADO:Prompt') (0)
+WHEN  ('?LOC:IDAFILIADO:Prompt:2') (0)
+WHEN  ('?LOC:IDAFILIADO:Prompt:3') (0)
+WHEN  ('?LOC:MARCAR') (0)
+WHEN  ('?LOC:MEDICO') (0)
+WHEN  ('?LOC:SERVICIO') (0)
+WHEN  ('?LOC:TOTAL') (0)
+WHEN  ('?Tab:2') (0)
+
+%SynOnAccept DEPEND %Control LONG TIMES 24
+WHEN  ('?BAsignar') (1)
+WHEN  ('?BAutorizacion') (1)
+WHEN  ('?BDmarcat') (1)
+WHEN  ('?BMarcaT') (1)
+WHEN  ('?BMarcar') (1)
+WHEN  ('?Browse:1') (1)
+WHEN  ('?Close') (1)
+WHEN  ('?CurrentTab') (1)
+WHEN  ('?LOC:AUTORIZACION') (1)
+WHEN  ('?LOC:AUTORIZACIONF') (1)
+WHEN  ('?LOC:AUTORIZACIONF:Prompt') (1)
+WHEN  ('?LOC:FECHAFIN') (1)
+WHEN  ('?LOC:FECHAINI') (1)
+WHEN  ('?LOC:FECHAINI:Prompt') (1)
+WHEN  ('?LOC:FECHAINI:Prompt:2') (1)
+WHEN  ('?LOC:IDAFILIADO') (1)
+WHEN  ('?LOC:IDAFILIADO:Prompt') (1)
+WHEN  ('?LOC:IDAFILIADO:Prompt:2') (1)
+WHEN  ('?LOC:IDAFILIADO:Prompt:3') (1)
+WHEN  ('?LOC:MARCAR') (1)
+WHEN  ('?LOC:MEDICO') (1)
+WHEN  ('?LOC:SERVICIO') (1)
+WHEN  ('?LOC:TOTAL') (1)
+WHEN  ('?Tab:2') (1)
+
+%SynOnSelect DEPEND %Control LONG TIMES 24
+WHEN  ('?BAsignar') (1)
+WHEN  ('?BAutorizacion') (1)
+WHEN  ('?BDmarcat') (1)
+WHEN  ('?BMarcaT') (1)
+WHEN  ('?BMarcar') (1)
+WHEN  ('?Browse:1') (1)
+WHEN  ('?Close') (1)
+WHEN  ('?CurrentTab') (1)
+WHEN  ('?LOC:AUTORIZACION') (1)
+WHEN  ('?LOC:AUTORIZACIONF') (1)
+WHEN  ('?LOC:AUTORIZACIONF:Prompt') (1)
+WHEN  ('?LOC:FECHAFIN') (1)
+WHEN  ('?LOC:FECHAINI') (1)
+WHEN  ('?LOC:FECHAINI:Prompt') (1)
+WHEN  ('?LOC:FECHAINI:Prompt:2') (1)
+WHEN  ('?LOC:IDAFILIADO') (1)
+WHEN  ('?LOC:IDAFILIADO:Prompt') (1)
+WHEN  ('?LOC:IDAFILIADO:Prompt:2') (1)
+WHEN  ('?LOC:IDAFILIADO:Prompt:3') (1)
+WHEN  ('?LOC:MARCAR') (1)
+WHEN  ('?LOC:MEDICO') (1)
+WHEN  ('?LOC:SERVICIO') (1)
+WHEN  ('?LOC:TOTAL') (1)
+WHEN  ('?Tab:2') (1)
+
+%ThinControlMaxSizeRTF DEPEND %Control DEFAULT TIMES 24
+WHEN  ('?BAsignar') ('250000')
+WHEN  ('?BAutorizacion') ('250000')
+WHEN  ('?BDmarcat') ('250000')
+WHEN  ('?BMarcaT') ('250000')
+WHEN  ('?BMarcar') ('250000')
+WHEN  ('?Browse:1') ('250000')
+WHEN  ('?Close') ('250000')
+WHEN  ('?CurrentTab') ('250000')
+WHEN  ('?LOC:AUTORIZACION') ('250000')
+WHEN  ('?LOC:AUTORIZACIONF') ('250000')
+WHEN  ('?LOC:AUTORIZACIONF:Prompt') ('250000')
+WHEN  ('?LOC:FECHAFIN') ('250000')
+WHEN  ('?LOC:FECHAINI') ('250000')
+WHEN  ('?LOC:FECHAINI:Prompt') ('250000')
+WHEN  ('?LOC:FECHAINI:Prompt:2') ('250000')
+WHEN  ('?LOC:IDAFILIADO') ('250000')
+WHEN  ('?LOC:IDAFILIADO:Prompt') ('250000')
+WHEN  ('?LOC:IDAFILIADO:Prompt:2') ('250000')
+WHEN  ('?LOC:IDAFILIADO:Prompt:3') ('250000')
+WHEN  ('?LOC:MARCAR') ('250000')
+WHEN  ('?LOC:MEDICO') ('250000')
+WHEN  ('?LOC:SERVICIO') ('250000')
+WHEN  ('?LOC:TOTAL') ('250000')
+WHEN  ('?Tab:2') ('250000')
+
+%ThinControlMaxSize DEPEND %Control DEFAULT TIMES 24
+WHEN  ('?BAsignar') ('32000')
+WHEN  ('?BAutorizacion') ('32000')
+WHEN  ('?BDmarcat') ('32000')
+WHEN  ('?BMarcaT') ('32000')
+WHEN  ('?BMarcar') ('32000')
+WHEN  ('?Browse:1') ('32000')
+WHEN  ('?Close') ('32000')
+WHEN  ('?CurrentTab') ('32000')
+WHEN  ('?LOC:AUTORIZACION') ('32000')
+WHEN  ('?LOC:AUTORIZACIONF') ('32000')
+WHEN  ('?LOC:AUTORIZACIONF:Prompt') ('32000')
+WHEN  ('?LOC:FECHAFIN') ('32000')
+WHEN  ('?LOC:FECHAINI') ('32000')
+WHEN  ('?LOC:FECHAINI:Prompt') ('32000')
+WHEN  ('?LOC:FECHAINI:Prompt:2') ('32000')
+WHEN  ('?LOC:IDAFILIADO') ('32000')
+WHEN  ('?LOC:IDAFILIADO:Prompt') ('32000')
+WHEN  ('?LOC:IDAFILIADO:Prompt:2') ('32000')
+WHEN  ('?LOC:IDAFILIADO:Prompt:3') ('32000')
+WHEN  ('?LOC:MARCAR') ('32000')
+WHEN  ('?LOC:MEDICO') ('32000')
+WHEN  ('?LOC:SERVICIO') ('32000')
+WHEN  ('?LOC:TOTAL') ('32000')
+WHEN  ('?Tab:2') ('32000')
+
+%ThinControlListboxPipes DEPEND %Control LONG TIMES 24
+WHEN  ('?BAsignar') (0)
+WHEN  ('?BAutorizacion') (0)
+WHEN  ('?BDmarcat') (0)
+WHEN  ('?BMarcaT') (0)
+WHEN  ('?BMarcar') (0)
+WHEN  ('?Browse:1') (0)
+WHEN  ('?Close') (0)
+WHEN  ('?CurrentTab') (0)
+WHEN  ('?LOC:AUTORIZACION') (0)
+WHEN  ('?LOC:AUTORIZACIONF') (0)
+WHEN  ('?LOC:AUTORIZACIONF:Prompt') (0)
+WHEN  ('?LOC:FECHAFIN') (0)
+WHEN  ('?LOC:FECHAINI') (0)
+WHEN  ('?LOC:FECHAINI:Prompt') (0)
+WHEN  ('?LOC:FECHAINI:Prompt:2') (0)
+WHEN  ('?LOC:IDAFILIADO') (0)
+WHEN  ('?LOC:IDAFILIADO:Prompt') (0)
+WHEN  ('?LOC:IDAFILIADO:Prompt:2') (0)
+WHEN  ('?LOC:IDAFILIADO:Prompt:3') (0)
+WHEN  ('?LOC:MARCAR') (0)
+WHEN  ('?LOC:MEDICO') (0)
+WHEN  ('?LOC:SERVICIO') (0)
+WHEN  ('?LOC:TOTAL') (0)
+WHEN  ('?Tab:2') (0)
+
+%AnyScreenCSSclass DEPEND %Control DEFAULT TIMES 24
+WHEN  ('?BAsignar') ('')
+WHEN  ('?BAutorizacion') ('')
+WHEN  ('?BDmarcat') ('')
+WHEN  ('?BMarcaT') ('')
+WHEN  ('?BMarcar') ('')
+WHEN  ('?Browse:1') ('')
+WHEN  ('?Close') ('')
+WHEN  ('?CurrentTab') ('')
+WHEN  ('?LOC:AUTORIZACION') ('')
+WHEN  ('?LOC:AUTORIZACIONF') ('')
+WHEN  ('?LOC:AUTORIZACIONF:Prompt') ('')
+WHEN  ('?LOC:FECHAFIN') ('')
+WHEN  ('?LOC:FECHAINI') ('')
+WHEN  ('?LOC:FECHAINI:Prompt') ('')
+WHEN  ('?LOC:FECHAINI:Prompt:2') ('')
+WHEN  ('?LOC:IDAFILIADO') ('')
+WHEN  ('?LOC:IDAFILIADO:Prompt') ('')
+WHEN  ('?LOC:IDAFILIADO:Prompt:2') ('')
+WHEN  ('?LOC:IDAFILIADO:Prompt:3') ('')
+WHEN  ('?LOC:MARCAR') ('')
+WHEN  ('?LOC:MEDICO') ('')
+WHEN  ('?LOC:SERVICIO') ('')
+WHEN  ('?LOC:TOTAL') ('')
+WHEN  ('?Tab:2') ('')
+
+%EnableWithoutThinet DEPEND %Control LONG TIMES 24
+WHEN  ('?BAsignar') (0)
+WHEN  ('?BAutorizacion') (0)
+WHEN  ('?BDmarcat') (0)
+WHEN  ('?BMarcaT') (0)
+WHEN  ('?BMarcar') (0)
+WHEN  ('?Browse:1') (0)
+WHEN  ('?Close') (0)
+WHEN  ('?CurrentTab') (0)
+WHEN  ('?LOC:AUTORIZACION') (0)
+WHEN  ('?LOC:AUTORIZACIONF') (0)
+WHEN  ('?LOC:AUTORIZACIONF:Prompt') (0)
+WHEN  ('?LOC:FECHAFIN') (0)
+WHEN  ('?LOC:FECHAINI') (0)
+WHEN  ('?LOC:FECHAINI:Prompt') (0)
+WHEN  ('?LOC:FECHAINI:Prompt:2') (0)
+WHEN  ('?LOC:IDAFILIADO') (0)
+WHEN  ('?LOC:IDAFILIADO:Prompt') (0)
+WHEN  ('?LOC:IDAFILIADO:Prompt:2') (0)
+WHEN  ('?LOC:IDAFILIADO:Prompt:3') (0)
+WHEN  ('?LOC:MARCAR') (0)
+WHEN  ('?LOC:MEDICO') (0)
+WHEN  ('?LOC:SERVICIO') (0)
+WHEN  ('?LOC:TOTAL') (0)
+WHEN  ('?Tab:2') (0)
+
+%OverrideGlobalListboxHeaderColors DEPEND %Control LONG TIMES 24
+WHEN  ('?BAsignar') (0)
+WHEN  ('?BAutorizacion') (0)
+WHEN  ('?BDmarcat') (0)
+WHEN  ('?BMarcaT') (0)
+WHEN  ('?BMarcar') (0)
+WHEN  ('?Browse:1') (0)
+WHEN  ('?Close') (0)
+WHEN  ('?CurrentTab') (0)
+WHEN  ('?LOC:AUTORIZACION') (0)
+WHEN  ('?LOC:AUTORIZACIONF') (0)
+WHEN  ('?LOC:AUTORIZACIONF:Prompt') (0)
+WHEN  ('?LOC:FECHAFIN') (0)
+WHEN  ('?LOC:FECHAINI') (0)
+WHEN  ('?LOC:FECHAINI:Prompt') (0)
+WHEN  ('?LOC:FECHAINI:Prompt:2') (0)
+WHEN  ('?LOC:IDAFILIADO') (0)
+WHEN  ('?LOC:IDAFILIADO:Prompt') (0)
+WHEN  ('?LOC:IDAFILIADO:Prompt:2') (0)
+WHEN  ('?LOC:IDAFILIADO:Prompt:3') (0)
+WHEN  ('?LOC:MARCAR') (0)
+WHEN  ('?LOC:MEDICO') (0)
+WHEN  ('?LOC:SERVICIO') (0)
+WHEN  ('?LOC:TOTAL') (0)
+WHEN  ('?Tab:2') (0)
+
+%cNormal DEPEND %Control LONG TIMES 24
+WHEN  ('?BAsignar') (-1)
+WHEN  ('?BAutorizacion') (-1)
+WHEN  ('?BDmarcat') (-1)
+WHEN  ('?BMarcaT') (-1)
+WHEN  ('?BMarcar') (-1)
+WHEN  ('?Browse:1') (-1)
+WHEN  ('?Close') (-1)
+WHEN  ('?CurrentTab') (-1)
+WHEN  ('?LOC:AUTORIZACION') (-1)
+WHEN  ('?LOC:AUTORIZACIONF') (-1)
+WHEN  ('?LOC:AUTORIZACIONF:Prompt') (-1)
+WHEN  ('?LOC:FECHAFIN') (-1)
+WHEN  ('?LOC:FECHAINI') (-1)
+WHEN  ('?LOC:FECHAINI:Prompt') (-1)
+WHEN  ('?LOC:FECHAINI:Prompt:2') (-1)
+WHEN  ('?LOC:IDAFILIADO') (-1)
+WHEN  ('?LOC:IDAFILIADO:Prompt') (-1)
+WHEN  ('?LOC:IDAFILIADO:Prompt:2') (-1)
+WHEN  ('?LOC:IDAFILIADO:Prompt:3') (-1)
+WHEN  ('?LOC:MARCAR') (-1)
+WHEN  ('?LOC:MEDICO') (-1)
+WHEN  ('?LOC:SERVICIO') (-1)
+WHEN  ('?LOC:TOTAL') (-1)
+WHEN  ('?Tab:2') (-1)
+
+%cAccentTxt DEPEND %Control LONG TIMES 24
+WHEN  ('?BAsignar') (14342874)
+WHEN  ('?BAutorizacion') (14342874)
+WHEN  ('?BDmarcat') (14342874)
+WHEN  ('?BMarcaT') (14342874)
+WHEN  ('?BMarcar') (14342874)
+WHEN  ('?Browse:1') (14342874)
+WHEN  ('?Close') (14342874)
+WHEN  ('?CurrentTab') (14342874)
+WHEN  ('?LOC:AUTORIZACION') (14342874)
+WHEN  ('?LOC:AUTORIZACIONF') (14342874)
+WHEN  ('?LOC:AUTORIZACIONF:Prompt') (14342874)
+WHEN  ('?LOC:FECHAFIN') (14342874)
+WHEN  ('?LOC:FECHAINI') (14342874)
+WHEN  ('?LOC:FECHAINI:Prompt') (14342874)
+WHEN  ('?LOC:FECHAINI:Prompt:2') (14342874)
+WHEN  ('?LOC:IDAFILIADO') (14342874)
+WHEN  ('?LOC:IDAFILIADO:Prompt') (14342874)
+WHEN  ('?LOC:IDAFILIADO:Prompt:2') (14342874)
+WHEN  ('?LOC:IDAFILIADO:Prompt:3') (14342874)
+WHEN  ('?LOC:MARCAR') (14342874)
+WHEN  ('?LOC:MEDICO') (14342874)
+WHEN  ('?LOC:SERVICIO') (14342874)
+WHEN  ('?LOC:TOTAL') (14342874)
+WHEN  ('?Tab:2') (14342874)
+
+%cListHeaderBack DEPEND %Control LONG TIMES 24
+WHEN  ('?BAsignar') (14342874)
+WHEN  ('?BAutorizacion') (14342874)
+WHEN  ('?BDmarcat') (14342874)
+WHEN  ('?BMarcaT') (14342874)
+WHEN  ('?BMarcar') (14342874)
+WHEN  ('?Browse:1') (14342874)
+WHEN  ('?Close') (14342874)
+WHEN  ('?CurrentTab') (14342874)
+WHEN  ('?LOC:AUTORIZACION') (14342874)
+WHEN  ('?LOC:AUTORIZACIONF') (14342874)
+WHEN  ('?LOC:AUTORIZACIONF:Prompt') (14342874)
+WHEN  ('?LOC:FECHAFIN') (14342874)
+WHEN  ('?LOC:FECHAINI') (14342874)
+WHEN  ('?LOC:FECHAINI:Prompt') (14342874)
+WHEN  ('?LOC:FECHAINI:Prompt:2') (14342874)
+WHEN  ('?LOC:IDAFILIADO') (14342874)
+WHEN  ('?LOC:IDAFILIADO:Prompt') (14342874)
+WHEN  ('?LOC:IDAFILIADO:Prompt:2') (14342874)
+WHEN  ('?LOC:IDAFILIADO:Prompt:3') (14342874)
+WHEN  ('?LOC:MARCAR') (14342874)
+WHEN  ('?LOC:MEDICO') (14342874)
+WHEN  ('?LOC:SERVICIO') (14342874)
+WHEN  ('?LOC:TOTAL') (14342874)
+WHEN  ('?Tab:2') (14342874)
+
+%cListHeaderFore DEPEND %Control LONG TIMES 24
+WHEN  ('?BAsignar') (0)
+WHEN  ('?BAutorizacion') (0)
+WHEN  ('?BDmarcat') (0)
+WHEN  ('?BMarcaT') (0)
+WHEN  ('?BMarcar') (0)
+WHEN  ('?Browse:1') (0)
+WHEN  ('?Close') (0)
+WHEN  ('?CurrentTab') (0)
+WHEN  ('?LOC:AUTORIZACION') (0)
+WHEN  ('?LOC:AUTORIZACIONF') (0)
+WHEN  ('?LOC:AUTORIZACIONF:Prompt') (0)
+WHEN  ('?LOC:FECHAFIN') (0)
+WHEN  ('?LOC:FECHAINI') (0)
+WHEN  ('?LOC:FECHAINI:Prompt') (0)
+WHEN  ('?LOC:FECHAINI:Prompt:2') (0)
+WHEN  ('?LOC:IDAFILIADO') (0)
+WHEN  ('?LOC:IDAFILIADO:Prompt') (0)
+WHEN  ('?LOC:IDAFILIADO:Prompt:2') (0)
+WHEN  ('?LOC:IDAFILIADO:Prompt:3') (0)
+WHEN  ('?LOC:MARCAR') (0)
+WHEN  ('?LOC:MEDICO') (0)
+WHEN  ('?LOC:SERVICIO') (0)
+WHEN  ('?LOC:TOTAL') (0)
+WHEN  ('?Tab:2') (0)
+
+%cListHeaderGRBack DEPEND %Control LONG TIMES 24
+WHEN  ('?BAsignar') (14342874)
+WHEN  ('?BAutorizacion') (14342874)
+WHEN  ('?BDmarcat') (14342874)
+WHEN  ('?BMarcaT') (14342874)
+WHEN  ('?BMarcar') (14342874)
+WHEN  ('?Browse:1') (14342874)
+WHEN  ('?Close') (14342874)
+WHEN  ('?CurrentTab') (14342874)
+WHEN  ('?LOC:AUTORIZACION') (14342874)
+WHEN  ('?LOC:AUTORIZACIONF') (14342874)
+WHEN  ('?LOC:AUTORIZACIONF:Prompt') (14342874)
+WHEN  ('?LOC:FECHAFIN') (14342874)
+WHEN  ('?LOC:FECHAINI') (14342874)
+WHEN  ('?LOC:FECHAINI:Prompt') (14342874)
+WHEN  ('?LOC:FECHAINI:Prompt:2') (14342874)
+WHEN  ('?LOC:IDAFILIADO') (14342874)
+WHEN  ('?LOC:IDAFILIADO:Prompt') (14342874)
+WHEN  ('?LOC:IDAFILIADO:Prompt:2') (14342874)
+WHEN  ('?LOC:IDAFILIADO:Prompt:3') (14342874)
+WHEN  ('?LOC:MARCAR') (14342874)
+WHEN  ('?LOC:MEDICO') (14342874)
+WHEN  ('?LOC:SERVICIO') (14342874)
+WHEN  ('?LOC:TOTAL') (14342874)
+WHEN  ('?Tab:2') (14342874)
+
+%cListHeaderGrFore DEPEND %Control LONG TIMES 24
+WHEN  ('?BAsignar') (0)
+WHEN  ('?BAutorizacion') (0)
+WHEN  ('?BDmarcat') (0)
+WHEN  ('?BMarcaT') (0)
+WHEN  ('?BMarcar') (0)
+WHEN  ('?Browse:1') (0)
+WHEN  ('?Close') (0)
+WHEN  ('?CurrentTab') (0)
+WHEN  ('?LOC:AUTORIZACION') (0)
+WHEN  ('?LOC:AUTORIZACIONF') (0)
+WHEN  ('?LOC:AUTORIZACIONF:Prompt') (0)
+WHEN  ('?LOC:FECHAFIN') (0)
+WHEN  ('?LOC:FECHAINI') (0)
+WHEN  ('?LOC:FECHAINI:Prompt') (0)
+WHEN  ('?LOC:FECHAINI:Prompt:2') (0)
+WHEN  ('?LOC:IDAFILIADO') (0)
+WHEN  ('?LOC:IDAFILIADO:Prompt') (0)
+WHEN  ('?LOC:IDAFILIADO:Prompt:2') (0)
+WHEN  ('?LOC:IDAFILIADO:Prompt:3') (0)
+WHEN  ('?LOC:MARCAR') (0)
+WHEN  ('?LOC:MEDICO') (0)
+WHEN  ('?LOC:SERVICIO') (0)
+WHEN  ('?LOC:TOTAL') (0)
+WHEN  ('?Tab:2') (0)
+
+%cListHeaderArrow DEPEND %Control LONG TIMES 24
+WHEN  ('?BAsignar') (8421504)
+WHEN  ('?BAutorizacion') (8421504)
+WHEN  ('?BDmarcat') (8421504)
+WHEN  ('?BMarcaT') (8421504)
+WHEN  ('?BMarcar') (8421504)
+WHEN  ('?Browse:1') (8421504)
+WHEN  ('?Close') (8421504)
+WHEN  ('?CurrentTab') (8421504)
+WHEN  ('?LOC:AUTORIZACION') (8421504)
+WHEN  ('?LOC:AUTORIZACIONF') (8421504)
+WHEN  ('?LOC:AUTORIZACIONF:Prompt') (8421504)
+WHEN  ('?LOC:FECHAFIN') (8421504)
+WHEN  ('?LOC:FECHAINI') (8421504)
+WHEN  ('?LOC:FECHAINI:Prompt') (8421504)
+WHEN  ('?LOC:FECHAINI:Prompt:2') (8421504)
+WHEN  ('?LOC:IDAFILIADO') (8421504)
+WHEN  ('?LOC:IDAFILIADO:Prompt') (8421504)
+WHEN  ('?LOC:IDAFILIADO:Prompt:2') (8421504)
+WHEN  ('?LOC:IDAFILIADO:Prompt:3') (8421504)
+WHEN  ('?LOC:MARCAR') (8421504)
+WHEN  ('?LOC:MEDICO') (8421504)
+WHEN  ('?LOC:SERVICIO') (8421504)
+WHEN  ('?LOC:TOTAL') (8421504)
+WHEN  ('?Tab:2') (8421504)
+
+%cListHeaderArrow3D DEPEND %Control LONG TIMES 24
+WHEN  ('?BAsignar') (16777215)
+WHEN  ('?BAutorizacion') (16777215)
+WHEN  ('?BDmarcat') (16777215)
+WHEN  ('?BMarcaT') (16777215)
+WHEN  ('?BMarcar') (16777215)
+WHEN  ('?Browse:1') (16777215)
+WHEN  ('?Close') (16777215)
+WHEN  ('?CurrentTab') (16777215)
+WHEN  ('?LOC:AUTORIZACION') (16777215)
+WHEN  ('?LOC:AUTORIZACIONF') (16777215)
+WHEN  ('?LOC:AUTORIZACIONF:Prompt') (16777215)
+WHEN  ('?LOC:FECHAFIN') (16777215)
+WHEN  ('?LOC:FECHAINI') (16777215)
+WHEN  ('?LOC:FECHAINI:Prompt') (16777215)
+WHEN  ('?LOC:FECHAINI:Prompt:2') (16777215)
+WHEN  ('?LOC:IDAFILIADO') (16777215)
+WHEN  ('?LOC:IDAFILIADO:Prompt') (16777215)
+WHEN  ('?LOC:IDAFILIADO:Prompt:2') (16777215)
+WHEN  ('?LOC:IDAFILIADO:Prompt:3') (16777215)
+WHEN  ('?LOC:MARCAR') (16777215)
+WHEN  ('?LOC:MEDICO') (16777215)
+WHEN  ('?LOC:SERVICIO') (16777215)
+WHEN  ('?LOC:TOTAL') (16777215)
+WHEN  ('?Tab:2') (16777215)
+
+[INSTANCE]
+INSTANCE 6
+OWNER 4
+[PROMPTS]
+%AnyScreenTimerRefresh LONG  (0)
+[ADDITION]
+NAME ABC BrowseBox
+[INSTANCE]
+INSTANCE 1
+PROCPROP
+[PROMPTS]
+%AcceptToolBarControl LONG  (0)
+%EnableQuickScan LONG  (0)
+%LocatorType DEFAULT  ('Step')
+%OverrideDefaultLocator LONG  (0)
+%OverrideLocator DEFAULT  ('')
+%RecordFilter DEFAULT  ('')
+%RangeField COMPONENT  ()
+%RangeLimitType DEFAULT  ('')
+%RangeLimit FIELD  ()
+%RangeLow FIELD  ()
+%RangeHigh FIELD  ()
+%RangeFile FILE  ()
+%ScrollBehavior DEFAULT  ('Fixed Thumb')
+%SortOrder MULTI LONG  ()
+%SortCondition DEPEND %SortOrder DEFAULT TIMES 0
+
+%SortKey DEPEND %SortOrder KEY TIMES 0
+
+%SortLocatorType DEPEND %SortOrder DEFAULT TIMES 0
+
+%SortOverrideDefaultLocator DEPEND %SortOrder LONG TIMES 0
+
+%SortOverrideLocator DEPEND %SortOrder DEFAULT TIMES 0
+
+%SortRecordFilter DEPEND %SortOrder DEFAULT TIMES 0
+
+%SortRangeField DEPEND %SortOrder COMPONENT TIMES 0
+
+%SortRangeLimit DEPEND %SortOrder FIELD TIMES 0
+
+%SortRangeLow DEPEND %SortOrder FIELD TIMES 0
+
+%SortRangeHigh DEPEND %SortOrder FIELD TIMES 0
+
+%SortRangeFile DEPEND %SortOrder FILE TIMES 0
+
+%SortRangeLimitType DEPEND %SortOrder DEFAULT TIMES 0
+
+%SortScrollBehavior DEPEND %SortOrder DEFAULT TIMES 0
+
+%SortScrollKeyDistribution DEPEND %SortOrder DEFAULT TIMES 0
+
+%SortCustomKeyDistribution DEPEND %SortOrder MULTI LONG TIMES 0
+
+%SortKeyDistributionValue DEPEND %SortCustomKeyDistribution DEFAULT TIMES 0
+
+%SortScrollAlpha DEPEND %SortOrder LONG TIMES 0
+
+%SortScrollNumeric DEPEND %SortOrder LONG TIMES 0
+
+%SortScrollAlt DEPEND %SortOrder LONG TIMES 0
+
+%ClassItem UNIQUE DEFAULT  ('Default', 'Locator', 'Locator0', 'Step', 'Step0')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('BrowseClass')
+WHEN  ('Locator0') ('StepLocatorClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('')
+WHEN  ('Locator0') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Q {22}&Queue:Browse:1 {16}!Reference to browse queue', 'ApplyFilter {12}PROCEDURE(),DERIVED', |
+  'SetQueueRecord {9}PROCEDURE(),DERIVED')
+
+%SQLViewFields MULTI DEFAULT  ('CIT:CONSECUTIVO', 'CIT:FECHA_DATE', 'CIT:FECHA_TIME', |
+  'CIT:IDAFILIADO', 'A_AFI:DOCIDAFILIADO', 'A_AFI:NOMBREAFI', 'CIT:IDSERVICIO', |
+  'A_SER:DESCSERVICIO', 'CIT:NOAUTORIZACION', 'CIT:VALORTOTAL', 'CIT:IDMEDICO', |
+  'A_MED:NOMBRE', 'CIT:MARCAFAC', 'CIT:CNSFACT')
+%TableSchematicsDescription DEFAULT  ('')
+%LoadMethod DEFAULT  ('Page')
+%InterLine DEFAULT  ('0')
+%FindDefaultAnywhere LONG  (0)
+%DefaultEnableOnEmpty LONG  (0)
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 4
+WHEN  ('Default') ('NO')
+WHEN  ('Locator') ('NO')
+WHEN  ('Locator0') ('NO')
+WHEN  ('Step0') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('BRW1')
+WHEN  ('Locator0') ('BRW1::Sort0:Locator')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 4
+WHEN  ('Default') (1)
+WHEN  ('Locator') (1)
+WHEN  ('Locator0') (1)
+WHEN  ('Step0') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 4
+WHEN  ('Default') (1)
+WHEN  ('Locator') (1)
+WHEN  ('Locator0') (1)
+WHEN  ('Step0') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 4
+WHEN  ('Default') ('ADOBlob')
+WHEN  ('Locator') ('ADOBlob')
+WHEN  ('Locator0') ('ADOBlob')
+WHEN  ('Step0') ('ADOBlob')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 4
+WHEN  ('Default') (0)
+WHEN  ('Locator') (0)
+WHEN  ('Locator0') (0)
+WHEN  ('Step0') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 3
+WHEN  ('Default')TIMES 0
+WHEN  ('Locator')TIMES 0
+WHEN  ('Locator0')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 3
+WHEN  ('Default')TIMES 0
+WHEN  ('Locator')TIMES 0
+WHEN  ('Locator0')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%HigherKeys MULTI LONG  ()
+%HigherKey DEPEND %HigherKeys COMPONENT TIMES 0
+
+%HigherKeyField DEPEND %HigherKeys FIELD TIMES 0
+
+%HigherKeyValueType DEPEND %HigherKeys DEFAULT TIMES 0
+
+%HigherKeyValueVariable DEPEND %HigherKeys FIELD TIMES 0
+
+%HigherKeyValueFixed DEPEND %HigherKeys DEFAULT TIMES 0
+
+%AdditionalSortType DEFAULT  ('Manual')
+%AddSortFields DEFAULT  ('')
+%AddSortFieldsAssisted MULTI LONG  ()
+%AddSortFieldAssisted DEPEND %AddSortFieldsAssisted FIELD TIMES 0
+
+%AddSortFieldAssistedOrder DEPEND %AddSortFieldsAssisted DEFAULT TIMES 0
+
+%AddSortFieldAssistedNoCase DEPEND %AddSortFieldsAssisted LONG TIMES 0
+
+%ResetFields MULTI LONG  (1, 2, 3, 4, 5, 6)
+%ResetField DEPEND %ResetFields FIELD TIMES 6
+WHEN  (1) (LOC:FECHAINI)
+WHEN  (2) (LOC:FECHAFIN)
+WHEN  (3) (LOC:IDAFILIADO)
+WHEN  (4) (LOC:MEDICO)
+WHEN  (5) (LOC:SERVICIO)
+WHEN  (6) (LOC:AUTORIZACIONF)
+
+%ScrollKeyDistribution DEFAULT  ('Alpha')
+%CustomKeyDistribution MULTI LONG  ()
+%KeyDistributionValue DEPEND %CustomKeyDistribution DEFAULT TIMES 0
+
+%ScrollAlpha LONG  (1)
+%ScrollNumeric LONG  (0)
+%ScrollAlt LONG  (0)
+%SortFindAnywhere DEPEND %SortOrder LONG TIMES 0
+
+%SortEnableOnEmpty DEPEND %SortOrder LONG TIMES 0
+
+%SortHigherKeys DEPEND %SortOrder MULTI LONG TIMES 0
+
+%SortHigherKey DEPEND %SortHigherKeys COMPONENT TIMES 0
+
+%SortHigherKeyField DEPEND %SortOrder DEPEND %SortHigherKeys FIELD TIMES 0
+
+%SortHigherKeyValueType DEPEND %SortOrder DEPEND %SortHigherKeys DEFAULT TIMES 0
+
+%SortHigherKeyValueVariable DEPEND %SortOrder DEPEND %SortHigherKeys FIELD TIMES 0
+
+%SortHigherKeyValueFixed DEPEND %SortOrder DEPEND %SortHigherKeys DEFAULT TIMES 0
+
+%SortAdditionalSortType DEPEND %SortOrder DEFAULT TIMES 0
+
+%SortAddSortFields DEPEND %SortOrder DEFAULT TIMES 0
+
+%SortAddSortFieldsAssisted DEPEND %SortOrder MULTI LONG TIMES 0
+
+%SortAddSortFieldAssisted DEPEND %SortAddSortFieldsAssisted FIELD TIMES 0
+
+%SortAddSortFieldAssistedOrder DEPEND %SortAddSortFieldsAssisted DEFAULT TIMES 0
+
+%SortResetFields DEPEND %SortOrder MULTI LONG TIMES 0
+
+%SortResetField DEPEND %SortResetFields FIELD TIMES 0
+
+%HotFields MULTI LONG  ()
+%HotField DEPEND %HotFields FIELD TIMES 0
+
+%HotFieldBound DEPEND %HotFields LONG TIMES 0
+
+%HotFieldBindOnly DEPEND %HotFields LONG TIMES 0
+
+%UseSameColorForAll LONG  (0)
+%ControlGreenBarColor DEPEND %Control DEPEND %ControlField LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') (0)
+WHEN  ('A_AFI:NOMBREAFI') (0)
+WHEN  ('A_MED:NOMBRE') (0)
+WHEN  ('A_SER:DESCSERVICIO') (0)
+WHEN  ('CIT:CNSFACT') (0)
+WHEN  ('CIT:CONSECUTIVO') (0)
+WHEN  ('CIT:FECHA_DATE') (0)
+WHEN  ('CIT:FECHA_TIME') (0)
+WHEN  ('CIT:IDAFILIADO') (0)
+WHEN  ('CIT:IDMEDICO') (0)
+WHEN  ('CIT:IDSERVICIO') (0)
+WHEN  ('CIT:MARCAFAC') (0)
+WHEN  ('CIT:NOAUTORIZACION') (0)
+WHEN  ('CIT:VALORTOTAL') (0)
+
+%ControlFieldForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') (-1)
+WHEN  ('A_AFI:NOMBREAFI') (-1)
+WHEN  ('A_MED:NOMBRE') (-1)
+WHEN  ('A_SER:DESCSERVICIO') (-1)
+WHEN  ('CIT:CNSFACT') (-1)
+WHEN  ('CIT:CONSECUTIVO') (-1)
+WHEN  ('CIT:FECHA_DATE') (-1)
+WHEN  ('CIT:FECHA_TIME') (-1)
+WHEN  ('CIT:IDAFILIADO') (-1)
+WHEN  ('CIT:IDMEDICO') (-1)
+WHEN  ('CIT:IDSERVICIO') (-1)
+WHEN  ('CIT:MARCAFAC') (-1)
+WHEN  ('CIT:NOAUTORIZACION') (-1)
+WHEN  ('CIT:VALORTOTAL') (-1)
+
+%ControlFieldBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') (-1)
+WHEN  ('A_AFI:NOMBREAFI') (-1)
+WHEN  ('A_MED:NOMBRE') (-1)
+WHEN  ('A_SER:DESCSERVICIO') (-1)
+WHEN  ('CIT:CNSFACT') (-1)
+WHEN  ('CIT:CONSECUTIVO') (-1)
+WHEN  ('CIT:FECHA_DATE') (-1)
+WHEN  ('CIT:FECHA_TIME') (-1)
+WHEN  ('CIT:IDAFILIADO') (-1)
+WHEN  ('CIT:IDMEDICO') (-1)
+WHEN  ('CIT:IDSERVICIO') (-1)
+WHEN  ('CIT:MARCAFAC') (-1)
+WHEN  ('CIT:NOAUTORIZACION') (-1)
+WHEN  ('CIT:VALORTOTAL') (-1)
+
+%ControlFieldForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') (-1)
+WHEN  ('A_AFI:NOMBREAFI') (-1)
+WHEN  ('A_MED:NOMBRE') (-1)
+WHEN  ('A_SER:DESCSERVICIO') (-1)
+WHEN  ('CIT:CNSFACT') (-1)
+WHEN  ('CIT:CONSECUTIVO') (-1)
+WHEN  ('CIT:FECHA_DATE') (-1)
+WHEN  ('CIT:FECHA_TIME') (-1)
+WHEN  ('CIT:IDAFILIADO') (-1)
+WHEN  ('CIT:IDMEDICO') (-1)
+WHEN  ('CIT:IDSERVICIO') (-1)
+WHEN  ('CIT:MARCAFAC') (-1)
+WHEN  ('CIT:NOAUTORIZACION') (-1)
+WHEN  ('CIT:VALORTOTAL') (-1)
+
+%ControlFieldBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') (-1)
+WHEN  ('A_AFI:NOMBREAFI') (-1)
+WHEN  ('A_MED:NOMBRE') (-1)
+WHEN  ('A_SER:DESCSERVICIO') (-1)
+WHEN  ('CIT:CNSFACT') (-1)
+WHEN  ('CIT:CONSECUTIVO') (-1)
+WHEN  ('CIT:FECHA_DATE') (-1)
+WHEN  ('CIT:FECHA_TIME') (-1)
+WHEN  ('CIT:IDAFILIADO') (-1)
+WHEN  ('CIT:IDMEDICO') (-1)
+WHEN  ('CIT:IDSERVICIO') (-1)
+WHEN  ('CIT:MARCAFAC') (-1)
+WHEN  ('CIT:NOAUTORIZACION') (-1)
+WHEN  ('CIT:VALORTOTAL') (-1)
+
+%ConditionalColors DEPEND %Control DEPEND %ControlField MULTI LONG TIMES 0
+
+%ColorCondition DEPEND %ConditionalColors DEFAULT TIMES 0
+
+%ConditionalControlFieldForegroundNormal DEPEND %ConditionalColors LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 0
+
+%ConditionalControlFieldBackgroundNormal DEPEND %ConditionalColors LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 0
+
+%ConditionalControlFieldForegroundSelected DEPEND %ConditionalColors LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 0
+
+%ConditionalControlFieldBackgroundSelected DEPEND %ConditionalColors LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 0
+
+%GreenBarOnForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') (-1)
+WHEN  ('A_AFI:NOMBREAFI') (-1)
+WHEN  ('A_MED:NOMBRE') (-1)
+WHEN  ('A_SER:DESCSERVICIO') (-1)
+WHEN  ('CIT:CNSFACT') (-1)
+WHEN  ('CIT:CONSECUTIVO') (-1)
+WHEN  ('CIT:FECHA_DATE') (-1)
+WHEN  ('CIT:FECHA_TIME') (-1)
+WHEN  ('CIT:IDAFILIADO') (-1)
+WHEN  ('CIT:IDMEDICO') (-1)
+WHEN  ('CIT:IDSERVICIO') (-1)
+WHEN  ('CIT:MARCAFAC') (-1)
+WHEN  ('CIT:NOAUTORIZACION') (-1)
+WHEN  ('CIT:VALORTOTAL') (-1)
+
+%GreenBarOnBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') (-1)
+WHEN  ('A_AFI:NOMBREAFI') (-1)
+WHEN  ('A_MED:NOMBRE') (-1)
+WHEN  ('A_SER:DESCSERVICIO') (-1)
+WHEN  ('CIT:CNSFACT') (-1)
+WHEN  ('CIT:CONSECUTIVO') (-1)
+WHEN  ('CIT:FECHA_DATE') (-1)
+WHEN  ('CIT:FECHA_TIME') (-1)
+WHEN  ('CIT:IDAFILIADO') (-1)
+WHEN  ('CIT:IDMEDICO') (-1)
+WHEN  ('CIT:IDSERVICIO') (-1)
+WHEN  ('CIT:MARCAFAC') (-1)
+WHEN  ('CIT:NOAUTORIZACION') (-1)
+WHEN  ('CIT:VALORTOTAL') (-1)
+
+%GreenBarOnForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') (-1)
+WHEN  ('A_AFI:NOMBREAFI') (-1)
+WHEN  ('A_MED:NOMBRE') (-1)
+WHEN  ('A_SER:DESCSERVICIO') (-1)
+WHEN  ('CIT:CNSFACT') (-1)
+WHEN  ('CIT:CONSECUTIVO') (-1)
+WHEN  ('CIT:FECHA_DATE') (-1)
+WHEN  ('CIT:FECHA_TIME') (-1)
+WHEN  ('CIT:IDAFILIADO') (-1)
+WHEN  ('CIT:IDMEDICO') (-1)
+WHEN  ('CIT:IDSERVICIO') (-1)
+WHEN  ('CIT:MARCAFAC') (-1)
+WHEN  ('CIT:NOAUTORIZACION') (-1)
+WHEN  ('CIT:VALORTOTAL') (-1)
+
+%GreenBarOnBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') (-1)
+WHEN  ('A_AFI:NOMBREAFI') (-1)
+WHEN  ('A_MED:NOMBRE') (-1)
+WHEN  ('A_SER:DESCSERVICIO') (-1)
+WHEN  ('CIT:CNSFACT') (-1)
+WHEN  ('CIT:CONSECUTIVO') (-1)
+WHEN  ('CIT:FECHA_DATE') (-1)
+WHEN  ('CIT:FECHA_TIME') (-1)
+WHEN  ('CIT:IDAFILIADO') (-1)
+WHEN  ('CIT:IDMEDICO') (-1)
+WHEN  ('CIT:IDSERVICIO') (-1)
+WHEN  ('CIT:MARCAFAC') (-1)
+WHEN  ('CIT:NOAUTORIZACION') (-1)
+WHEN  ('CIT:VALORTOTAL') (-1)
+
+%GreenBarOffForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') (-1)
+WHEN  ('A_AFI:NOMBREAFI') (-1)
+WHEN  ('A_MED:NOMBRE') (-1)
+WHEN  ('A_SER:DESCSERVICIO') (-1)
+WHEN  ('CIT:CNSFACT') (-1)
+WHEN  ('CIT:CONSECUTIVO') (-1)
+WHEN  ('CIT:FECHA_DATE') (-1)
+WHEN  ('CIT:FECHA_TIME') (-1)
+WHEN  ('CIT:IDAFILIADO') (-1)
+WHEN  ('CIT:IDMEDICO') (-1)
+WHEN  ('CIT:IDSERVICIO') (-1)
+WHEN  ('CIT:MARCAFAC') (-1)
+WHEN  ('CIT:NOAUTORIZACION') (-1)
+WHEN  ('CIT:VALORTOTAL') (-1)
+
+%GreenBarOffBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') (-1)
+WHEN  ('A_AFI:NOMBREAFI') (-1)
+WHEN  ('A_MED:NOMBRE') (-1)
+WHEN  ('A_SER:DESCSERVICIO') (-1)
+WHEN  ('CIT:CNSFACT') (-1)
+WHEN  ('CIT:CONSECUTIVO') (-1)
+WHEN  ('CIT:FECHA_DATE') (-1)
+WHEN  ('CIT:FECHA_TIME') (-1)
+WHEN  ('CIT:IDAFILIADO') (-1)
+WHEN  ('CIT:IDMEDICO') (-1)
+WHEN  ('CIT:IDSERVICIO') (-1)
+WHEN  ('CIT:MARCAFAC') (-1)
+WHEN  ('CIT:NOAUTORIZACION') (-1)
+WHEN  ('CIT:VALORTOTAL') (-1)
+
+%GreenBarOffForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') (-1)
+WHEN  ('A_AFI:NOMBREAFI') (-1)
+WHEN  ('A_MED:NOMBRE') (-1)
+WHEN  ('A_SER:DESCSERVICIO') (-1)
+WHEN  ('CIT:CNSFACT') (-1)
+WHEN  ('CIT:CONSECUTIVO') (-1)
+WHEN  ('CIT:FECHA_DATE') (-1)
+WHEN  ('CIT:FECHA_TIME') (-1)
+WHEN  ('CIT:IDAFILIADO') (-1)
+WHEN  ('CIT:IDMEDICO') (-1)
+WHEN  ('CIT:IDSERVICIO') (-1)
+WHEN  ('CIT:MARCAFAC') (-1)
+WHEN  ('CIT:NOAUTORIZACION') (-1)
+WHEN  ('CIT:VALORTOTAL') (-1)
+
+%GreenBarOffBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') (-1)
+WHEN  ('A_AFI:NOMBREAFI') (-1)
+WHEN  ('A_MED:NOMBRE') (-1)
+WHEN  ('A_SER:DESCSERVICIO') (-1)
+WHEN  ('CIT:CNSFACT') (-1)
+WHEN  ('CIT:CONSECUTIVO') (-1)
+WHEN  ('CIT:FECHA_DATE') (-1)
+WHEN  ('CIT:FECHA_TIME') (-1)
+WHEN  ('CIT:IDAFILIADO') (-1)
+WHEN  ('CIT:IDMEDICO') (-1)
+WHEN  ('CIT:IDSERVICIO') (-1)
+WHEN  ('CIT:MARCAFAC') (-1)
+WHEN  ('CIT:NOAUTORIZACION') (-1)
+WHEN  ('CIT:VALORTOTAL') (-1)
+
+%AllControlGreenBarColor LONG  (0)
+%AllControlGreenBarColorAlternate LONG  (0)
+%AllControlFieldForegroundNormal LONG  (-1)
+%AllControlFieldBackgroundNormal LONG  (-1)
+%AllControlFieldForegroundSelected LONG  (-1)
+%AllControlFieldBackgroundSelected LONG  (-1)
+%ConditionalColorsAll MULTI LONG  ()
+%ColorConditionAll DEPEND %ConditionalColorsAll DEFAULT TIMES 0
+
+%ConditionalAllControlFieldForegroundNormal DEPEND %ConditionalColorsAll LONG TIMES 0
+
+%ConditionalAllControlFieldBackgroundNormal DEPEND %ConditionalColorsAll LONG TIMES 0
+
+%ConditionalAllControlFieldForegroundSelected DEPEND %ConditionalColorsAll LONG TIMES 0
+
+%ConditionalAllControlFieldBackgroundSelected DEPEND %ConditionalColorsAll LONG TIMES 0
+
+%AllGreenBarOnForegroundNormal LONG  (-1)
+%AllGreenBarOnBackgroundNormal LONG  (-1)
+%AllGreenBarOnForegroundSelected LONG  (-1)
+%AllGreenBarOnBackgroundSelected LONG  (-1)
+%AllGreenBarOffForegroundNormal LONG  (-1)
+%AllGreenBarOffBackgroundNormal LONG  (-1)
+%AllGreenBarOffForegroundSelected LONG  (-1)
+%AllGreenBarOffBackgroundSelected LONG  (-1)
+%ControlFieldIcon DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+WHEN  ('?Browse:1')TIMES 1
+WHEN  ('CIT:CONSECUTIVO') ('.\iconos\EVOC\bullet_square_red.ico')
+
+%ControlFieldIconIsNumber DEPEND %Control DEPEND %ControlField LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 1
+WHEN  ('CIT:CONSECUTIVO') (0)
+
+%ConditionalIcons DEPEND %Control DEPEND %ControlField MULTI LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 1
+WHEN  ('CIT:CONSECUTIVO') (1)
+
+%IconCondition DEPEND %ConditionalIcons DEFAULT TIMES 1
+WHEN  ('?Browse:1')TIMES 1
+WHEN  ('CIT:CONSECUTIVO')TIMES 1
+WHEN  (1) ('CIT:MARCAFAC=1')
+
+%ConditionalControlFieldIcon DEPEND %ConditionalIcons DEFAULT TIMES 1
+WHEN  ('?Browse:1')TIMES 1
+WHEN  ('CIT:CONSECUTIVO')TIMES 1
+WHEN  (1) ('.\iconos\EVOC\bullet_ball_blue.ico')
+
+%ConditionalControlFieldIconIsNumber DEPEND %ConditionalIcons LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 1
+WHEN  ('CIT:CONSECUTIVO')TIMES 1
+WHEN  (1) (0)
+
+%UseSameStyleForAll LONG  (0)
+%ControlGreenBarStyle DEPEND %Control DEPEND %ControlField LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') (0)
+WHEN  ('A_AFI:NOMBREAFI') (0)
+WHEN  ('A_MED:NOMBRE') (0)
+WHEN  ('A_SER:DESCSERVICIO') (0)
+WHEN  ('CIT:CNSFACT') (0)
+WHEN  ('CIT:CONSECUTIVO') (0)
+WHEN  ('CIT:FECHA_DATE') (0)
+WHEN  ('CIT:FECHA_TIME') (0)
+WHEN  ('CIT:IDAFILIADO') (0)
+WHEN  ('CIT:IDMEDICO') (0)
+WHEN  ('CIT:IDSERVICIO') (0)
+WHEN  ('CIT:MARCAFAC') (0)
+WHEN  ('CIT:NOAUTORIZACION') (0)
+WHEN  ('CIT:VALORTOTAL') (0)
+
+%GreenBarOnStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') ('Local List')
+WHEN  ('A_AFI:NOMBREAFI') ('Local List')
+WHEN  ('A_MED:NOMBRE') ('Local List')
+WHEN  ('A_SER:DESCSERVICIO') ('Local List')
+WHEN  ('CIT:CNSFACT') ('Local List')
+WHEN  ('CIT:CONSECUTIVO') ('Local List')
+WHEN  ('CIT:FECHA_DATE') ('Local List')
+WHEN  ('CIT:FECHA_TIME') ('Local List')
+WHEN  ('CIT:IDAFILIADO') ('Local List')
+WHEN  ('CIT:IDMEDICO') ('Local List')
+WHEN  ('CIT:IDSERVICIO') ('Local List')
+WHEN  ('CIT:MARCAFAC') ('Local List')
+WHEN  ('CIT:NOAUTORIZACION') ('Local List')
+WHEN  ('CIT:VALORTOTAL') ('Local List')
+
+%GreenBarOnStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') ('')
+WHEN  ('A_AFI:NOMBREAFI') ('')
+WHEN  ('A_MED:NOMBRE') ('')
+WHEN  ('A_SER:DESCSERVICIO') ('')
+WHEN  ('CIT:CNSFACT') ('')
+WHEN  ('CIT:CONSECUTIVO') ('')
+WHEN  ('CIT:FECHA_DATE') ('')
+WHEN  ('CIT:FECHA_TIME') ('')
+WHEN  ('CIT:IDAFILIADO') ('')
+WHEN  ('CIT:IDMEDICO') ('')
+WHEN  ('CIT:IDSERVICIO') ('')
+WHEN  ('CIT:MARCAFAC') ('')
+WHEN  ('CIT:NOAUTORIZACION') ('')
+WHEN  ('CIT:VALORTOTAL') ('')
+
+%GreenBarOnStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%GreenBarOffStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') ('Local List')
+WHEN  ('A_AFI:NOMBREAFI') ('Local List')
+WHEN  ('A_MED:NOMBRE') ('Local List')
+WHEN  ('A_SER:DESCSERVICIO') ('Local List')
+WHEN  ('CIT:CNSFACT') ('Local List')
+WHEN  ('CIT:CONSECUTIVO') ('Local List')
+WHEN  ('CIT:FECHA_DATE') ('Local List')
+WHEN  ('CIT:FECHA_TIME') ('Local List')
+WHEN  ('CIT:IDAFILIADO') ('Local List')
+WHEN  ('CIT:IDMEDICO') ('Local List')
+WHEN  ('CIT:IDSERVICIO') ('Local List')
+WHEN  ('CIT:MARCAFAC') ('Local List')
+WHEN  ('CIT:NOAUTORIZACION') ('Local List')
+WHEN  ('CIT:VALORTOTAL') ('Local List')
+
+%GreenBarOffStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') ('')
+WHEN  ('A_AFI:NOMBREAFI') ('')
+WHEN  ('A_MED:NOMBRE') ('')
+WHEN  ('A_SER:DESCSERVICIO') ('')
+WHEN  ('CIT:CNSFACT') ('')
+WHEN  ('CIT:CONSECUTIVO') ('')
+WHEN  ('CIT:FECHA_DATE') ('')
+WHEN  ('CIT:FECHA_TIME') ('')
+WHEN  ('CIT:IDAFILIADO') ('')
+WHEN  ('CIT:IDMEDICO') ('')
+WHEN  ('CIT:IDSERVICIO') ('')
+WHEN  ('CIT:MARCAFAC') ('')
+WHEN  ('CIT:NOAUTORIZACION') ('')
+WHEN  ('CIT:VALORTOTAL') ('')
+
+%GreenBarOffStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%ControlFieldStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') ('Local List')
+WHEN  ('A_AFI:NOMBREAFI') ('Local List')
+WHEN  ('A_MED:NOMBRE') ('Local List')
+WHEN  ('A_SER:DESCSERVICIO') ('Local List')
+WHEN  ('CIT:CNSFACT') ('Local List')
+WHEN  ('CIT:CONSECUTIVO') ('Local List')
+WHEN  ('CIT:FECHA_DATE') ('Local List')
+WHEN  ('CIT:FECHA_TIME') ('Local List')
+WHEN  ('CIT:IDAFILIADO') ('Local List')
+WHEN  ('CIT:IDMEDICO') ('Local List')
+WHEN  ('CIT:IDSERVICIO') ('Local List')
+WHEN  ('CIT:MARCAFAC') ('Local List')
+WHEN  ('CIT:NOAUTORIZACION') ('Local List')
+WHEN  ('CIT:VALORTOTAL') ('Local List')
+
+%ControlFieldStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') ('')
+WHEN  ('A_AFI:NOMBREAFI') ('')
+WHEN  ('A_MED:NOMBRE') ('')
+WHEN  ('A_SER:DESCSERVICIO') ('')
+WHEN  ('CIT:CNSFACT') ('')
+WHEN  ('CIT:CONSECUTIVO') ('')
+WHEN  ('CIT:FECHA_DATE') ('')
+WHEN  ('CIT:FECHA_TIME') ('')
+WHEN  ('CIT:IDAFILIADO') ('')
+WHEN  ('CIT:IDMEDICO') ('')
+WHEN  ('CIT:IDSERVICIO') ('')
+WHEN  ('CIT:MARCAFAC') ('')
+WHEN  ('CIT:NOAUTORIZACION') ('')
+WHEN  ('CIT:VALORTOTAL') ('')
+
+%ControlFieldStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
+
+%ConditionalStyles DEPEND %Control DEPEND %ControlField MULTI LONG TIMES 0
+
+%StyleCondition DEPEND %ConditionalStyles DEFAULT TIMES 0
+
+%ConditionalControlFieldStyleType DEPEND %ConditionalStyles DEFAULT TIMES 1
+WHEN  ('?Browse:1')TIMES 0
+
+%ConditionalControlFieldStyleLocalList DEPEND %ConditionalStyles DEFAULT TIMES 1
+WHEN  ('?Browse:1')TIMES 0
+
+%ConditionalControlFieldStyle DEPEND %ConditionalStyles DEFAULT TIMES 0
+
+%AllControlGreenBarStyle LONG  (0)
+%AllControlGreenBarStyleAlternate LONG  (0)
+%AllControlFieldStyleType DEFAULT  ('Local List')
+%AllControlFieldStyleLocalList DEFAULT  ('')
+%AllControlFieldStyle DEFAULT  ('')
+%ConditionalStylesAll MULTI LONG  ()
+%StyleConditionAll DEPEND %ConditionalStylesAll DEFAULT TIMES 0
+
+%ConditionalAllControlFieldStyleType DEPEND %ConditionalStylesAll DEFAULT TIMES 0
+
+%ConditionalAllControlFieldStyleLocalList DEPEND %ConditionalStylesAll DEFAULT TIMES 0
+
+%ConditionalAllControlFieldStyle DEPEND %ConditionalStylesAll DEFAULT TIMES 0
+
+%AllGreenBarOnStyleType DEFAULT  ('Local List')
+%AllGreenBarOnStyleLocalList DEFAULT  ('')
+%AllGreenBarOnStyle DEFAULT  ('')
+%AllGreenBarOffStyleType DEFAULT  ('Local List')
+%AllGreenBarOffStyleLocalList DEFAULT  ('')
+%AllGreenBarOffStyle DEFAULT  ('')
+%ControlFieldTipField DEPEND %Control DEPEND %ControlField FIELD TIMES 0
+
+%BrowseAllTotalOnOff LONG  (1)
+%BrowseAllTotalOnOffCondition DEFAULT  ('')
+%BrowseTotals MULTI LONG  ()
+%BrowseTotalTarget DEPEND %BrowseTotals FIELD TIMES 0
+
+%BrowseTotalType DEPEND %BrowseTotals DEFAULT TIMES 0
+
+%BrowseTotalField DEPEND %BrowseTotals DEFAULT TIMES 0
+
+%BrowseTotalBasedOn DEPEND %BrowseTotals DEFAULT TIMES 0
+
+%BrowseTotalCondition DEPEND %BrowseTotals DEFAULT TIMES 0
+
+%BrowseBoxDoNotIncludePrimaryKey LONG  (0)
+%DisableUsePopup LONG  (0)
+%EnableSortHeader LONG  (0)
+%ControlFieldSortHeaderSave LONG  (0)
+%ControlFieldSortHeaderMulti LONG  (1)
+%ControlFieldSortHeaderOnlyAsc DEPEND %Control DEPEND %ControlField LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') (0)
+WHEN  ('A_AFI:NOMBREAFI') (0)
+WHEN  ('A_MED:NOMBRE') (0)
+WHEN  ('A_SER:DESCSERVICIO') (0)
+WHEN  ('CIT:CNSFACT') (0)
+WHEN  ('CIT:CONSECUTIVO') (0)
+WHEN  ('CIT:FECHA_DATE') (0)
+WHEN  ('CIT:FECHA_TIME') (0)
+WHEN  ('CIT:IDAFILIADO') (0)
+WHEN  ('CIT:IDMEDICO') (0)
+WHEN  ('CIT:IDSERVICIO') (0)
+WHEN  ('CIT:MARCAFAC') (0)
+WHEN  ('CIT:NOAUTORIZACION') (0)
+WHEN  ('CIT:VALORTOTAL') (0)
+
+%ControlFieldSortHeaderOverride DEPEND %Control DEPEND %ControlField LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') (0)
+WHEN  ('A_AFI:NOMBREAFI') (0)
+WHEN  ('A_MED:NOMBRE') (0)
+WHEN  ('A_SER:DESCSERVICIO') (0)
+WHEN  ('CIT:CNSFACT') (0)
+WHEN  ('CIT:CONSECUTIVO') (0)
+WHEN  ('CIT:FECHA_DATE') (0)
+WHEN  ('CIT:FECHA_TIME') (0)
+WHEN  ('CIT:IDAFILIADO') (0)
+WHEN  ('CIT:IDMEDICO') (0)
+WHEN  ('CIT:IDSERVICIO') (0)
+WHEN  ('CIT:MARCAFAC') (0)
+WHEN  ('CIT:NOAUTORIZACION') (0)
+WHEN  ('CIT:VALORTOTAL') (0)
+
+%ControlFieldSortHeaderDisableColumn DEPEND %Control DEPEND %ControlField LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 14
+WHEN  ('A_AFI:DOCIDAFILIADO') (0)
+WHEN  ('A_AFI:NOMBREAFI') (0)
+WHEN  ('A_MED:NOMBRE') (0)
+WHEN  ('A_SER:DESCSERVICIO') (0)
+WHEN  ('CIT:CNSFACT') (0)
+WHEN  ('CIT:CONSECUTIVO') (0)
+WHEN  ('CIT:FECHA_DATE') (0)
+WHEN  ('CIT:FECHA_TIME') (0)
+WHEN  ('CIT:IDAFILIADO') (0)
+WHEN  ('CIT:IDMEDICO') (0)
+WHEN  ('CIT:IDSERVICIO') (0)
+WHEN  ('CIT:MARCAFAC') (0)
+WHEN  ('CIT:NOAUTORIZACION') (0)
+WHEN  ('CIT:VALORTOTAL') (0)
+
+%ControlFieldSortHeaderFields DEPEND %Control DEPEND %ControlField MULTI LONG TIMES 0
+
+%ControlFieldSortHeaderField DEPEND %ControlFieldSortHeaderFields FIELD TIMES 0
+
+%ControlFieldSortHeaderFieldOrder DEPEND %ControlFieldSortHeaderFields DEFAULT TIMES 1
+WHEN  ('?Browse:1')TIMES 0
+
+%ControlFieldSortHeaderFieldCase DEPEND %ControlFieldSortHeaderFields LONG TIMES 1
+WHEN  ('?Browse:1')TIMES 0
+
+%SortHeaderColumnsUseColor LONG  (0)
+%SortHeaderColorBkHdrAsc LONG  (10526303)
+%SortHeaderColorBkColAsc LONG  (15128749)
+%SortHeaderColorBkHdrDec LONG  (10526303)
+%SortHeaderColorBkColDec LONG  (15128749)
+%DisableAutoSizeColumn LONG  (0)
+%DisableListFormatManager LONG  (0)
+%ListFormatManagerAllowPopupInEmptyList DEFAULT  ('Enable')
+%ListFormatManagerCheckType DEFAULT  ('Icon')
+%ListFormatManagerItemsSortBy DEFAULT  ('Alpha')
+%ListFormatManagerUseIdentificationTip DEFAULT  ('Enable')
+%ListFormatManagerSaveWindowPosition DEFAULT  ('Enable')
+%ListFormatManagerSortOrder LONG  (1)
+%ListFormatManagerMenuAppendSortOrder LONG  (1)
+%ListFormatManagerSave LONG  (1)
+%UseMRP LONG  (1)
+%AddPopUp MULTI LONG  ()
+%AddPopUpChoice DEPEND %AddPopUp DEFAULT TIMES 0
+
+%AddPopUpControl DEPEND %AddPopUp DEFAULT TIMES 0
+
+%AddPopUpAction DEPEND %AddPopUp DEFAULT TIMES 0
+
+%AddPopUpProcedure DEPEND %AddPopUp PROCEDURE TIMES 0
+
+%AddPopUpThreadProcedure DEPEND %AddPopUp LONG TIMES 0
+
+%AddPopUpThreadStack DEPEND %AddPopUp DEFAULT TIMES 0
+
+%AddPopUpText DEPEND %AddPopUp DEFAULT TIMES 0
+
+%AddPopUpIcon DEPEND %AddPopUp DEFAULT TIMES 0
+
+%TypeAddPopupIcon DEPEND %AddPopUp DEFAULT TIMES 0
+
+%OtherPopupIcon DEPEND %AddPopUp DEFAULT TIMES 0
+
+%AddPopUpDisable DEPEND %AddPopUp DEFAULT TIMES 0
+
+%AddPopUpSeparate DEPEND %AddPopUp LONG TIMES 0
+
+%SQLAssignments MULTI LONG  ()
+%SQLViewField DEPEND %SQLAssignments DEFAULT TIMES 0
+
+%SQLViewFieldAssignment DEPEND %SQLAssignments DEFAULT TIMES 0
+
+%SQLHasGroupBy LONG  (0)
+%SQLGrouping DEFAULT  ('')
+%SQLHasHaving LONG  (0)
+%SQLHas DEFAULT  ('')
+[ADDITION]
+NAME ABC CloseButton
+[INSTANCE]
+INSTANCE 3
+[ADDITION]
+NAME ABC WindowResize
+[FIELDPROMPT]
+%ResizeAnchorTop DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorLeft DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorRight DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorBottom DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowTop DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowLeft DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowRight DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowBottom DEPEND %Control LONG TIMES 0
+
+[INSTANCE]
+INSTANCE 5
+[PROMPTS]
+%UseAppStrategy DEFAULT  ('1')
+%AppStrategy DEFAULT  ('Surface')
+%RestrictMinSize LONG  (1)
+%WindowMinWidth DEFAULT  ('0')
+%WindowMaxWidth DEFAULT  ('0')
+%ClassItem UNIQUE DEFAULT  ('Default')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('WindowResizeClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Init {19}PROCEDURE(BYTE AppStrategy=AppStrategy:Resize,BYTE SetWindowMinSize=False,BYTE SetWindowMaxSize=False)')
+
+%WindowMinHeight DEFAULT  ('')
+%RestrictMaxSize LONG  (0)
+%WindowMaxHeight DEFAULT  ('')
+%AutoFindParents DEFAULT  ('Default')
+%DeferMoves DEFAULT  ('Default')
+%OverrideControls MULTI LONG  ()
+%OverrideControl DEPEND %OverrideControls DEFAULT TIMES 0
+
+%DisableResize DEPEND %OverrideControls LONG TIMES 0
+
+%HorizResize DEPEND %OverrideControls DEFAULT TIMES 0
+
+%VertResize DEPEND %OverrideControls DEFAULT TIMES 0
+
+%HorizPositional DEPEND %OverrideControls DEFAULT TIMES 0
+
+%VertPositional DEPEND %OverrideControls DEFAULT TIMES 0
+
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('Resizer')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('ADOBlob')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+[WINDOW]
+QuickWindow WINDOW('Browse the CIT file'),AT(,,565,241),FONT('Microsoft Sans Serif',8,,FONT:regular, |
+          CHARSET:DEFAULT),RESIZE,CENTER,GRAY,IMM,MDI,HLP('Brw:CitasFacturaMasiva'),SYSTEM, |
+          WALLPAPER('.\iconos\fondoazul_IX.jpg')
+          LIST,AT(8,47,543,159),USE(?Browse:1),HVSCROLL,FORMAT('55L(2)|MI~Consecutivo~@' & |
+            's13@46C|M~Fecha~@d10@24C(2)|M~Hora~C(0)@t01@0L(2)|M~Id. afiliado~@s20@[50L' & |
+            '(2)M~Documento Id.~C(0)@s20@164L(2)|M~Nombre~C(0)@s124@](205)|~Afiliado~37' & |
+            'L(2)|M~Id. servicio~@s20@183L(2)|M~Descripción~L(0)@s255@58L(2)|M~No. Auto' & |
+            'rización~L(0)@s45@43R(2)|M~Valor total~C(0)@n-14.2@49L(2)|M~Id. Médico~L(0' & |
+            ')@s12@120L(2)|M~Nombre~L(0)@s45@0L(2)|M~MARCAFAC~L(1)@n-7@0L(2)|M~CNSFACT~L(0)@s20@'), |
+            FROM(Queue:Browse:1),IMM,MSG('Browsing the CIT file'),#FIELDS(CIT:CONSECUTIVO, |
+            CIT:FECHA_DATE,CIT:FECHA_TIME,CIT:IDAFILIADO,A_AFI:DOCIDAFILIADO,A_AFI:NOMBREAFI, |
+            CIT:IDSERVICIO,A_SER:DESCSERVICIO,CIT:NOAUTORIZACION,CIT:VALORTOTAL,CIT:IDMEDICO, |
+            A_MED:NOMBRE,CIT:MARCAFAC,CIT:CNSFACT),#ORIG(?List),#SEQ(1),#ORDINAL(1)
+          SHEET,AT(4,4,557,212),USE(?CurrentTab),#ORIG(CurrentTab),#ORDINAL(2)
+            TAB('&1) Id.Afiliado'),USE(?Tab:2),#ORDINAL(3)
+              PROMPT('Fecha Inicial:'),AT(364,23),USE(?LOC:FECHAINI:Prompt),TRN,#ORDINAL(4)
+              ENTRY(@d17),AT(364,34,50,10),USE(LOC:FECHAINI),FLAT,#ORDINAL(5)
+              ENTRY(@d17),AT(418,34,52,10),USE(LOC:FECHAFIN),FLAT,#ORDINAL(6)
+              PROMPT('Afiliado(Idafiliado, Docidafiliado,Nombre):'),AT(7,22),USE(?LOC:IDAFILIADO:Prompt:2), |
+                TRN,#ORDINAL(7)
+              ENTRY(@s100),AT(8,33,135,10),USE(LOC:IDAFILIADO),FLAT,#ORDINAL(8)
+              ENTRY(@s100),AT(150,33,97,10),USE(LOC:MEDICO),FLAT,#ORDINAL(9)
+              PROMPT('Medico (Idmedico,Nombre):'),AT(149,22),USE(?LOC:IDAFILIADO:Prompt),TRN, |
+                #ORDINAL(10)
+              PROMPT('Servicio(Idservicio, Descripcion):'),AT(249,23),USE(?LOC:IDAFILIADO:Prompt:3), |
+                TRN,#ORDINAL(11)
+              ENTRY(@s100),AT(251,34,109,10),USE(LOC:SERVICIO),FLAT,#ORDINAL(12)
+              PROMPT('Fecha Final:'),AT(417,23),USE(?LOC:FECHAINI:Prompt:2),TRN,#ORDINAL(13)
+              PROMPT('Nro. Autorización:'),AT(475,20),USE(?LOC:AUTORIZACIONF:Prompt),TRN,#ORDINAL(14)
+              ENTRY(@s20),AT(475,33,76,10),USE(LOC:AUTORIZACIONF),#ORDINAL(15)
+            END
+          END
+          BUTTON('&Close'),AT(509,221,49,14),USE(?Close),LEFT,ICON('WACLOSE.ICO'),FLAT,MSG('Close Window'), |
+            TIP('Close Window'),#ORIG(?Close),#SEQ(3),#ORDINAL(16)
+          BUTTON('&Marcar'),AT(6,221,48,14),USE(?BMarcar),LEFT,ICON('iconos\EVOC\column' & |
+            '_preferences.ico'),FLAT,TRN,#ORDINAL(17)
+          BUTTON('Marcar Todo'),AT(61,221,67,14),USE(?BMarcaT),LEFT,ICON('iconos\EVOC\i' & |
+            'ndex_preferences.ico'),FLAT,TRN,#ORDINAL(18)
+          BUTTON('Desmarcar Todo'),AT(134,221,79,14),USE(?BDmarcat),LEFT,ICON('iconos\EVO' & |
+            'C\index_down.ico'),FLAT,TRN,#ORDINAL(19)
+          BUTTON('&Asignar'),AT(217,221,50,14),USE(?BAsignar),LEFT,ICON('iconos\EVOC\da' & |
+            'ta_disk.ico'),FLAT,TRN,#ORDINAL(20)
+          CHECK('Marcar con un Click'),AT(239,6),USE(LOC:MARCAR),FONT(,,,FONT:regular),TRN, |
+            #ORDINAL(21)
+          BUTTON('&Actualizar Autorizacion'),AT(401,219,61,16),USE(?BAutorizacion),LEFT,ICON('.\iconos\E' & |
+            'voc\data_refresh.ico'),FLAT,TRN,#ORDINAL(22)
+          STRING(@s50),AT(319,6,239),USE(LOC:TOTAL),FONT(,,,FONT:bold),RIGHT,TRN,#ORDINAL(23)
+          ENTRY(@s50),AT(271,221,117,14),USE(LOC:AUTORIZACION),FLAT,#ORDINAL(24)
+        END
+
